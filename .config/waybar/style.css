@@ -1,0 +1,182 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Source Serif";
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: none;
+    text-shadow: none;
+    transition-duration: 0.5s;
+}
+
+window {
+    color: rgba(217, 216, 216, 1);
+    background: rgba(1, 1, 1, 0.4);
+}
+
+window#waybar.solo {
+    background: rgba(1, 1, 1, 0.4);
+}
+
+#workspaces {
+    transition: none;
+}
+
+#workspaces button {
+    transition: none;
+    color: rgba(217, 216, 216, 0.4);
+    background: transparent;
+}
+
+#workspaces button.visible {
+    color: rgba(217, 216, 216, 1);
+}
+
+#workspaces button.focused {
+    color: #9aedfe;
+}
+
+#workspaces button:hover {
+    transition: none;
+    box-shadow: inherit;
+    text-shadow: inherit;
+    color: #ff79c6;
+}
+
+#workspaces button.urgent {
+    color: rgba(238, 46, 36, 1);
+}
+
+#mode,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#idle_inhibitor,
+#backlight,
+#custom-storage,
+#custom-spotify,
+#custom-weather,
+#custom-mail {
+    margin: 0px 4px 0px 4px;
+    min-width: 6px;
+}
+
+#clock {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    transition: none;
+    font-weight: bolder;
+    color: #0dd81d;
+}
+
+#custom-launcher {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    transition: none;
+    color: rgb(20, 188, 255);
+}
+
+#custom-powermenu {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    transition: none;
+    color: rgba(188, 143, 143, 0.85);
+}
+
+#battery.warning {
+    color: rgba(255, 210, 4, 1);
+}
+
+#battery.critical {
+    color: rgba(238, 46, 36, 1);
+}
+
+#battery.charging {
+    color: rgba(217, 216, 216, 1);
+}
+
+#pulseaudio {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    letter-spacing: 2px;
+    transition: none;
+    color: rgba(189, 183, 107, 0.85);
+}
+
+#cpu {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    transition: none;
+    color: rgba(205, 92, 92, 0.85);
+}
+
+#battery {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    transition: none;
+    color: rgba(176, 196, 222, 0.85);
+}
+
+#memory {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    transition: none;
+    color: rgba(222, 184, 135, 0.85);
+}
+
+#tray {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    transition: none;
+    color: rgba(119, 136, 153, 0.85);
+}
+
+#temperature {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+#idle_inhibitor {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    color: aqua;
+}
+
+#mpd.paused {
+    color: #414868;
+    font-style: italic;
+}
+
+#mpd.stopped {
+    background: transparent;
+}
+
+#mpd {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    color: #c0caf5;
+}
