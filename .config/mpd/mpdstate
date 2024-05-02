@@ -1,1484 +1,1484 @@
-sw_volume: 98
+sw_volume: 84
 audio_device_state:1:my_fifo
 audio_device_state:1:My Pulse Output
-state: play
-current: 33
-time: 120.297000
-random: 0
+state: pause
+current: 75
+time: 151.692000
+random: 1
 repeat: 0
 single: 0
 consume: 0
-crossfade: 0
+crossfade: 2
 mixrampdb: 0.000000
 mixrampdelay: -1.000000
 playlist_begin
 0:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-1:中文/周杰伦/周杰伦 - 分裂.flac
-2:中文/周杰伦/周杰伦 - 半兽人.flac
-3:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-4:中文/周杰伦/周杰伦 - 回到过去.flac
-5:中文/周杰伦/周杰伦 - 暗号.flac
-6:中文/周杰伦/周杰伦 - 最后的战役.flac
-7:中文/周杰伦/周杰伦 - 火车叨位去.flac
-8:中文/周杰伦/周杰伦 - 龙拳.flac
-9:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-10:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-11:中文/许嵩/许嵩 - 如果当时.flac
-12:中文/许嵩/许嵩 - 多余的解释.flac
-13:中文/许嵩/许嵩 - 有何不可.flac
-14:中文/许嵩/许嵩 - 坏孩子.flac
-15:中文/许嵩/许嵩 - 清明雨上.flac
-16:中文/许嵩/许嵩 - 城府.flac
-17:中文/许嵩/许嵩 - 认错.flac
-18:中文/许嵩/许嵩 - 内线.flac
-19:中文/许嵩/许嵩 - 星座书上.flac
-20:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-21:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-22:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-23:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-24:中文/三无MarBlue - 深夜诗人.mp3
-25:中文/夏天Alex - 不再联系.mp3
-26:中文/徐良,汪苏泷 - 后会无期.mp3
-27:中文/Jam - 不露声色.mp3
-28:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-29:中文/星尘,純白P - 中华纯白娘.mp3
-30:中文/洛天依 - 天行健.flac
-31:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-32:中文/洛天依,乐正绫 - 双生契.flac
-33:中文/胡夏 - 同桌的你.mp3
-34:中文/汪苏泷 - 巴赫旧约.mp3
-35:中文/戴荃 - 悟空.mp3
-36:中文/赵雷 - 成都.mp3
-37:中文/林志炫 - 烟花易冷.mp3
-38:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-39:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-40:中文/左宏元,张慧清 - 渡情.mp3
-41:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-42:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-43:中文/洛天依 - 世末积雨云.mp3
-44:中文/洛天依 - 君临天下.mp3
-45:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-46:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-47:中文/洛天依,言和 - 花儿纳吉.mp3
-48:中文/洛天依,言和,ilem - 葬歌.mp3
-49:中文/洛天依,言和,ilem - 阴阳先生.mp3
-50:中文/洛天依,乌龟Sui - 权御天下.mp3
-51:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-52:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-53:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-54:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-55:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-56:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-57:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-58:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-59:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-60:中文/李玲玉 - 女儿情.mp3
-61:中文/洛天依,言和 - 神经病之歌.mp3
-62:中文/乐正绫,言和 - 清明上河图.mp3
-63:中文/兮曰Crandy - 千本中国通史.mp3
-64:中文/郑绪岚 - 牧羊曲.mp3
-65:中文/银临,Aki阿杰 - 牵丝戏.mp3
-66:中文/徐良 - 月光.mp3
-67:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-68:中文/光良 - 童话.mp3
-69:中文/陈力 - 枉凝眉.mp3
-70:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-71:中文/薛之谦 - 绅士.mp3
-72:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-73:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-74:中文/洛天依,许嵩 - 深夜书店.mp3
-75:中文/买辣椒也用券 - 起风了.mp3
-76:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-77:中文/西瓜JUN - 长生诀.flac
-78:中文/郭顶 - 想着你.mp3
-79:中文/郭顶 - 水星记.mp3
-80:中文/郭顶 - 保留.mp3
-81:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-82:中文/周杰伦/周杰伦 - 七里香.flac
-83:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-84:中文/周杰伦/周杰伦 - 借口.flac
-85:中文/周杰伦/周杰伦 - 园游会.flac
-86:中文/周杰伦/周杰伦 - 困兽之斗.flac
-87:中文/周杰伦/周杰伦 - 外婆.flac
-88:中文/周杰伦/周杰伦 - 将军.flac
-89:中文/周杰伦/周杰伦 - 我的地盘.flac
-90:中文/周杰伦/周杰伦 - 搁浅.flac
-91:中文/周杰伦/周杰伦 - 止战之殇.flac
-92:中文/周杰伦/周杰伦 - 最后的战役.flac
-93:中文/周杰伦/周杰伦 - 分裂.flac
-94:中文/周杰伦/周杰伦 - 半兽人.flac
-95:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-96:中文/周杰伦/周杰伦 - 回到过去.flac
-97:中文/周杰伦/周杰伦 - 暗号.flac
-98:中文/周杰伦/周杰伦 - 火车叨位去.flac
-99:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-100:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-101:中文/周杰伦/周杰伦 - 龙拳.flac
-102:中文/周杰伦/周杰伦 - Intro.flac
-103:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-104:中文/周杰伦/周杰伦 - 还在流浪.flac
-105:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-106:中文/周杰伦/周杰伦 - 红颜如霜.flac
-107:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-108:中文/周杰伦/周杰伦 - Mojito.flac
-109:中文/周杰伦/周杰伦 - 错过的烟火.flac
-110:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-111:中文/周杰伦/周杰伦 - 粉色海洋.flac
-112:中文/周杰伦/周杰伦 - 倒影.flac
-113:中文/周杰伦/周杰伦 - 我是如此相信.flac
-114:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-115:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-116:中文/周杰伦/周杰伦 - 一路向北.flac
-117:中文/周杰伦/周杰伦 - 发如雪.flac
-118:中文/周杰伦/周杰伦 - 夜曲.flac
-119:中文/周杰伦/周杰伦 - 枫.flac
-120:中文/周杰伦/周杰伦 - 浪漫手机.flac
-121:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-122:中文/周杰伦/周杰伦 - 逆鳞.flac
-123:中文/周杰伦/周杰伦 - 飘移.flac
-124:中文/周杰伦/周杰伦 - 麦芽糖.flac
-125:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-126:中文/周杰伦/周杰伦 - 三年二班.flac
-127:中文/周杰伦/周杰伦 - 东风破.flac
-128:中文/周杰伦/周杰伦 - 以父之名.flac
-129:中文/周杰伦/周杰伦 - 你听得到.flac
-130:中文/周杰伦/周杰伦 - 双刀.flac
-131:中文/周杰伦/周杰伦 - 同一种调调.flac
-132:中文/周杰伦/周杰伦 - 她的睫毛.flac
-133:中文/周杰伦/周杰伦 - 懦夫.flac
-134:中文/周杰伦/周杰伦 - 晴天.flac
-135:中文/周杰伦/周杰伦 - 梯田.flac
-136:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-137:中文/周杰伦/周杰伦 - 上海一九四三.flac
-138:中文/周杰伦/周杰伦 - 双截棍.flac
-139:中文/周杰伦/周杰伦 - 威廉古堡.flac
-140:中文/周杰伦/周杰伦 - 安静.flac
-141:中文/周杰伦/周杰伦 - 对不起.flac
-142:中文/周杰伦/周杰伦 - 开不了口.flac
-143:中文/周杰伦/周杰伦 - 忍者.flac
-144:中文/周杰伦/周杰伦 - 爱在西元前.flac
-145:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-146:中文/周杰伦/周杰伦 - 简单爱.flac
-147:中文/许嵩/千百度-许嵩.flac
-148:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-149:中文/许嵩/许嵩 - 庐州月.mp3
-150:中文/许嵩/许嵩 - 胡萝卜须.flac
-151:中文/许嵩/许嵩 - 幻听.flac
-152:中文/许嵩/许嵩 - 对话老师.flac
-153:中文/许嵩/许嵩 - 伴虎.flac
-154:中文/许嵩/许嵩 - 闺蜜.flac
-155:中文/许嵩/许嵩 - 装糊涂.flac
-156:中文/许嵩/许嵩 - Play With Style.flac
-157:中文/许嵩/许嵩 - 心疼你的过去.flac
-158:中文/许嵩/许嵩 - 全球变冷.flac
-159:中文/许嵩/许嵩 - 亲情式的爱情.flac
-160:中文/许嵩/许嵩 - 绝代风华.mp3
-161:中文/许嵩/许嵩 - 如果当时.flac
-162:中文/许嵩/许嵩 - 多余的解释.flac
-163:中文/许嵩/许嵩 - 有何不可.flac
-164:中文/许嵩/许嵩 - 坏孩子.flac
-165:中文/许嵩/许嵩 - 清明雨上.flac
-166:中文/许嵩/许嵩 - 城府.flac
-167:中文/许嵩/许嵩 - 认错.flac
-168:中文/许嵩/许嵩 - 内线.flac
-169:中文/许嵩/许嵩 - 星座书上.flac
-170:中文/许嵩/许嵩 - 想象之中.flac
-171:中文/许嵩/许嵩 - 河山大好.flac
-172:中文/许嵩/许嵩 - 拆东墙.flac
-173:中文/许嵩/许嵩 - 医生.flac
-174:中文/许嵩/许嵩 - 微博控.flac
-175:中文/许嵩/许嵩 - 毁人不倦.flac
-176:中文/许嵩/许嵩 - 双人旁.flac
-177:中文/许嵩/许嵩 - 降温.flac
-178:中文/许嵩/许嵩 - 敬酒不吃.flac
-179:中文/许嵩/许嵩 - 千百度.flac
-180:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-181:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-182:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-183:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-184:日语/浮森かや子 - 魔女狩り.mp3
-185:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-186:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-187:日语/初音ミク - からくりピエロ.mp3
-188:日语/松たか子 - 花のように.mp3
-189:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-190:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-191:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-192:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-193:纯音乐/小胡仙儿 - The Fox.mp3
-194:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-195:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-196:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-197:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-198:纯音乐/陈亮 - 无题.mp3
-199:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-200:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-201:纯音乐/仓健 - 拉利亚的祭典.mp3
-202:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-203:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-204:英文/Avril Lavigne - Complicated.mp3
-205:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-206:英文/The Chainsmokers,Halsey - Closer.mp3
-207:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-208:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-209:英文/Alan Walker,Iselin Solheim - Faded.mp3
-210:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-211:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-212:英文/Camila Cabello,Young Thug - Havana.mp3
-213:英文/Against the Current - Legends Never Die.mp3
-214:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-215:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-216:英文/Michael Jackson - Hollywood Tonight.mp3
-217:英文/TheFatRat,Laura Brehm - Monody.mp3
-218:英文/David Garrett - Viva La Vida.mp3
-219:英文/OneRepublic - Counting Stars.mp3
-220:英文/Eagles - Hotel California (Live) - live.mp3
-221:英文/Matteo - Panama.mp3
-222:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-223:英文/Klaus Badelt - He's a Pirate.mp3
-224:英文/Joel Adams - Please Don't Go.mp3
-225:英文/Nicolas de Angelis - Asturias.mp3
-226:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-227:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-228:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-229:英文/Imagine Dragons - Thunder.mp3
-230:英文/Ed Sheeran - Shape of You.mp3
-231:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-232:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-233:英文/Maroon 5 - Sugar.mp3
-234:英文/Lindsey Stirling - Carol Of The Bells.mp3
-235:英文/Flo Rida - Whistle.mp3
-236:英文/Miley Cyrus - Wrecking Ball.mp3
-237:英文/Piknik - Полюшко-поле.mp3
-238:英文/Jesper Kyd - Ezio's Family.mp3
-239:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-240:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-241:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-242:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-243:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-244:中文/三无MarBlue - 深夜诗人.mp3
-245:中文/夏天Alex - 不再联系.mp3
-246:中文/徐良,汪苏泷 - 后会无期.mp3
-247:中文/Jam - 不露声色.mp3
-248:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-249:中文/星尘,純白P - 中华纯白娘.mp3
-250:中文/洛天依 - 天行健.flac
-251:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-252:中文/洛天依,乐正绫 - 双生契.flac
-253:中文/胡夏 - 同桌的你.mp3
-254:中文/汪苏泷 - 巴赫旧约.mp3
-255:中文/戴荃 - 悟空.mp3
-256:中文/赵雷 - 成都.mp3
-257:中文/林志炫 - 烟花易冷.mp3
-258:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-259:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-260:中文/左宏元,张慧清 - 渡情.mp3
-261:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-262:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-263:中文/洛天依 - 世末积雨云.mp3
-264:中文/洛天依 - 君临天下.mp3
-265:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-266:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-267:中文/洛天依,言和 - 花儿纳吉.mp3
-268:中文/洛天依,言和,ilem - 葬歌.mp3
-269:中文/洛天依,言和,ilem - 阴阳先生.mp3
-270:中文/洛天依,乌龟Sui - 权御天下.mp3
-271:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-272:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-273:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-274:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-275:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-276:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-277:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-278:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-279:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-280:中文/李玲玉 - 女儿情.mp3
-281:中文/洛天依,言和 - 神经病之歌.mp3
-282:中文/乐正绫,言和 - 清明上河图.mp3
-283:中文/兮曰Crandy - 千本中国通史.mp3
-284:中文/郑绪岚 - 牧羊曲.mp3
-285:中文/银临,Aki阿杰 - 牵丝戏.mp3
-286:中文/徐良 - 月光.mp3
-287:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-288:中文/光良 - 童话.mp3
-289:中文/陈力 - 枉凝眉.mp3
-290:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-291:中文/薛之谦 - 绅士.mp3
-292:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-293:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-294:中文/洛天依,许嵩 - 深夜书店.mp3
-295:中文/买辣椒也用券 - 起风了.mp3
-296:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-297:中文/西瓜JUN - 长生诀.flac
-298:中文/郭顶 - 想着你.mp3
-299:中文/郭顶 - 水星记.mp3
-300:中文/郭顶 - 保留.mp3
-301:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-302:中文/周杰伦/周杰伦 - 七里香.flac
-303:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-304:中文/周杰伦/周杰伦 - 借口.flac
-305:中文/周杰伦/周杰伦 - 园游会.flac
-306:中文/周杰伦/周杰伦 - 困兽之斗.flac
-307:中文/周杰伦/周杰伦 - 外婆.flac
-308:中文/周杰伦/周杰伦 - 将军.flac
-309:中文/周杰伦/周杰伦 - 我的地盘.flac
-310:中文/周杰伦/周杰伦 - 搁浅.flac
-311:中文/周杰伦/周杰伦 - 止战之殇.flac
-312:中文/周杰伦/周杰伦 - 最后的战役.flac
-313:中文/周杰伦/周杰伦 - 分裂.flac
-314:中文/周杰伦/周杰伦 - 半兽人.flac
-315:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-316:中文/周杰伦/周杰伦 - 回到过去.flac
-317:中文/周杰伦/周杰伦 - 暗号.flac
-318:中文/周杰伦/周杰伦 - 火车叨位去.flac
-319:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-320:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-321:中文/周杰伦/周杰伦 - 龙拳.flac
-322:中文/周杰伦/周杰伦 - Intro.flac
-323:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-324:中文/周杰伦/周杰伦 - 还在流浪.flac
-325:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-326:中文/周杰伦/周杰伦 - 红颜如霜.flac
-327:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-328:中文/周杰伦/周杰伦 - Mojito.flac
-329:中文/周杰伦/周杰伦 - 错过的烟火.flac
-330:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-331:中文/周杰伦/周杰伦 - 粉色海洋.flac
-332:中文/周杰伦/周杰伦 - 倒影.flac
-333:中文/周杰伦/周杰伦 - 我是如此相信.flac
-334:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-335:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-336:中文/周杰伦/周杰伦 - 一路向北.flac
-337:中文/周杰伦/周杰伦 - 发如雪.flac
-338:中文/周杰伦/周杰伦 - 夜曲.flac
-339:中文/周杰伦/周杰伦 - 枫.flac
-340:中文/周杰伦/周杰伦 - 浪漫手机.flac
-341:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-342:中文/周杰伦/周杰伦 - 逆鳞.flac
-343:中文/周杰伦/周杰伦 - 飘移.flac
-344:中文/周杰伦/周杰伦 - 麦芽糖.flac
-345:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-346:中文/周杰伦/周杰伦 - 三年二班.flac
-347:中文/周杰伦/周杰伦 - 东风破.flac
-348:中文/周杰伦/周杰伦 - 以父之名.flac
-349:中文/周杰伦/周杰伦 - 你听得到.flac
-350:中文/周杰伦/周杰伦 - 双刀.flac
-351:中文/周杰伦/周杰伦 - 同一种调调.flac
-352:中文/周杰伦/周杰伦 - 她的睫毛.flac
-353:中文/周杰伦/周杰伦 - 懦夫.flac
-354:中文/周杰伦/周杰伦 - 晴天.flac
-355:中文/周杰伦/周杰伦 - 梯田.flac
-356:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-357:中文/周杰伦/周杰伦 - 上海一九四三.flac
-358:中文/周杰伦/周杰伦 - 双截棍.flac
-359:中文/周杰伦/周杰伦 - 威廉古堡.flac
-360:中文/周杰伦/周杰伦 - 安静.flac
-361:中文/周杰伦/周杰伦 - 对不起.flac
-362:中文/周杰伦/周杰伦 - 开不了口.flac
-363:中文/周杰伦/周杰伦 - 忍者.flac
-364:中文/周杰伦/周杰伦 - 爱在西元前.flac
-365:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-366:中文/周杰伦/周杰伦 - 简单爱.flac
-367:中文/许嵩/千百度-许嵩.flac
-368:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-369:中文/许嵩/许嵩 - 庐州月.mp3
-370:中文/许嵩/许嵩 - 胡萝卜须.flac
-371:中文/许嵩/许嵩 - 幻听.flac
-372:中文/许嵩/许嵩 - 对话老师.flac
-373:中文/许嵩/许嵩 - 伴虎.flac
-374:中文/许嵩/许嵩 - 闺蜜.flac
-375:中文/许嵩/许嵩 - 装糊涂.flac
-376:中文/许嵩/许嵩 - Play With Style.flac
-377:中文/许嵩/许嵩 - 心疼你的过去.flac
-378:中文/许嵩/许嵩 - 全球变冷.flac
-379:中文/许嵩/许嵩 - 亲情式的爱情.flac
-380:中文/许嵩/许嵩 - 绝代风华.mp3
-381:中文/许嵩/许嵩 - 如果当时.flac
-382:中文/许嵩/许嵩 - 多余的解释.flac
-383:中文/许嵩/许嵩 - 有何不可.flac
-384:中文/许嵩/许嵩 - 坏孩子.flac
-385:中文/许嵩/许嵩 - 清明雨上.flac
-386:中文/许嵩/许嵩 - 城府.flac
-387:中文/许嵩/许嵩 - 认错.flac
-388:中文/许嵩/许嵩 - 内线.flac
-389:中文/许嵩/许嵩 - 星座书上.flac
-390:中文/许嵩/许嵩 - 想象之中.flac
-391:中文/许嵩/许嵩 - 河山大好.flac
-392:中文/许嵩/许嵩 - 拆东墙.flac
-393:中文/许嵩/许嵩 - 医生.flac
-394:中文/许嵩/许嵩 - 微博控.flac
-395:中文/许嵩/许嵩 - 毁人不倦.flac
-396:中文/许嵩/许嵩 - 双人旁.flac
-397:中文/许嵩/许嵩 - 降温.flac
-398:中文/许嵩/许嵩 - 敬酒不吃.flac
-399:中文/许嵩/许嵩 - 千百度.flac
-400:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-401:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-402:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-403:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-404:日语/浮森かや子 - 魔女狩り.mp3
-405:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-406:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-407:日语/初音ミク - からくりピエロ.mp3
-408:日语/松たか子 - 花のように.mp3
-409:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-410:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-411:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-412:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-413:纯音乐/小胡仙儿 - The Fox.mp3
-414:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-415:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-416:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-417:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-418:纯音乐/陈亮 - 无题.mp3
-419:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-420:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-421:纯音乐/仓健 - 拉利亚的祭典.mp3
-422:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-423:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-424:英文/Avril Lavigne - Complicated.mp3
-425:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-426:英文/The Chainsmokers,Halsey - Closer.mp3
-427:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-428:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-429:英文/Alan Walker,Iselin Solheim - Faded.mp3
-430:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-431:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-432:英文/Camila Cabello,Young Thug - Havana.mp3
-433:英文/Against the Current - Legends Never Die.mp3
-434:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-435:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-436:英文/Michael Jackson - Hollywood Tonight.mp3
-437:英文/TheFatRat,Laura Brehm - Monody.mp3
-438:英文/David Garrett - Viva La Vida.mp3
-439:英文/OneRepublic - Counting Stars.mp3
-440:英文/Eagles - Hotel California (Live) - live.mp3
-441:英文/Matteo - Panama.mp3
-442:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-443:英文/Klaus Badelt - He's a Pirate.mp3
-444:英文/Joel Adams - Please Don't Go.mp3
-445:英文/Nicolas de Angelis - Asturias.mp3
-446:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-447:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-448:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-449:英文/Imagine Dragons - Thunder.mp3
-450:英文/Ed Sheeran - Shape of You.mp3
-451:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-452:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-453:英文/Maroon 5 - Sugar.mp3
-454:英文/Lindsey Stirling - Carol Of The Bells.mp3
-455:英文/Flo Rida - Whistle.mp3
-456:英文/Miley Cyrus - Wrecking Ball.mp3
-457:英文/Piknik - Полюшко-поле.mp3
-458:英文/Jesper Kyd - Ezio's Family.mp3
-459:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-460:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-461:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-462:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-463:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-464:中文/三无MarBlue - 深夜诗人.mp3
-465:中文/夏天Alex - 不再联系.mp3
-466:中文/徐良,汪苏泷 - 后会无期.mp3
-467:中文/Jam - 不露声色.mp3
-468:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-469:中文/星尘,純白P - 中华纯白娘.mp3
-470:中文/洛天依 - 天行健.flac
-471:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-472:中文/洛天依,乐正绫 - 双生契.flac
-473:中文/胡夏 - 同桌的你.mp3
-474:中文/汪苏泷 - 巴赫旧约.mp3
-475:中文/戴荃 - 悟空.mp3
-476:中文/赵雷 - 成都.mp3
-477:中文/林志炫 - 烟花易冷.mp3
-478:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-479:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-480:中文/左宏元,张慧清 - 渡情.mp3
-481:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-482:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-483:中文/洛天依 - 世末积雨云.mp3
-484:中文/洛天依 - 君临天下.mp3
-485:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-486:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-487:中文/洛天依,言和 - 花儿纳吉.mp3
-488:中文/洛天依,言和,ilem - 葬歌.mp3
-489:中文/洛天依,言和,ilem - 阴阳先生.mp3
-490:中文/洛天依,乌龟Sui - 权御天下.mp3
-491:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-492:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-493:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-494:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-495:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-496:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-497:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-498:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-499:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-500:中文/李玲玉 - 女儿情.mp3
-501:中文/洛天依,言和 - 神经病之歌.mp3
-502:中文/乐正绫,言和 - 清明上河图.mp3
-503:中文/兮曰Crandy - 千本中国通史.mp3
-504:中文/郑绪岚 - 牧羊曲.mp3
-505:中文/银临,Aki阿杰 - 牵丝戏.mp3
-506:中文/徐良 - 月光.mp3
-507:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-508:中文/光良 - 童话.mp3
-509:中文/陈力 - 枉凝眉.mp3
-510:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-511:中文/薛之谦 - 绅士.mp3
-512:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-513:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-514:中文/洛天依,许嵩 - 深夜书店.mp3
-515:中文/买辣椒也用券 - 起风了.mp3
-516:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-517:中文/西瓜JUN - 长生诀.flac
-518:中文/郭顶 - 想着你.mp3
-519:中文/郭顶 - 水星记.mp3
-520:中文/郭顶 - 保留.mp3
-521:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-522:中文/周杰伦/周杰伦 - 七里香.flac
-523:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-524:中文/周杰伦/周杰伦 - 借口.flac
-525:中文/周杰伦/周杰伦 - 园游会.flac
-526:中文/周杰伦/周杰伦 - 困兽之斗.flac
-527:中文/周杰伦/周杰伦 - 外婆.flac
-528:中文/周杰伦/周杰伦 - 将军.flac
-529:中文/周杰伦/周杰伦 - 我的地盘.flac
-530:中文/周杰伦/周杰伦 - 搁浅.flac
-531:中文/周杰伦/周杰伦 - 止战之殇.flac
-532:中文/周杰伦/周杰伦 - 最后的战役.flac
-533:中文/周杰伦/周杰伦 - 分裂.flac
-534:中文/周杰伦/周杰伦 - 半兽人.flac
-535:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-536:中文/周杰伦/周杰伦 - 回到过去.flac
-537:中文/周杰伦/周杰伦 - 暗号.flac
-538:中文/周杰伦/周杰伦 - 火车叨位去.flac
-539:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-540:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-541:中文/周杰伦/周杰伦 - 龙拳.flac
-542:中文/周杰伦/周杰伦 - Intro.flac
-543:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-544:中文/周杰伦/周杰伦 - 还在流浪.flac
-545:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-546:中文/周杰伦/周杰伦 - 红颜如霜.flac
-547:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-548:中文/周杰伦/周杰伦 - Mojito.flac
-549:中文/周杰伦/周杰伦 - 错过的烟火.flac
-550:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-551:中文/周杰伦/周杰伦 - 粉色海洋.flac
-552:中文/周杰伦/周杰伦 - 倒影.flac
-553:中文/周杰伦/周杰伦 - 我是如此相信.flac
-554:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-555:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-556:中文/周杰伦/周杰伦 - 一路向北.flac
-557:中文/周杰伦/周杰伦 - 发如雪.flac
-558:中文/周杰伦/周杰伦 - 夜曲.flac
-559:中文/周杰伦/周杰伦 - 枫.flac
-560:中文/周杰伦/周杰伦 - 浪漫手机.flac
-561:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-562:中文/周杰伦/周杰伦 - 逆鳞.flac
-563:中文/周杰伦/周杰伦 - 飘移.flac
-564:中文/周杰伦/周杰伦 - 麦芽糖.flac
-565:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-566:中文/周杰伦/周杰伦 - 三年二班.flac
-567:中文/周杰伦/周杰伦 - 东风破.flac
-568:中文/周杰伦/周杰伦 - 以父之名.flac
-569:中文/周杰伦/周杰伦 - 你听得到.flac
-570:中文/周杰伦/周杰伦 - 双刀.flac
-571:中文/周杰伦/周杰伦 - 同一种调调.flac
-572:中文/周杰伦/周杰伦 - 她的睫毛.flac
-573:中文/周杰伦/周杰伦 - 懦夫.flac
-574:中文/周杰伦/周杰伦 - 晴天.flac
-575:中文/周杰伦/周杰伦 - 梯田.flac
-576:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-577:中文/周杰伦/周杰伦 - 上海一九四三.flac
-578:中文/周杰伦/周杰伦 - 双截棍.flac
-579:中文/周杰伦/周杰伦 - 威廉古堡.flac
-580:中文/周杰伦/周杰伦 - 安静.flac
-581:中文/周杰伦/周杰伦 - 对不起.flac
-582:中文/周杰伦/周杰伦 - 开不了口.flac
-583:中文/周杰伦/周杰伦 - 忍者.flac
-584:中文/周杰伦/周杰伦 - 爱在西元前.flac
-585:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-586:中文/周杰伦/周杰伦 - 简单爱.flac
-587:中文/许嵩/千百度-许嵩.flac
-588:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-589:中文/许嵩/许嵩 - 庐州月.mp3
-590:中文/许嵩/许嵩 - 胡萝卜须.flac
-591:中文/许嵩/许嵩 - 幻听.flac
-592:中文/许嵩/许嵩 - 对话老师.flac
-593:中文/许嵩/许嵩 - 伴虎.flac
-594:中文/许嵩/许嵩 - 闺蜜.flac
-595:中文/许嵩/许嵩 - 装糊涂.flac
-596:中文/许嵩/许嵩 - Play With Style.flac
-597:中文/许嵩/许嵩 - 心疼你的过去.flac
-598:中文/许嵩/许嵩 - 全球变冷.flac
-599:中文/许嵩/许嵩 - 亲情式的爱情.flac
-600:中文/许嵩/许嵩 - 绝代风华.mp3
-601:中文/许嵩/许嵩 - 如果当时.flac
-602:中文/许嵩/许嵩 - 多余的解释.flac
-603:中文/许嵩/许嵩 - 有何不可.flac
-604:中文/许嵩/许嵩 - 坏孩子.flac
-605:中文/许嵩/许嵩 - 清明雨上.flac
-606:中文/许嵩/许嵩 - 城府.flac
-607:中文/许嵩/许嵩 - 认错.flac
-608:中文/许嵩/许嵩 - 内线.flac
-609:中文/许嵩/许嵩 - 星座书上.flac
-610:中文/许嵩/许嵩 - 想象之中.flac
-611:中文/许嵩/许嵩 - 河山大好.flac
-612:中文/许嵩/许嵩 - 拆东墙.flac
-613:中文/许嵩/许嵩 - 医生.flac
-614:中文/许嵩/许嵩 - 微博控.flac
-615:中文/许嵩/许嵩 - 毁人不倦.flac
-616:中文/许嵩/许嵩 - 双人旁.flac
-617:中文/许嵩/许嵩 - 降温.flac
-618:中文/许嵩/许嵩 - 敬酒不吃.flac
-619:中文/许嵩/许嵩 - 千百度.flac
-620:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-621:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-622:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-623:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-624:日语/浮森かや子 - 魔女狩り.mp3
-625:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-626:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-627:日语/初音ミク - からくりピエロ.mp3
-628:日语/松たか子 - 花のように.mp3
-629:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-630:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-631:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-632:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-633:纯音乐/小胡仙儿 - The Fox.mp3
-634:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-635:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-636:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-637:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-638:纯音乐/陈亮 - 无题.mp3
-639:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-640:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-641:纯音乐/仓健 - 拉利亚的祭典.mp3
-642:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-643:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-644:英文/Avril Lavigne - Complicated.mp3
-645:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-646:英文/The Chainsmokers,Halsey - Closer.mp3
-647:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-648:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-649:英文/Alan Walker,Iselin Solheim - Faded.mp3
-650:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-651:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-652:英文/Camila Cabello,Young Thug - Havana.mp3
-653:英文/Against the Current - Legends Never Die.mp3
-654:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-655:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-656:英文/Michael Jackson - Hollywood Tonight.mp3
-657:英文/TheFatRat,Laura Brehm - Monody.mp3
-658:英文/David Garrett - Viva La Vida.mp3
-659:英文/OneRepublic - Counting Stars.mp3
-660:英文/Eagles - Hotel California (Live) - live.mp3
-661:英文/Matteo - Panama.mp3
-662:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-663:英文/Klaus Badelt - He's a Pirate.mp3
-664:英文/Joel Adams - Please Don't Go.mp3
-665:英文/Nicolas de Angelis - Asturias.mp3
-666:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-667:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-668:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-669:英文/Imagine Dragons - Thunder.mp3
-670:英文/Ed Sheeran - Shape of You.mp3
-671:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-672:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-673:英文/Maroon 5 - Sugar.mp3
-674:英文/Lindsey Stirling - Carol Of The Bells.mp3
-675:英文/Flo Rida - Whistle.mp3
-676:英文/Miley Cyrus - Wrecking Ball.mp3
-677:英文/Piknik - Полюшко-поле.mp3
-678:英文/Jesper Kyd - Ezio's Family.mp3
-679:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-680:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-681:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-682:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-683:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-684:中文/三无MarBlue - 深夜诗人.mp3
-685:中文/夏天Alex - 不再联系.mp3
-686:中文/徐良,汪苏泷 - 后会无期.mp3
-687:中文/Jam - 不露声色.mp3
-688:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-689:中文/星尘,純白P - 中华纯白娘.mp3
-690:中文/洛天依 - 天行健.flac
-691:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-692:中文/洛天依,乐正绫 - 双生契.flac
-693:中文/胡夏 - 同桌的你.mp3
-694:中文/汪苏泷 - 巴赫旧约.mp3
-695:中文/戴荃 - 悟空.mp3
-696:中文/赵雷 - 成都.mp3
-697:中文/林志炫 - 烟花易冷.mp3
-698:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-699:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-700:中文/左宏元,张慧清 - 渡情.mp3
-701:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-702:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-703:中文/洛天依 - 世末积雨云.mp3
-704:中文/洛天依 - 君临天下.mp3
-705:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-706:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-707:中文/洛天依,言和 - 花儿纳吉.mp3
-708:中文/洛天依,言和,ilem - 葬歌.mp3
-709:中文/洛天依,言和,ilem - 阴阳先生.mp3
-710:中文/洛天依,乌龟Sui - 权御天下.mp3
-711:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-712:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-713:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-714:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-715:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-716:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-717:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-718:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-719:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-720:中文/李玲玉 - 女儿情.mp3
-721:中文/洛天依,言和 - 神经病之歌.mp3
-722:中文/乐正绫,言和 - 清明上河图.mp3
-723:中文/兮曰Crandy - 千本中国通史.mp3
-724:中文/郑绪岚 - 牧羊曲.mp3
-725:中文/银临,Aki阿杰 - 牵丝戏.mp3
-726:中文/徐良 - 月光.mp3
-727:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-728:中文/光良 - 童话.mp3
-729:中文/陈力 - 枉凝眉.mp3
-730:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-731:中文/薛之谦 - 绅士.mp3
-732:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-733:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-734:中文/洛天依,许嵩 - 深夜书店.mp3
-735:中文/买辣椒也用券 - 起风了.mp3
-736:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-737:中文/西瓜JUN - 长生诀.flac
-738:中文/郭顶 - 想着你.mp3
-739:中文/郭顶 - 水星记.mp3
-740:中文/郭顶 - 保留.mp3
-741:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-742:中文/周杰伦/周杰伦 - 七里香.flac
-743:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-744:中文/周杰伦/周杰伦 - 借口.flac
-745:中文/周杰伦/周杰伦 - 园游会.flac
-746:中文/周杰伦/周杰伦 - 困兽之斗.flac
-747:中文/周杰伦/周杰伦 - 外婆.flac
-748:中文/周杰伦/周杰伦 - 将军.flac
-749:中文/周杰伦/周杰伦 - 我的地盘.flac
-750:中文/周杰伦/周杰伦 - 搁浅.flac
-751:中文/周杰伦/周杰伦 - 止战之殇.flac
-752:中文/周杰伦/周杰伦 - 最后的战役.flac
-753:中文/周杰伦/周杰伦 - 分裂.flac
-754:中文/周杰伦/周杰伦 - 半兽人.flac
-755:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-756:中文/周杰伦/周杰伦 - 回到过去.flac
-757:中文/周杰伦/周杰伦 - 暗号.flac
-758:中文/周杰伦/周杰伦 - 火车叨位去.flac
-759:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-760:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-761:中文/周杰伦/周杰伦 - 龙拳.flac
-762:中文/周杰伦/周杰伦 - Intro.flac
-763:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-764:中文/周杰伦/周杰伦 - 还在流浪.flac
-765:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-766:中文/周杰伦/周杰伦 - 红颜如霜.flac
-767:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-768:中文/周杰伦/周杰伦 - Mojito.flac
-769:中文/周杰伦/周杰伦 - 错过的烟火.flac
-770:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-771:中文/周杰伦/周杰伦 - 粉色海洋.flac
-772:中文/周杰伦/周杰伦 - 倒影.flac
-773:中文/周杰伦/周杰伦 - 我是如此相信.flac
-774:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-775:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-776:中文/周杰伦/周杰伦 - 一路向北.flac
-777:中文/周杰伦/周杰伦 - 发如雪.flac
-778:中文/周杰伦/周杰伦 - 夜曲.flac
-779:中文/周杰伦/周杰伦 - 枫.flac
-780:中文/周杰伦/周杰伦 - 浪漫手机.flac
-781:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-782:中文/周杰伦/周杰伦 - 逆鳞.flac
-783:中文/周杰伦/周杰伦 - 飘移.flac
-784:中文/周杰伦/周杰伦 - 麦芽糖.flac
-785:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-786:中文/周杰伦/周杰伦 - 三年二班.flac
-787:中文/周杰伦/周杰伦 - 东风破.flac
-788:中文/周杰伦/周杰伦 - 以父之名.flac
-789:中文/周杰伦/周杰伦 - 你听得到.flac
-790:中文/周杰伦/周杰伦 - 双刀.flac
-791:中文/周杰伦/周杰伦 - 同一种调调.flac
-792:中文/周杰伦/周杰伦 - 她的睫毛.flac
-793:中文/周杰伦/周杰伦 - 懦夫.flac
-794:中文/周杰伦/周杰伦 - 晴天.flac
-795:中文/周杰伦/周杰伦 - 梯田.flac
-796:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-797:中文/周杰伦/周杰伦 - 上海一九四三.flac
-798:中文/周杰伦/周杰伦 - 双截棍.flac
-799:中文/周杰伦/周杰伦 - 威廉古堡.flac
-800:中文/周杰伦/周杰伦 - 安静.flac
-801:中文/周杰伦/周杰伦 - 对不起.flac
-802:中文/周杰伦/周杰伦 - 开不了口.flac
-803:中文/周杰伦/周杰伦 - 忍者.flac
-804:中文/周杰伦/周杰伦 - 爱在西元前.flac
-805:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-806:中文/周杰伦/周杰伦 - 简单爱.flac
-807:中文/许嵩/千百度-许嵩.flac
-808:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-809:中文/许嵩/许嵩 - 庐州月.mp3
-810:中文/许嵩/许嵩 - 胡萝卜须.flac
-811:中文/许嵩/许嵩 - 幻听.flac
-812:中文/许嵩/许嵩 - 对话老师.flac
-813:中文/许嵩/许嵩 - 伴虎.flac
-814:中文/许嵩/许嵩 - 闺蜜.flac
-815:中文/许嵩/许嵩 - 装糊涂.flac
-816:中文/许嵩/许嵩 - Play With Style.flac
-817:中文/许嵩/许嵩 - 心疼你的过去.flac
-818:中文/许嵩/许嵩 - 全球变冷.flac
-819:中文/许嵩/许嵩 - 亲情式的爱情.flac
-820:中文/许嵩/许嵩 - 绝代风华.mp3
-821:中文/许嵩/许嵩 - 如果当时.flac
-822:中文/许嵩/许嵩 - 多余的解释.flac
-823:中文/许嵩/许嵩 - 有何不可.flac
-824:中文/许嵩/许嵩 - 坏孩子.flac
-825:中文/许嵩/许嵩 - 清明雨上.flac
-826:中文/许嵩/许嵩 - 城府.flac
-827:中文/许嵩/许嵩 - 认错.flac
-828:中文/许嵩/许嵩 - 内线.flac
-829:中文/许嵩/许嵩 - 星座书上.flac
-830:中文/许嵩/许嵩 - 想象之中.flac
-831:中文/许嵩/许嵩 - 河山大好.flac
-832:中文/许嵩/许嵩 - 拆东墙.flac
-833:中文/许嵩/许嵩 - 医生.flac
-834:中文/许嵩/许嵩 - 微博控.flac
-835:中文/许嵩/许嵩 - 毁人不倦.flac
-836:中文/许嵩/许嵩 - 双人旁.flac
-837:中文/许嵩/许嵩 - 降温.flac
-838:中文/许嵩/许嵩 - 敬酒不吃.flac
-839:中文/许嵩/许嵩 - 千百度.flac
-840:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-841:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-842:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-843:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-844:日语/浮森かや子 - 魔女狩り.mp3
-845:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-846:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-847:日语/初音ミク - からくりピエロ.mp3
-848:日语/松たか子 - 花のように.mp3
-849:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-850:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-851:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-852:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-853:纯音乐/小胡仙儿 - The Fox.mp3
-854:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-855:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-856:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-857:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-858:纯音乐/陈亮 - 无题.mp3
-859:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-860:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-861:纯音乐/仓健 - 拉利亚的祭典.mp3
-862:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-863:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-864:英文/Avril Lavigne - Complicated.mp3
-865:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-866:英文/The Chainsmokers,Halsey - Closer.mp3
-867:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-868:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-869:英文/Alan Walker,Iselin Solheim - Faded.mp3
-870:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-871:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-872:英文/Camila Cabello,Young Thug - Havana.mp3
-873:英文/Against the Current - Legends Never Die.mp3
-874:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-875:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-876:英文/Michael Jackson - Hollywood Tonight.mp3
-877:英文/TheFatRat,Laura Brehm - Monody.mp3
-878:英文/David Garrett - Viva La Vida.mp3
-879:英文/OneRepublic - Counting Stars.mp3
-880:英文/Eagles - Hotel California (Live) - live.mp3
-881:英文/Matteo - Panama.mp3
-882:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-883:英文/Klaus Badelt - He's a Pirate.mp3
-884:英文/Joel Adams - Please Don't Go.mp3
-885:英文/Nicolas de Angelis - Asturias.mp3
-886:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-887:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-888:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-889:英文/Imagine Dragons - Thunder.mp3
-890:英文/Ed Sheeran - Shape of You.mp3
-891:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-892:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-893:英文/Maroon 5 - Sugar.mp3
-894:英文/Lindsey Stirling - Carol Of The Bells.mp3
-895:英文/Flo Rida - Whistle.mp3
-896:英文/Miley Cyrus - Wrecking Ball.mp3
-897:英文/Piknik - Полюшко-поле.mp3
-898:英文/Jesper Kyd - Ezio's Family.mp3
-899:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-900:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-901:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-902:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-903:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-904:中文/三无MarBlue - 深夜诗人.mp3
-905:中文/夏天Alex - 不再联系.mp3
-906:中文/徐良,汪苏泷 - 后会无期.mp3
-907:中文/Jam - 不露声色.mp3
-908:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-909:中文/星尘,純白P - 中华纯白娘.mp3
-910:中文/洛天依 - 天行健.flac
-911:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-912:中文/洛天依,乐正绫 - 双生契.flac
-913:中文/胡夏 - 同桌的你.mp3
-914:中文/汪苏泷 - 巴赫旧约.mp3
-915:中文/戴荃 - 悟空.mp3
-916:中文/赵雷 - 成都.mp3
-917:中文/林志炫 - 烟花易冷.mp3
-918:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-919:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-920:中文/左宏元,张慧清 - 渡情.mp3
-921:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-922:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-923:中文/洛天依 - 世末积雨云.mp3
-924:中文/洛天依 - 君临天下.mp3
-925:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-926:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-927:中文/洛天依,言和 - 花儿纳吉.mp3
-928:中文/洛天依,言和,ilem - 葬歌.mp3
-929:中文/洛天依,言和,ilem - 阴阳先生.mp3
-930:中文/洛天依,乌龟Sui - 权御天下.mp3
-931:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-932:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-933:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-934:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-935:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-936:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-937:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-938:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-939:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-940:中文/李玲玉 - 女儿情.mp3
-941:中文/洛天依,言和 - 神经病之歌.mp3
-942:中文/乐正绫,言和 - 清明上河图.mp3
-943:中文/兮曰Crandy - 千本中国通史.mp3
-944:中文/郑绪岚 - 牧羊曲.mp3
-945:中文/银临,Aki阿杰 - 牵丝戏.mp3
-946:中文/徐良 - 月光.mp3
-947:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-948:中文/光良 - 童话.mp3
-949:中文/陈力 - 枉凝眉.mp3
-950:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-951:中文/薛之谦 - 绅士.mp3
-952:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-953:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-954:中文/洛天依,许嵩 - 深夜书店.mp3
-955:中文/买辣椒也用券 - 起风了.mp3
-956:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-957:中文/西瓜JUN - 长生诀.flac
-958:中文/郭顶 - 想着你.mp3
-959:中文/郭顶 - 水星记.mp3
-960:中文/郭顶 - 保留.mp3
-961:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-962:中文/周杰伦/周杰伦 - 七里香.flac
-963:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-964:中文/周杰伦/周杰伦 - 借口.flac
-965:中文/周杰伦/周杰伦 - 园游会.flac
-966:中文/周杰伦/周杰伦 - 困兽之斗.flac
-967:中文/周杰伦/周杰伦 - 外婆.flac
-968:中文/周杰伦/周杰伦 - 将军.flac
-969:中文/周杰伦/周杰伦 - 我的地盘.flac
-970:中文/周杰伦/周杰伦 - 搁浅.flac
-971:中文/周杰伦/周杰伦 - 止战之殇.flac
-972:中文/周杰伦/周杰伦 - 最后的战役.flac
-973:中文/周杰伦/周杰伦 - 分裂.flac
-974:中文/周杰伦/周杰伦 - 半兽人.flac
-975:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-976:中文/周杰伦/周杰伦 - 回到过去.flac
-977:中文/周杰伦/周杰伦 - 暗号.flac
-978:中文/周杰伦/周杰伦 - 火车叨位去.flac
-979:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-980:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-981:中文/周杰伦/周杰伦 - 龙拳.flac
-982:中文/周杰伦/周杰伦 - Intro.flac
-983:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-984:中文/周杰伦/周杰伦 - 还在流浪.flac
-985:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-986:中文/周杰伦/周杰伦 - 红颜如霜.flac
-987:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-988:中文/周杰伦/周杰伦 - Mojito.flac
-989:中文/周杰伦/周杰伦 - 错过的烟火.flac
-990:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-991:中文/周杰伦/周杰伦 - 粉色海洋.flac
-992:中文/周杰伦/周杰伦 - 倒影.flac
-993:中文/周杰伦/周杰伦 - 我是如此相信.flac
-994:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-995:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-996:中文/周杰伦/周杰伦 - 一路向北.flac
-997:中文/周杰伦/周杰伦 - 发如雪.flac
-998:中文/周杰伦/周杰伦 - 夜曲.flac
-999:中文/周杰伦/周杰伦 - 枫.flac
-1000:中文/周杰伦/周杰伦 - 浪漫手机.flac
-1001:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-1002:中文/周杰伦/周杰伦 - 逆鳞.flac
-1003:中文/周杰伦/周杰伦 - 飘移.flac
-1004:中文/周杰伦/周杰伦 - 麦芽糖.flac
-1005:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-1006:中文/周杰伦/周杰伦 - 三年二班.flac
-1007:中文/周杰伦/周杰伦 - 东风破.flac
-1008:中文/周杰伦/周杰伦 - 以父之名.flac
-1009:中文/周杰伦/周杰伦 - 你听得到.flac
-1010:中文/周杰伦/周杰伦 - 双刀.flac
-1011:中文/周杰伦/周杰伦 - 同一种调调.flac
-1012:中文/周杰伦/周杰伦 - 她的睫毛.flac
-1013:中文/周杰伦/周杰伦 - 懦夫.flac
-1014:中文/周杰伦/周杰伦 - 晴天.flac
-1015:中文/周杰伦/周杰伦 - 梯田.flac
-1016:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-1017:中文/周杰伦/周杰伦 - 上海一九四三.flac
-1018:中文/周杰伦/周杰伦 - 双截棍.flac
-1019:中文/周杰伦/周杰伦 - 威廉古堡.flac
-1020:中文/周杰伦/周杰伦 - 安静.flac
-1021:中文/周杰伦/周杰伦 - 对不起.flac
-1022:中文/周杰伦/周杰伦 - 开不了口.flac
-1023:中文/周杰伦/周杰伦 - 忍者.flac
-1024:中文/周杰伦/周杰伦 - 爱在西元前.flac
-1025:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-1026:中文/周杰伦/周杰伦 - 简单爱.flac
-1027:中文/许嵩/千百度-许嵩.flac
-1028:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-1029:中文/许嵩/许嵩 - 庐州月.mp3
-1030:中文/许嵩/许嵩 - 胡萝卜须.flac
-1031:中文/许嵩/许嵩 - 幻听.flac
-1032:中文/许嵩/许嵩 - 对话老师.flac
-1033:中文/许嵩/许嵩 - 伴虎.flac
-1034:中文/许嵩/许嵩 - 闺蜜.flac
-1035:中文/许嵩/许嵩 - 装糊涂.flac
-1036:中文/许嵩/许嵩 - Play With Style.flac
-1037:中文/许嵩/许嵩 - 心疼你的过去.flac
-1038:中文/许嵩/许嵩 - 全球变冷.flac
-1039:中文/许嵩/许嵩 - 亲情式的爱情.flac
-1040:中文/许嵩/许嵩 - 绝代风华.mp3
-1041:中文/许嵩/许嵩 - 如果当时.flac
-1042:中文/许嵩/许嵩 - 多余的解释.flac
-1043:中文/许嵩/许嵩 - 有何不可.flac
-1044:中文/许嵩/许嵩 - 坏孩子.flac
-1045:中文/许嵩/许嵩 - 清明雨上.flac
-1046:中文/许嵩/许嵩 - 城府.flac
-1047:中文/许嵩/许嵩 - 认错.flac
-1048:中文/许嵩/许嵩 - 内线.flac
-1049:中文/许嵩/许嵩 - 星座书上.flac
-1050:中文/许嵩/许嵩 - 想象之中.flac
-1051:中文/许嵩/许嵩 - 河山大好.flac
-1052:中文/许嵩/许嵩 - 拆东墙.flac
-1053:中文/许嵩/许嵩 - 医生.flac
-1054:中文/许嵩/许嵩 - 微博控.flac
-1055:中文/许嵩/许嵩 - 毁人不倦.flac
-1056:中文/许嵩/许嵩 - 双人旁.flac
-1057:中文/许嵩/许嵩 - 降温.flac
-1058:中文/许嵩/许嵩 - 敬酒不吃.flac
-1059:中文/许嵩/许嵩 - 千百度.flac
-1060:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-1061:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-1062:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-1063:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-1064:日语/浮森かや子 - 魔女狩り.mp3
-1065:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-1066:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-1067:日语/初音ミク - からくりピエロ.mp3
-1068:日语/松たか子 - 花のように.mp3
-1069:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-1070:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-1071:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-1072:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-1073:纯音乐/小胡仙儿 - The Fox.mp3
-1074:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-1075:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-1076:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-1077:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-1078:纯音乐/陈亮 - 无题.mp3
-1079:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-1080:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-1081:纯音乐/仓健 - 拉利亚的祭典.mp3
-1082:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-1083:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-1084:英文/Avril Lavigne - Complicated.mp3
-1085:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-1086:英文/The Chainsmokers,Halsey - Closer.mp3
-1087:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-1088:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-1089:英文/Alan Walker,Iselin Solheim - Faded.mp3
-1090:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-1091:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-1092:英文/Camila Cabello,Young Thug - Havana.mp3
-1093:英文/Against the Current - Legends Never Die.mp3
-1094:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-1095:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-1096:英文/Michael Jackson - Hollywood Tonight.mp3
-1097:英文/TheFatRat,Laura Brehm - Monody.mp3
-1098:英文/David Garrett - Viva La Vida.mp3
-1099:英文/OneRepublic - Counting Stars.mp3
-1100:英文/Eagles - Hotel California (Live) - live.mp3
-1101:英文/Matteo - Panama.mp3
-1102:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-1103:英文/Klaus Badelt - He's a Pirate.mp3
-1104:英文/Joel Adams - Please Don't Go.mp3
-1105:英文/Nicolas de Angelis - Asturias.mp3
-1106:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-1107:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-1108:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-1109:英文/Imagine Dragons - Thunder.mp3
-1110:英文/Ed Sheeran - Shape of You.mp3
-1111:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-1112:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-1113:英文/Maroon 5 - Sugar.mp3
-1114:英文/Lindsey Stirling - Carol Of The Bells.mp3
-1115:英文/Flo Rida - Whistle.mp3
-1116:英文/Miley Cyrus - Wrecking Ball.mp3
-1117:英文/Piknik - Полюшко-поле.mp3
-1118:英文/Jesper Kyd - Ezio's Family.mp3
-1119:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-1120:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-1121:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-1122:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-1123:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-1124:中文/三无MarBlue - 深夜诗人.mp3
-1125:中文/夏天Alex - 不再联系.mp3
-1126:中文/徐良,汪苏泷 - 后会无期.mp3
-1127:中文/Jam - 不露声色.mp3
-1128:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-1129:中文/星尘,純白P - 中华纯白娘.mp3
-1130:中文/洛天依 - 天行健.flac
-1131:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-1132:中文/洛天依,乐正绫 - 双生契.flac
-1133:中文/胡夏 - 同桌的你.mp3
-1134:中文/汪苏泷 - 巴赫旧约.mp3
-1135:中文/戴荃 - 悟空.mp3
-1136:中文/赵雷 - 成都.mp3
-1137:中文/林志炫 - 烟花易冷.mp3
-1138:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-1139:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-1140:中文/左宏元,张慧清 - 渡情.mp3
-1141:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-1142:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-1143:中文/洛天依 - 世末积雨云.mp3
-1144:中文/洛天依 - 君临天下.mp3
-1145:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-1146:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-1147:中文/洛天依,言和 - 花儿纳吉.mp3
-1148:中文/洛天依,言和,ilem - 葬歌.mp3
-1149:中文/洛天依,言和,ilem - 阴阳先生.mp3
-1150:中文/洛天依,乌龟Sui - 权御天下.mp3
-1151:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-1152:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-1153:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-1154:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-1155:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-1156:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-1157:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-1158:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-1159:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-1160:中文/李玲玉 - 女儿情.mp3
-1161:中文/洛天依,言和 - 神经病之歌.mp3
-1162:中文/乐正绫,言和 - 清明上河图.mp3
-1163:中文/兮曰Crandy - 千本中国通史.mp3
-1164:中文/郑绪岚 - 牧羊曲.mp3
-1165:中文/银临,Aki阿杰 - 牵丝戏.mp3
-1166:中文/徐良 - 月光.mp3
-1167:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-1168:中文/光良 - 童话.mp3
-1169:中文/陈力 - 枉凝眉.mp3
-1170:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-1171:中文/薛之谦 - 绅士.mp3
-1172:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-1173:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-1174:中文/洛天依,许嵩 - 深夜书店.mp3
-1175:中文/买辣椒也用券 - 起风了.mp3
-1176:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-1177:中文/西瓜JUN - 长生诀.flac
-1178:中文/郭顶 - 想着你.mp3
-1179:中文/郭顶 - 水星记.mp3
-1180:中文/郭顶 - 保留.mp3
-1181:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-1182:中文/周杰伦/周杰伦 - 七里香.flac
-1183:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-1184:中文/周杰伦/周杰伦 - 借口.flac
-1185:中文/周杰伦/周杰伦 - 园游会.flac
-1186:中文/周杰伦/周杰伦 - 困兽之斗.flac
-1187:中文/周杰伦/周杰伦 - 外婆.flac
-1188:中文/周杰伦/周杰伦 - 将军.flac
-1189:中文/周杰伦/周杰伦 - 我的地盘.flac
-1190:中文/周杰伦/周杰伦 - 搁浅.flac
-1191:中文/周杰伦/周杰伦 - 止战之殇.flac
-1192:中文/周杰伦/周杰伦 - 最后的战役.flac
-1193:中文/周杰伦/周杰伦 - 分裂.flac
-1194:中文/周杰伦/周杰伦 - 半兽人.flac
-1195:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-1196:中文/周杰伦/周杰伦 - 回到过去.flac
-1197:中文/周杰伦/周杰伦 - 暗号.flac
-1198:中文/周杰伦/周杰伦 - 火车叨位去.flac
-1199:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-1200:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-1201:中文/周杰伦/周杰伦 - 龙拳.flac
-1202:中文/周杰伦/周杰伦 - Intro.flac
-1203:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-1204:中文/周杰伦/周杰伦 - 还在流浪.flac
-1205:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-1206:中文/周杰伦/周杰伦 - 红颜如霜.flac
-1207:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-1208:中文/周杰伦/周杰伦 - Mojito.flac
-1209:中文/周杰伦/周杰伦 - 错过的烟火.flac
-1210:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-1211:中文/周杰伦/周杰伦 - 粉色海洋.flac
-1212:中文/周杰伦/周杰伦 - 倒影.flac
-1213:中文/周杰伦/周杰伦 - 我是如此相信.flac
-1214:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-1215:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-1216:中文/周杰伦/周杰伦 - 一路向北.flac
-1217:中文/周杰伦/周杰伦 - 发如雪.flac
-1218:中文/周杰伦/周杰伦 - 夜曲.flac
-1219:中文/周杰伦/周杰伦 - 枫.flac
-1220:中文/周杰伦/周杰伦 - 浪漫手机.flac
-1221:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-1222:中文/周杰伦/周杰伦 - 逆鳞.flac
-1223:中文/周杰伦/周杰伦 - 飘移.flac
-1224:中文/周杰伦/周杰伦 - 麦芽糖.flac
-1225:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-1226:中文/周杰伦/周杰伦 - 三年二班.flac
-1227:中文/周杰伦/周杰伦 - 东风破.flac
-1228:中文/周杰伦/周杰伦 - 以父之名.flac
-1229:中文/周杰伦/周杰伦 - 你听得到.flac
-1230:中文/周杰伦/周杰伦 - 双刀.flac
-1231:中文/周杰伦/周杰伦 - 同一种调调.flac
-1232:中文/周杰伦/周杰伦 - 她的睫毛.flac
-1233:中文/周杰伦/周杰伦 - 懦夫.flac
-1234:中文/周杰伦/周杰伦 - 晴天.flac
-1235:中文/周杰伦/周杰伦 - 梯田.flac
-1236:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-1237:中文/周杰伦/周杰伦 - 上海一九四三.flac
-1238:中文/周杰伦/周杰伦 - 双截棍.flac
-1239:中文/周杰伦/周杰伦 - 威廉古堡.flac
-1240:中文/周杰伦/周杰伦 - 安静.flac
-1241:中文/周杰伦/周杰伦 - 对不起.flac
-1242:中文/周杰伦/周杰伦 - 开不了口.flac
-1243:中文/周杰伦/周杰伦 - 忍者.flac
-1244:中文/周杰伦/周杰伦 - 爱在西元前.flac
-1245:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-1246:中文/周杰伦/周杰伦 - 简单爱.flac
-1247:中文/许嵩/千百度-许嵩.flac
-1248:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-1249:中文/许嵩/许嵩 - 庐州月.mp3
-1250:中文/许嵩/许嵩 - 胡萝卜须.flac
-1251:中文/许嵩/许嵩 - 幻听.flac
-1252:中文/许嵩/许嵩 - 对话老师.flac
-1253:中文/许嵩/许嵩 - 伴虎.flac
-1254:中文/许嵩/许嵩 - 闺蜜.flac
-1255:中文/许嵩/许嵩 - 装糊涂.flac
-1256:中文/许嵩/许嵩 - Play With Style.flac
-1257:中文/许嵩/许嵩 - 心疼你的过去.flac
-1258:中文/许嵩/许嵩 - 全球变冷.flac
-1259:中文/许嵩/许嵩 - 亲情式的爱情.flac
-1260:中文/许嵩/许嵩 - 绝代风华.mp3
-1261:中文/许嵩/许嵩 - 如果当时.flac
-1262:中文/许嵩/许嵩 - 多余的解释.flac
-1263:中文/许嵩/许嵩 - 有何不可.flac
-1264:中文/许嵩/许嵩 - 坏孩子.flac
-1265:中文/许嵩/许嵩 - 清明雨上.flac
-1266:中文/许嵩/许嵩 - 城府.flac
-1267:中文/许嵩/许嵩 - 认错.flac
-1268:中文/许嵩/许嵩 - 内线.flac
-1269:中文/许嵩/许嵩 - 星座书上.flac
-1270:中文/许嵩/许嵩 - 想象之中.flac
-1271:中文/许嵩/许嵩 - 河山大好.flac
-1272:中文/许嵩/许嵩 - 拆东墙.flac
-1273:中文/许嵩/许嵩 - 医生.flac
-1274:中文/许嵩/许嵩 - 微博控.flac
-1275:中文/许嵩/许嵩 - 毁人不倦.flac
-1276:中文/许嵩/许嵩 - 双人旁.flac
-1277:中文/许嵩/许嵩 - 降温.flac
-1278:中文/许嵩/许嵩 - 敬酒不吃.flac
-1279:中文/许嵩/许嵩 - 千百度.flac
-1280:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-1281:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-1282:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-1283:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-1284:日语/浮森かや子 - 魔女狩り.mp3
-1285:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-1286:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-1287:日语/初音ミク - からくりピエロ.mp3
-1288:日语/松たか子 - 花のように.mp3
-1289:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-1290:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-1291:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-1292:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-1293:纯音乐/小胡仙儿 - The Fox.mp3
-1294:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-1295:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-1296:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-1297:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-1298:纯音乐/陈亮 - 无题.mp3
-1299:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-1300:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-1301:纯音乐/仓健 - 拉利亚的祭典.mp3
-1302:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-1303:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-1304:英文/Avril Lavigne - Complicated.mp3
-1305:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-1306:英文/The Chainsmokers,Halsey - Closer.mp3
-1307:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-1308:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-1309:英文/Alan Walker,Iselin Solheim - Faded.mp3
-1310:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-1311:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-1312:英文/Camila Cabello,Young Thug - Havana.mp3
-1313:英文/Against the Current - Legends Never Die.mp3
-1314:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-1315:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-1316:英文/Michael Jackson - Hollywood Tonight.mp3
-1317:英文/TheFatRat,Laura Brehm - Monody.mp3
-1318:英文/David Garrett - Viva La Vida.mp3
-1319:英文/OneRepublic - Counting Stars.mp3
-1320:英文/Eagles - Hotel California (Live) - live.mp3
-1321:英文/Matteo - Panama.mp3
-1322:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-1323:英文/Klaus Badelt - He's a Pirate.mp3
-1324:英文/Joel Adams - Please Don't Go.mp3
-1325:英文/Nicolas de Angelis - Asturias.mp3
-1326:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-1327:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-1328:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-1329:英文/Imagine Dragons - Thunder.mp3
-1330:英文/Ed Sheeran - Shape of You.mp3
-1331:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-1332:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-1333:英文/Maroon 5 - Sugar.mp3
-1334:英文/Lindsey Stirling - Carol Of The Bells.mp3
-1335:英文/Flo Rida - Whistle.mp3
-1336:英文/Miley Cyrus - Wrecking Ball.mp3
-1337:英文/Piknik - Полюшко-поле.mp3
-1338:英文/Jesper Kyd - Ezio's Family.mp3
-1339:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-1340:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-1341:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-1342:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-1343:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-1344:中文/三无MarBlue - 深夜诗人.mp3
-1345:中文/夏天Alex - 不再联系.mp3
-1346:中文/徐良,汪苏泷 - 后会无期.mp3
-1347:中文/Jam - 不露声色.mp3
-1348:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-1349:中文/星尘,純白P - 中华纯白娘.mp3
-1350:中文/洛天依 - 天行健.flac
-1351:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-1352:中文/洛天依,乐正绫 - 双生契.flac
-1353:中文/胡夏 - 同桌的你.mp3
-1354:中文/汪苏泷 - 巴赫旧约.mp3
-1355:中文/戴荃 - 悟空.mp3
-1356:中文/赵雷 - 成都.mp3
-1357:中文/林志炫 - 烟花易冷.mp3
-1358:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-1359:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-1360:中文/左宏元,张慧清 - 渡情.mp3
-1361:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-1362:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-1363:中文/洛天依 - 世末积雨云.mp3
-1364:中文/洛天依 - 君临天下.mp3
-1365:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-1366:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-1367:中文/洛天依,言和 - 花儿纳吉.mp3
-1368:中文/洛天依,言和,ilem - 葬歌.mp3
-1369:中文/洛天依,言和,ilem - 阴阳先生.mp3
-1370:中文/洛天依,乌龟Sui - 权御天下.mp3
-1371:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-1372:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-1373:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-1374:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-1375:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-1376:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-1377:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-1378:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-1379:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-1380:中文/李玲玉 - 女儿情.mp3
-1381:中文/洛天依,言和 - 神经病之歌.mp3
-1382:中文/乐正绫,言和 - 清明上河图.mp3
-1383:中文/兮曰Crandy - 千本中国通史.mp3
-1384:中文/郑绪岚 - 牧羊曲.mp3
-1385:中文/银临,Aki阿杰 - 牵丝戏.mp3
-1386:中文/徐良 - 月光.mp3
-1387:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-1388:中文/光良 - 童话.mp3
-1389:中文/陈力 - 枉凝眉.mp3
-1390:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-1391:中文/薛之谦 - 绅士.mp3
-1392:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-1393:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-1394:中文/洛天依,许嵩 - 深夜书店.mp3
-1395:中文/买辣椒也用券 - 起风了.mp3
-1396:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-1397:中文/西瓜JUN - 长生诀.flac
-1398:中文/郭顶 - 想着你.mp3
-1399:中文/郭顶 - 水星记.mp3
-1400:中文/郭顶 - 保留.mp3
-1401:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-1402:中文/周杰伦/周杰伦 - 七里香.flac
-1403:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-1404:中文/周杰伦/周杰伦 - 借口.flac
-1405:中文/周杰伦/周杰伦 - 园游会.flac
-1406:中文/周杰伦/周杰伦 - 困兽之斗.flac
-1407:中文/周杰伦/周杰伦 - 外婆.flac
-1408:中文/周杰伦/周杰伦 - 将军.flac
-1409:中文/周杰伦/周杰伦 - 我的地盘.flac
-1410:中文/周杰伦/周杰伦 - 搁浅.flac
-1411:中文/周杰伦/周杰伦 - 止战之殇.flac
-1412:中文/周杰伦/周杰伦 - 最后的战役.flac
-1413:中文/周杰伦/周杰伦 - 分裂.flac
-1414:中文/周杰伦/周杰伦 - 半兽人.flac
-1415:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-1416:中文/周杰伦/周杰伦 - 回到过去.flac
-1417:中文/周杰伦/周杰伦 - 暗号.flac
-1418:中文/周杰伦/周杰伦 - 火车叨位去.flac
-1419:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-1420:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-1421:中文/周杰伦/周杰伦 - 龙拳.flac
-1422:中文/周杰伦/周杰伦 - Intro.flac
-1423:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-1424:中文/周杰伦/周杰伦 - 还在流浪.flac
-1425:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-1426:中文/周杰伦/周杰伦 - 红颜如霜.flac
-1427:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-1428:中文/周杰伦/周杰伦 - Mojito.flac
-1429:中文/周杰伦/周杰伦 - 错过的烟火.flac
-1430:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-1431:中文/周杰伦/周杰伦 - 粉色海洋.flac
-1432:中文/周杰伦/周杰伦 - 倒影.flac
-1433:中文/周杰伦/周杰伦 - 我是如此相信.flac
-1434:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-1435:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-1436:中文/周杰伦/周杰伦 - 一路向北.flac
-1437:中文/周杰伦/周杰伦 - 发如雪.flac
-1438:中文/周杰伦/周杰伦 - 夜曲.flac
-1439:中文/周杰伦/周杰伦 - 枫.flac
-1440:中文/周杰伦/周杰伦 - 浪漫手机.flac
-1441:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-1442:中文/周杰伦/周杰伦 - 逆鳞.flac
-1443:中文/周杰伦/周杰伦 - 飘移.flac
-1444:中文/周杰伦/周杰伦 - 麦芽糖.flac
-1445:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-1446:中文/周杰伦/周杰伦 - 三年二班.flac
-1447:中文/周杰伦/周杰伦 - 东风破.flac
-1448:中文/周杰伦/周杰伦 - 以父之名.flac
-1449:中文/周杰伦/周杰伦 - 你听得到.flac
-1450:中文/周杰伦/周杰伦 - 双刀.flac
-1451:中文/周杰伦/周杰伦 - 同一种调调.flac
-1452:中文/周杰伦/周杰伦 - 她的睫毛.flac
-1453:中文/周杰伦/周杰伦 - 懦夫.flac
-1454:中文/周杰伦/周杰伦 - 晴天.flac
-1455:中文/周杰伦/周杰伦 - 梯田.flac
-1456:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-1457:中文/周杰伦/周杰伦 - 上海一九四三.flac
-1458:中文/周杰伦/周杰伦 - 双截棍.flac
-1459:中文/周杰伦/周杰伦 - 威廉古堡.flac
-1460:中文/周杰伦/周杰伦 - 安静.flac
-1461:中文/周杰伦/周杰伦 - 对不起.flac
-1462:中文/周杰伦/周杰伦 - 开不了口.flac
-1463:中文/周杰伦/周杰伦 - 忍者.flac
-1464:中文/周杰伦/周杰伦 - 爱在西元前.flac
-1465:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-1466:中文/周杰伦/周杰伦 - 简单爱.flac
+1:中文/许嵩/许嵩 - 如果当时.flac
+2:中文/许嵩/许嵩 - 多余的解释.flac
+3:中文/许嵩/许嵩 - 有何不可.flac
+4:中文/许嵩/许嵩 - 坏孩子.flac
+5:中文/许嵩/许嵩 - 清明雨上.flac
+6:中文/许嵩/许嵩 - 城府.flac
+7:中文/许嵩/许嵩 - 认错.flac
+8:中文/许嵩/许嵩 - 内线.flac
+9:中文/许嵩/许嵩 - 星座书上.flac
+10:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+11:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+12:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+13:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+14:中文/三无MarBlue - 深夜诗人.mp3
+15:中文/夏天Alex - 不再联系.mp3
+16:中文/徐良,汪苏泷 - 后会无期.mp3
+17:中文/Jam - 不露声色.mp3
+18:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+19:中文/星尘,純白P - 中华纯白娘.mp3
+20:中文/洛天依 - 天行健.flac
+21:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+22:中文/洛天依,乐正绫 - 双生契.flac
+23:中文/胡夏 - 同桌的你.mp3
+24:中文/汪苏泷 - 巴赫旧约.mp3
+25:中文/戴荃 - 悟空.mp3
+26:中文/赵雷 - 成都.mp3
+27:中文/林志炫 - 烟花易冷.mp3
+28:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+29:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+30:中文/左宏元,张慧清 - 渡情.mp3
+31:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+32:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+33:中文/洛天依 - 世末积雨云.mp3
+34:中文/洛天依 - 君临天下.mp3
+35:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+36:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+37:中文/洛天依,言和 - 花儿纳吉.mp3
+38:中文/洛天依,言和,ilem - 葬歌.mp3
+39:中文/洛天依,言和,ilem - 阴阳先生.mp3
+40:中文/洛天依,乌龟Sui - 权御天下.mp3
+41:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+42:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+43:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+44:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+45:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+46:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+47:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+48:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+49:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+50:中文/李玲玉 - 女儿情.mp3
+51:中文/洛天依,言和 - 神经病之歌.mp3
+52:中文/乐正绫,言和 - 清明上河图.mp3
+53:中文/兮曰Crandy - 千本中国通史.mp3
+54:中文/郑绪岚 - 牧羊曲.mp3
+55:中文/银临,Aki阿杰 - 牵丝戏.mp3
+56:中文/徐良 - 月光.mp3
+57:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+58:中文/光良 - 童话.mp3
+59:中文/陈力 - 枉凝眉.mp3
+60:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+61:中文/薛之谦 - 绅士.mp3
+62:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+63:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+64:中文/洛天依,许嵩 - 深夜书店.mp3
+65:中文/买辣椒也用券 - 起风了.mp3
+66:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+67:中文/西瓜JUN - 长生诀.flac
+68:中文/郭顶 - 想着你.mp3
+69:中文/郭顶 - 水星记.mp3
+70:中文/郭顶 - 保留.mp3
+71:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+72:中文/许嵩/千百度-许嵩.flac
+73:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+74:中文/许嵩/许嵩 - 庐州月.mp3
+75:中文/许嵩/许嵩 - 胡萝卜须.flac
+76:中文/许嵩/许嵩 - 幻听.flac
+77:中文/许嵩/许嵩 - 对话老师.flac
+78:中文/许嵩/许嵩 - 伴虎.flac
+79:中文/许嵩/许嵩 - 闺蜜.flac
+80:中文/许嵩/许嵩 - 装糊涂.flac
+81:中文/许嵩/许嵩 - Play With Style.flac
+82:中文/许嵩/许嵩 - 心疼你的过去.flac
+83:中文/许嵩/许嵩 - 全球变冷.flac
+84:中文/许嵩/许嵩 - 亲情式的爱情.flac
+85:中文/许嵩/许嵩 - 绝代风华.mp3
+86:中文/许嵩/许嵩 - 如果当时.flac
+87:中文/许嵩/许嵩 - 多余的解释.flac
+88:中文/许嵩/许嵩 - 有何不可.flac
+89:中文/许嵩/许嵩 - 坏孩子.flac
+90:中文/许嵩/许嵩 - 清明雨上.flac
+91:中文/许嵩/许嵩 - 城府.flac
+92:中文/许嵩/许嵩 - 认错.flac
+93:中文/许嵩/许嵩 - 内线.flac
+94:中文/许嵩/许嵩 - 星座书上.flac
+95:中文/许嵩/许嵩 - 想象之中.flac
+96:中文/许嵩/许嵩 - 河山大好.flac
+97:中文/许嵩/许嵩 - 拆东墙.flac
+98:中文/许嵩/许嵩 - 医生.flac
+99:中文/许嵩/许嵩 - 微博控.flac
+100:中文/许嵩/许嵩 - 毁人不倦.flac
+101:中文/许嵩/许嵩 - 双人旁.flac
+102:中文/许嵩/许嵩 - 降温.flac
+103:中文/许嵩/许嵩 - 敬酒不吃.flac
+104:中文/许嵩/许嵩 - 千百度.flac
+105:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+106:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+107:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+108:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+109:日语/浮森かや子 - 魔女狩り.mp3
+110:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+111:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+112:日语/初音ミク - からくりピエロ.mp3
+113:日语/松たか子 - 花のように.mp3
+114:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+115:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+116:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+117:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+118:纯音乐/小胡仙儿 - The Fox.mp3
+119:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+120:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+121:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+122:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+123:纯音乐/陈亮 - 无题.mp3
+124:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+125:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+126:纯音乐/仓健 - 拉利亚的祭典.mp3
+127:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+128:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+129:英文/Avril Lavigne - Complicated.mp3
+130:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+131:英文/The Chainsmokers,Halsey - Closer.mp3
+132:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+133:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+134:英文/Alan Walker,Iselin Solheim - Faded.mp3
+135:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+136:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+137:英文/Camila Cabello,Young Thug - Havana.mp3
+138:英文/Against the Current - Legends Never Die.mp3
+139:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+140:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+141:英文/Michael Jackson - Hollywood Tonight.mp3
+142:英文/TheFatRat,Laura Brehm - Monody.mp3
+143:英文/David Garrett - Viva La Vida.mp3
+144:英文/OneRepublic - Counting Stars.mp3
+145:英文/Eagles - Hotel California (Live) - live.mp3
+146:英文/Matteo - Panama.mp3
+147:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+148:英文/Klaus Badelt - He's a Pirate.mp3
+149:英文/Joel Adams - Please Don't Go.mp3
+150:英文/Nicolas de Angelis - Asturias.mp3
+151:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+152:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+153:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+154:英文/Imagine Dragons - Thunder.mp3
+155:英文/Ed Sheeran - Shape of You.mp3
+156:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+157:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+158:英文/Maroon 5 - Sugar.mp3
+159:英文/Lindsey Stirling - Carol Of The Bells.mp3
+160:英文/Flo Rida - Whistle.mp3
+161:英文/Miley Cyrus - Wrecking Ball.mp3
+162:英文/Piknik - Полюшко-поле.mp3
+163:英文/Jesper Kyd - Ezio's Family.mp3
+164:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+165:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+166:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+167:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+168:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+169:中文/三无MarBlue - 深夜诗人.mp3
+170:中文/夏天Alex - 不再联系.mp3
+171:中文/徐良,汪苏泷 - 后会无期.mp3
+172:中文/Jam - 不露声色.mp3
+173:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+174:中文/星尘,純白P - 中华纯白娘.mp3
+175:中文/洛天依 - 天行健.flac
+176:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+177:中文/洛天依,乐正绫 - 双生契.flac
+178:中文/胡夏 - 同桌的你.mp3
+179:中文/汪苏泷 - 巴赫旧约.mp3
+180:中文/戴荃 - 悟空.mp3
+181:中文/赵雷 - 成都.mp3
+182:中文/林志炫 - 烟花易冷.mp3
+183:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+184:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+185:中文/左宏元,张慧清 - 渡情.mp3
+186:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+187:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+188:中文/洛天依 - 世末积雨云.mp3
+189:中文/洛天依 - 君临天下.mp3
+190:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+191:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+192:中文/洛天依,言和 - 花儿纳吉.mp3
+193:中文/洛天依,言和,ilem - 葬歌.mp3
+194:中文/洛天依,言和,ilem - 阴阳先生.mp3
+195:中文/洛天依,乌龟Sui - 权御天下.mp3
+196:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+197:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+198:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+199:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+200:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+201:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+202:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+203:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+204:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+205:中文/李玲玉 - 女儿情.mp3
+206:中文/洛天依,言和 - 神经病之歌.mp3
+207:中文/乐正绫,言和 - 清明上河图.mp3
+208:中文/兮曰Crandy - 千本中国通史.mp3
+209:中文/郑绪岚 - 牧羊曲.mp3
+210:中文/银临,Aki阿杰 - 牵丝戏.mp3
+211:中文/徐良 - 月光.mp3
+212:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+213:中文/光良 - 童话.mp3
+214:中文/陈力 - 枉凝眉.mp3
+215:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+216:中文/薛之谦 - 绅士.mp3
+217:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+218:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+219:中文/洛天依,许嵩 - 深夜书店.mp3
+220:中文/买辣椒也用券 - 起风了.mp3
+221:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+222:中文/西瓜JUN - 长生诀.flac
+223:中文/郭顶 - 想着你.mp3
+224:中文/郭顶 - 水星记.mp3
+225:中文/郭顶 - 保留.mp3
+226:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+227:中文/许嵩/千百度-许嵩.flac
+228:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+229:中文/许嵩/许嵩 - 庐州月.mp3
+230:中文/许嵩/许嵩 - 胡萝卜须.flac
+231:中文/许嵩/许嵩 - 幻听.flac
+232:中文/许嵩/许嵩 - 对话老师.flac
+233:中文/许嵩/许嵩 - 伴虎.flac
+234:中文/许嵩/许嵩 - 闺蜜.flac
+235:中文/许嵩/许嵩 - 装糊涂.flac
+236:中文/许嵩/许嵩 - Play With Style.flac
+237:中文/许嵩/许嵩 - 心疼你的过去.flac
+238:中文/许嵩/许嵩 - 全球变冷.flac
+239:中文/许嵩/许嵩 - 亲情式的爱情.flac
+240:中文/许嵩/许嵩 - 绝代风华.mp3
+241:中文/许嵩/许嵩 - 如果当时.flac
+242:中文/许嵩/许嵩 - 多余的解释.flac
+243:中文/许嵩/许嵩 - 有何不可.flac
+244:中文/许嵩/许嵩 - 坏孩子.flac
+245:中文/许嵩/许嵩 - 清明雨上.flac
+246:中文/许嵩/许嵩 - 城府.flac
+247:中文/许嵩/许嵩 - 认错.flac
+248:中文/许嵩/许嵩 - 内线.flac
+249:中文/许嵩/许嵩 - 星座书上.flac
+250:中文/许嵩/许嵩 - 想象之中.flac
+251:中文/许嵩/许嵩 - 河山大好.flac
+252:中文/许嵩/许嵩 - 拆东墙.flac
+253:中文/许嵩/许嵩 - 医生.flac
+254:中文/许嵩/许嵩 - 微博控.flac
+255:中文/许嵩/许嵩 - 毁人不倦.flac
+256:中文/许嵩/许嵩 - 双人旁.flac
+257:中文/许嵩/许嵩 - 降温.flac
+258:中文/许嵩/许嵩 - 敬酒不吃.flac
+259:中文/许嵩/许嵩 - 千百度.flac
+260:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+261:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+262:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+263:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+264:日语/浮森かや子 - 魔女狩り.mp3
+265:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+266:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+267:日语/初音ミク - からくりピエロ.mp3
+268:日语/松たか子 - 花のように.mp3
+269:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+270:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+271:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+272:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+273:纯音乐/小胡仙儿 - The Fox.mp3
+274:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+275:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+276:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+277:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+278:纯音乐/陈亮 - 无题.mp3
+279:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+280:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+281:纯音乐/仓健 - 拉利亚的祭典.mp3
+282:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+283:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+284:英文/Avril Lavigne - Complicated.mp3
+285:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+286:英文/The Chainsmokers,Halsey - Closer.mp3
+287:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+288:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+289:英文/Alan Walker,Iselin Solheim - Faded.mp3
+290:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+291:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+292:英文/Camila Cabello,Young Thug - Havana.mp3
+293:英文/Against the Current - Legends Never Die.mp3
+294:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+295:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+296:英文/Michael Jackson - Hollywood Tonight.mp3
+297:英文/TheFatRat,Laura Brehm - Monody.mp3
+298:英文/David Garrett - Viva La Vida.mp3
+299:英文/OneRepublic - Counting Stars.mp3
+300:英文/Eagles - Hotel California (Live) - live.mp3
+301:英文/Matteo - Panama.mp3
+302:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+303:英文/Klaus Badelt - He's a Pirate.mp3
+304:英文/Joel Adams - Please Don't Go.mp3
+305:英文/Nicolas de Angelis - Asturias.mp3
+306:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+307:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+308:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+309:英文/Imagine Dragons - Thunder.mp3
+310:英文/Ed Sheeran - Shape of You.mp3
+311:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+312:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+313:英文/Maroon 5 - Sugar.mp3
+314:英文/Lindsey Stirling - Carol Of The Bells.mp3
+315:英文/Flo Rida - Whistle.mp3
+316:英文/Miley Cyrus - Wrecking Ball.mp3
+317:英文/Piknik - Полюшко-поле.mp3
+318:英文/Jesper Kyd - Ezio's Family.mp3
+319:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+320:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+321:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+322:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+323:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+324:中文/三无MarBlue - 深夜诗人.mp3
+325:中文/夏天Alex - 不再联系.mp3
+326:中文/徐良,汪苏泷 - 后会无期.mp3
+327:中文/Jam - 不露声色.mp3
+328:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+329:中文/星尘,純白P - 中华纯白娘.mp3
+330:中文/洛天依 - 天行健.flac
+331:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+332:中文/洛天依,乐正绫 - 双生契.flac
+333:中文/胡夏 - 同桌的你.mp3
+334:中文/汪苏泷 - 巴赫旧约.mp3
+335:中文/戴荃 - 悟空.mp3
+336:中文/赵雷 - 成都.mp3
+337:中文/林志炫 - 烟花易冷.mp3
+338:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+339:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+340:中文/左宏元,张慧清 - 渡情.mp3
+341:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+342:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+343:中文/洛天依 - 世末积雨云.mp3
+344:中文/洛天依 - 君临天下.mp3
+345:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+346:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+347:中文/洛天依,言和 - 花儿纳吉.mp3
+348:中文/洛天依,言和,ilem - 葬歌.mp3
+349:中文/洛天依,言和,ilem - 阴阳先生.mp3
+350:中文/洛天依,乌龟Sui - 权御天下.mp3
+351:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+352:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+353:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+354:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+355:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+356:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+357:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+358:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+359:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+360:中文/李玲玉 - 女儿情.mp3
+361:中文/洛天依,言和 - 神经病之歌.mp3
+362:中文/乐正绫,言和 - 清明上河图.mp3
+363:中文/兮曰Crandy - 千本中国通史.mp3
+364:中文/郑绪岚 - 牧羊曲.mp3
+365:中文/银临,Aki阿杰 - 牵丝戏.mp3
+366:中文/徐良 - 月光.mp3
+367:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+368:中文/光良 - 童话.mp3
+369:中文/陈力 - 枉凝眉.mp3
+370:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+371:中文/薛之谦 - 绅士.mp3
+372:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+373:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+374:中文/洛天依,许嵩 - 深夜书店.mp3
+375:中文/买辣椒也用券 - 起风了.mp3
+376:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+377:中文/西瓜JUN - 长生诀.flac
+378:中文/郭顶 - 想着你.mp3
+379:中文/郭顶 - 水星记.mp3
+380:中文/郭顶 - 保留.mp3
+381:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+382:中文/许嵩/千百度-许嵩.flac
+383:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+384:中文/许嵩/许嵩 - 庐州月.mp3
+385:中文/许嵩/许嵩 - 胡萝卜须.flac
+386:中文/许嵩/许嵩 - 幻听.flac
+387:中文/许嵩/许嵩 - 对话老师.flac
+388:中文/许嵩/许嵩 - 伴虎.flac
+389:中文/许嵩/许嵩 - 闺蜜.flac
+390:中文/许嵩/许嵩 - 装糊涂.flac
+391:中文/许嵩/许嵩 - Play With Style.flac
+392:中文/许嵩/许嵩 - 心疼你的过去.flac
+393:中文/许嵩/许嵩 - 全球变冷.flac
+394:中文/许嵩/许嵩 - 亲情式的爱情.flac
+395:中文/许嵩/许嵩 - 绝代风华.mp3
+396:中文/许嵩/许嵩 - 如果当时.flac
+397:中文/许嵩/许嵩 - 多余的解释.flac
+398:中文/许嵩/许嵩 - 有何不可.flac
+399:中文/许嵩/许嵩 - 坏孩子.flac
+400:中文/许嵩/许嵩 - 清明雨上.flac
+401:中文/许嵩/许嵩 - 城府.flac
+402:中文/许嵩/许嵩 - 认错.flac
+403:中文/许嵩/许嵩 - 内线.flac
+404:中文/许嵩/许嵩 - 星座书上.flac
+405:中文/许嵩/许嵩 - 想象之中.flac
+406:中文/许嵩/许嵩 - 河山大好.flac
+407:中文/许嵩/许嵩 - 拆东墙.flac
+408:中文/许嵩/许嵩 - 医生.flac
+409:中文/许嵩/许嵩 - 微博控.flac
+410:中文/许嵩/许嵩 - 毁人不倦.flac
+411:中文/许嵩/许嵩 - 双人旁.flac
+412:中文/许嵩/许嵩 - 降温.flac
+413:中文/许嵩/许嵩 - 敬酒不吃.flac
+414:中文/许嵩/许嵩 - 千百度.flac
+415:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+416:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+417:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+418:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+419:日语/浮森かや子 - 魔女狩り.mp3
+420:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+421:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+422:日语/初音ミク - からくりピエロ.mp3
+423:日语/松たか子 - 花のように.mp3
+424:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+425:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+426:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+427:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+428:纯音乐/小胡仙儿 - The Fox.mp3
+429:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+430:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+431:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+432:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+433:纯音乐/陈亮 - 无题.mp3
+434:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+435:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+436:纯音乐/仓健 - 拉利亚的祭典.mp3
+437:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+438:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+439:英文/Avril Lavigne - Complicated.mp3
+440:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+441:英文/The Chainsmokers,Halsey - Closer.mp3
+442:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+443:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+444:英文/Alan Walker,Iselin Solheim - Faded.mp3
+445:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+446:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+447:英文/Camila Cabello,Young Thug - Havana.mp3
+448:英文/Against the Current - Legends Never Die.mp3
+449:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+450:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+451:英文/Michael Jackson - Hollywood Tonight.mp3
+452:英文/TheFatRat,Laura Brehm - Monody.mp3
+453:英文/David Garrett - Viva La Vida.mp3
+454:英文/OneRepublic - Counting Stars.mp3
+455:英文/Eagles - Hotel California (Live) - live.mp3
+456:英文/Matteo - Panama.mp3
+457:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+458:英文/Klaus Badelt - He's a Pirate.mp3
+459:英文/Joel Adams - Please Don't Go.mp3
+460:英文/Nicolas de Angelis - Asturias.mp3
+461:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+462:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+463:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+464:英文/Imagine Dragons - Thunder.mp3
+465:英文/Ed Sheeran - Shape of You.mp3
+466:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+467:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+468:英文/Maroon 5 - Sugar.mp3
+469:英文/Lindsey Stirling - Carol Of The Bells.mp3
+470:英文/Flo Rida - Whistle.mp3
+471:英文/Miley Cyrus - Wrecking Ball.mp3
+472:英文/Piknik - Полюшко-поле.mp3
+473:英文/Jesper Kyd - Ezio's Family.mp3
+474:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+475:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+476:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+477:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+478:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+479:中文/三无MarBlue - 深夜诗人.mp3
+480:中文/夏天Alex - 不再联系.mp3
+481:中文/徐良,汪苏泷 - 后会无期.mp3
+482:中文/Jam - 不露声色.mp3
+483:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+484:中文/星尘,純白P - 中华纯白娘.mp3
+485:中文/洛天依 - 天行健.flac
+486:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+487:中文/洛天依,乐正绫 - 双生契.flac
+488:中文/胡夏 - 同桌的你.mp3
+489:中文/汪苏泷 - 巴赫旧约.mp3
+490:中文/戴荃 - 悟空.mp3
+491:中文/赵雷 - 成都.mp3
+492:中文/林志炫 - 烟花易冷.mp3
+493:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+494:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+495:中文/左宏元,张慧清 - 渡情.mp3
+496:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+497:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+498:中文/洛天依 - 世末积雨云.mp3
+499:中文/洛天依 - 君临天下.mp3
+500:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+501:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+502:中文/洛天依,言和 - 花儿纳吉.mp3
+503:中文/洛天依,言和,ilem - 葬歌.mp3
+504:中文/洛天依,言和,ilem - 阴阳先生.mp3
+505:中文/洛天依,乌龟Sui - 权御天下.mp3
+506:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+507:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+508:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+509:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+510:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+511:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+512:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+513:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+514:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+515:中文/李玲玉 - 女儿情.mp3
+516:中文/洛天依,言和 - 神经病之歌.mp3
+517:中文/乐正绫,言和 - 清明上河图.mp3
+518:中文/兮曰Crandy - 千本中国通史.mp3
+519:中文/郑绪岚 - 牧羊曲.mp3
+520:中文/银临,Aki阿杰 - 牵丝戏.mp3
+521:中文/徐良 - 月光.mp3
+522:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+523:中文/光良 - 童话.mp3
+524:中文/陈力 - 枉凝眉.mp3
+525:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+526:中文/薛之谦 - 绅士.mp3
+527:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+528:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+529:中文/洛天依,许嵩 - 深夜书店.mp3
+530:中文/买辣椒也用券 - 起风了.mp3
+531:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+532:中文/西瓜JUN - 长生诀.flac
+533:中文/郭顶 - 想着你.mp3
+534:中文/郭顶 - 水星记.mp3
+535:中文/郭顶 - 保留.mp3
+536:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+537:中文/许嵩/千百度-许嵩.flac
+538:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+539:中文/许嵩/许嵩 - 庐州月.mp3
+540:中文/许嵩/许嵩 - 胡萝卜须.flac
+541:中文/许嵩/许嵩 - 幻听.flac
+542:中文/许嵩/许嵩 - 对话老师.flac
+543:中文/许嵩/许嵩 - 伴虎.flac
+544:中文/许嵩/许嵩 - 闺蜜.flac
+545:中文/许嵩/许嵩 - 装糊涂.flac
+546:中文/许嵩/许嵩 - Play With Style.flac
+547:中文/许嵩/许嵩 - 心疼你的过去.flac
+548:中文/许嵩/许嵩 - 全球变冷.flac
+549:中文/许嵩/许嵩 - 亲情式的爱情.flac
+550:中文/许嵩/许嵩 - 绝代风华.mp3
+551:中文/许嵩/许嵩 - 如果当时.flac
+552:中文/许嵩/许嵩 - 多余的解释.flac
+553:中文/许嵩/许嵩 - 有何不可.flac
+554:中文/许嵩/许嵩 - 坏孩子.flac
+555:中文/许嵩/许嵩 - 清明雨上.flac
+556:中文/许嵩/许嵩 - 城府.flac
+557:中文/许嵩/许嵩 - 认错.flac
+558:中文/许嵩/许嵩 - 内线.flac
+559:中文/许嵩/许嵩 - 星座书上.flac
+560:中文/许嵩/许嵩 - 想象之中.flac
+561:中文/许嵩/许嵩 - 河山大好.flac
+562:中文/许嵩/许嵩 - 拆东墙.flac
+563:中文/许嵩/许嵩 - 医生.flac
+564:中文/许嵩/许嵩 - 微博控.flac
+565:中文/许嵩/许嵩 - 毁人不倦.flac
+566:中文/许嵩/许嵩 - 双人旁.flac
+567:中文/许嵩/许嵩 - 降温.flac
+568:中文/许嵩/许嵩 - 敬酒不吃.flac
+569:中文/许嵩/许嵩 - 千百度.flac
+570:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+571:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+572:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+573:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+574:日语/浮森かや子 - 魔女狩り.mp3
+575:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+576:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+577:日语/初音ミク - からくりピエロ.mp3
+578:日语/松たか子 - 花のように.mp3
+579:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+580:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+581:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+582:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+583:纯音乐/小胡仙儿 - The Fox.mp3
+584:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+585:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+586:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+587:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+588:纯音乐/陈亮 - 无题.mp3
+589:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+590:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+591:纯音乐/仓健 - 拉利亚的祭典.mp3
+592:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+593:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+594:英文/Avril Lavigne - Complicated.mp3
+595:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+596:英文/The Chainsmokers,Halsey - Closer.mp3
+597:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+598:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+599:英文/Alan Walker,Iselin Solheim - Faded.mp3
+600:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+601:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+602:英文/Camila Cabello,Young Thug - Havana.mp3
+603:英文/Against the Current - Legends Never Die.mp3
+604:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+605:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+606:英文/Michael Jackson - Hollywood Tonight.mp3
+607:英文/TheFatRat,Laura Brehm - Monody.mp3
+608:英文/David Garrett - Viva La Vida.mp3
+609:英文/OneRepublic - Counting Stars.mp3
+610:英文/Eagles - Hotel California (Live) - live.mp3
+611:英文/Matteo - Panama.mp3
+612:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+613:英文/Klaus Badelt - He's a Pirate.mp3
+614:英文/Joel Adams - Please Don't Go.mp3
+615:英文/Nicolas de Angelis - Asturias.mp3
+616:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+617:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+618:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+619:英文/Imagine Dragons - Thunder.mp3
+620:英文/Ed Sheeran - Shape of You.mp3
+621:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+622:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+623:英文/Maroon 5 - Sugar.mp3
+624:英文/Lindsey Stirling - Carol Of The Bells.mp3
+625:英文/Flo Rida - Whistle.mp3
+626:英文/Miley Cyrus - Wrecking Ball.mp3
+627:英文/Piknik - Полюшко-поле.mp3
+628:英文/Jesper Kyd - Ezio's Family.mp3
+629:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+630:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+631:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+632:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+633:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+634:中文/三无MarBlue - 深夜诗人.mp3
+635:中文/夏天Alex - 不再联系.mp3
+636:中文/徐良,汪苏泷 - 后会无期.mp3
+637:中文/Jam - 不露声色.mp3
+638:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+639:中文/星尘,純白P - 中华纯白娘.mp3
+640:中文/洛天依 - 天行健.flac
+641:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+642:中文/洛天依,乐正绫 - 双生契.flac
+643:中文/胡夏 - 同桌的你.mp3
+644:中文/汪苏泷 - 巴赫旧约.mp3
+645:中文/戴荃 - 悟空.mp3
+646:中文/赵雷 - 成都.mp3
+647:中文/林志炫 - 烟花易冷.mp3
+648:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+649:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+650:中文/左宏元,张慧清 - 渡情.mp3
+651:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+652:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+653:中文/洛天依 - 世末积雨云.mp3
+654:中文/洛天依 - 君临天下.mp3
+655:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+656:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+657:中文/洛天依,言和 - 花儿纳吉.mp3
+658:中文/洛天依,言和,ilem - 葬歌.mp3
+659:中文/洛天依,言和,ilem - 阴阳先生.mp3
+660:中文/洛天依,乌龟Sui - 权御天下.mp3
+661:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+662:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+663:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+664:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+665:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+666:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+667:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+668:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+669:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+670:中文/李玲玉 - 女儿情.mp3
+671:中文/洛天依,言和 - 神经病之歌.mp3
+672:中文/乐正绫,言和 - 清明上河图.mp3
+673:中文/兮曰Crandy - 千本中国通史.mp3
+674:中文/郑绪岚 - 牧羊曲.mp3
+675:中文/银临,Aki阿杰 - 牵丝戏.mp3
+676:中文/徐良 - 月光.mp3
+677:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+678:中文/光良 - 童话.mp3
+679:中文/陈力 - 枉凝眉.mp3
+680:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+681:中文/薛之谦 - 绅士.mp3
+682:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+683:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+684:中文/洛天依,许嵩 - 深夜书店.mp3
+685:中文/买辣椒也用券 - 起风了.mp3
+686:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+687:中文/西瓜JUN - 长生诀.flac
+688:中文/郭顶 - 想着你.mp3
+689:中文/郭顶 - 水星记.mp3
+690:中文/郭顶 - 保留.mp3
+691:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+692:中文/许嵩/千百度-许嵩.flac
+693:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+694:中文/许嵩/许嵩 - 庐州月.mp3
+695:中文/许嵩/许嵩 - 胡萝卜须.flac
+696:中文/许嵩/许嵩 - 幻听.flac
+697:中文/许嵩/许嵩 - 对话老师.flac
+698:中文/许嵩/许嵩 - 伴虎.flac
+699:中文/许嵩/许嵩 - 闺蜜.flac
+700:中文/许嵩/许嵩 - 装糊涂.flac
+701:中文/许嵩/许嵩 - Play With Style.flac
+702:中文/许嵩/许嵩 - 心疼你的过去.flac
+703:中文/许嵩/许嵩 - 全球变冷.flac
+704:中文/许嵩/许嵩 - 亲情式的爱情.flac
+705:中文/许嵩/许嵩 - 绝代风华.mp3
+706:中文/许嵩/许嵩 - 如果当时.flac
+707:中文/许嵩/许嵩 - 多余的解释.flac
+708:中文/许嵩/许嵩 - 有何不可.flac
+709:中文/许嵩/许嵩 - 坏孩子.flac
+710:中文/许嵩/许嵩 - 清明雨上.flac
+711:中文/许嵩/许嵩 - 城府.flac
+712:中文/许嵩/许嵩 - 认错.flac
+713:中文/许嵩/许嵩 - 内线.flac
+714:中文/许嵩/许嵩 - 星座书上.flac
+715:中文/许嵩/许嵩 - 想象之中.flac
+716:中文/许嵩/许嵩 - 河山大好.flac
+717:中文/许嵩/许嵩 - 拆东墙.flac
+718:中文/许嵩/许嵩 - 医生.flac
+719:中文/许嵩/许嵩 - 微博控.flac
+720:中文/许嵩/许嵩 - 毁人不倦.flac
+721:中文/许嵩/许嵩 - 双人旁.flac
+722:中文/许嵩/许嵩 - 降温.flac
+723:中文/许嵩/许嵩 - 敬酒不吃.flac
+724:中文/许嵩/许嵩 - 千百度.flac
+725:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+726:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+727:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+728:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+729:日语/浮森かや子 - 魔女狩り.mp3
+730:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+731:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+732:日语/初音ミク - からくりピエロ.mp3
+733:日语/松たか子 - 花のように.mp3
+734:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+735:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+736:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+737:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+738:纯音乐/小胡仙儿 - The Fox.mp3
+739:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+740:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+741:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+742:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+743:纯音乐/陈亮 - 无题.mp3
+744:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+745:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+746:纯音乐/仓健 - 拉利亚的祭典.mp3
+747:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+748:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+749:英文/Avril Lavigne - Complicated.mp3
+750:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+751:英文/The Chainsmokers,Halsey - Closer.mp3
+752:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+753:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+754:英文/Alan Walker,Iselin Solheim - Faded.mp3
+755:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+756:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+757:英文/Camila Cabello,Young Thug - Havana.mp3
+758:英文/Against the Current - Legends Never Die.mp3
+759:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+760:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+761:英文/Michael Jackson - Hollywood Tonight.mp3
+762:英文/TheFatRat,Laura Brehm - Monody.mp3
+763:英文/David Garrett - Viva La Vida.mp3
+764:英文/OneRepublic - Counting Stars.mp3
+765:英文/Eagles - Hotel California (Live) - live.mp3
+766:英文/Matteo - Panama.mp3
+767:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+768:英文/Klaus Badelt - He's a Pirate.mp3
+769:英文/Joel Adams - Please Don't Go.mp3
+770:英文/Nicolas de Angelis - Asturias.mp3
+771:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+772:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+773:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+774:英文/Imagine Dragons - Thunder.mp3
+775:英文/Ed Sheeran - Shape of You.mp3
+776:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+777:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+778:英文/Maroon 5 - Sugar.mp3
+779:英文/Lindsey Stirling - Carol Of The Bells.mp3
+780:英文/Flo Rida - Whistle.mp3
+781:英文/Miley Cyrus - Wrecking Ball.mp3
+782:英文/Piknik - Полюшко-поле.mp3
+783:英文/Jesper Kyd - Ezio's Family.mp3
+784:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+785:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+786:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+787:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+788:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+789:中文/三无MarBlue - 深夜诗人.mp3
+790:中文/夏天Alex - 不再联系.mp3
+791:中文/徐良,汪苏泷 - 后会无期.mp3
+792:中文/Jam - 不露声色.mp3
+793:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+794:中文/星尘,純白P - 中华纯白娘.mp3
+795:中文/洛天依 - 天行健.flac
+796:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+797:中文/洛天依,乐正绫 - 双生契.flac
+798:中文/胡夏 - 同桌的你.mp3
+799:中文/汪苏泷 - 巴赫旧约.mp3
+800:中文/戴荃 - 悟空.mp3
+801:中文/赵雷 - 成都.mp3
+802:中文/林志炫 - 烟花易冷.mp3
+803:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+804:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+805:中文/左宏元,张慧清 - 渡情.mp3
+806:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+807:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+808:中文/洛天依 - 世末积雨云.mp3
+809:中文/洛天依 - 君临天下.mp3
+810:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+811:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+812:中文/洛天依,言和 - 花儿纳吉.mp3
+813:中文/洛天依,言和,ilem - 葬歌.mp3
+814:中文/洛天依,言和,ilem - 阴阳先生.mp3
+815:中文/洛天依,乌龟Sui - 权御天下.mp3
+816:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+817:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+818:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+819:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+820:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+821:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+822:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+823:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+824:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+825:中文/李玲玉 - 女儿情.mp3
+826:中文/洛天依,言和 - 神经病之歌.mp3
+827:中文/乐正绫,言和 - 清明上河图.mp3
+828:中文/兮曰Crandy - 千本中国通史.mp3
+829:中文/郑绪岚 - 牧羊曲.mp3
+830:中文/银临,Aki阿杰 - 牵丝戏.mp3
+831:中文/徐良 - 月光.mp3
+832:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+833:中文/光良 - 童话.mp3
+834:中文/陈力 - 枉凝眉.mp3
+835:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+836:中文/薛之谦 - 绅士.mp3
+837:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+838:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+839:中文/洛天依,许嵩 - 深夜书店.mp3
+840:中文/买辣椒也用券 - 起风了.mp3
+841:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+842:中文/西瓜JUN - 长生诀.flac
+843:中文/郭顶 - 想着你.mp3
+844:中文/郭顶 - 水星记.mp3
+845:中文/郭顶 - 保留.mp3
+846:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+847:中文/许嵩/千百度-许嵩.flac
+848:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+849:中文/许嵩/许嵩 - 庐州月.mp3
+850:中文/许嵩/许嵩 - 胡萝卜须.flac
+851:中文/许嵩/许嵩 - 幻听.flac
+852:中文/许嵩/许嵩 - 对话老师.flac
+853:中文/许嵩/许嵩 - 伴虎.flac
+854:中文/许嵩/许嵩 - 闺蜜.flac
+855:中文/许嵩/许嵩 - 装糊涂.flac
+856:中文/许嵩/许嵩 - Play With Style.flac
+857:中文/许嵩/许嵩 - 心疼你的过去.flac
+858:中文/许嵩/许嵩 - 全球变冷.flac
+859:中文/许嵩/许嵩 - 亲情式的爱情.flac
+860:中文/许嵩/许嵩 - 绝代风华.mp3
+861:中文/许嵩/许嵩 - 如果当时.flac
+862:中文/许嵩/许嵩 - 多余的解释.flac
+863:中文/许嵩/许嵩 - 有何不可.flac
+864:中文/许嵩/许嵩 - 坏孩子.flac
+865:中文/许嵩/许嵩 - 清明雨上.flac
+866:中文/许嵩/许嵩 - 城府.flac
+867:中文/许嵩/许嵩 - 认错.flac
+868:中文/许嵩/许嵩 - 内线.flac
+869:中文/许嵩/许嵩 - 星座书上.flac
+870:中文/许嵩/许嵩 - 想象之中.flac
+871:中文/许嵩/许嵩 - 河山大好.flac
+872:中文/许嵩/许嵩 - 拆东墙.flac
+873:中文/许嵩/许嵩 - 医生.flac
+874:中文/许嵩/许嵩 - 微博控.flac
+875:中文/许嵩/许嵩 - 毁人不倦.flac
+876:中文/许嵩/许嵩 - 双人旁.flac
+877:中文/许嵩/许嵩 - 降温.flac
+878:中文/许嵩/许嵩 - 敬酒不吃.flac
+879:中文/许嵩/许嵩 - 千百度.flac
+880:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+881:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+882:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+883:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+884:日语/浮森かや子 - 魔女狩り.mp3
+885:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+886:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+887:日语/初音ミク - からくりピエロ.mp3
+888:日语/松たか子 - 花のように.mp3
+889:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+890:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+891:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+892:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+893:纯音乐/小胡仙儿 - The Fox.mp3
+894:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+895:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+896:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+897:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+898:纯音乐/陈亮 - 无题.mp3
+899:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+900:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+901:纯音乐/仓健 - 拉利亚的祭典.mp3
+902:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+903:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+904:英文/Avril Lavigne - Complicated.mp3
+905:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+906:英文/The Chainsmokers,Halsey - Closer.mp3
+907:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+908:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+909:英文/Alan Walker,Iselin Solheim - Faded.mp3
+910:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+911:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+912:英文/Camila Cabello,Young Thug - Havana.mp3
+913:英文/Against the Current - Legends Never Die.mp3
+914:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+915:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+916:英文/Michael Jackson - Hollywood Tonight.mp3
+917:英文/TheFatRat,Laura Brehm - Monody.mp3
+918:英文/David Garrett - Viva La Vida.mp3
+919:英文/OneRepublic - Counting Stars.mp3
+920:英文/Eagles - Hotel California (Live) - live.mp3
+921:英文/Matteo - Panama.mp3
+922:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+923:英文/Klaus Badelt - He's a Pirate.mp3
+924:英文/Joel Adams - Please Don't Go.mp3
+925:英文/Nicolas de Angelis - Asturias.mp3
+926:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+927:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+928:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+929:英文/Imagine Dragons - Thunder.mp3
+930:英文/Ed Sheeran - Shape of You.mp3
+931:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+932:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+933:英文/Maroon 5 - Sugar.mp3
+934:英文/Lindsey Stirling - Carol Of The Bells.mp3
+935:英文/Flo Rida - Whistle.mp3
+936:英文/Miley Cyrus - Wrecking Ball.mp3
+937:英文/Piknik - Полюшко-поле.mp3
+938:英文/Jesper Kyd - Ezio's Family.mp3
+939:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+940:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+941:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+942:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+943:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+944:中文/三无MarBlue - 深夜诗人.mp3
+945:中文/夏天Alex - 不再联系.mp3
+946:中文/徐良,汪苏泷 - 后会无期.mp3
+947:中文/Jam - 不露声色.mp3
+948:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+949:中文/星尘,純白P - 中华纯白娘.mp3
+950:中文/洛天依 - 天行健.flac
+951:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+952:中文/洛天依,乐正绫 - 双生契.flac
+953:中文/胡夏 - 同桌的你.mp3
+954:中文/汪苏泷 - 巴赫旧约.mp3
+955:中文/戴荃 - 悟空.mp3
+956:中文/赵雷 - 成都.mp3
+957:中文/林志炫 - 烟花易冷.mp3
+958:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+959:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+960:中文/左宏元,张慧清 - 渡情.mp3
+961:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+962:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+963:中文/洛天依 - 世末积雨云.mp3
+964:中文/洛天依 - 君临天下.mp3
+965:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+966:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+967:中文/洛天依,言和 - 花儿纳吉.mp3
+968:中文/洛天依,言和,ilem - 葬歌.mp3
+969:中文/洛天依,言和,ilem - 阴阳先生.mp3
+970:中文/洛天依,乌龟Sui - 权御天下.mp3
+971:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+972:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+973:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+974:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+975:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+976:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+977:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+978:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+979:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+980:中文/李玲玉 - 女儿情.mp3
+981:中文/洛天依,言和 - 神经病之歌.mp3
+982:中文/乐正绫,言和 - 清明上河图.mp3
+983:中文/兮曰Crandy - 千本中国通史.mp3
+984:中文/郑绪岚 - 牧羊曲.mp3
+985:中文/银临,Aki阿杰 - 牵丝戏.mp3
+986:中文/徐良 - 月光.mp3
+987:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+988:中文/光良 - 童话.mp3
+989:中文/陈力 - 枉凝眉.mp3
+990:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+991:中文/薛之谦 - 绅士.mp3
+992:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+993:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+994:中文/洛天依,许嵩 - 深夜书店.mp3
+995:中文/买辣椒也用券 - 起风了.mp3
+996:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+997:中文/西瓜JUN - 长生诀.flac
+998:中文/郭顶 - 想着你.mp3
+999:中文/郭顶 - 水星记.mp3
+1000:中文/郭顶 - 保留.mp3
+1001:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+1002:中文/许嵩/千百度-许嵩.flac
+1003:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+1004:中文/许嵩/许嵩 - 庐州月.mp3
+1005:中文/许嵩/许嵩 - 胡萝卜须.flac
+1006:中文/许嵩/许嵩 - 幻听.flac
+1007:中文/许嵩/许嵩 - 对话老师.flac
+1008:中文/许嵩/许嵩 - 伴虎.flac
+1009:中文/许嵩/许嵩 - 闺蜜.flac
+1010:中文/许嵩/许嵩 - 装糊涂.flac
+1011:中文/许嵩/许嵩 - Play With Style.flac
+1012:中文/许嵩/许嵩 - 心疼你的过去.flac
+1013:中文/许嵩/许嵩 - 全球变冷.flac
+1014:中文/许嵩/许嵩 - 亲情式的爱情.flac
+1015:中文/许嵩/许嵩 - 绝代风华.mp3
+1016:中文/许嵩/许嵩 - 如果当时.flac
+1017:中文/许嵩/许嵩 - 多余的解释.flac
+1018:中文/许嵩/许嵩 - 有何不可.flac
+1019:中文/许嵩/许嵩 - 坏孩子.flac
+1020:中文/许嵩/许嵩 - 清明雨上.flac
+1021:中文/许嵩/许嵩 - 城府.flac
+1022:中文/许嵩/许嵩 - 认错.flac
+1023:中文/许嵩/许嵩 - 内线.flac
+1024:中文/许嵩/许嵩 - 星座书上.flac
+1025:中文/许嵩/许嵩 - 想象之中.flac
+1026:中文/许嵩/许嵩 - 河山大好.flac
+1027:中文/许嵩/许嵩 - 拆东墙.flac
+1028:中文/许嵩/许嵩 - 医生.flac
+1029:中文/许嵩/许嵩 - 微博控.flac
+1030:中文/许嵩/许嵩 - 毁人不倦.flac
+1031:中文/许嵩/许嵩 - 双人旁.flac
+1032:中文/许嵩/许嵩 - 降温.flac
+1033:中文/许嵩/许嵩 - 敬酒不吃.flac
+1034:中文/许嵩/许嵩 - 千百度.flac
+1035:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+1036:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+1037:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+1038:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+1039:日语/浮森かや子 - 魔女狩り.mp3
+1040:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+1041:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+1042:日语/初音ミク - からくりピエロ.mp3
+1043:日语/松たか子 - 花のように.mp3
+1044:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+1045:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+1046:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+1047:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+1048:纯音乐/小胡仙儿 - The Fox.mp3
+1049:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+1050:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+1051:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+1052:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+1053:纯音乐/陈亮 - 无题.mp3
+1054:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+1055:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+1056:纯音乐/仓健 - 拉利亚的祭典.mp3
+1057:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+1058:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+1059:英文/Avril Lavigne - Complicated.mp3
+1060:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+1061:英文/The Chainsmokers,Halsey - Closer.mp3
+1062:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+1063:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+1064:英文/Alan Walker,Iselin Solheim - Faded.mp3
+1065:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+1066:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+1067:英文/Camila Cabello,Young Thug - Havana.mp3
+1068:英文/Against the Current - Legends Never Die.mp3
+1069:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+1070:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+1071:英文/Michael Jackson - Hollywood Tonight.mp3
+1072:英文/TheFatRat,Laura Brehm - Monody.mp3
+1073:英文/David Garrett - Viva La Vida.mp3
+1074:英文/OneRepublic - Counting Stars.mp3
+1075:英文/Eagles - Hotel California (Live) - live.mp3
+1076:英文/Matteo - Panama.mp3
+1077:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+1078:英文/Klaus Badelt - He's a Pirate.mp3
+1079:英文/Joel Adams - Please Don't Go.mp3
+1080:英文/Nicolas de Angelis - Asturias.mp3
+1081:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+1082:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+1083:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+1084:英文/Imagine Dragons - Thunder.mp3
+1085:英文/Ed Sheeran - Shape of You.mp3
+1086:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+1087:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+1088:英文/Maroon 5 - Sugar.mp3
+1089:英文/Lindsey Stirling - Carol Of The Bells.mp3
+1090:英文/Flo Rida - Whistle.mp3
+1091:英文/Miley Cyrus - Wrecking Ball.mp3
+1092:英文/Piknik - Полюшко-поле.mp3
+1093:英文/Jesper Kyd - Ezio's Family.mp3
+1094:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+1095:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+1096:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+1097:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+1098:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+1099:中文/三无MarBlue - 深夜诗人.mp3
+1100:中文/夏天Alex - 不再联系.mp3
+1101:中文/徐良,汪苏泷 - 后会无期.mp3
+1102:中文/Jam - 不露声色.mp3
+1103:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+1104:中文/星尘,純白P - 中华纯白娘.mp3
+1105:中文/洛天依 - 天行健.flac
+1106:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+1107:中文/洛天依,乐正绫 - 双生契.flac
+1108:中文/胡夏 - 同桌的你.mp3
+1109:中文/汪苏泷 - 巴赫旧约.mp3
+1110:中文/戴荃 - 悟空.mp3
+1111:中文/赵雷 - 成都.mp3
+1112:中文/林志炫 - 烟花易冷.mp3
+1113:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+1114:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+1115:中文/左宏元,张慧清 - 渡情.mp3
+1116:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+1117:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+1118:中文/洛天依 - 世末积雨云.mp3
+1119:中文/洛天依 - 君临天下.mp3
+1120:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+1121:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+1122:中文/洛天依,言和 - 花儿纳吉.mp3
+1123:中文/洛天依,言和,ilem - 葬歌.mp3
+1124:中文/洛天依,言和,ilem - 阴阳先生.mp3
+1125:中文/洛天依,乌龟Sui - 权御天下.mp3
+1126:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+1127:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+1128:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+1129:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+1130:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+1131:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+1132:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+1133:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+1134:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+1135:中文/李玲玉 - 女儿情.mp3
+1136:中文/洛天依,言和 - 神经病之歌.mp3
+1137:中文/乐正绫,言和 - 清明上河图.mp3
+1138:中文/兮曰Crandy - 千本中国通史.mp3
+1139:中文/郑绪岚 - 牧羊曲.mp3
+1140:中文/银临,Aki阿杰 - 牵丝戏.mp3
+1141:中文/徐良 - 月光.mp3
+1142:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+1143:中文/光良 - 童话.mp3
+1144:中文/陈力 - 枉凝眉.mp3
+1145:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+1146:中文/薛之谦 - 绅士.mp3
+1147:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+1148:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+1149:中文/洛天依,许嵩 - 深夜书店.mp3
+1150:中文/买辣椒也用券 - 起风了.mp3
+1151:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+1152:中文/西瓜JUN - 长生诀.flac
+1153:中文/郭顶 - 想着你.mp3
+1154:中文/郭顶 - 水星记.mp3
+1155:中文/郭顶 - 保留.mp3
+1156:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+1157:中文/许嵩/千百度-许嵩.flac
+1158:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+1159:中文/许嵩/许嵩 - 庐州月.mp3
+1160:中文/许嵩/许嵩 - 胡萝卜须.flac
+1161:中文/许嵩/许嵩 - 幻听.flac
+1162:中文/许嵩/许嵩 - 对话老师.flac
+1163:中文/许嵩/许嵩 - 伴虎.flac
+1164:中文/许嵩/许嵩 - 闺蜜.flac
+1165:中文/许嵩/许嵩 - 装糊涂.flac
+1166:中文/许嵩/许嵩 - Play With Style.flac
+1167:中文/许嵩/许嵩 - 心疼你的过去.flac
+1168:中文/许嵩/许嵩 - 全球变冷.flac
+1169:中文/许嵩/许嵩 - 亲情式的爱情.flac
+1170:中文/许嵩/许嵩 - 绝代风华.mp3
+1171:中文/许嵩/许嵩 - 如果当时.flac
+1172:中文/许嵩/许嵩 - 多余的解释.flac
+1173:中文/许嵩/许嵩 - 有何不可.flac
+1174:中文/许嵩/许嵩 - 坏孩子.flac
+1175:中文/许嵩/许嵩 - 清明雨上.flac
+1176:中文/许嵩/许嵩 - 城府.flac
+1177:中文/许嵩/许嵩 - 认错.flac
+1178:中文/许嵩/许嵩 - 内线.flac
+1179:中文/许嵩/许嵩 - 星座书上.flac
+1180:中文/许嵩/许嵩 - 想象之中.flac
+1181:中文/许嵩/许嵩 - 河山大好.flac
+1182:中文/许嵩/许嵩 - 拆东墙.flac
+1183:中文/许嵩/许嵩 - 医生.flac
+1184:中文/许嵩/许嵩 - 微博控.flac
+1185:中文/许嵩/许嵩 - 毁人不倦.flac
+1186:中文/许嵩/许嵩 - 双人旁.flac
+1187:中文/许嵩/许嵩 - 降温.flac
+1188:中文/许嵩/许嵩 - 敬酒不吃.flac
+1189:中文/许嵩/许嵩 - 千百度.flac
+1190:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+1191:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+1192:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+1193:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+1194:日语/浮森かや子 - 魔女狩り.mp3
+1195:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+1196:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+1197:日语/初音ミク - からくりピエロ.mp3
+1198:日语/松たか子 - 花のように.mp3
+1199:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+1200:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+1201:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+1202:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+1203:纯音乐/小胡仙儿 - The Fox.mp3
+1204:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+1205:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+1206:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+1207:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+1208:纯音乐/陈亮 - 无题.mp3
+1209:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+1210:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+1211:纯音乐/仓健 - 拉利亚的祭典.mp3
+1212:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+1213:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+1214:英文/Avril Lavigne - Complicated.mp3
+1215:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+1216:英文/The Chainsmokers,Halsey - Closer.mp3
+1217:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+1218:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+1219:英文/Alan Walker,Iselin Solheim - Faded.mp3
+1220:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+1221:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+1222:英文/Camila Cabello,Young Thug - Havana.mp3
+1223:英文/Against the Current - Legends Never Die.mp3
+1224:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+1225:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+1226:英文/Michael Jackson - Hollywood Tonight.mp3
+1227:英文/TheFatRat,Laura Brehm - Monody.mp3
+1228:英文/David Garrett - Viva La Vida.mp3
+1229:英文/OneRepublic - Counting Stars.mp3
+1230:英文/Eagles - Hotel California (Live) - live.mp3
+1231:英文/Matteo - Panama.mp3
+1232:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+1233:英文/Klaus Badelt - He's a Pirate.mp3
+1234:英文/Joel Adams - Please Don't Go.mp3
+1235:英文/Nicolas de Angelis - Asturias.mp3
+1236:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+1237:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+1238:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+1239:英文/Imagine Dragons - Thunder.mp3
+1240:英文/Ed Sheeran - Shape of You.mp3
+1241:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+1242:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+1243:英文/Maroon 5 - Sugar.mp3
+1244:英文/Lindsey Stirling - Carol Of The Bells.mp3
+1245:英文/Flo Rida - Whistle.mp3
+1246:英文/Miley Cyrus - Wrecking Ball.mp3
+1247:英文/Piknik - Полюшко-поле.mp3
+1248:英文/Jesper Kyd - Ezio's Family.mp3
+1249:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+1250:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+1251:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+1252:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+1253:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+1254:中文/三无MarBlue - 深夜诗人.mp3
+1255:中文/夏天Alex - 不再联系.mp3
+1256:中文/徐良,汪苏泷 - 后会无期.mp3
+1257:中文/Jam - 不露声色.mp3
+1258:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+1259:中文/星尘,純白P - 中华纯白娘.mp3
+1260:中文/洛天依 - 天行健.flac
+1261:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+1262:中文/洛天依,乐正绫 - 双生契.flac
+1263:中文/胡夏 - 同桌的你.mp3
+1264:中文/汪苏泷 - 巴赫旧约.mp3
+1265:中文/戴荃 - 悟空.mp3
+1266:中文/赵雷 - 成都.mp3
+1267:中文/林志炫 - 烟花易冷.mp3
+1268:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+1269:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+1270:中文/左宏元,张慧清 - 渡情.mp3
+1271:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+1272:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+1273:中文/洛天依 - 世末积雨云.mp3
+1274:中文/洛天依 - 君临天下.mp3
+1275:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+1276:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+1277:中文/洛天依,言和 - 花儿纳吉.mp3
+1278:中文/洛天依,言和,ilem - 葬歌.mp3
+1279:中文/洛天依,言和,ilem - 阴阳先生.mp3
+1280:中文/洛天依,乌龟Sui - 权御天下.mp3
+1281:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+1282:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+1283:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+1284:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+1285:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+1286:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+1287:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+1288:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+1289:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+1290:中文/李玲玉 - 女儿情.mp3
+1291:中文/洛天依,言和 - 神经病之歌.mp3
+1292:中文/乐正绫,言和 - 清明上河图.mp3
+1293:中文/兮曰Crandy - 千本中国通史.mp3
+1294:中文/郑绪岚 - 牧羊曲.mp3
+1295:中文/银临,Aki阿杰 - 牵丝戏.mp3
+1296:中文/徐良 - 月光.mp3
+1297:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+1298:中文/光良 - 童话.mp3
+1299:中文/陈力 - 枉凝眉.mp3
+1300:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+1301:中文/薛之谦 - 绅士.mp3
+1302:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+1303:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+1304:中文/洛天依,许嵩 - 深夜书店.mp3
+1305:中文/买辣椒也用券 - 起风了.mp3
+1306:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+1307:中文/西瓜JUN - 长生诀.flac
+1308:中文/郭顶 - 想着你.mp3
+1309:中文/郭顶 - 水星记.mp3
+1310:中文/郭顶 - 保留.mp3
+1311:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+1312:中文/许嵩/千百度-许嵩.flac
+1313:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+1314:中文/许嵩/许嵩 - 庐州月.mp3
+1315:中文/许嵩/许嵩 - 胡萝卜须.flac
+1316:中文/许嵩/许嵩 - 幻听.flac
+1317:中文/许嵩/许嵩 - 对话老师.flac
+1318:中文/许嵩/许嵩 - 伴虎.flac
+1319:中文/许嵩/许嵩 - 闺蜜.flac
+1320:中文/许嵩/许嵩 - 装糊涂.flac
+1321:中文/许嵩/许嵩 - Play With Style.flac
+1322:中文/许嵩/许嵩 - 心疼你的过去.flac
+1323:中文/许嵩/许嵩 - 全球变冷.flac
+1324:中文/许嵩/许嵩 - 亲情式的爱情.flac
+1325:中文/许嵩/许嵩 - 绝代风华.mp3
+1326:中文/许嵩/许嵩 - 如果当时.flac
+1327:中文/许嵩/许嵩 - 多余的解释.flac
+1328:中文/许嵩/许嵩 - 有何不可.flac
+1329:中文/许嵩/许嵩 - 坏孩子.flac
+1330:中文/许嵩/许嵩 - 清明雨上.flac
+1331:中文/许嵩/许嵩 - 城府.flac
+1332:中文/许嵩/许嵩 - 认错.flac
+1333:中文/许嵩/许嵩 - 内线.flac
+1334:中文/许嵩/许嵩 - 星座书上.flac
+1335:中文/许嵩/许嵩 - 想象之中.flac
+1336:中文/许嵩/许嵩 - 河山大好.flac
+1337:中文/许嵩/许嵩 - 拆东墙.flac
+1338:中文/许嵩/许嵩 - 医生.flac
+1339:中文/许嵩/许嵩 - 微博控.flac
+1340:中文/许嵩/许嵩 - 毁人不倦.flac
+1341:中文/许嵩/许嵩 - 双人旁.flac
+1342:中文/许嵩/许嵩 - 降温.flac
+1343:中文/许嵩/许嵩 - 敬酒不吃.flac
+1344:中文/许嵩/许嵩 - 千百度.flac
+1345:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+1346:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+1347:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+1348:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+1349:日语/浮森かや子 - 魔女狩り.mp3
+1350:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+1351:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+1352:日语/初音ミク - からくりピエロ.mp3
+1353:日语/松たか子 - 花のように.mp3
+1354:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+1355:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+1356:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+1357:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+1358:纯音乐/小胡仙儿 - The Fox.mp3
+1359:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+1360:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+1361:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+1362:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+1363:纯音乐/陈亮 - 无题.mp3
+1364:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+1365:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+1366:纯音乐/仓健 - 拉利亚的祭典.mp3
+1367:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+1368:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+1369:英文/Avril Lavigne - Complicated.mp3
+1370:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+1371:英文/The Chainsmokers,Halsey - Closer.mp3
+1372:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+1373:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+1374:英文/Alan Walker,Iselin Solheim - Faded.mp3
+1375:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+1376:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+1377:英文/Camila Cabello,Young Thug - Havana.mp3
+1378:英文/Against the Current - Legends Never Die.mp3
+1379:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+1380:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+1381:英文/Michael Jackson - Hollywood Tonight.mp3
+1382:英文/TheFatRat,Laura Brehm - Monody.mp3
+1383:英文/David Garrett - Viva La Vida.mp3
+1384:英文/OneRepublic - Counting Stars.mp3
+1385:英文/Eagles - Hotel California (Live) - live.mp3
+1386:英文/Matteo - Panama.mp3
+1387:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+1388:英文/Klaus Badelt - He's a Pirate.mp3
+1389:英文/Joel Adams - Please Don't Go.mp3
+1390:英文/Nicolas de Angelis - Asturias.mp3
+1391:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+1392:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+1393:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+1394:英文/Imagine Dragons - Thunder.mp3
+1395:英文/Ed Sheeran - Shape of You.mp3
+1396:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+1397:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+1398:英文/Maroon 5 - Sugar.mp3
+1399:英文/Lindsey Stirling - Carol Of The Bells.mp3
+1400:英文/Flo Rida - Whistle.mp3
+1401:英文/Miley Cyrus - Wrecking Ball.mp3
+1402:英文/Piknik - Полюшко-поле.mp3
+1403:英文/Jesper Kyd - Ezio's Family.mp3
+1404:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+1405:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+1406:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+1407:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+1408:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+1409:中文/三无MarBlue - 深夜诗人.mp3
+1410:中文/夏天Alex - 不再联系.mp3
+1411:中文/徐良,汪苏泷 - 后会无期.mp3
+1412:中文/Jam - 不露声色.mp3
+1413:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+1414:中文/星尘,純白P - 中华纯白娘.mp3
+1415:中文/洛天依 - 天行健.flac
+1416:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+1417:中文/洛天依,乐正绫 - 双生契.flac
+1418:中文/胡夏 - 同桌的你.mp3
+1419:中文/汪苏泷 - 巴赫旧约.mp3
+1420:中文/戴荃 - 悟空.mp3
+1421:中文/赵雷 - 成都.mp3
+1422:中文/林志炫 - 烟花易冷.mp3
+1423:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+1424:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+1425:中文/左宏元,张慧清 - 渡情.mp3
+1426:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+1427:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+1428:中文/洛天依 - 世末积雨云.mp3
+1429:中文/洛天依 - 君临天下.mp3
+1430:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+1431:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+1432:中文/洛天依,言和 - 花儿纳吉.mp3
+1433:中文/洛天依,言和,ilem - 葬歌.mp3
+1434:中文/洛天依,言和,ilem - 阴阳先生.mp3
+1435:中文/洛天依,乌龟Sui - 权御天下.mp3
+1436:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+1437:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+1438:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+1439:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+1440:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+1441:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+1442:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+1443:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+1444:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+1445:中文/李玲玉 - 女儿情.mp3
+1446:中文/洛天依,言和 - 神经病之歌.mp3
+1447:中文/乐正绫,言和 - 清明上河图.mp3
+1448:中文/兮曰Crandy - 千本中国通史.mp3
+1449:中文/郑绪岚 - 牧羊曲.mp3
+1450:中文/银临,Aki阿杰 - 牵丝戏.mp3
+1451:中文/徐良 - 月光.mp3
+1452:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+1453:中文/光良 - 童话.mp3
+1454:中文/陈力 - 枉凝眉.mp3
+1455:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+1456:中文/薛之谦 - 绅士.mp3
+1457:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+1458:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+1459:中文/洛天依,许嵩 - 深夜书店.mp3
+1460:中文/买辣椒也用券 - 起风了.mp3
+1461:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+1462:中文/西瓜JUN - 长生诀.flac
+1463:中文/郭顶 - 想着你.mp3
+1464:中文/郭顶 - 水星记.mp3
+1465:中文/郭顶 - 保留.mp3
+1466:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
 1467:中文/许嵩/千百度-许嵩.flac
 1468:中文/许嵩/许嵩 - 安徒生不后悔.mp3
 1469:中文/许嵩/许嵩 - 庐州月.mp3
@@ -1634,1482 +1634,763 @@ playlist_begin
 1619:中文/郭顶 - 水星记.mp3
 1620:中文/郭顶 - 保留.mp3
 1621:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-1622:中文/周杰伦/周杰伦 - 七里香.flac
-1623:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-1624:中文/周杰伦/周杰伦 - 借口.flac
-1625:中文/周杰伦/周杰伦 - 园游会.flac
-1626:中文/周杰伦/周杰伦 - 困兽之斗.flac
-1627:中文/周杰伦/周杰伦 - 外婆.flac
-1628:中文/周杰伦/周杰伦 - 将军.flac
-1629:中文/周杰伦/周杰伦 - 我的地盘.flac
-1630:中文/周杰伦/周杰伦 - 搁浅.flac
-1631:中文/周杰伦/周杰伦 - 止战之殇.flac
-1632:中文/周杰伦/周杰伦 - 最后的战役.flac
-1633:中文/周杰伦/周杰伦 - 分裂.flac
-1634:中文/周杰伦/周杰伦 - 半兽人.flac
-1635:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-1636:中文/周杰伦/周杰伦 - 回到过去.flac
-1637:中文/周杰伦/周杰伦 - 暗号.flac
-1638:中文/周杰伦/周杰伦 - 火车叨位去.flac
-1639:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-1640:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-1641:中文/周杰伦/周杰伦 - 龙拳.flac
-1642:中文/周杰伦/周杰伦 - Intro.flac
-1643:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-1644:中文/周杰伦/周杰伦 - 还在流浪.flac
-1645:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-1646:中文/周杰伦/周杰伦 - 红颜如霜.flac
-1647:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-1648:中文/周杰伦/周杰伦 - Mojito.flac
-1649:中文/周杰伦/周杰伦 - 错过的烟火.flac
-1650:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-1651:中文/周杰伦/周杰伦 - 粉色海洋.flac
-1652:中文/周杰伦/周杰伦 - 倒影.flac
-1653:中文/周杰伦/周杰伦 - 我是如此相信.flac
-1654:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-1655:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-1656:中文/周杰伦/周杰伦 - 一路向北.flac
-1657:中文/周杰伦/周杰伦 - 发如雪.flac
-1658:中文/周杰伦/周杰伦 - 夜曲.flac
-1659:中文/周杰伦/周杰伦 - 枫.flac
-1660:中文/周杰伦/周杰伦 - 浪漫手机.flac
-1661:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-1662:中文/周杰伦/周杰伦 - 逆鳞.flac
-1663:中文/周杰伦/周杰伦 - 飘移.flac
-1664:中文/周杰伦/周杰伦 - 麦芽糖.flac
-1665:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-1666:中文/周杰伦/周杰伦 - 三年二班.flac
-1667:中文/周杰伦/周杰伦 - 东风破.flac
-1668:中文/周杰伦/周杰伦 - 以父之名.flac
-1669:中文/周杰伦/周杰伦 - 你听得到.flac
-1670:中文/周杰伦/周杰伦 - 双刀.flac
-1671:中文/周杰伦/周杰伦 - 同一种调调.flac
-1672:中文/周杰伦/周杰伦 - 她的睫毛.flac
-1673:中文/周杰伦/周杰伦 - 懦夫.flac
-1674:中文/周杰伦/周杰伦 - 晴天.flac
-1675:中文/周杰伦/周杰伦 - 梯田.flac
-1676:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-1677:中文/周杰伦/周杰伦 - 上海一九四三.flac
-1678:中文/周杰伦/周杰伦 - 双截棍.flac
-1679:中文/周杰伦/周杰伦 - 威廉古堡.flac
-1680:中文/周杰伦/周杰伦 - 安静.flac
-1681:中文/周杰伦/周杰伦 - 对不起.flac
-1682:中文/周杰伦/周杰伦 - 开不了口.flac
-1683:中文/周杰伦/周杰伦 - 忍者.flac
-1684:中文/周杰伦/周杰伦 - 爱在西元前.flac
-1685:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-1686:中文/周杰伦/周杰伦 - 简单爱.flac
-1687:中文/许嵩/千百度-许嵩.flac
-1688:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-1689:中文/许嵩/许嵩 - 庐州月.mp3
-1690:中文/许嵩/许嵩 - 胡萝卜须.flac
-1691:中文/许嵩/许嵩 - 幻听.flac
-1692:中文/许嵩/许嵩 - 对话老师.flac
-1693:中文/许嵩/许嵩 - 伴虎.flac
-1694:中文/许嵩/许嵩 - 闺蜜.flac
-1695:中文/许嵩/许嵩 - 装糊涂.flac
-1696:中文/许嵩/许嵩 - Play With Style.flac
-1697:中文/许嵩/许嵩 - 心疼你的过去.flac
-1698:中文/许嵩/许嵩 - 全球变冷.flac
-1699:中文/许嵩/许嵩 - 亲情式的爱情.flac
-1700:中文/许嵩/许嵩 - 绝代风华.mp3
-1701:中文/许嵩/许嵩 - 如果当时.flac
-1702:中文/许嵩/许嵩 - 多余的解释.flac
-1703:中文/许嵩/许嵩 - 有何不可.flac
-1704:中文/许嵩/许嵩 - 坏孩子.flac
-1705:中文/许嵩/许嵩 - 清明雨上.flac
-1706:中文/许嵩/许嵩 - 城府.flac
-1707:中文/许嵩/许嵩 - 认错.flac
-1708:中文/许嵩/许嵩 - 内线.flac
-1709:中文/许嵩/许嵩 - 星座书上.flac
-1710:中文/许嵩/许嵩 - 想象之中.flac
-1711:中文/许嵩/许嵩 - 河山大好.flac
-1712:中文/许嵩/许嵩 - 拆东墙.flac
-1713:中文/许嵩/许嵩 - 医生.flac
-1714:中文/许嵩/许嵩 - 微博控.flac
-1715:中文/许嵩/许嵩 - 毁人不倦.flac
-1716:中文/许嵩/许嵩 - 双人旁.flac
-1717:中文/许嵩/许嵩 - 降温.flac
-1718:中文/许嵩/许嵩 - 敬酒不吃.flac
-1719:中文/许嵩/许嵩 - 千百度.flac
-1720:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-1721:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-1722:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-1723:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-1724:日语/浮森かや子 - 魔女狩り.mp3
-1725:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-1726:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-1727:日语/初音ミク - からくりピエロ.mp3
-1728:日语/松たか子 - 花のように.mp3
-1729:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-1730:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-1731:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-1732:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-1733:纯音乐/小胡仙儿 - The Fox.mp3
-1734:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-1735:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-1736:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-1737:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-1738:纯音乐/陈亮 - 无题.mp3
-1739:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-1740:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-1741:纯音乐/仓健 - 拉利亚的祭典.mp3
-1742:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-1743:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-1744:英文/Avril Lavigne - Complicated.mp3
-1745:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-1746:英文/The Chainsmokers,Halsey - Closer.mp3
-1747:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-1748:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-1749:英文/Alan Walker,Iselin Solheim - Faded.mp3
-1750:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-1751:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-1752:英文/Camila Cabello,Young Thug - Havana.mp3
-1753:英文/Against the Current - Legends Never Die.mp3
-1754:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-1755:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-1756:英文/Michael Jackson - Hollywood Tonight.mp3
-1757:英文/TheFatRat,Laura Brehm - Monody.mp3
-1758:英文/David Garrett - Viva La Vida.mp3
-1759:英文/OneRepublic - Counting Stars.mp3
-1760:英文/Eagles - Hotel California (Live) - live.mp3
-1761:英文/Matteo - Panama.mp3
-1762:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-1763:英文/Klaus Badelt - He's a Pirate.mp3
-1764:英文/Joel Adams - Please Don't Go.mp3
-1765:英文/Nicolas de Angelis - Asturias.mp3
-1766:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-1767:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-1768:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-1769:英文/Imagine Dragons - Thunder.mp3
-1770:英文/Ed Sheeran - Shape of You.mp3
-1771:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-1772:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-1773:英文/Maroon 5 - Sugar.mp3
-1774:英文/Lindsey Stirling - Carol Of The Bells.mp3
-1775:英文/Flo Rida - Whistle.mp3
-1776:英文/Miley Cyrus - Wrecking Ball.mp3
-1777:英文/Piknik - Полюшко-поле.mp3
-1778:英文/Jesper Kyd - Ezio's Family.mp3
-1779:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-1780:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-1781:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-1782:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-1783:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-1784:中文/三无MarBlue - 深夜诗人.mp3
-1785:中文/夏天Alex - 不再联系.mp3
-1786:中文/徐良,汪苏泷 - 后会无期.mp3
-1787:中文/Jam - 不露声色.mp3
-1788:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-1789:中文/星尘,純白P - 中华纯白娘.mp3
-1790:中文/洛天依 - 天行健.flac
-1791:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-1792:中文/洛天依,乐正绫 - 双生契.flac
-1793:中文/胡夏 - 同桌的你.mp3
-1794:中文/汪苏泷 - 巴赫旧约.mp3
-1795:中文/戴荃 - 悟空.mp3
-1796:中文/赵雷 - 成都.mp3
-1797:中文/林志炫 - 烟花易冷.mp3
-1798:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-1799:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-1800:中文/左宏元,张慧清 - 渡情.mp3
-1801:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-1802:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-1803:中文/洛天依 - 世末积雨云.mp3
-1804:中文/洛天依 - 君临天下.mp3
-1805:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-1806:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-1807:中文/洛天依,言和 - 花儿纳吉.mp3
-1808:中文/洛天依,言和,ilem - 葬歌.mp3
-1809:中文/洛天依,言和,ilem - 阴阳先生.mp3
-1810:中文/洛天依,乌龟Sui - 权御天下.mp3
-1811:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-1812:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-1813:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-1814:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-1815:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-1816:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-1817:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-1818:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-1819:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-1820:中文/李玲玉 - 女儿情.mp3
-1821:中文/洛天依,言和 - 神经病之歌.mp3
-1822:中文/乐正绫,言和 - 清明上河图.mp3
-1823:中文/兮曰Crandy - 千本中国通史.mp3
-1824:中文/郑绪岚 - 牧羊曲.mp3
-1825:中文/银临,Aki阿杰 - 牵丝戏.mp3
-1826:中文/徐良 - 月光.mp3
-1827:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-1828:中文/光良 - 童话.mp3
-1829:中文/陈力 - 枉凝眉.mp3
-1830:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-1831:中文/薛之谦 - 绅士.mp3
-1832:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-1833:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-1834:中文/洛天依,许嵩 - 深夜书店.mp3
-1835:中文/买辣椒也用券 - 起风了.mp3
-1836:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-1837:中文/西瓜JUN - 长生诀.flac
-1838:中文/郭顶 - 想着你.mp3
-1839:中文/郭顶 - 水星记.mp3
-1840:中文/郭顶 - 保留.mp3
-1841:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-1842:中文/周杰伦/周杰伦 - 七里香.flac
-1843:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-1844:中文/周杰伦/周杰伦 - 借口.flac
-1845:中文/周杰伦/周杰伦 - 园游会.flac
-1846:中文/周杰伦/周杰伦 - 困兽之斗.flac
-1847:中文/周杰伦/周杰伦 - 外婆.flac
-1848:中文/周杰伦/周杰伦 - 将军.flac
-1849:中文/周杰伦/周杰伦 - 我的地盘.flac
-1850:中文/周杰伦/周杰伦 - 搁浅.flac
-1851:中文/周杰伦/周杰伦 - 止战之殇.flac
-1852:中文/周杰伦/周杰伦 - 最后的战役.flac
-1853:中文/周杰伦/周杰伦 - 分裂.flac
-1854:中文/周杰伦/周杰伦 - 半兽人.flac
-1855:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-1856:中文/周杰伦/周杰伦 - 回到过去.flac
-1857:中文/周杰伦/周杰伦 - 暗号.flac
-1858:中文/周杰伦/周杰伦 - 火车叨位去.flac
-1859:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-1860:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-1861:中文/周杰伦/周杰伦 - 龙拳.flac
-1862:中文/周杰伦/周杰伦 - Intro.flac
-1863:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-1864:中文/周杰伦/周杰伦 - 还在流浪.flac
-1865:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-1866:中文/周杰伦/周杰伦 - 红颜如霜.flac
-1867:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-1868:中文/周杰伦/周杰伦 - Mojito.flac
-1869:中文/周杰伦/周杰伦 - 错过的烟火.flac
-1870:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-1871:中文/周杰伦/周杰伦 - 粉色海洋.flac
-1872:中文/周杰伦/周杰伦 - 倒影.flac
-1873:中文/周杰伦/周杰伦 - 我是如此相信.flac
-1874:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-1875:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-1876:中文/周杰伦/周杰伦 - 一路向北.flac
-1877:中文/周杰伦/周杰伦 - 发如雪.flac
-1878:中文/周杰伦/周杰伦 - 夜曲.flac
-1879:中文/周杰伦/周杰伦 - 枫.flac
-1880:中文/周杰伦/周杰伦 - 浪漫手机.flac
-1881:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-1882:中文/周杰伦/周杰伦 - 逆鳞.flac
-1883:中文/周杰伦/周杰伦 - 飘移.flac
-1884:中文/周杰伦/周杰伦 - 麦芽糖.flac
-1885:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-1886:中文/周杰伦/周杰伦 - 三年二班.flac
-1887:中文/周杰伦/周杰伦 - 东风破.flac
-1888:中文/周杰伦/周杰伦 - 以父之名.flac
-1889:中文/周杰伦/周杰伦 - 你听得到.flac
-1890:中文/周杰伦/周杰伦 - 双刀.flac
-1891:中文/周杰伦/周杰伦 - 同一种调调.flac
-1892:中文/周杰伦/周杰伦 - 她的睫毛.flac
-1893:中文/周杰伦/周杰伦 - 懦夫.flac
-1894:中文/周杰伦/周杰伦 - 晴天.flac
-1895:中文/周杰伦/周杰伦 - 梯田.flac
-1896:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-1897:中文/周杰伦/周杰伦 - 上海一九四三.flac
-1898:中文/周杰伦/周杰伦 - 双截棍.flac
-1899:中文/周杰伦/周杰伦 - 威廉古堡.flac
-1900:中文/周杰伦/周杰伦 - 安静.flac
-1901:中文/周杰伦/周杰伦 - 对不起.flac
-1902:中文/周杰伦/周杰伦 - 开不了口.flac
-1903:中文/周杰伦/周杰伦 - 忍者.flac
-1904:中文/周杰伦/周杰伦 - 爱在西元前.flac
-1905:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-1906:中文/周杰伦/周杰伦 - 简单爱.flac
-1907:中文/许嵩/千百度-许嵩.flac
-1908:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-1909:中文/许嵩/许嵩 - 庐州月.mp3
-1910:中文/许嵩/许嵩 - 胡萝卜须.flac
-1911:中文/许嵩/许嵩 - 幻听.flac
-1912:中文/许嵩/许嵩 - 对话老师.flac
-1913:中文/许嵩/许嵩 - 伴虎.flac
-1914:中文/许嵩/许嵩 - 闺蜜.flac
-1915:中文/许嵩/许嵩 - 装糊涂.flac
-1916:中文/许嵩/许嵩 - Play With Style.flac
-1917:中文/许嵩/许嵩 - 心疼你的过去.flac
-1918:中文/许嵩/许嵩 - 全球变冷.flac
-1919:中文/许嵩/许嵩 - 亲情式的爱情.flac
-1920:中文/许嵩/许嵩 - 绝代风华.mp3
-1921:中文/许嵩/许嵩 - 如果当时.flac
-1922:中文/许嵩/许嵩 - 多余的解释.flac
-1923:中文/许嵩/许嵩 - 有何不可.flac
-1924:中文/许嵩/许嵩 - 坏孩子.flac
-1925:中文/许嵩/许嵩 - 清明雨上.flac
-1926:中文/许嵩/许嵩 - 城府.flac
-1927:中文/许嵩/许嵩 - 认错.flac
-1928:中文/许嵩/许嵩 - 内线.flac
-1929:中文/许嵩/许嵩 - 星座书上.flac
-1930:中文/许嵩/许嵩 - 想象之中.flac
-1931:中文/许嵩/许嵩 - 河山大好.flac
-1932:中文/许嵩/许嵩 - 拆东墙.flac
-1933:中文/许嵩/许嵩 - 医生.flac
-1934:中文/许嵩/许嵩 - 微博控.flac
-1935:中文/许嵩/许嵩 - 毁人不倦.flac
-1936:中文/许嵩/许嵩 - 双人旁.flac
-1937:中文/许嵩/许嵩 - 降温.flac
-1938:中文/许嵩/许嵩 - 敬酒不吃.flac
-1939:中文/许嵩/许嵩 - 千百度.flac
-1940:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-1941:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-1942:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-1943:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-1944:日语/浮森かや子 - 魔女狩り.mp3
-1945:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-1946:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-1947:日语/初音ミク - からくりピエロ.mp3
-1948:日语/松たか子 - 花のように.mp3
-1949:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-1950:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-1951:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-1952:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-1953:纯音乐/小胡仙儿 - The Fox.mp3
-1954:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-1955:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-1956:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-1957:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-1958:纯音乐/陈亮 - 无题.mp3
-1959:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-1960:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-1961:纯音乐/仓健 - 拉利亚的祭典.mp3
-1962:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-1963:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-1964:英文/Avril Lavigne - Complicated.mp3
-1965:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-1966:英文/The Chainsmokers,Halsey - Closer.mp3
-1967:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-1968:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-1969:英文/Alan Walker,Iselin Solheim - Faded.mp3
-1970:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-1971:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-1972:英文/Camila Cabello,Young Thug - Havana.mp3
-1973:英文/Against the Current - Legends Never Die.mp3
-1974:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-1975:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-1976:英文/Michael Jackson - Hollywood Tonight.mp3
-1977:英文/TheFatRat,Laura Brehm - Monody.mp3
-1978:英文/David Garrett - Viva La Vida.mp3
-1979:英文/OneRepublic - Counting Stars.mp3
-1980:英文/Eagles - Hotel California (Live) - live.mp3
-1981:英文/Matteo - Panama.mp3
-1982:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-1983:英文/Klaus Badelt - He's a Pirate.mp3
-1984:英文/Joel Adams - Please Don't Go.mp3
-1985:英文/Nicolas de Angelis - Asturias.mp3
-1986:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-1987:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-1988:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-1989:英文/Imagine Dragons - Thunder.mp3
-1990:英文/Ed Sheeran - Shape of You.mp3
-1991:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-1992:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-1993:英文/Maroon 5 - Sugar.mp3
-1994:英文/Lindsey Stirling - Carol Of The Bells.mp3
-1995:英文/Flo Rida - Whistle.mp3
-1996:英文/Miley Cyrus - Wrecking Ball.mp3
-1997:英文/Piknik - Полюшко-поле.mp3
-1998:英文/Jesper Kyd - Ezio's Family.mp3
-1999:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-2000:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-2001:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-2002:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-2003:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-2004:中文/三无MarBlue - 深夜诗人.mp3
-2005:中文/夏天Alex - 不再联系.mp3
-2006:中文/徐良,汪苏泷 - 后会无期.mp3
-2007:中文/Jam - 不露声色.mp3
-2008:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-2009:中文/星尘,純白P - 中华纯白娘.mp3
-2010:中文/洛天依 - 天行健.flac
-2011:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-2012:中文/洛天依,乐正绫 - 双生契.flac
-2013:中文/胡夏 - 同桌的你.mp3
-2014:中文/汪苏泷 - 巴赫旧约.mp3
-2015:中文/戴荃 - 悟空.mp3
-2016:中文/赵雷 - 成都.mp3
-2017:中文/林志炫 - 烟花易冷.mp3
-2018:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-2019:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-2020:中文/左宏元,张慧清 - 渡情.mp3
-2021:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-2022:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-2023:中文/洛天依 - 世末积雨云.mp3
-2024:中文/洛天依 - 君临天下.mp3
-2025:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-2026:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-2027:中文/洛天依,言和 - 花儿纳吉.mp3
-2028:中文/洛天依,言和,ilem - 葬歌.mp3
-2029:中文/洛天依,言和,ilem - 阴阳先生.mp3
-2030:中文/洛天依,乌龟Sui - 权御天下.mp3
-2031:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-2032:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-2033:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-2034:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-2035:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-2036:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-2037:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-2038:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-2039:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-2040:中文/李玲玉 - 女儿情.mp3
-2041:中文/洛天依,言和 - 神经病之歌.mp3
-2042:中文/乐正绫,言和 - 清明上河图.mp3
-2043:中文/兮曰Crandy - 千本中国通史.mp3
-2044:中文/郑绪岚 - 牧羊曲.mp3
-2045:中文/银临,Aki阿杰 - 牵丝戏.mp3
-2046:中文/徐良 - 月光.mp3
-2047:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-2048:中文/光良 - 童话.mp3
-2049:中文/陈力 - 枉凝眉.mp3
-2050:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-2051:中文/薛之谦 - 绅士.mp3
-2052:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-2053:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-2054:中文/洛天依,许嵩 - 深夜书店.mp3
-2055:中文/买辣椒也用券 - 起风了.mp3
-2056:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-2057:中文/西瓜JUN - 长生诀.flac
-2058:中文/郭顶 - 想着你.mp3
-2059:中文/郭顶 - 水星记.mp3
-2060:中文/郭顶 - 保留.mp3
-2061:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-2062:中文/周杰伦/周杰伦 - 七里香.flac
-2063:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-2064:中文/周杰伦/周杰伦 - 借口.flac
-2065:中文/周杰伦/周杰伦 - 园游会.flac
-2066:中文/周杰伦/周杰伦 - 困兽之斗.flac
-2067:中文/周杰伦/周杰伦 - 外婆.flac
-2068:中文/周杰伦/周杰伦 - 将军.flac
-2069:中文/周杰伦/周杰伦 - 我的地盘.flac
-2070:中文/周杰伦/周杰伦 - 搁浅.flac
-2071:中文/周杰伦/周杰伦 - 止战之殇.flac
-2072:中文/周杰伦/周杰伦 - 最后的战役.flac
-2073:中文/周杰伦/周杰伦 - 分裂.flac
-2074:中文/周杰伦/周杰伦 - 半兽人.flac
-2075:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-2076:中文/周杰伦/周杰伦 - 回到过去.flac
-2077:中文/周杰伦/周杰伦 - 暗号.flac
-2078:中文/周杰伦/周杰伦 - 火车叨位去.flac
-2079:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-2080:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-2081:中文/周杰伦/周杰伦 - 龙拳.flac
-2082:中文/周杰伦/周杰伦 - Intro.flac
-2083:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-2084:中文/周杰伦/周杰伦 - 还在流浪.flac
-2085:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-2086:中文/周杰伦/周杰伦 - 红颜如霜.flac
-2087:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-2088:中文/周杰伦/周杰伦 - Mojito.flac
-2089:中文/周杰伦/周杰伦 - 错过的烟火.flac
-2090:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-2091:中文/周杰伦/周杰伦 - 粉色海洋.flac
-2092:中文/周杰伦/周杰伦 - 倒影.flac
-2093:中文/周杰伦/周杰伦 - 我是如此相信.flac
-2094:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-2095:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-2096:中文/周杰伦/周杰伦 - 一路向北.flac
-2097:中文/周杰伦/周杰伦 - 发如雪.flac
-2098:中文/周杰伦/周杰伦 - 夜曲.flac
-2099:中文/周杰伦/周杰伦 - 枫.flac
-2100:中文/周杰伦/周杰伦 - 浪漫手机.flac
-2101:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-2102:中文/周杰伦/周杰伦 - 逆鳞.flac
-2103:中文/周杰伦/周杰伦 - 飘移.flac
-2104:中文/周杰伦/周杰伦 - 麦芽糖.flac
-2105:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-2106:中文/周杰伦/周杰伦 - 三年二班.flac
-2107:中文/周杰伦/周杰伦 - 东风破.flac
-2108:中文/周杰伦/周杰伦 - 以父之名.flac
-2109:中文/周杰伦/周杰伦 - 你听得到.flac
-2110:中文/周杰伦/周杰伦 - 双刀.flac
-2111:中文/周杰伦/周杰伦 - 同一种调调.flac
-2112:中文/周杰伦/周杰伦 - 她的睫毛.flac
-2113:中文/周杰伦/周杰伦 - 懦夫.flac
-2114:中文/周杰伦/周杰伦 - 晴天.flac
-2115:中文/周杰伦/周杰伦 - 梯田.flac
-2116:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-2117:中文/周杰伦/周杰伦 - 上海一九四三.flac
-2118:中文/周杰伦/周杰伦 - 双截棍.flac
-2119:中文/周杰伦/周杰伦 - 威廉古堡.flac
-2120:中文/周杰伦/周杰伦 - 安静.flac
-2121:中文/周杰伦/周杰伦 - 对不起.flac
-2122:中文/周杰伦/周杰伦 - 开不了口.flac
-2123:中文/周杰伦/周杰伦 - 忍者.flac
-2124:中文/周杰伦/周杰伦 - 爱在西元前.flac
-2125:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-2126:中文/周杰伦/周杰伦 - 简单爱.flac
-2127:中文/许嵩/千百度-许嵩.flac
-2128:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-2129:中文/许嵩/许嵩 - 庐州月.mp3
-2130:中文/许嵩/许嵩 - 胡萝卜须.flac
-2131:中文/许嵩/许嵩 - 幻听.flac
-2132:中文/许嵩/许嵩 - 对话老师.flac
-2133:中文/许嵩/许嵩 - 伴虎.flac
-2134:中文/许嵩/许嵩 - 闺蜜.flac
-2135:中文/许嵩/许嵩 - 装糊涂.flac
-2136:中文/许嵩/许嵩 - Play With Style.flac
-2137:中文/许嵩/许嵩 - 心疼你的过去.flac
-2138:中文/许嵩/许嵩 - 全球变冷.flac
-2139:中文/许嵩/许嵩 - 亲情式的爱情.flac
-2140:中文/许嵩/许嵩 - 绝代风华.mp3
-2141:中文/许嵩/许嵩 - 如果当时.flac
-2142:中文/许嵩/许嵩 - 多余的解释.flac
-2143:中文/许嵩/许嵩 - 有何不可.flac
-2144:中文/许嵩/许嵩 - 坏孩子.flac
-2145:中文/许嵩/许嵩 - 清明雨上.flac
-2146:中文/许嵩/许嵩 - 城府.flac
-2147:中文/许嵩/许嵩 - 认错.flac
-2148:中文/许嵩/许嵩 - 内线.flac
-2149:中文/许嵩/许嵩 - 星座书上.flac
-2150:中文/许嵩/许嵩 - 想象之中.flac
-2151:中文/许嵩/许嵩 - 河山大好.flac
-2152:中文/许嵩/许嵩 - 拆东墙.flac
-2153:中文/许嵩/许嵩 - 医生.flac
-2154:中文/许嵩/许嵩 - 微博控.flac
-2155:中文/许嵩/许嵩 - 毁人不倦.flac
-2156:中文/许嵩/许嵩 - 双人旁.flac
-2157:中文/许嵩/许嵩 - 降温.flac
-2158:中文/许嵩/许嵩 - 敬酒不吃.flac
-2159:中文/许嵩/许嵩 - 千百度.flac
-2160:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-2161:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-2162:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-2163:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-2164:日语/浮森かや子 - 魔女狩り.mp3
-2165:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-2166:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-2167:日语/初音ミク - からくりピエロ.mp3
-2168:日语/松たか子 - 花のように.mp3
-2169:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-2170:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-2171:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-2172:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-2173:纯音乐/小胡仙儿 - The Fox.mp3
-2174:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-2175:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-2176:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-2177:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-2178:纯音乐/陈亮 - 无题.mp3
-2179:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-2180:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-2181:纯音乐/仓健 - 拉利亚的祭典.mp3
-2182:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-2183:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-2184:英文/Avril Lavigne - Complicated.mp3
-2185:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-2186:英文/The Chainsmokers,Halsey - Closer.mp3
-2187:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-2188:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-2189:英文/Alan Walker,Iselin Solheim - Faded.mp3
-2190:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-2191:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-2192:英文/Camila Cabello,Young Thug - Havana.mp3
-2193:英文/Against the Current - Legends Never Die.mp3
-2194:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-2195:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-2196:英文/Michael Jackson - Hollywood Tonight.mp3
-2197:英文/TheFatRat,Laura Brehm - Monody.mp3
-2198:英文/David Garrett - Viva La Vida.mp3
-2199:英文/OneRepublic - Counting Stars.mp3
-2200:英文/Eagles - Hotel California (Live) - live.mp3
-2201:英文/Matteo - Panama.mp3
-2202:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-2203:英文/Klaus Badelt - He's a Pirate.mp3
-2204:英文/Joel Adams - Please Don't Go.mp3
-2205:英文/Nicolas de Angelis - Asturias.mp3
-2206:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-2207:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-2208:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-2209:英文/Imagine Dragons - Thunder.mp3
-2210:英文/Ed Sheeran - Shape of You.mp3
-2211:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-2212:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-2213:英文/Maroon 5 - Sugar.mp3
-2214:英文/Lindsey Stirling - Carol Of The Bells.mp3
-2215:英文/Flo Rida - Whistle.mp3
-2216:英文/Miley Cyrus - Wrecking Ball.mp3
-2217:英文/Piknik - Полюшко-поле.mp3
-2218:英文/Jesper Kyd - Ezio's Family.mp3
-2219:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-2220:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-2221:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-2222:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-2223:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-2224:中文/三无MarBlue - 深夜诗人.mp3
-2225:中文/夏天Alex - 不再联系.mp3
-2226:中文/徐良,汪苏泷 - 后会无期.mp3
-2227:中文/Jam - 不露声色.mp3
-2228:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-2229:中文/星尘,純白P - 中华纯白娘.mp3
-2230:中文/洛天依 - 天行健.flac
-2231:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-2232:中文/洛天依,乐正绫 - 双生契.flac
-2233:中文/胡夏 - 同桌的你.mp3
-2234:中文/汪苏泷 - 巴赫旧约.mp3
-2235:中文/戴荃 - 悟空.mp3
-2236:中文/赵雷 - 成都.mp3
-2237:中文/林志炫 - 烟花易冷.mp3
-2238:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-2239:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-2240:中文/左宏元,张慧清 - 渡情.mp3
-2241:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-2242:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-2243:中文/洛天依 - 世末积雨云.mp3
-2244:中文/洛天依 - 君临天下.mp3
-2245:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-2246:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-2247:中文/洛天依,言和 - 花儿纳吉.mp3
-2248:中文/洛天依,言和,ilem - 葬歌.mp3
-2249:中文/洛天依,言和,ilem - 阴阳先生.mp3
-2250:中文/洛天依,乌龟Sui - 权御天下.mp3
-2251:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-2252:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-2253:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-2254:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-2255:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-2256:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-2257:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-2258:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-2259:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-2260:中文/李玲玉 - 女儿情.mp3
-2261:中文/洛天依,言和 - 神经病之歌.mp3
-2262:中文/乐正绫,言和 - 清明上河图.mp3
-2263:中文/兮曰Crandy - 千本中国通史.mp3
-2264:中文/郑绪岚 - 牧羊曲.mp3
-2265:中文/银临,Aki阿杰 - 牵丝戏.mp3
-2266:中文/徐良 - 月光.mp3
-2267:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-2268:中文/光良 - 童话.mp3
-2269:中文/陈力 - 枉凝眉.mp3
-2270:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-2271:中文/薛之谦 - 绅士.mp3
-2272:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-2273:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-2274:中文/洛天依,许嵩 - 深夜书店.mp3
-2275:中文/买辣椒也用券 - 起风了.mp3
-2276:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-2277:中文/西瓜JUN - 长生诀.flac
-2278:中文/郭顶 - 想着你.mp3
-2279:中文/郭顶 - 水星记.mp3
-2280:中文/郭顶 - 保留.mp3
-2281:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-2282:中文/周杰伦/周杰伦 - 七里香.flac
-2283:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-2284:中文/周杰伦/周杰伦 - 借口.flac
-2285:中文/周杰伦/周杰伦 - 园游会.flac
-2286:中文/周杰伦/周杰伦 - 困兽之斗.flac
-2287:中文/周杰伦/周杰伦 - 外婆.flac
-2288:中文/周杰伦/周杰伦 - 将军.flac
-2289:中文/周杰伦/周杰伦 - 我的地盘.flac
-2290:中文/周杰伦/周杰伦 - 搁浅.flac
-2291:中文/周杰伦/周杰伦 - 止战之殇.flac
-2292:中文/周杰伦/周杰伦 - 最后的战役.flac
-2293:中文/周杰伦/周杰伦 - 分裂.flac
-2294:中文/周杰伦/周杰伦 - 半兽人.flac
-2295:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-2296:中文/周杰伦/周杰伦 - 回到过去.flac
-2297:中文/周杰伦/周杰伦 - 暗号.flac
-2298:中文/周杰伦/周杰伦 - 火车叨位去.flac
-2299:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-2300:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-2301:中文/周杰伦/周杰伦 - 龙拳.flac
-2302:中文/周杰伦/周杰伦 - Intro.flac
-2303:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-2304:中文/周杰伦/周杰伦 - 还在流浪.flac
-2305:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-2306:中文/周杰伦/周杰伦 - 红颜如霜.flac
-2307:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-2308:中文/周杰伦/周杰伦 - Mojito.flac
-2309:中文/周杰伦/周杰伦 - 错过的烟火.flac
-2310:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-2311:中文/周杰伦/周杰伦 - 粉色海洋.flac
-2312:中文/周杰伦/周杰伦 - 倒影.flac
-2313:中文/周杰伦/周杰伦 - 我是如此相信.flac
-2314:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-2315:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-2316:中文/周杰伦/周杰伦 - 一路向北.flac
-2317:中文/周杰伦/周杰伦 - 发如雪.flac
-2318:中文/周杰伦/周杰伦 - 夜曲.flac
-2319:中文/周杰伦/周杰伦 - 枫.flac
-2320:中文/周杰伦/周杰伦 - 浪漫手机.flac
-2321:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-2322:中文/周杰伦/周杰伦 - 逆鳞.flac
-2323:中文/周杰伦/周杰伦 - 飘移.flac
-2324:中文/周杰伦/周杰伦 - 麦芽糖.flac
-2325:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-2326:中文/周杰伦/周杰伦 - 三年二班.flac
-2327:中文/周杰伦/周杰伦 - 东风破.flac
-2328:中文/周杰伦/周杰伦 - 以父之名.flac
-2329:中文/周杰伦/周杰伦 - 你听得到.flac
-2330:中文/周杰伦/周杰伦 - 双刀.flac
-2331:中文/周杰伦/周杰伦 - 同一种调调.flac
-2332:中文/周杰伦/周杰伦 - 她的睫毛.flac
-2333:中文/周杰伦/周杰伦 - 懦夫.flac
-2334:中文/周杰伦/周杰伦 - 晴天.flac
-2335:中文/周杰伦/周杰伦 - 梯田.flac
-2336:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-2337:中文/周杰伦/周杰伦 - 上海一九四三.flac
-2338:中文/周杰伦/周杰伦 - 双截棍.flac
-2339:中文/周杰伦/周杰伦 - 威廉古堡.flac
-2340:中文/周杰伦/周杰伦 - 安静.flac
-2341:中文/周杰伦/周杰伦 - 对不起.flac
-2342:中文/周杰伦/周杰伦 - 开不了口.flac
-2343:中文/周杰伦/周杰伦 - 忍者.flac
-2344:中文/周杰伦/周杰伦 - 爱在西元前.flac
-2345:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-2346:中文/周杰伦/周杰伦 - 简单爱.flac
-2347:中文/许嵩/千百度-许嵩.flac
-2348:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-2349:中文/许嵩/许嵩 - 庐州月.mp3
-2350:中文/许嵩/许嵩 - 胡萝卜须.flac
-2351:中文/许嵩/许嵩 - 幻听.flac
-2352:中文/许嵩/许嵩 - 对话老师.flac
-2353:中文/许嵩/许嵩 - 伴虎.flac
-2354:中文/许嵩/许嵩 - 闺蜜.flac
-2355:中文/许嵩/许嵩 - 装糊涂.flac
-2356:中文/许嵩/许嵩 - Play With Style.flac
-2357:中文/许嵩/许嵩 - 心疼你的过去.flac
-2358:中文/许嵩/许嵩 - 全球变冷.flac
-2359:中文/许嵩/许嵩 - 亲情式的爱情.flac
-2360:中文/许嵩/许嵩 - 绝代风华.mp3
-2361:中文/许嵩/许嵩 - 如果当时.flac
-2362:中文/许嵩/许嵩 - 多余的解释.flac
-2363:中文/许嵩/许嵩 - 有何不可.flac
-2364:中文/许嵩/许嵩 - 坏孩子.flac
-2365:中文/许嵩/许嵩 - 清明雨上.flac
-2366:中文/许嵩/许嵩 - 城府.flac
-2367:中文/许嵩/许嵩 - 认错.flac
-2368:中文/许嵩/许嵩 - 内线.flac
-2369:中文/许嵩/许嵩 - 星座书上.flac
-2370:中文/许嵩/许嵩 - 想象之中.flac
-2371:中文/许嵩/许嵩 - 河山大好.flac
-2372:中文/许嵩/许嵩 - 拆东墙.flac
-2373:中文/许嵩/许嵩 - 医生.flac
-2374:中文/许嵩/许嵩 - 微博控.flac
-2375:中文/许嵩/许嵩 - 毁人不倦.flac
-2376:中文/许嵩/许嵩 - 双人旁.flac
-2377:中文/许嵩/许嵩 - 降温.flac
-2378:中文/许嵩/许嵩 - 敬酒不吃.flac
-2379:中文/许嵩/许嵩 - 千百度.flac
-2380:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-2381:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-2382:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-2383:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-2384:日语/浮森かや子 - 魔女狩り.mp3
-2385:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-2386:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-2387:日语/初音ミク - からくりピエロ.mp3
-2388:日语/松たか子 - 花のように.mp3
-2389:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-2390:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-2391:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-2392:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-2393:纯音乐/小胡仙儿 - The Fox.mp3
-2394:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-2395:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-2396:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-2397:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-2398:纯音乐/陈亮 - 无题.mp3
-2399:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-2400:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-2401:纯音乐/仓健 - 拉利亚的祭典.mp3
-2402:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-2403:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-2404:英文/Avril Lavigne - Complicated.mp3
-2405:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-2406:英文/The Chainsmokers,Halsey - Closer.mp3
-2407:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-2408:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-2409:英文/Alan Walker,Iselin Solheim - Faded.mp3
-2410:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-2411:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-2412:英文/Camila Cabello,Young Thug - Havana.mp3
-2413:英文/Against the Current - Legends Never Die.mp3
-2414:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-2415:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-2416:英文/Michael Jackson - Hollywood Tonight.mp3
-2417:英文/TheFatRat,Laura Brehm - Monody.mp3
-2418:英文/David Garrett - Viva La Vida.mp3
-2419:英文/OneRepublic - Counting Stars.mp3
-2420:英文/Eagles - Hotel California (Live) - live.mp3
-2421:英文/Matteo - Panama.mp3
-2422:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-2423:英文/Klaus Badelt - He's a Pirate.mp3
-2424:英文/Joel Adams - Please Don't Go.mp3
-2425:英文/Nicolas de Angelis - Asturias.mp3
-2426:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-2427:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-2428:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-2429:英文/Imagine Dragons - Thunder.mp3
-2430:英文/Ed Sheeran - Shape of You.mp3
-2431:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-2432:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-2433:英文/Maroon 5 - Sugar.mp3
-2434:英文/Lindsey Stirling - Carol Of The Bells.mp3
-2435:英文/Flo Rida - Whistle.mp3
-2436:英文/Miley Cyrus - Wrecking Ball.mp3
-2437:英文/Piknik - Полюшко-поле.mp3
-2438:英文/Jesper Kyd - Ezio's Family.mp3
-2439:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-2440:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-2441:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-2442:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-2443:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-2444:中文/三无MarBlue - 深夜诗人.mp3
-2445:中文/夏天Alex - 不再联系.mp3
-2446:中文/徐良,汪苏泷 - 后会无期.mp3
-2447:中文/Jam - 不露声色.mp3
-2448:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-2449:中文/星尘,純白P - 中华纯白娘.mp3
-2450:中文/洛天依 - 天行健.flac
-2451:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-2452:中文/洛天依,乐正绫 - 双生契.flac
-2453:中文/胡夏 - 同桌的你.mp3
-2454:中文/汪苏泷 - 巴赫旧约.mp3
-2455:中文/戴荃 - 悟空.mp3
-2456:中文/赵雷 - 成都.mp3
-2457:中文/林志炫 - 烟花易冷.mp3
-2458:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-2459:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-2460:中文/左宏元,张慧清 - 渡情.mp3
-2461:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-2462:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-2463:中文/洛天依 - 世末积雨云.mp3
-2464:中文/洛天依 - 君临天下.mp3
-2465:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-2466:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-2467:中文/洛天依,言和 - 花儿纳吉.mp3
-2468:中文/洛天依,言和,ilem - 葬歌.mp3
-2469:中文/洛天依,言和,ilem - 阴阳先生.mp3
-2470:中文/洛天依,乌龟Sui - 权御天下.mp3
-2471:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-2472:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-2473:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-2474:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-2475:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-2476:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-2477:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-2478:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-2479:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-2480:中文/李玲玉 - 女儿情.mp3
-2481:中文/洛天依,言和 - 神经病之歌.mp3
-2482:中文/乐正绫,言和 - 清明上河图.mp3
-2483:中文/兮曰Crandy - 千本中国通史.mp3
-2484:中文/郑绪岚 - 牧羊曲.mp3
-2485:中文/银临,Aki阿杰 - 牵丝戏.mp3
-2486:中文/徐良 - 月光.mp3
-2487:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-2488:中文/光良 - 童话.mp3
-2489:中文/陈力 - 枉凝眉.mp3
-2490:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-2491:中文/薛之谦 - 绅士.mp3
-2492:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-2493:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-2494:中文/洛天依,许嵩 - 深夜书店.mp3
-2495:中文/买辣椒也用券 - 起风了.mp3
-2496:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-2497:中文/西瓜JUN - 长生诀.flac
-2498:中文/郭顶 - 想着你.mp3
-2499:中文/郭顶 - 水星记.mp3
-2500:中文/郭顶 - 保留.mp3
-2501:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-2502:中文/周杰伦/周杰伦 - 七里香.flac
-2503:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-2504:中文/周杰伦/周杰伦 - 借口.flac
-2505:中文/周杰伦/周杰伦 - 园游会.flac
-2506:中文/周杰伦/周杰伦 - 困兽之斗.flac
-2507:中文/周杰伦/周杰伦 - 外婆.flac
-2508:中文/周杰伦/周杰伦 - 将军.flac
-2509:中文/周杰伦/周杰伦 - 我的地盘.flac
-2510:中文/周杰伦/周杰伦 - 搁浅.flac
-2511:中文/周杰伦/周杰伦 - 止战之殇.flac
-2512:中文/周杰伦/周杰伦 - 最后的战役.flac
-2513:中文/周杰伦/周杰伦 - 分裂.flac
-2514:中文/周杰伦/周杰伦 - 半兽人.flac
-2515:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-2516:中文/周杰伦/周杰伦 - 回到过去.flac
-2517:中文/周杰伦/周杰伦 - 暗号.flac
-2518:中文/周杰伦/周杰伦 - 火车叨位去.flac
-2519:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-2520:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-2521:中文/周杰伦/周杰伦 - 龙拳.flac
-2522:中文/周杰伦/周杰伦 - Intro.flac
-2523:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-2524:中文/周杰伦/周杰伦 - 还在流浪.flac
-2525:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-2526:中文/周杰伦/周杰伦 - 红颜如霜.flac
-2527:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-2528:中文/周杰伦/周杰伦 - Mojito.flac
-2529:中文/周杰伦/周杰伦 - 错过的烟火.flac
-2530:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-2531:中文/周杰伦/周杰伦 - 粉色海洋.flac
-2532:中文/周杰伦/周杰伦 - 倒影.flac
-2533:中文/周杰伦/周杰伦 - 我是如此相信.flac
-2534:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-2535:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-2536:中文/周杰伦/周杰伦 - 一路向北.flac
-2537:中文/周杰伦/周杰伦 - 发如雪.flac
-2538:中文/周杰伦/周杰伦 - 夜曲.flac
-2539:中文/周杰伦/周杰伦 - 枫.flac
-2540:中文/周杰伦/周杰伦 - 浪漫手机.flac
-2541:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-2542:中文/周杰伦/周杰伦 - 逆鳞.flac
-2543:中文/周杰伦/周杰伦 - 飘移.flac
-2544:中文/周杰伦/周杰伦 - 麦芽糖.flac
-2545:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-2546:中文/周杰伦/周杰伦 - 三年二班.flac
-2547:中文/周杰伦/周杰伦 - 东风破.flac
-2548:中文/周杰伦/周杰伦 - 以父之名.flac
-2549:中文/周杰伦/周杰伦 - 你听得到.flac
-2550:中文/周杰伦/周杰伦 - 双刀.flac
-2551:中文/周杰伦/周杰伦 - 同一种调调.flac
-2552:中文/周杰伦/周杰伦 - 她的睫毛.flac
-2553:中文/周杰伦/周杰伦 - 懦夫.flac
-2554:中文/周杰伦/周杰伦 - 晴天.flac
-2555:中文/周杰伦/周杰伦 - 梯田.flac
-2556:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-2557:中文/周杰伦/周杰伦 - 上海一九四三.flac
-2558:中文/周杰伦/周杰伦 - 双截棍.flac
-2559:中文/周杰伦/周杰伦 - 威廉古堡.flac
-2560:中文/周杰伦/周杰伦 - 安静.flac
-2561:中文/周杰伦/周杰伦 - 对不起.flac
-2562:中文/周杰伦/周杰伦 - 开不了口.flac
-2563:中文/周杰伦/周杰伦 - 忍者.flac
-2564:中文/周杰伦/周杰伦 - 爱在西元前.flac
-2565:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-2566:中文/周杰伦/周杰伦 - 简单爱.flac
-2567:中文/许嵩/千百度-许嵩.flac
-2568:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-2569:中文/许嵩/许嵩 - 庐州月.mp3
-2570:中文/许嵩/许嵩 - 胡萝卜须.flac
-2571:中文/许嵩/许嵩 - 幻听.flac
-2572:中文/许嵩/许嵩 - 对话老师.flac
-2573:中文/许嵩/许嵩 - 伴虎.flac
-2574:中文/许嵩/许嵩 - 闺蜜.flac
-2575:中文/许嵩/许嵩 - 装糊涂.flac
-2576:中文/许嵩/许嵩 - Play With Style.flac
-2577:中文/许嵩/许嵩 - 心疼你的过去.flac
-2578:中文/许嵩/许嵩 - 全球变冷.flac
-2579:中文/许嵩/许嵩 - 亲情式的爱情.flac
-2580:中文/许嵩/许嵩 - 绝代风华.mp3
-2581:中文/许嵩/许嵩 - 如果当时.flac
-2582:中文/许嵩/许嵩 - 多余的解释.flac
-2583:中文/许嵩/许嵩 - 有何不可.flac
-2584:中文/许嵩/许嵩 - 坏孩子.flac
-2585:中文/许嵩/许嵩 - 清明雨上.flac
-2586:中文/许嵩/许嵩 - 城府.flac
-2587:中文/许嵩/许嵩 - 认错.flac
-2588:中文/许嵩/许嵩 - 内线.flac
-2589:中文/许嵩/许嵩 - 星座书上.flac
-2590:中文/许嵩/许嵩 - 想象之中.flac
-2591:中文/许嵩/许嵩 - 河山大好.flac
-2592:中文/许嵩/许嵩 - 拆东墙.flac
-2593:中文/许嵩/许嵩 - 医生.flac
-2594:中文/许嵩/许嵩 - 微博控.flac
-2595:中文/许嵩/许嵩 - 毁人不倦.flac
-2596:中文/许嵩/许嵩 - 双人旁.flac
-2597:中文/许嵩/许嵩 - 降温.flac
-2598:中文/许嵩/许嵩 - 敬酒不吃.flac
-2599:中文/许嵩/许嵩 - 千百度.flac
-2600:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-2601:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-2602:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-2603:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-2604:日语/浮森かや子 - 魔女狩り.mp3
-2605:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-2606:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-2607:日语/初音ミク - からくりピエロ.mp3
-2608:日语/松たか子 - 花のように.mp3
-2609:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-2610:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-2611:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-2612:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-2613:纯音乐/小胡仙儿 - The Fox.mp3
-2614:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-2615:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-2616:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-2617:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-2618:纯音乐/陈亮 - 无题.mp3
-2619:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-2620:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-2621:纯音乐/仓健 - 拉利亚的祭典.mp3
-2622:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-2623:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-2624:英文/Avril Lavigne - Complicated.mp3
-2625:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-2626:英文/The Chainsmokers,Halsey - Closer.mp3
-2627:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-2628:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-2629:英文/Alan Walker,Iselin Solheim - Faded.mp3
-2630:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-2631:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-2632:英文/Camila Cabello,Young Thug - Havana.mp3
-2633:英文/Against the Current - Legends Never Die.mp3
-2634:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-2635:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-2636:英文/Michael Jackson - Hollywood Tonight.mp3
-2637:英文/TheFatRat,Laura Brehm - Monody.mp3
-2638:英文/David Garrett - Viva La Vida.mp3
-2639:英文/OneRepublic - Counting Stars.mp3
-2640:英文/Eagles - Hotel California (Live) - live.mp3
-2641:英文/Matteo - Panama.mp3
-2642:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-2643:英文/Klaus Badelt - He's a Pirate.mp3
-2644:英文/Joel Adams - Please Don't Go.mp3
-2645:英文/Nicolas de Angelis - Asturias.mp3
-2646:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-2647:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-2648:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-2649:英文/Imagine Dragons - Thunder.mp3
-2650:英文/Ed Sheeran - Shape of You.mp3
-2651:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-2652:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-2653:英文/Maroon 5 - Sugar.mp3
-2654:英文/Lindsey Stirling - Carol Of The Bells.mp3
-2655:英文/Flo Rida - Whistle.mp3
-2656:英文/Miley Cyrus - Wrecking Ball.mp3
-2657:英文/Piknik - Полюшко-поле.mp3
-2658:英文/Jesper Kyd - Ezio's Family.mp3
-2659:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-2660:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-2661:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-2662:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-2663:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-2664:中文/三无MarBlue - 深夜诗人.mp3
-2665:中文/夏天Alex - 不再联系.mp3
-2666:中文/徐良,汪苏泷 - 后会无期.mp3
-2667:中文/Jam - 不露声色.mp3
-2668:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-2669:中文/星尘,純白P - 中华纯白娘.mp3
-2670:中文/洛天依 - 天行健.flac
-2671:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-2672:中文/洛天依,乐正绫 - 双生契.flac
-2673:中文/胡夏 - 同桌的你.mp3
-2674:中文/汪苏泷 - 巴赫旧约.mp3
-2675:中文/戴荃 - 悟空.mp3
-2676:中文/赵雷 - 成都.mp3
-2677:中文/林志炫 - 烟花易冷.mp3
-2678:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-2679:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-2680:中文/左宏元,张慧清 - 渡情.mp3
-2681:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-2682:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-2683:中文/洛天依 - 世末积雨云.mp3
-2684:中文/洛天依 - 君临天下.mp3
-2685:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-2686:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-2687:中文/洛天依,言和 - 花儿纳吉.mp3
-2688:中文/洛天依,言和,ilem - 葬歌.mp3
-2689:中文/洛天依,言和,ilem - 阴阳先生.mp3
-2690:中文/洛天依,乌龟Sui - 权御天下.mp3
-2691:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-2692:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-2693:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-2694:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-2695:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-2696:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-2697:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-2698:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-2699:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-2700:中文/李玲玉 - 女儿情.mp3
-2701:中文/洛天依,言和 - 神经病之歌.mp3
-2702:中文/乐正绫,言和 - 清明上河图.mp3
-2703:中文/兮曰Crandy - 千本中国通史.mp3
-2704:中文/郑绪岚 - 牧羊曲.mp3
-2705:中文/银临,Aki阿杰 - 牵丝戏.mp3
-2706:中文/徐良 - 月光.mp3
-2707:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-2708:中文/光良 - 童话.mp3
-2709:中文/陈力 - 枉凝眉.mp3
-2710:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-2711:中文/薛之谦 - 绅士.mp3
-2712:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-2713:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-2714:中文/洛天依,许嵩 - 深夜书店.mp3
-2715:中文/买辣椒也用券 - 起风了.mp3
-2716:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-2717:中文/西瓜JUN - 长生诀.flac
-2718:中文/郭顶 - 想着你.mp3
-2719:中文/郭顶 - 水星记.mp3
-2720:中文/郭顶 - 保留.mp3
-2721:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-2722:中文/周杰伦/周杰伦 - 七里香.flac
-2723:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-2724:中文/周杰伦/周杰伦 - 借口.flac
-2725:中文/周杰伦/周杰伦 - 园游会.flac
-2726:中文/周杰伦/周杰伦 - 困兽之斗.flac
-2727:中文/周杰伦/周杰伦 - 外婆.flac
-2728:中文/周杰伦/周杰伦 - 将军.flac
-2729:中文/周杰伦/周杰伦 - 我的地盘.flac
-2730:中文/周杰伦/周杰伦 - 搁浅.flac
-2731:中文/周杰伦/周杰伦 - 止战之殇.flac
-2732:中文/周杰伦/周杰伦 - 最后的战役.flac
-2733:中文/周杰伦/周杰伦 - 分裂.flac
-2734:中文/周杰伦/周杰伦 - 半兽人.flac
-2735:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-2736:中文/周杰伦/周杰伦 - 回到过去.flac
-2737:中文/周杰伦/周杰伦 - 暗号.flac
-2738:中文/周杰伦/周杰伦 - 火车叨位去.flac
-2739:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-2740:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-2741:中文/周杰伦/周杰伦 - 龙拳.flac
-2742:中文/周杰伦/周杰伦 - Intro.flac
-2743:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-2744:中文/周杰伦/周杰伦 - 还在流浪.flac
-2745:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-2746:中文/周杰伦/周杰伦 - 红颜如霜.flac
-2747:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-2748:中文/周杰伦/周杰伦 - Mojito.flac
-2749:中文/周杰伦/周杰伦 - 错过的烟火.flac
-2750:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-2751:中文/周杰伦/周杰伦 - 粉色海洋.flac
-2752:中文/周杰伦/周杰伦 - 倒影.flac
-2753:中文/周杰伦/周杰伦 - 我是如此相信.flac
-2754:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-2755:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-2756:中文/周杰伦/周杰伦 - 一路向北.flac
-2757:中文/周杰伦/周杰伦 - 发如雪.flac
-2758:中文/周杰伦/周杰伦 - 夜曲.flac
-2759:中文/周杰伦/周杰伦 - 枫.flac
-2760:中文/周杰伦/周杰伦 - 浪漫手机.flac
-2761:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-2762:中文/周杰伦/周杰伦 - 逆鳞.flac
-2763:中文/周杰伦/周杰伦 - 飘移.flac
-2764:中文/周杰伦/周杰伦 - 麦芽糖.flac
-2765:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-2766:中文/周杰伦/周杰伦 - 三年二班.flac
-2767:中文/周杰伦/周杰伦 - 东风破.flac
-2768:中文/周杰伦/周杰伦 - 以父之名.flac
-2769:中文/周杰伦/周杰伦 - 你听得到.flac
-2770:中文/周杰伦/周杰伦 - 双刀.flac
-2771:中文/周杰伦/周杰伦 - 同一种调调.flac
-2772:中文/周杰伦/周杰伦 - 她的睫毛.flac
-2773:中文/周杰伦/周杰伦 - 懦夫.flac
-2774:中文/周杰伦/周杰伦 - 晴天.flac
-2775:中文/周杰伦/周杰伦 - 梯田.flac
-2776:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-2777:中文/周杰伦/周杰伦 - 上海一九四三.flac
-2778:中文/周杰伦/周杰伦 - 双截棍.flac
-2779:中文/周杰伦/周杰伦 - 威廉古堡.flac
-2780:中文/周杰伦/周杰伦 - 安静.flac
-2781:中文/周杰伦/周杰伦 - 对不起.flac
-2782:中文/周杰伦/周杰伦 - 开不了口.flac
-2783:中文/周杰伦/周杰伦 - 忍者.flac
-2784:中文/周杰伦/周杰伦 - 爱在西元前.flac
-2785:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-2786:中文/周杰伦/周杰伦 - 简单爱.flac
-2787:中文/许嵩/千百度-许嵩.flac
-2788:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-2789:中文/许嵩/许嵩 - 庐州月.mp3
-2790:中文/许嵩/许嵩 - 胡萝卜须.flac
-2791:中文/许嵩/许嵩 - 幻听.flac
-2792:中文/许嵩/许嵩 - 对话老师.flac
-2793:中文/许嵩/许嵩 - 伴虎.flac
-2794:中文/许嵩/许嵩 - 闺蜜.flac
-2795:中文/许嵩/许嵩 - 装糊涂.flac
-2796:中文/许嵩/许嵩 - Play With Style.flac
-2797:中文/许嵩/许嵩 - 心疼你的过去.flac
-2798:中文/许嵩/许嵩 - 全球变冷.flac
-2799:中文/许嵩/许嵩 - 亲情式的爱情.flac
-2800:中文/许嵩/许嵩 - 绝代风华.mp3
-2801:中文/许嵩/许嵩 - 如果当时.flac
-2802:中文/许嵩/许嵩 - 多余的解释.flac
-2803:中文/许嵩/许嵩 - 有何不可.flac
-2804:中文/许嵩/许嵩 - 坏孩子.flac
-2805:中文/许嵩/许嵩 - 清明雨上.flac
-2806:中文/许嵩/许嵩 - 城府.flac
-2807:中文/许嵩/许嵩 - 认错.flac
-2808:中文/许嵩/许嵩 - 内线.flac
-2809:中文/许嵩/许嵩 - 星座书上.flac
-2810:中文/许嵩/许嵩 - 想象之中.flac
-2811:中文/许嵩/许嵩 - 河山大好.flac
-2812:中文/许嵩/许嵩 - 拆东墙.flac
-2813:中文/许嵩/许嵩 - 医生.flac
-2814:中文/许嵩/许嵩 - 微博控.flac
-2815:中文/许嵩/许嵩 - 毁人不倦.flac
-2816:中文/许嵩/许嵩 - 双人旁.flac
-2817:中文/许嵩/许嵩 - 降温.flac
-2818:中文/许嵩/许嵩 - 敬酒不吃.flac
-2819:中文/许嵩/许嵩 - 千百度.flac
-2820:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-2821:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-2822:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-2823:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-2824:日语/浮森かや子 - 魔女狩り.mp3
-2825:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-2826:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-2827:日语/初音ミク - からくりピエロ.mp3
-2828:日语/松たか子 - 花のように.mp3
-2829:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-2830:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-2831:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-2832:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-2833:纯音乐/小胡仙儿 - The Fox.mp3
-2834:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-2835:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-2836:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-2837:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-2838:纯音乐/陈亮 - 无题.mp3
-2839:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-2840:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-2841:纯音乐/仓健 - 拉利亚的祭典.mp3
-2842:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-2843:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-2844:英文/Avril Lavigne - Complicated.mp3
-2845:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-2846:英文/The Chainsmokers,Halsey - Closer.mp3
-2847:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-2848:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-2849:英文/Alan Walker,Iselin Solheim - Faded.mp3
-2850:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-2851:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-2852:英文/Camila Cabello,Young Thug - Havana.mp3
-2853:英文/Against the Current - Legends Never Die.mp3
-2854:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-2855:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-2856:英文/Michael Jackson - Hollywood Tonight.mp3
-2857:英文/TheFatRat,Laura Brehm - Monody.mp3
-2858:英文/David Garrett - Viva La Vida.mp3
-2859:英文/OneRepublic - Counting Stars.mp3
-2860:英文/Eagles - Hotel California (Live) - live.mp3
-2861:英文/Matteo - Panama.mp3
-2862:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-2863:英文/Klaus Badelt - He's a Pirate.mp3
-2864:英文/Joel Adams - Please Don't Go.mp3
-2865:英文/Nicolas de Angelis - Asturias.mp3
-2866:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-2867:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-2868:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-2869:英文/Imagine Dragons - Thunder.mp3
-2870:英文/Ed Sheeran - Shape of You.mp3
-2871:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-2872:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-2873:英文/Maroon 5 - Sugar.mp3
-2874:英文/Lindsey Stirling - Carol Of The Bells.mp3
-2875:英文/Flo Rida - Whistle.mp3
-2876:英文/Miley Cyrus - Wrecking Ball.mp3
-2877:英文/Piknik - Полюшко-поле.mp3
-2878:英文/Jesper Kyd - Ezio's Family.mp3
-2879:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
-2880:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
-2881:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
-2882:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
-2883:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
-2884:中文/三无MarBlue - 深夜诗人.mp3
-2885:中文/夏天Alex - 不再联系.mp3
-2886:中文/徐良,汪苏泷 - 后会无期.mp3
-2887:中文/Jam - 不露声色.mp3
-2888:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
-2889:中文/星尘,純白P - 中华纯白娘.mp3
-2890:中文/洛天依 - 天行健.flac
-2891:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
-2892:中文/洛天依,乐正绫 - 双生契.flac
-2893:中文/胡夏 - 同桌的你.mp3
-2894:中文/汪苏泷 - 巴赫旧约.mp3
-2895:中文/戴荃 - 悟空.mp3
-2896:中文/赵雷 - 成都.mp3
-2897:中文/林志炫 - 烟花易冷.mp3
-2898:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
-2899:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
-2900:中文/左宏元,张慧清 - 渡情.mp3
-2901:中文/蒋志光,罗大佑 - 皇后大道东.mp3
-2902:中文/乐正绫,洛天依,COP - 世末歌者.mp3
-2903:中文/洛天依 - 世末积雨云.mp3
-2904:中文/洛天依 - 君临天下.mp3
-2905:中文/洛天依,乐正绫 - 锦鲤抄.mp3
-2906:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
-2907:中文/洛天依,言和 - 花儿纳吉.mp3
-2908:中文/洛天依,言和,ilem - 葬歌.mp3
-2909:中文/洛天依,言和,ilem - 阴阳先生.mp3
-2910:中文/洛天依,乌龟Sui - 权御天下.mp3
-2911:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
-2912:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
-2913:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
-2914:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
-2915:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
-2916:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
-2917:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
-2918:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
-2919:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
-2920:中文/李玲玉 - 女儿情.mp3
-2921:中文/洛天依,言和 - 神经病之歌.mp3
-2922:中文/乐正绫,言和 - 清明上河图.mp3
-2923:中文/兮曰Crandy - 千本中国通史.mp3
-2924:中文/郑绪岚 - 牧羊曲.mp3
-2925:中文/银临,Aki阿杰 - 牵丝戏.mp3
-2926:中文/徐良 - 月光.mp3
-2927:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
-2928:中文/光良 - 童话.mp3
-2929:中文/陈力 - 枉凝眉.mp3
-2930:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
-2931:中文/薛之谦 - 绅士.mp3
-2932:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
-2933:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
-2934:中文/洛天依,许嵩 - 深夜书店.mp3
-2935:中文/买辣椒也用券 - 起风了.mp3
-2936:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
-2937:中文/西瓜JUN - 长生诀.flac
-2938:中文/郭顶 - 想着你.mp3
-2939:中文/郭顶 - 水星记.mp3
-2940:中文/郭顶 - 保留.mp3
-2941:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
-2942:中文/周杰伦/周杰伦 - 七里香.flac
-2943:中文/周杰伦/周杰伦 - 乱舞春秋.flac
-2944:中文/周杰伦/周杰伦 - 借口.flac
-2945:中文/周杰伦/周杰伦 - 园游会.flac
-2946:中文/周杰伦/周杰伦 - 困兽之斗.flac
-2947:中文/周杰伦/周杰伦 - 外婆.flac
-2948:中文/周杰伦/周杰伦 - 将军.flac
-2949:中文/周杰伦/周杰伦 - 我的地盘.flac
-2950:中文/周杰伦/周杰伦 - 搁浅.flac
-2951:中文/周杰伦/周杰伦 - 止战之殇.flac
-2952:中文/周杰伦/周杰伦 - 最后的战役.flac
-2953:中文/周杰伦/周杰伦 - 分裂.flac
-2954:中文/周杰伦/周杰伦 - 半兽人.flac
-2955:中文/周杰伦/周杰伦 - 半岛铁盒.flac
-2956:中文/周杰伦/周杰伦 - 回到过去.flac
-2957:中文/周杰伦/周杰伦 - 暗号.flac
-2958:中文/周杰伦/周杰伦 - 火车叨位去.flac
-2959:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
-2960:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
-2961:中文/周杰伦/周杰伦 - 龙拳.flac
-2962:中文/周杰伦/周杰伦 - Intro.flac
-2963:中文/周杰伦/周杰伦 - 最伟大的作品.flac
-2964:中文/周杰伦/周杰伦 - 还在流浪.flac
-2965:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
-2966:中文/周杰伦/周杰伦 - 红颜如霜.flac
-2967:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
-2968:中文/周杰伦/周杰伦 - Mojito.flac
-2969:中文/周杰伦/周杰伦 - 错过的烟火.flac
-2970:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
-2971:中文/周杰伦/周杰伦 - 粉色海洋.flac
-2972:中文/周杰伦/周杰伦 - 倒影.flac
-2973:中文/周杰伦/周杰伦 - 我是如此相信.flac
-2974:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
-2975:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
-2976:中文/周杰伦/周杰伦 - 一路向北.flac
-2977:中文/周杰伦/周杰伦 - 发如雪.flac
-2978:中文/周杰伦/周杰伦 - 夜曲.flac
-2979:中文/周杰伦/周杰伦 - 枫.flac
-2980:中文/周杰伦/周杰伦 - 浪漫手机.flac
-2981:中文/周杰伦/周杰伦 - 蓝色风暴.flac
-2982:中文/周杰伦/周杰伦 - 逆鳞.flac
-2983:中文/周杰伦/周杰伦 - 飘移.flac
-2984:中文/周杰伦/周杰伦 - 麦芽糖.flac
-2985:中文/周杰伦/周杰伦 - 黑色毛衣.flac
-2986:中文/周杰伦/周杰伦 - 三年二班.flac
-2987:中文/周杰伦/周杰伦 - 东风破.flac
-2988:中文/周杰伦/周杰伦 - 以父之名.flac
-2989:中文/周杰伦/周杰伦 - 你听得到.flac
-2990:中文/周杰伦/周杰伦 - 双刀.flac
-2991:中文/周杰伦/周杰伦 - 同一种调调.flac
-2992:中文/周杰伦/周杰伦 - 她的睫毛.flac
-2993:中文/周杰伦/周杰伦 - 懦夫.flac
-2994:中文/周杰伦/周杰伦 - 晴天.flac
-2995:中文/周杰伦/周杰伦 - 梯田.flac
-2996:中文/周杰伦/周杰伦 - 爱情悬崖.flac
-2997:中文/周杰伦/周杰伦 - 上海一九四三.flac
-2998:中文/周杰伦/周杰伦 - 双截棍.flac
-2999:中文/周杰伦/周杰伦 - 威廉古堡.flac
-3000:中文/周杰伦/周杰伦 - 安静.flac
-3001:中文/周杰伦/周杰伦 - 对不起.flac
-3002:中文/周杰伦/周杰伦 - 开不了口.flac
-3003:中文/周杰伦/周杰伦 - 忍者.flac
-3004:中文/周杰伦/周杰伦 - 爱在西元前.flac
-3005:中文/周杰伦/周杰伦 - 爸，我回来了.flac
-3006:中文/周杰伦/周杰伦 - 简单爱.flac
-3007:中文/许嵩/千百度-许嵩.flac
-3008:中文/许嵩/许嵩 - 安徒生不后悔.mp3
-3009:中文/许嵩/许嵩 - 庐州月.mp3
-3010:中文/许嵩/许嵩 - 胡萝卜须.flac
-3011:中文/许嵩/许嵩 - 幻听.flac
-3012:中文/许嵩/许嵩 - 对话老师.flac
-3013:中文/许嵩/许嵩 - 伴虎.flac
-3014:中文/许嵩/许嵩 - 闺蜜.flac
-3015:中文/许嵩/许嵩 - 装糊涂.flac
-3016:中文/许嵩/许嵩 - Play With Style.flac
-3017:中文/许嵩/许嵩 - 心疼你的过去.flac
-3018:中文/许嵩/许嵩 - 全球变冷.flac
-3019:中文/许嵩/许嵩 - 亲情式的爱情.flac
-3020:中文/许嵩/许嵩 - 绝代风华.mp3
-3021:中文/许嵩/许嵩 - 如果当时.flac
-3022:中文/许嵩/许嵩 - 多余的解释.flac
-3023:中文/许嵩/许嵩 - 有何不可.flac
-3024:中文/许嵩/许嵩 - 坏孩子.flac
-3025:中文/许嵩/许嵩 - 清明雨上.flac
-3026:中文/许嵩/许嵩 - 城府.flac
-3027:中文/许嵩/许嵩 - 认错.flac
-3028:中文/许嵩/许嵩 - 内线.flac
-3029:中文/许嵩/许嵩 - 星座书上.flac
-3030:中文/许嵩/许嵩 - 想象之中.flac
-3031:中文/许嵩/许嵩 - 河山大好.flac
-3032:中文/许嵩/许嵩 - 拆东墙.flac
-3033:中文/许嵩/许嵩 - 医生.flac
-3034:中文/许嵩/许嵩 - 微博控.flac
-3035:中文/许嵩/许嵩 - 毁人不倦.flac
-3036:中文/许嵩/许嵩 - 双人旁.flac
-3037:中文/许嵩/许嵩 - 降温.flac
-3038:中文/许嵩/许嵩 - 敬酒不吃.flac
-3039:中文/许嵩/许嵩 - 千百度.flac
-3040:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
-3041:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
-3042:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
-3043:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
-3044:日语/浮森かや子 - 魔女狩り.mp3
-3045:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
-3046:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
-3047:日语/初音ミク - からくりピエロ.mp3
-3048:日语/松たか子 - 花のように.mp3
-3049:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
-3050:纯音乐/久石譲 - Confessions in the Moonlight.mp3
-3051:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
-3052:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
-3053:纯音乐/小胡仙儿 - The Fox.mp3
-3054:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
-3055:纯音乐/贝多芬 - 月光奏鸣曲.mp3
-3056:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
-3057:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
-3058:纯音乐/陈亮 - 无题.mp3
-3059:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
-3060:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
-3061:纯音乐/仓健 - 拉利亚的祭典.mp3
-3062:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
-3063:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
-3064:英文/Avril Lavigne - Complicated.mp3
-3065:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
-3066:英文/The Chainsmokers,Halsey - Closer.mp3
-3067:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
-3068:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
-3069:英文/Alan Walker,Iselin Solheim - Faded.mp3
-3070:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
-3071:英文/Marshmello,Anne-Marie - FRIENDS.mp3
-3072:英文/Camila Cabello,Young Thug - Havana.mp3
-3073:英文/Against the Current - Legends Never Die.mp3
-3074:英文/Eminem,Rihanna - Love The Way You Lie.mp3
-3075:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
-3076:英文/Michael Jackson - Hollywood Tonight.mp3
-3077:英文/TheFatRat,Laura Brehm - Monody.mp3
-3078:英文/David Garrett - Viva La Vida.mp3
-3079:英文/OneRepublic - Counting Stars.mp3
-3080:英文/Eagles - Hotel California (Live) - live.mp3
-3081:英文/Matteo - Panama.mp3
-3082:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
-3083:英文/Klaus Badelt - He's a Pirate.mp3
-3084:英文/Joel Adams - Please Don't Go.mp3
-3085:英文/Nicolas de Angelis - Asturias.mp3
-3086:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
-3087:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
-3088:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
-3089:英文/Imagine Dragons - Thunder.mp3
-3090:英文/Ed Sheeran - Shape of You.mp3
-3091:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
-3092:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
-3093:英文/Maroon 5 - Sugar.mp3
-3094:英文/Lindsey Stirling - Carol Of The Bells.mp3
-3095:英文/Flo Rida - Whistle.mp3
-3096:英文/Miley Cyrus - Wrecking Ball.mp3
-3097:英文/Piknik - Полюшко-поле.mp3
-3098:英文/Jesper Kyd - Ezio's Family.mp3
-3099:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+1622:中文/许嵩/千百度-许嵩.flac
+1623:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+1624:中文/许嵩/许嵩 - 庐州月.mp3
+1625:中文/许嵩/许嵩 - 胡萝卜须.flac
+1626:中文/许嵩/许嵩 - 幻听.flac
+1627:中文/许嵩/许嵩 - 对话老师.flac
+1628:中文/许嵩/许嵩 - 伴虎.flac
+1629:中文/许嵩/许嵩 - 闺蜜.flac
+1630:中文/许嵩/许嵩 - 装糊涂.flac
+1631:中文/许嵩/许嵩 - Play With Style.flac
+1632:中文/许嵩/许嵩 - 心疼你的过去.flac
+1633:中文/许嵩/许嵩 - 全球变冷.flac
+1634:中文/许嵩/许嵩 - 亲情式的爱情.flac
+1635:中文/许嵩/许嵩 - 绝代风华.mp3
+1636:中文/许嵩/许嵩 - 如果当时.flac
+1637:中文/许嵩/许嵩 - 多余的解释.flac
+1638:中文/许嵩/许嵩 - 有何不可.flac
+1639:中文/许嵩/许嵩 - 坏孩子.flac
+1640:中文/许嵩/许嵩 - 清明雨上.flac
+1641:中文/许嵩/许嵩 - 城府.flac
+1642:中文/许嵩/许嵩 - 认错.flac
+1643:中文/许嵩/许嵩 - 内线.flac
+1644:中文/许嵩/许嵩 - 星座书上.flac
+1645:中文/许嵩/许嵩 - 想象之中.flac
+1646:中文/许嵩/许嵩 - 河山大好.flac
+1647:中文/许嵩/许嵩 - 拆东墙.flac
+1648:中文/许嵩/许嵩 - 医生.flac
+1649:中文/许嵩/许嵩 - 微博控.flac
+1650:中文/许嵩/许嵩 - 毁人不倦.flac
+1651:中文/许嵩/许嵩 - 双人旁.flac
+1652:中文/许嵩/许嵩 - 降温.flac
+1653:中文/许嵩/许嵩 - 敬酒不吃.flac
+1654:中文/许嵩/许嵩 - 千百度.flac
+1655:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+1656:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+1657:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+1658:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+1659:日语/浮森かや子 - 魔女狩り.mp3
+1660:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+1661:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+1662:日语/初音ミク - からくりピエロ.mp3
+1663:日语/松たか子 - 花のように.mp3
+1664:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+1665:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+1666:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+1667:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+1668:纯音乐/小胡仙儿 - The Fox.mp3
+1669:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+1670:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+1671:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+1672:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+1673:纯音乐/陈亮 - 无题.mp3
+1674:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+1675:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+1676:纯音乐/仓健 - 拉利亚的祭典.mp3
+1677:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+1678:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+1679:英文/Avril Lavigne - Complicated.mp3
+1680:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+1681:英文/The Chainsmokers,Halsey - Closer.mp3
+1682:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+1683:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+1684:英文/Alan Walker,Iselin Solheim - Faded.mp3
+1685:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+1686:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+1687:英文/Camila Cabello,Young Thug - Havana.mp3
+1688:英文/Against the Current - Legends Never Die.mp3
+1689:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+1690:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+1691:英文/Michael Jackson - Hollywood Tonight.mp3
+1692:英文/TheFatRat,Laura Brehm - Monody.mp3
+1693:英文/David Garrett - Viva La Vida.mp3
+1694:英文/OneRepublic - Counting Stars.mp3
+1695:英文/Eagles - Hotel California (Live) - live.mp3
+1696:英文/Matteo - Panama.mp3
+1697:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+1698:英文/Klaus Badelt - He's a Pirate.mp3
+1699:英文/Joel Adams - Please Don't Go.mp3
+1700:英文/Nicolas de Angelis - Asturias.mp3
+1701:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+1702:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+1703:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+1704:英文/Imagine Dragons - Thunder.mp3
+1705:英文/Ed Sheeran - Shape of You.mp3
+1706:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+1707:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+1708:英文/Maroon 5 - Sugar.mp3
+1709:英文/Lindsey Stirling - Carol Of The Bells.mp3
+1710:英文/Flo Rida - Whistle.mp3
+1711:英文/Miley Cyrus - Wrecking Ball.mp3
+1712:英文/Piknik - Полюшко-поле.mp3
+1713:英文/Jesper Kyd - Ezio's Family.mp3
+1714:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+1715:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+1716:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+1717:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+1718:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+1719:中文/三无MarBlue - 深夜诗人.mp3
+1720:中文/夏天Alex - 不再联系.mp3
+1721:中文/徐良,汪苏泷 - 后会无期.mp3
+1722:中文/Jam - 不露声色.mp3
+1723:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+1724:中文/星尘,純白P - 中华纯白娘.mp3
+1725:中文/洛天依 - 天行健.flac
+1726:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+1727:中文/洛天依,乐正绫 - 双生契.flac
+1728:中文/胡夏 - 同桌的你.mp3
+1729:中文/汪苏泷 - 巴赫旧约.mp3
+1730:中文/戴荃 - 悟空.mp3
+1731:中文/赵雷 - 成都.mp3
+1732:中文/林志炫 - 烟花易冷.mp3
+1733:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+1734:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+1735:中文/左宏元,张慧清 - 渡情.mp3
+1736:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+1737:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+1738:中文/洛天依 - 世末积雨云.mp3
+1739:中文/洛天依 - 君临天下.mp3
+1740:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+1741:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+1742:中文/洛天依,言和 - 花儿纳吉.mp3
+1743:中文/洛天依,言和,ilem - 葬歌.mp3
+1744:中文/洛天依,言和,ilem - 阴阳先生.mp3
+1745:中文/洛天依,乌龟Sui - 权御天下.mp3
+1746:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+1747:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+1748:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+1749:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+1750:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+1751:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+1752:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+1753:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+1754:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+1755:中文/李玲玉 - 女儿情.mp3
+1756:中文/洛天依,言和 - 神经病之歌.mp3
+1757:中文/乐正绫,言和 - 清明上河图.mp3
+1758:中文/兮曰Crandy - 千本中国通史.mp3
+1759:中文/郑绪岚 - 牧羊曲.mp3
+1760:中文/银临,Aki阿杰 - 牵丝戏.mp3
+1761:中文/徐良 - 月光.mp3
+1762:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+1763:中文/光良 - 童话.mp3
+1764:中文/陈力 - 枉凝眉.mp3
+1765:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+1766:中文/薛之谦 - 绅士.mp3
+1767:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+1768:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+1769:中文/洛天依,许嵩 - 深夜书店.mp3
+1770:中文/买辣椒也用券 - 起风了.mp3
+1771:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+1772:中文/西瓜JUN - 长生诀.flac
+1773:中文/郭顶 - 想着你.mp3
+1774:中文/郭顶 - 水星记.mp3
+1775:中文/郭顶 - 保留.mp3
+1776:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+1777:中文/许嵩/千百度-许嵩.flac
+1778:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+1779:中文/许嵩/许嵩 - 庐州月.mp3
+1780:中文/许嵩/许嵩 - 胡萝卜须.flac
+1781:中文/许嵩/许嵩 - 幻听.flac
+1782:中文/许嵩/许嵩 - 对话老师.flac
+1783:中文/许嵩/许嵩 - 伴虎.flac
+1784:中文/许嵩/许嵩 - 闺蜜.flac
+1785:中文/许嵩/许嵩 - 装糊涂.flac
+1786:中文/许嵩/许嵩 - Play With Style.flac
+1787:中文/许嵩/许嵩 - 心疼你的过去.flac
+1788:中文/许嵩/许嵩 - 全球变冷.flac
+1789:中文/许嵩/许嵩 - 亲情式的爱情.flac
+1790:中文/许嵩/许嵩 - 绝代风华.mp3
+1791:中文/许嵩/许嵩 - 如果当时.flac
+1792:中文/许嵩/许嵩 - 多余的解释.flac
+1793:中文/许嵩/许嵩 - 有何不可.flac
+1794:中文/许嵩/许嵩 - 坏孩子.flac
+1795:中文/许嵩/许嵩 - 清明雨上.flac
+1796:中文/许嵩/许嵩 - 城府.flac
+1797:中文/许嵩/许嵩 - 认错.flac
+1798:中文/许嵩/许嵩 - 内线.flac
+1799:中文/许嵩/许嵩 - 星座书上.flac
+1800:中文/许嵩/许嵩 - 想象之中.flac
+1801:中文/许嵩/许嵩 - 河山大好.flac
+1802:中文/许嵩/许嵩 - 拆东墙.flac
+1803:中文/许嵩/许嵩 - 医生.flac
+1804:中文/许嵩/许嵩 - 微博控.flac
+1805:中文/许嵩/许嵩 - 毁人不倦.flac
+1806:中文/许嵩/许嵩 - 双人旁.flac
+1807:中文/许嵩/许嵩 - 降温.flac
+1808:中文/许嵩/许嵩 - 敬酒不吃.flac
+1809:中文/许嵩/许嵩 - 千百度.flac
+1810:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+1811:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+1812:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+1813:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+1814:日语/浮森かや子 - 魔女狩り.mp3
+1815:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+1816:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+1817:日语/初音ミク - からくりピエロ.mp3
+1818:日语/松たか子 - 花のように.mp3
+1819:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+1820:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+1821:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+1822:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+1823:纯音乐/小胡仙儿 - The Fox.mp3
+1824:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+1825:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+1826:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+1827:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+1828:纯音乐/陈亮 - 无题.mp3
+1829:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+1830:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+1831:纯音乐/仓健 - 拉利亚的祭典.mp3
+1832:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+1833:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+1834:英文/Avril Lavigne - Complicated.mp3
+1835:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+1836:英文/The Chainsmokers,Halsey - Closer.mp3
+1837:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+1838:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+1839:英文/Alan Walker,Iselin Solheim - Faded.mp3
+1840:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+1841:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+1842:英文/Camila Cabello,Young Thug - Havana.mp3
+1843:英文/Against the Current - Legends Never Die.mp3
+1844:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+1845:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+1846:英文/Michael Jackson - Hollywood Tonight.mp3
+1847:英文/TheFatRat,Laura Brehm - Monody.mp3
+1848:英文/David Garrett - Viva La Vida.mp3
+1849:英文/OneRepublic - Counting Stars.mp3
+1850:英文/Eagles - Hotel California (Live) - live.mp3
+1851:英文/Matteo - Panama.mp3
+1852:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+1853:英文/Klaus Badelt - He's a Pirate.mp3
+1854:英文/Joel Adams - Please Don't Go.mp3
+1855:英文/Nicolas de Angelis - Asturias.mp3
+1856:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+1857:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+1858:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+1859:英文/Imagine Dragons - Thunder.mp3
+1860:英文/Ed Sheeran - Shape of You.mp3
+1861:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+1862:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+1863:英文/Maroon 5 - Sugar.mp3
+1864:英文/Lindsey Stirling - Carol Of The Bells.mp3
+1865:英文/Flo Rida - Whistle.mp3
+1866:英文/Miley Cyrus - Wrecking Ball.mp3
+1867:英文/Piknik - Полюшко-поле.mp3
+1868:英文/Jesper Kyd - Ezio's Family.mp3
+1869:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+1870:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+1871:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+1872:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+1873:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+1874:中文/三无MarBlue - 深夜诗人.mp3
+1875:中文/夏天Alex - 不再联系.mp3
+1876:中文/徐良,汪苏泷 - 后会无期.mp3
+1877:中文/Jam - 不露声色.mp3
+1878:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+1879:中文/星尘,純白P - 中华纯白娘.mp3
+1880:中文/洛天依 - 天行健.flac
+1881:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+1882:中文/洛天依,乐正绫 - 双生契.flac
+1883:中文/胡夏 - 同桌的你.mp3
+1884:中文/汪苏泷 - 巴赫旧约.mp3
+1885:中文/戴荃 - 悟空.mp3
+1886:中文/赵雷 - 成都.mp3
+1887:中文/林志炫 - 烟花易冷.mp3
+1888:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+1889:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+1890:中文/左宏元,张慧清 - 渡情.mp3
+1891:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+1892:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+1893:中文/洛天依 - 世末积雨云.mp3
+1894:中文/洛天依 - 君临天下.mp3
+1895:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+1896:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+1897:中文/洛天依,言和 - 花儿纳吉.mp3
+1898:中文/洛天依,言和,ilem - 葬歌.mp3
+1899:中文/洛天依,言和,ilem - 阴阳先生.mp3
+1900:中文/洛天依,乌龟Sui - 权御天下.mp3
+1901:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+1902:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+1903:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+1904:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+1905:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+1906:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+1907:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+1908:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+1909:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+1910:中文/李玲玉 - 女儿情.mp3
+1911:中文/洛天依,言和 - 神经病之歌.mp3
+1912:中文/乐正绫,言和 - 清明上河图.mp3
+1913:中文/兮曰Crandy - 千本中国通史.mp3
+1914:中文/郑绪岚 - 牧羊曲.mp3
+1915:中文/银临,Aki阿杰 - 牵丝戏.mp3
+1916:中文/徐良 - 月光.mp3
+1917:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+1918:中文/光良 - 童话.mp3
+1919:中文/陈力 - 枉凝眉.mp3
+1920:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+1921:中文/薛之谦 - 绅士.mp3
+1922:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+1923:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+1924:中文/洛天依,许嵩 - 深夜书店.mp3
+1925:中文/买辣椒也用券 - 起风了.mp3
+1926:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+1927:中文/西瓜JUN - 长生诀.flac
+1928:中文/郭顶 - 想着你.mp3
+1929:中文/郭顶 - 水星记.mp3
+1930:中文/郭顶 - 保留.mp3
+1931:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+1932:中文/许嵩/千百度-许嵩.flac
+1933:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+1934:中文/许嵩/许嵩 - 庐州月.mp3
+1935:中文/许嵩/许嵩 - 胡萝卜须.flac
+1936:中文/许嵩/许嵩 - 幻听.flac
+1937:中文/许嵩/许嵩 - 对话老师.flac
+1938:中文/许嵩/许嵩 - 伴虎.flac
+1939:中文/许嵩/许嵩 - 闺蜜.flac
+1940:中文/许嵩/许嵩 - 装糊涂.flac
+1941:中文/许嵩/许嵩 - Play With Style.flac
+1942:中文/许嵩/许嵩 - 心疼你的过去.flac
+1943:中文/许嵩/许嵩 - 全球变冷.flac
+1944:中文/许嵩/许嵩 - 亲情式的爱情.flac
+1945:中文/许嵩/许嵩 - 绝代风华.mp3
+1946:中文/许嵩/许嵩 - 如果当时.flac
+1947:中文/许嵩/许嵩 - 多余的解释.flac
+1948:中文/许嵩/许嵩 - 有何不可.flac
+1949:中文/许嵩/许嵩 - 坏孩子.flac
+1950:中文/许嵩/许嵩 - 清明雨上.flac
+1951:中文/许嵩/许嵩 - 城府.flac
+1952:中文/许嵩/许嵩 - 认错.flac
+1953:中文/许嵩/许嵩 - 内线.flac
+1954:中文/许嵩/许嵩 - 星座书上.flac
+1955:中文/许嵩/许嵩 - 想象之中.flac
+1956:中文/许嵩/许嵩 - 河山大好.flac
+1957:中文/许嵩/许嵩 - 拆东墙.flac
+1958:中文/许嵩/许嵩 - 医生.flac
+1959:中文/许嵩/许嵩 - 微博控.flac
+1960:中文/许嵩/许嵩 - 毁人不倦.flac
+1961:中文/许嵩/许嵩 - 双人旁.flac
+1962:中文/许嵩/许嵩 - 降温.flac
+1963:中文/许嵩/许嵩 - 敬酒不吃.flac
+1964:中文/许嵩/许嵩 - 千百度.flac
+1965:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+1966:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+1967:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+1968:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+1969:日语/浮森かや子 - 魔女狩り.mp3
+1970:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+1971:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+1972:日语/初音ミク - からくりピエロ.mp3
+1973:日语/松たか子 - 花のように.mp3
+1974:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+1975:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+1976:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+1977:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+1978:纯音乐/小胡仙儿 - The Fox.mp3
+1979:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+1980:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+1981:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+1982:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+1983:纯音乐/陈亮 - 无题.mp3
+1984:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+1985:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+1986:纯音乐/仓健 - 拉利亚的祭典.mp3
+1987:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+1988:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+1989:英文/Avril Lavigne - Complicated.mp3
+1990:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+1991:英文/The Chainsmokers,Halsey - Closer.mp3
+1992:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+1993:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+1994:英文/Alan Walker,Iselin Solheim - Faded.mp3
+1995:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+1996:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+1997:英文/Camila Cabello,Young Thug - Havana.mp3
+1998:英文/Against the Current - Legends Never Die.mp3
+1999:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+2000:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+2001:英文/Michael Jackson - Hollywood Tonight.mp3
+2002:英文/TheFatRat,Laura Brehm - Monody.mp3
+2003:英文/David Garrett - Viva La Vida.mp3
+2004:英文/OneRepublic - Counting Stars.mp3
+2005:英文/Eagles - Hotel California (Live) - live.mp3
+2006:英文/Matteo - Panama.mp3
+2007:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+2008:英文/Klaus Badelt - He's a Pirate.mp3
+2009:英文/Joel Adams - Please Don't Go.mp3
+2010:英文/Nicolas de Angelis - Asturias.mp3
+2011:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+2012:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+2013:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+2014:英文/Imagine Dragons - Thunder.mp3
+2015:英文/Ed Sheeran - Shape of You.mp3
+2016:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+2017:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+2018:英文/Maroon 5 - Sugar.mp3
+2019:英文/Lindsey Stirling - Carol Of The Bells.mp3
+2020:英文/Flo Rida - Whistle.mp3
+2021:英文/Miley Cyrus - Wrecking Ball.mp3
+2022:英文/Piknik - Полюшко-поле.mp3
+2023:英文/Jesper Kyd - Ezio's Family.mp3
+2024:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+2025:中文/泠鸢yousa - 【取经计划·原创】新·九九八十一（官方优化版）.mp3
+2026:中文/周杰伦,蔡威泽 - 魔术与歌曲：告白气球.mp3
+2027:中文/肥皂菌丨珉珉的猫咪丨 - 万神纪（人声本家·正式版）.mp3
+2028:中文/三无MarBlue - 达拉崩吧（Cover 洛天依&言和）.mp3
+2029:中文/三无MarBlue - 深夜诗人.mp3
+2030:中文/夏天Alex - 不再联系.mp3
+2031:中文/徐良,汪苏泷 - 后会无期.mp3
+2032:中文/Jam - 不露声色.mp3
+2033:中文/乐正绫,純白P,洛天依 - 白石溪.mp3
+2034:中文/星尘,純白P - 中华纯白娘.mp3
+2035:中文/洛天依 - 天行健.flac
+2036:中文/上海彩虹室内合唱团 - 张士超你到底把我家钥匙放在哪里了.mp3
+2037:中文/洛天依,乐正绫 - 双生契.flac
+2038:中文/胡夏 - 同桌的你.mp3
+2039:中文/汪苏泷 - 巴赫旧约.mp3
+2040:中文/戴荃 - 悟空.mp3
+2041:中文/赵雷 - 成都.mp3
+2042:中文/林志炫 - 烟花易冷.mp3
+2043:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】东京不太热.mp3
+2044:中文/排骨教主,Payam1(黛米） - 【排骨xPayam1】干物女（weiwei）.mp3
+2045:中文/左宏元,张慧清 - 渡情.mp3
+2046:中文/蒋志光,罗大佑 - 皇后大道东.mp3
+2047:中文/乐正绫,洛天依,COP - 世末歌者.mp3
+2048:中文/洛天依 - 世末积雨云.mp3
+2049:中文/洛天依 - 君临天下.mp3
+2050:中文/洛天依,乐正绫 - 锦鲤抄.mp3
+2051:中文/洛天依,乐正绫,COP - 霜雪千年.mp3
+2052:中文/洛天依,言和 - 花儿纳吉.mp3
+2053:中文/洛天依,言和,ilem - 葬歌.mp3
+2054:中文/洛天依,言和,ilem - 阴阳先生.mp3
+2055:中文/洛天依,乌龟Sui - 权御天下.mp3
+2056:中文/嘟督不噶油 - 深夜浪人（Cover：洛天依&言和）.mp3
+2057:中文/JUSF周存,洛天依 - 【洛天依原创】火烧云-重制版【尉迟真金印象曲】.mp3
+2058:中文/炸厕工作室 - 部落到帝国·怒斥群臣.mp3
+2059:中文/炸厕工作室 - 人命大如天·洗冤最终章.mp3
+2060:中文/炸厕工作室 - 天下第一疏·门神崛起.mp3
+2061:中文/炸厕工作室,-乐明社- - 灯芯不灭.flac
+2062:中文/炸厕工作室 - 先秦风骨·诸子百家（Cover 李荣浩）.mp3
+2063:中文/炸厕工作室 - 人命大如天·嘉州失盗案（翻自 Skylar Grey）.flac
+2064:中文/炸厕工作室,Mr.Tear - 人命大如天·史文俊案(冤魂生灭).flac
+2065:中文/李玲玉 - 女儿情.mp3
+2066:中文/洛天依,言和 - 神经病之歌.mp3
+2067:中文/乐正绫,言和 - 清明上河图.mp3
+2068:中文/兮曰Crandy - 千本中国通史.mp3
+2069:中文/郑绪岚 - 牧羊曲.mp3
+2070:中文/银临,Aki阿杰 - 牵丝戏.mp3
+2071:中文/徐良 - 月光.mp3
+2072:中文/散华悠 - 告一段落（cover：陈一发儿）.mp3
+2073:中文/光良 - 童话.mp3
+2074:中文/陈力 - 枉凝眉.mp3
+2075:中文/洛天依,乐正绫,空气凝 - 孙尚香.mp3
+2076:中文/薛之谦 - 绅士.mp3
+2077:中文/Rosa - 自言自语（Cover 洛天依 ／ sya）.mp3
+2078:中文/伦桑 - 苦行僧（Cover 原唱：崔健 ／ 版本：GAI）.mp3
+2079:中文/洛天依,许嵩 - 深夜书店.mp3
+2080:中文/买辣椒也用券 - 起风了.mp3
+2081:中文/顾振遐,高鸣 - 天上掉下个林妹妹.mp3
+2082:中文/西瓜JUN - 长生诀.flac
+2083:中文/郭顶 - 想着你.mp3
+2084:中文/郭顶 - 水星记.mp3
+2085:中文/郭顶 - 保留.mp3
+2086:中文/寇家伦,时乐濛,孟贵彬 - 黄河大合唱.mp3
+2087:中文/许嵩/千百度-许嵩.flac
+2088:中文/许嵩/许嵩 - 安徒生不后悔.mp3
+2089:中文/许嵩/许嵩 - 庐州月.mp3
+2090:中文/许嵩/许嵩 - 胡萝卜须.flac
+2091:中文/许嵩/许嵩 - 幻听.flac
+2092:中文/许嵩/许嵩 - 对话老师.flac
+2093:中文/许嵩/许嵩 - 伴虎.flac
+2094:中文/许嵩/许嵩 - 闺蜜.flac
+2095:中文/许嵩/许嵩 - 装糊涂.flac
+2096:中文/许嵩/许嵩 - Play With Style.flac
+2097:中文/许嵩/许嵩 - 心疼你的过去.flac
+2098:中文/许嵩/许嵩 - 全球变冷.flac
+2099:中文/许嵩/许嵩 - 亲情式的爱情.flac
+2100:中文/许嵩/许嵩 - 绝代风华.mp3
+2101:中文/许嵩/许嵩 - 如果当时.flac
+2102:中文/许嵩/许嵩 - 多余的解释.flac
+2103:中文/许嵩/许嵩 - 有何不可.flac
+2104:中文/许嵩/许嵩 - 坏孩子.flac
+2105:中文/许嵩/许嵩 - 清明雨上.flac
+2106:中文/许嵩/许嵩 - 城府.flac
+2107:中文/许嵩/许嵩 - 认错.flac
+2108:中文/许嵩/许嵩 - 内线.flac
+2109:中文/许嵩/许嵩 - 星座书上.flac
+2110:中文/许嵩/许嵩 - 想象之中.flac
+2111:中文/许嵩/许嵩 - 河山大好.flac
+2112:中文/许嵩/许嵩 - 拆东墙.flac
+2113:中文/许嵩/许嵩 - 医生.flac
+2114:中文/许嵩/许嵩 - 微博控.flac
+2115:中文/许嵩/许嵩 - 毁人不倦.flac
+2116:中文/许嵩/许嵩 - 双人旁.flac
+2117:中文/许嵩/许嵩 - 降温.flac
+2118:中文/许嵩/许嵩 - 敬酒不吃.flac
+2119:中文/许嵩/许嵩 - 千百度.flac
+2120:中文/许嵩/许嵩 - 玫瑰花的葬礼.mp3
+2121:日语/初音ミク,鏡音リン,鏡音レン - Bad ∞ End ∞ Night.mp3
+2122:日语/ひとしずく×やま△,初音ミク,鏡音レン - EveR ∞ LastinG ∞ NighT.mp3
+2123:日语/初音ミク,GUMI,ひとしずく×やま△ - Crazy ∞ nighT.mp3
+2124:日语/浮森かや子 - 魔女狩り.mp3
+2125:日语/水瀬いのり,久保ユリカ - 動く、動く.flac
+2126:日语/赤﨑千夏,戸松遥,豊崎愛生 - 輪!Moon!dass!cry!.flac
+2127:日语/初音ミク - からくりピエロ.mp3
+2128:日语/松たか子 - 花のように.mp3
+2129:日语/紲星あかり,GYARI - アカリがやってきたぞっ.flac
+2130:纯音乐/久石譲 - Confessions in the Moonlight.mp3
+2131:纯音乐/康貞蘭 - 英雄の証 ～ Monster Hunter： World version (Extended edition).flac
+2132:纯音乐/上田麗奈,高野麻里佳 - 英雄の証 〜 ミラクル☆ミルクティ.mp3
+2133:纯音乐/小胡仙儿 - The Fox.mp3
+2134:纯音乐/Various Artists - 卡农（木吉他独奏版）.mp3
+2135:纯音乐/贝多芬 - 月光奏鸣曲.mp3
+2136:纯音乐/群星 - 月光奏鸣曲 (贝多芬).mp3
+2137:纯音乐/陈亮 宋依凡 - 鲸歌（Cover 萨满乐队）.flac
+2138:纯音乐/陈亮 - 无题.mp3
+2139:纯音乐/山下和仁 - 阿尔罕布拉宫的回忆.mp3
+2140:纯音乐/小胡仙儿 - 神经病之歌 - 二胡.mp3
+2141:纯音乐/仓健 - 拉利亚的祭典.mp3
+2142:英文/Ajour,骁奕 - SCP：SL Alpha Warhead Annoucer (Old) (旧版α弹头播报音).flac
+2143:英文/H. P. Lovecraft Historical Society - The Carol of the Old Ones.mp3
+2144:英文/Avril Lavigne - Complicated.mp3
+2145:英文/Imagine Dragons,Kaskade - Believer (Kaskade Remix).mp3
+2146:英文/The Chainsmokers,Halsey - Closer.mp3
+2147:英文/David Garrett - Smooth Criminal (Michael Jackson).mp3
+2148:英文/Luis Fonsi,Daddy Yankee,Justin Bieber - Despacito (Remix).mp3
+2149:英文/Alan Walker,Iselin Solheim - Faded.mp3
+2150:英文/Emily Bindiger - my long forgotten cloistered sleep (unreleased work of Xenosaga).flac
+2151:英文/Marshmello,Anne-Marie - FRIENDS.mp3
+2152:英文/Camila Cabello,Young Thug - Havana.mp3
+2153:英文/Against the Current - Legends Never Die.mp3
+2154:英文/Eminem,Rihanna - Love The Way You Lie.mp3
+2155:英文/商越kori - Megalomaniac／狂妄之人（翻自 Aria R.）.mp3
+2156:英文/Michael Jackson - Hollywood Tonight.mp3
+2157:英文/TheFatRat,Laura Brehm - Monody.mp3
+2158:英文/David Garrett - Viva La Vida.mp3
+2159:英文/OneRepublic - Counting Stars.mp3
+2160:英文/Eagles - Hotel California (Live) - live.mp3
+2161:英文/Matteo - Panama.mp3
+2162:英文/Luciano Pavarotti - Di Capua： 'O Sole Mio.mp3
+2163:英文/Klaus Badelt - He's a Pirate.mp3
+2164:英文/Joel Adams - Please Don't Go.mp3
+2165:英文/Nicolas de Angelis - Asturias.mp3
+2166:英文/Clean Bandit,Jess Glynne - Rather Be.mp3
+2167:英文/Jordan Reyne,Michael A. Levine - Go Tell Aunt Rhody - Resident Evil (Full Version).mp3
+2168:英文/The Glitch Mob,Mako,The Word Alive - RISE.mp3
+2169:英文/Imagine Dragons - Thunder.mp3
+2170:英文/Ed Sheeran - Shape of You.mp3
+2171:英文/The Chainsmokers,Coldplay - Something Just Like This.mp3
+2172:英文/Fort Minor,Styles of Beyond - Remember The Name.mp3
+2173:英文/Maroon 5 - Sugar.mp3
+2174:英文/Lindsey Stirling - Carol Of The Bells.mp3
+2175:英文/Flo Rida - Whistle.mp3
+2176:英文/Miley Cyrus - Wrecking Ball.mp3
+2177:英文/Piknik - Полюшко-поле.mp3
+2178:英文/Jesper Kyd - Ezio's Family.mp3
+2179:英文/KBShinya,A路人 - 深夜诗人英文版（Cover 洛天依 ／ 言和）.mp3
+2180:中文/郑伊健 - 我愿你知道.flac
+2181:中文/周杰伦 - 反方向的钟.flac
+2182:中文/林忆莲 - 为你我受冷风吹.flac
+2183:中文/田馥甄 - 魔鬼中的天使（Hi-Res）.flac
+2184:中文/少女时代 - Gee.flac
+2185:中文/可惜不是你-丝路-梁静茹.flac
+2186:中文/任贤齐 - 死不了.flac
+2187:中文/小阿七 - 从前说.flac
+2188:中文/刀郎 - 西海情歌.flac
+2189:中文/厦门六中合唱团 - 夜空中最亮的星－Acappella.flac
+2190:中文/张洪量 - 你知道我在等你吗.flac
+2191:中文/陈小春 - 独家记忆.flac
+2192:中文/张宇 - 囚鸟.flac
+2193:中文/Beyond - 喜欢你.flac
+2194:中文/胡彦斌 - 月光.flac
+2195:中文/长城.flac
+2196:中文/胡广生-胡广生-任素汐.flac
+2197:中文/一块红布.flac
+2198:中文/孙燕姿 - 逆光.flac
+2199:中文/邓丽君 - 甜蜜蜜.flac
+2200:中文/黑豹乐队 - 无地自容.flac
+2201:日语/[梅とら][various]威風堂々.flac
+2202:日语/Aimer - カタオモイ.flac
+2203:日语/米津玄師 - Lemon.flac
+2204:日语/小林未郁 - βίος.flac
+2205:日语/双笙 - 心做し（Cover GUMI）.flac
+2206:日语/YOASOBI - 群青.flac
+2207:英文/James Blunt - You Are Beautiful.flac
+2208:英文/Vanotek,Eneli - Back To Me.flac
+2209:英文/BLACKPINK - DDU-DU DDU-DU.flac
+2210:英文/01.So What.flac
+2211:英文/02.Freddie Freeloader.flac
+2212:英文/03.Blue in Green.flac
+2213:英文/04.All Blues.flac
+2214:英文/05.Flamenco Sketches.flac
+2215:英文/Anti-Hero-Midnights-Taylor_Swift.flac
+2216:英文/Walk off the Earth - Summer Vibe.flac
+2217:英文/01-khruangbin_and_leon_bridges-doris.flac
+2218:英文/02-khruangbin_and_leon_bridges-b-side.flac
+2219:英文/03-khruangbin_and_leon_bridges-chocolate_hills.flac
+2220:英文/04-khruangbin_and_leon_bridges-father_father.flac
+2221:英文/05-khruangbin_and_leon_bridges-mariella.flac
+2222:英文/01 - Texas Sun.flac
+2223:英文/02 - Midnight.flac
+2224:英文/03 - C-Side.flac
+2225:英文/04 - Conversation.flac
+2226:英文/07.That Girl.flac
+2227:英文/09.Mirrors.flac
+2228:英文/This Love (Taylor s Version).flac
+2229:英文/LiSA - crossing field.flac
+2230:中文/周杰伦/周杰伦 - 七里香.flac
+2231:中文/周杰伦/周杰伦 - 乱舞春秋.flac
+2232:中文/周杰伦/周杰伦 - 借口.flac
+2233:中文/周杰伦/周杰伦 - 园游会.flac
+2234:中文/周杰伦/周杰伦 - 困兽之斗.flac
+2235:中文/周杰伦/周杰伦 - 外婆.flac
+2236:中文/周杰伦/周杰伦 - 将军.flac
+2237:中文/周杰伦/周杰伦 - 我的地盘.flac
+2238:中文/周杰伦/周杰伦 - 搁浅.flac
+2239:中文/周杰伦/周杰伦 - 止战之殇.flac
+2240:中文/周杰伦/夜的第七章 - 周杰倫.flac
+2241:中文/周杰伦/聽媽媽的話 - 周杰倫.flac
+2242:中文/周杰伦/千里之外 - 周杰倫.flac
+2243:中文/周杰伦/本草綱目 - 周杰倫.flac
+2244:中文/周杰伦/退後 - 周杰倫.flac
+2245:中文/周杰伦/紅模仿 - 周杰倫.flac
+2246:中文/周杰伦/心雨 - 周杰倫.flac
+2247:中文/周杰伦/白色風車 - 周杰倫.flac
+2248:中文/周杰伦/迷迭香 - 周杰倫.flac
+2249:中文/周杰伦/菊花台 - 周杰倫.flac
+2250:中文/周杰伦/周杰伦 - 最后的战役.flac
+2251:中文/周杰伦/周杰伦 - 分裂.flac
+2252:中文/周杰伦/周杰伦 - 半兽人.flac
+2253:中文/周杰伦/周杰伦 - 半岛铁盒.flac
+2254:中文/周杰伦/周杰伦 - 回到过去.flac
+2255:中文/周杰伦/周杰伦 - 暗号.flac
+2256:中文/周杰伦/周杰伦 - 火车叨位去.flac
+2257:中文/周杰伦/周杰伦 - 爷爷泡的茶.flac
+2258:中文/周杰伦/周杰伦 - 米兰的小铁匠.flac
+2259:中文/周杰伦/周杰伦 - 龙拳.flac
+2260:中文/周杰伦/周杰伦 - Intro.flac
+2261:中文/周杰伦/周杰伦 - 最伟大的作品.flac
+2262:中文/周杰伦/周杰伦 - 还在流浪.flac
+2263:中文/周杰伦/周杰伦 - 说好不哭 (with 五月天阿信).flac
+2264:中文/周杰伦/周杰伦 - 红颜如霜.flac
+2265:中文/周杰伦/周杰伦 - 不爱我就拉倒.flac
+2266:中文/周杰伦/周杰伦 - Mojito.flac
+2267:中文/周杰伦/周杰伦 - 错过的烟火.flac
+2268:中文/周杰伦/周杰伦 - 等你下课 (with 杨瑞代).flac
+2269:中文/周杰伦/周杰伦 - 粉色海洋.flac
+2270:中文/周杰伦/周杰伦 - 倒影.flac
+2271:中文/周杰伦/周杰伦 - 我是如此相信.flac
+2272:中文/周杰伦/周杰伦 _ Lara梁心颐 - 珊瑚海.flac
+2273:中文/周杰伦/周杰伦 _ 林迈可 - 四面楚歌.flac
+2274:中文/周杰伦/周杰伦 - 一路向北.flac
+2275:中文/周杰伦/周杰伦 - 发如雪.flac
+2276:中文/周杰伦/周杰伦 - 夜曲.flac
+2277:中文/周杰伦/周杰伦 - 枫.flac
+2278:中文/周杰伦/周杰伦 - 浪漫手机.flac
+2279:中文/周杰伦/周杰伦 - 蓝色风暴.flac
+2280:中文/周杰伦/周杰伦 - 逆鳞.flac
+2281:中文/周杰伦/周杰伦 - 飘移.flac
+2282:中文/周杰伦/周杰伦 - 麦芽糖.flac
+2283:中文/周杰伦/周杰伦 - 黑色毛衣.flac
+2284:中文/周杰伦/四季列車 - 周杰倫.flac
+2285:中文/周杰伦/手語 - 周杰倫.flac
+2286:中文/周杰伦/公公偏頭痛 - 周杰倫.flac
+2287:中文/周杰伦/明明就 - 周杰倫.flac
+2288:中文/周杰伦/傻笑 - 周杰倫.flac
+2289:中文/周杰伦/比較大的大提琴 - 周杰倫.flac
+2290:中文/周杰伦/愛你沒差 - 周杰倫.flac
+2291:中文/周杰伦/紅塵客棧 - 周杰倫.flac
+2292:中文/周杰伦/夢想啟動 - 周杰倫.flac
+2293:中文/周杰伦/大笨鐘 - 周杰倫.flac
+2294:中文/周杰伦/哪裡都是你 - 周杰倫.flac
+2295:中文/周杰伦/烏克麗麗 - 周杰倫.flac
+2296:中文/周杰伦/周杰伦 - 三年二班.flac
+2297:中文/周杰伦/周杰伦 - 东风破.flac
+2298:中文/周杰伦/周杰伦 - 以父之名.flac
+2299:中文/周杰伦/周杰伦 - 你听得到.flac
+2300:中文/周杰伦/周杰伦 - 双刀.flac
+2301:中文/周杰伦/周杰伦 - 同一种调调.flac
+2302:中文/周杰伦/周杰伦 - 她的睫毛.flac
+2303:中文/周杰伦/周杰伦 - 懦夫.flac
+2304:中文/周杰伦/周杰伦 - 晴天.flac
+2305:中文/周杰伦/周杰伦 - 梯田.flac
+2306:中文/周杰伦/周杰伦 - 爱情悬崖.flac
+2307:中文/周杰伦/床邊故事 - 周杰倫.flac
+2308:中文/周杰伦/說走就走 - 周杰倫.flac
+2309:中文/周杰伦/一點點 - 周杰倫.flac
+2310:中文/周杰伦/前世情人 - 周杰倫.flac
+2311:中文/周杰伦/英雄 - 周杰倫.flac
+2312:中文/周杰伦/不該 - 周杰倫.flac
+2313:中文/周杰伦/土耳其冰淇淋 - 周杰倫.flac
+2314:中文/周杰伦/告白氣球 - 周杰倫.flac
+2315:中文/周杰伦/愛情廢柴 - 周杰倫.flac
+2316:中文/周杰伦/陽明山 - 周杰倫.flac
+2317:中文/周杰伦/竊愛 - 周杰倫.flac
+2318:中文/周杰伦/算什麼男人 - 周杰倫.flac
+2319:中文/周杰伦/天涯過客 - 周杰倫.flac
+2320:中文/周杰伦/怎麼了 - 周杰倫.flac
+2321:中文/周杰伦/一口氣全唸對 - 周杰倫.flac
+2322:中文/周杰伦/我要夏天 - 周杰倫.flac
+2323:中文/周杰伦/手寫的從前 - 周杰倫.flac
+2324:中文/周杰伦/鞋子特大號 - 周杰倫.flac
+2325:中文/周杰伦/聽爸爸的話 - 周杰倫.flac
+2326:中文/周杰伦/美人魚 - 周杰倫.flac
+2327:中文/周杰伦/聽見下雨的聲音 - 周杰倫.flac
+2328:中文/周杰伦/牛仔很忙 - 周杰倫.flac
+2329:中文/周杰伦/彩虹 - 周杰倫.flac
+2330:中文/周杰伦/青花瓷 - 周杰倫.flac
+2331:中文/周杰伦/陽光宅男 - 周杰倫.flac
+2332:中文/周杰伦/蒲公英的約定 - 周杰倫.flac
+2333:中文/周杰伦/無雙 - 周杰倫.flac
+2334:中文/周杰伦/我不配 - 周杰倫.flac
+2335:中文/周杰伦/扯 - 周杰倫.flac
+2336:中文/周杰伦/甜甜的 - 周杰倫.flac
+2337:中文/周杰伦/最長的電影 - 周杰倫.flac
+2338:中文/周杰伦/周杰伦 - 上海一九四三.flac
+2339:中文/周杰伦/周杰伦 - 双截棍.flac
+2340:中文/周杰伦/周杰伦 - 威廉古堡.flac
+2341:中文/周杰伦/周杰伦 - 安静.flac
+2342:中文/周杰伦/周杰伦 - 对不起.flac
+2343:中文/周杰伦/周杰伦 - 开不了口.flac
+2344:中文/周杰伦/周杰伦 - 忍者.flac
+2345:中文/周杰伦/周杰伦 - 爱在西元前.flac
+2346:中文/周杰伦/周杰伦 - 爸，我回来了.flac
+2347:中文/周杰伦/周杰伦 - 简单爱.flac
+2348:中文/周杰伦/跨時代 - 周杰倫.flac
+2349:中文/周杰伦/說了再見 - 周杰倫.flac
+2350:中文/周杰伦/煙花易冷 - 周杰倫.flac
+2351:中文/周杰伦/免費教學錄影帶 - 周杰倫.flac
+2352:中文/周杰伦/好久不見 - 周杰倫.flac
+2353:中文/周杰伦/雨下一整晚 - 周杰倫.flac
+2354:中文/周杰伦/嘻哈空姐 - 周杰倫.flac
+2355:中文/周杰伦/我落淚．情緒零碎 - 周杰倫.flac
+2356:中文/周杰伦/愛的飛行日記 - 周杰倫.flac
+2357:中文/周杰伦/自導自演 - 周杰倫.flac
+2358:中文/周杰伦/超人不會飛 - 周杰倫.flac
+2359:中文/周杰伦/驚嘆號 - 周杰倫.flac
+2360:中文/周杰伦/迷魂曲 - 周杰倫.flac
+2361:中文/周杰伦/公主病 - 周杰倫.flac
+2362:中文/周杰伦/你好嗎 - 周杰倫.flac
+2363:中文/周杰伦/療傷燒肉粽 - 周杰倫.flac
+2364:中文/周杰伦/琴傷 - 周杰倫.flac
+2365:中文/周杰伦/水手怕水 - 周杰倫.flac
+2366:中文/周杰伦/世界未末日 - 周杰倫.flac
+2367:中文/周杰伦/皮影戲 - 周杰倫.flac
+2368:中文/周杰伦/超跑女神 - 周杰倫.flac
+2369:中文/周杰伦/龍戰騎士 - 周杰倫.flac
+2370:中文/周杰伦/給我一首歌的時間 - 周杰倫.flac
+2371:中文/周杰伦/蛇舞 - 周杰倫.flac
+2372:中文/周杰伦/花海 - 周杰倫.flac
+2373:中文/周杰伦/魔術先生 - 周杰倫.flac
+2374:中文/周杰伦/說好的幸福呢 - 周杰倫.flac
+2375:中文/周杰伦/蘭亭序 - 周杰倫.flac
+2376:中文/周杰伦/時光機 - 周杰倫.flac
+2377:中文/周杰伦/喬克叔叔 - 周杰倫.flac
+2378:中文/周杰伦/稻香 - 周杰倫.flac
+2379:英文/Wolf's Heart (feat. Chantelle Barry).flac
+2380:英文/CL - Hello Bitches.flac
 playlist_end

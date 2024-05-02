@@ -16,13 +16,13 @@
   ],
   "modules-right": [
     "network",
-    "wireplumber",
+    "pulseaudio",
     "cpu",
     "memory",
     "disk",
     "battery",
+    "tray",
     "custom/powermenu",
-    "tray"
   ],
   "custom/launcher": {
     "interval": 40,
@@ -143,27 +143,27 @@
   },
   "network": {
     "interval": 1,
-    "format-wifi": "<span foreground='#61AF1F'>󰘊</span> {essid} ({signalStrength}%) ",
+    "format-wifi": "<span foreground='#61AF1F'>󰘊</span> {essid} ({signaldBm}) ",
     "format-ethernet": "<span foreground='#61AF1F'>󰈀</span> {ifname} ({ipaddr}) ",
     "format-linked": "<span foreground='#61AF1F'>󰘊</span> {essid} (No IP) ",
     "format-disconnected": "<span foreground='#61AF1F'>󰌙</span> Disconnected ",
     "tooltip-format": "{ifname} via {gwaddr} 󰩠 "
   },
-  "wireplumber": {
-    "format": "<span foreground='#D08770'>{icon}</span> {volume}% ",
-    "format-bluetooth": "<span foreground='#00BFFF'>{icon}</span> {volume}%",
+  "pulseaudio": {
+    "format": "<span foreground='#D08770'>{icon}  </span>{volume}% ",
+    "format-bluetooth": "<span foreground='#00BFFF'>{icon}</span>{volume}%",
     "format-muted": "󰖁  Muted",
     "format-icons": {
       "headphone": "",
-      "hands-free": "",
-      "headset": "",
+      "hands-free": "󰂑",
+      "headset": "󰂑",
       "phone": "",
       "portable": "",
       "car": "",
       "default": [
-        " ",
-        " ",
-        " "
+        "",
+        "",
+        ""
       ]
     },
     "states": {
@@ -188,7 +188,7 @@
     }
   },
   "custom/powermenu": {
-    "format": "",
+    "format": " ",
     "on-click": "systemctl poweroff",
     "tooltip": false
   }

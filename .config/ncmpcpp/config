@@ -44,6 +44,7 @@ main_window_color = "default"
 centered_cursor = "yes"
 enable_window_title = "yes"
 external_editor = "vim"
+allow_for_physical_item_deletion = "yes"
 
 ## you have dunst?
 execute_on_song_change = notify-send "Now Playing" "$(mpc --format '%title% - %artist%' current)"
