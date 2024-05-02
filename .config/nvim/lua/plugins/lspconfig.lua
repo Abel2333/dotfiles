@@ -9,11 +9,11 @@ return {
 
             -- Useful status updates for LSP.
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim',       opts = {} },
+            { 'j-hui/fidget.nvim', opts = {} },
 
             -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
             -- used for completion, annotations and signatures of Neovim apis
-            { 'folke/neodev.nvim',       opts = {} },
+            { 'folke/neodev.nvim', opts = {} },
         },
         config = function()
             -- Brief aside: **What is LSP?**
@@ -105,8 +105,7 @@ return {
                     -- When you move your cursor, the highlights will be cleared (the second autocommand).
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
                     if client and client.server_capabilities.documentHighlightProvider then
-                        local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight',
-                            { clear = false })
+                        local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
                         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
                             buffer = event.buf,
                             group = highlight_augroup,
@@ -157,9 +156,31 @@ return {
             --  - settings (table): Override the default settings passed when initializing the server.
             --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
             local servers = {
-                clangd = {},
+                clangd = {
+                    cmd = {
+                        'clangd',
+                        '--all-scopes-completion',
+                        '--background-index',
+                        '--clang-tidy',
+                        '--clang-tidy-checks="performance-*, bugprone-*, misc-*, google-*, modernize-*, readability-*, portability-*"',
+                        -- '--compile-commands-dir=${workspaceFolder}/build/',
+                        '--completion-parse=auto',
+                        '--completion-style=detailed',
+                        '--enable-config',
+                        '--function-arg-placeholders=true',
+                        '--function-arg-placeholders=true',
+                        '--header-insertion-decorators',
+                        '--header-insertion=iwyu',
+                        '--include-cleaner-stdlib',
+                        '--log=verbose',
+                        '--log=verbose',
+                        '--pretty',
+                        '--ranking-model=decision_forest',
+                        '-j=12',
+                    },
+                },
                 -- gopls = {},
-                -- pyright = {},
+                pyright = {},
                 -- rust_analyzer = {},
                 -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
                 --
