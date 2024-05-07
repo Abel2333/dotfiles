@@ -41,7 +41,7 @@ require('lazy').setup({
 
     require 'plugins.cmp',
 
-    require 'plugins.tokyonight',
+    require 'plugins.catppuccin',
 
     require 'plugins.todo-comments',
 
@@ -62,6 +62,8 @@ require('lazy').setup({
     require 'plugins.alpha',
 
     require 'plugins.persistence',
+
+    require 'plugins.lualine',
 }, {
     ui = {
         -- If you are using a Nerd Font: set icons to an empty table which will use the
