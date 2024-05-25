@@ -16,12 +16,31 @@
 return {
     { -- Useful plugin to show you pending keybinds.
         'folke/which-key.nvim',
-        event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-        config = function() -- This is the function that runs, AFTER loading
-            require('which-key').setup()
+        event = 'VeryLazy', -- Sets the loading event to 'VimEnter'
+        opts = {
+            plugins = {
+                marks = true, -- shows a list of your marks on ` and '
+                registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+                spelling = {
+                    enabled = true, -- enableing this will show WhichKey when pressing z= to select spelling suggestions
+                    suggestions = 20, -- how many suggestions should be shown in the list
+                },
+            },
+            icons = {
+                breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
+                separator = '➜', -- symbol used between a key and it's label
+                group = '+', -- symbol prepended to a group
+            },
+            window = {
+                border = require('abel.config.custom').border,
+            },
+        },
+        config = function(_, opts) -- This is the function that runs, AFTER loading
+            local which_key = require 'which-key'
+            which_key.setup(opts)
 
             -- Document existing key chains
-            require('which-key').register {
+            which_key.register {
                 ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
                 ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
                 ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
@@ -32,10 +51,9 @@ return {
                 ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
             }
             -- visual mode
-            require('which-key').register({
+            which_key.register({
                 ['<leader>h'] = { 'Git [H]unk' },
             }, { mode = 'v' })
         end,
     },
 }
--- vim: ts=4 sts=4 sw=4 et

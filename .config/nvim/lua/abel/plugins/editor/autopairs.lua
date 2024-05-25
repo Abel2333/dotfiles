@@ -15,5 +15,3 @@ return {
         cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     end,
 }
-
--- vim: ts=4 sts=4 sw=4 et
