@@ -12,7 +12,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
+-- for people to discover. Otherwise, just normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
@@ -34,23 +34,9 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Keybinds under insert mode
+-- Switch to normal mode fastly.
 vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Enter normal mode' })
 
--- Keybinds under virtual mode
+-- Move lines up and down
 vim.keymap.set('v', 'J', ":move '>+1<CR>gv=gv", { desc = 'Move the selected text down' })
 vim.keymap.set('v', 'K', ":move '<-2<CR>gv=gv", { desc = 'Move the selected text up' })
-
--- [[ Basic Autocommands ]]
--- See `:help lua-guide-autocommands'
-
--- Highlight when yanking (copying) text
-vim.api.nvim_create_autocmd('TextYankPost', {
-    desc = 'Highlight when yanking (copying) text',
-    group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-})
-
--- vim: ts=4 sts=4 sw=4 et
