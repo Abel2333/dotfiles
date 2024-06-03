@@ -4,6 +4,7 @@ local utils = require 'abel.util.misc'
 local mode = custom.prefer_tabpage and 'tab' or 'buffer'
 local modes = custom.prefer_tabpage and 'tabs' or 'buffers'
 
+---@type LazyPluginSpec
 return {
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',

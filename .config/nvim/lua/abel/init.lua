@@ -21,5 +21,10 @@ require 'abel.config.lsp'
 -- [[ Install and configure plugins ]]
 require 'abel.config.lazy-plugins'
 
+-- [[ Apply GUI settings ]]
+if vim.g.neovide then
+    require 'abel.config.gui'
+end
+
 -- Set colorscheme
 vim.cmd.colorscheme(custom.theme)

@@ -8,6 +8,7 @@ return {
     opts = {
         term_colors = true,
         custom_highlights = theme.catppuccin_highlight,
+        transparent_background = true,
         integrations = {
             aerial = true,
             fidget = true,

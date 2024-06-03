@@ -17,7 +17,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -35,7 +35,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Switch to normal mode fastly.
-vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Enter normal mode' })
+vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Enter normal mode' })
 
 -- Move lines up and down
 vim.keymap.set('v', 'J', ":move '>+1<CR>gv=gv", { desc = 'Move the selected text down' })
