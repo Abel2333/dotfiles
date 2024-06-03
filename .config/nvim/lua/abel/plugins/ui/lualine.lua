@@ -18,8 +18,9 @@ return {
             theme = 'auto',
             -- component_separators = { left = '', right = '' },
             -- section_separators = { left = '', right = '' },
-            component_separators = { left = ' ', right = ' ' },
-            section_separators = { left = '', right = '' },
+            component_separators = { left = '', right = '' },
+            -- section_separators = { left = '', right = '' },
+            section_separators = { left = '', right = '' },
             globalstatus = true,
             disabled_filetypes = {
                 statusline = {
@@ -56,7 +57,17 @@ return {
                     shorting_target = 40, -- Shortens path to leave 40 spaces in the window
                 },
             },
-            lualine_x = { require('abel.util.lualine').indent, 'encoding', 'filetype' },
+            lualine_x = {
+                require('abel.util.lualine').indent,
+                { -- a placeholder of overseer, to ensure overseer will be loaded after lualine
+                    name = 'overseer-placeholder',
+                    function()
+                        return ''
+                    end,
+                },
+                'encoding',
+                'filetype',
+            },
             lualine_y = { 'progress' },
             lualine_z = { 'location' },
         },
@@ -74,6 +85,11 @@ return {
             'nvim-tree',
             'neo-tree',
             'lazy',
+            'toggleterm',
+            'symbols-outline',
+            'aerial',
+            'nvim-dap-ui',
+            'mundo',
         },
     },
 }
