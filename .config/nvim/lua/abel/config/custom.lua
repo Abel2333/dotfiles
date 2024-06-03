@@ -214,8 +214,7 @@ local ascii_art = {
 }
 
 M.get_random_art = function()
-    math.randomseed(os.time())
-    return ascii_art[math.random(#ascii_art)]
+    return ascii_art[math.random(tonumber(os.time()) % #ascii_art) + 1]
 end
 
 return M

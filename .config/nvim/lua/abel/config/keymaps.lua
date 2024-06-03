@@ -35,7 +35,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Switch to normal mode fastly.
-vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Enter normal mode' })
+vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Enter normal mode' })
 
 -- Move lines up and down
 vim.keymap.set('v', 'J', ":move '>+1<CR>gv=gv", { desc = 'Move the selected text down' })

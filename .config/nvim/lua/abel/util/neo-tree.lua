@@ -4,10 +4,7 @@ local M = {}
 function M.system_open(state)
     local node = state.tree:get_node()
     local path = node:get_id()
-    -- WARN: the follow setence is only useful
-    -- for neovim version >= 1.0
-    -- vim.ui.open(path)
-    vim.fn.system('ranger ' .. path)
+    vim.ui.open(path)
 end
 
 -- Try to move left in file tree smartly

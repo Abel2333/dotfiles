@@ -3,7 +3,7 @@ local custom = require 'abel.config.custom'
 return {
     'stevearc/dressing.nvim',
     event = 'VeryLazy',
-    enabled = false,
+    enabled = true,
     opts = {
         input = {
             border = 'rounded',

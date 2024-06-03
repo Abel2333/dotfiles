@@ -10,11 +10,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
         local lint = require 'lint'
-        lint.linters_by_ft = {
-            markdown = { 'markdownlint' },
-            cpp = { 'clangtidy' },
-            text = { 'vale' },
-        }
+        lint.linters_by_ft = require('abel.config.lang').linters_by_ft
 
         -- Check if the needed linters are exist.
         for fs, linter in pairs(lint.linters_by_ft) do
@@ -25,41 +21,9 @@ return {
                 actual_linter = linter[1]
             end
             if not misc_util.has_software(actual_linter) then
-                misc_util.warn('Linter not found ' .. actual_linter .. ' for ' .. fs, { title = 'nvim-lint' })
+                misc_util.warn('Linter: ' .. actual_linter .. ' for ' .. fs .. ' does not exist.', { title = 'nvim-lint' })
             end
         end
-
-        -- To allow other plugins to add linters to require('lint').linters_by_ft,
-        -- instead set linters_by_ft like this:
-        -- lint.linters_by_ft = lint.linters_by_ft or {}
-        -- lint.linters_by_ft['markdown'] = { 'markdownlint' }
-        --
-        -- However, note that this will enable a set of default linters,
-        -- which will cause errors unless these tools are available:
-        -- {
-        --   clojure = { "clj-kondo" },
-        --   dockerfile = { "hadolint" },
-        --   inko = { "inko" },
-        --   janet = { "janet" },
-        --   json = { "jsonlint" },
-        --   markdown = { "vale" },
-        --   rst = { "vale" },
-        --   ruby = { "ruby" },
-        --   terraform = { "tflint" },
-        --   text = { "vale" }
-        -- }
-        --
-        -- You can disable the default linters by setting their filetypes to nil:
-        -- lint.linters_by_ft['clojure'] = nil
-        -- lint.linters_by_ft['dockerfile'] = nil
-        -- lint.linters_by_ft['inko'] = nil
-        -- lint.linters_by_ft['janet'] = nil
-        -- lint.linters_by_ft['json'] = nil
-        -- lint.linters_by_ft['markdown'] = nil
-        -- lint.linters_by_ft['rst'] = nil
-        -- lint.linters_by_ft['ruby'] = nil
-        -- lint.linters_by_ft['terraform'] = nil
-        -- lint.linters_by_ft['text'] = nil
 
         -- Create autocommand which carries out the actual linting
         -- on the specified events.

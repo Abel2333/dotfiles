@@ -33,6 +33,7 @@ return {
             -- is found.
             -- javascript = { { "prettierd", "prettier" } },
             cpp = { 'clangd-format' },
+            cmake = { 'cmake_format' },
         },
     },
 }
