@@ -1,7 +1,8 @@
 -- [[ Configure and install plugins ]]
 --
+-- Ensure to install lazy.nvim
 local root = vim.env.LAZYROOT
-local lazypath = root .. '/lazy.nvim'
+local lazypath = vim.fs.joinpath(root, 'lazy.nvim')
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system {
         'git',
@@ -12,9 +13,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         lazypath,
     }
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.runtimepath:prepend(lazypath)
 
 local custom = require 'abel.config.custom'
+-- This will add plugins accroding to the file
+-- `abel.plugins.init.lua`
 require('lazy').setup('abel.plugins', {
     root = root,
     install = {

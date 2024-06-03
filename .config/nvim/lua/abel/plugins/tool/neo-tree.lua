@@ -2,11 +2,10 @@
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
 local custom = require 'abel.config.custom'
 local tree_util = require 'abel.util.neo-tree'
--- WARN: The following api is useful only when nvim>=0.10
--- local kinds = vim.iter(custom.icons.kind):fold({}, function(t, k, v)
---     t[k] = { icon = v }
---     return t
--- end)
+local kinds = vim.iter(custom.icons.kind):fold({}, function(t, k, v)
+    t[k] = { icon = v }
+    return t
+end)
 
 ---@type LazyPluginSpec
 return {
@@ -77,41 +76,14 @@ return {
             },
         },
         commands = {
+            -- Try to open the file.
             system_open = tree_util.system_open,
 
-            -- TODO: Move these functions to util directory
+            -- Try to move left in file tree smartly.
+            smart_h = tree_util.smart_left,
 
-            -- Try to close the fold
-            smart_h = function(state)
-                local node = state.tree:get_node()
-                if node.type == 'directory' and node:is_expanded() then
-                    if state.name == 'filesystem' then
-                        require('neo-tree.sources.filesystem.commands').toggle_node(state)
-                    else
-                        require('neo-tree.sources.common.commands').toggle_node(state)
-                    end
-                else
-                    require('neo-tree.ui.renderer').focus_node(state, node:get_parent_id())
-                end
-            end,
-
-            -- Try to expand the fold
-            smart_l = function(state)
-                local node = state.tree:get_node()
-                if node.type == 'directory' then
-                    if not node:is_expanded() then
-                        if state.name == 'filesystem' then
-                            require('neo-tree.sources.filesystem.commands').toggle_node(state)
-                        else
-                            require('neo-tree.sources.common.commands').toggle_node(state)
-                        end
-                    elseif node:has_children() then
-                        require('neo-tree.ui.renderer').focus_node(state, node:get_child_ids()[1])
-                    end
-                elseif node.type == 'file' then
-                    require('neo-tree.sources.common.commands').open(state, function() end)
-                end
-            end,
+            -- Try to move right in file tree smartly.
+            smart_l = tree_util.smart_right,
         },
         filesystem = {
             group_empty_dirs = true,
@@ -120,7 +92,6 @@ return {
             },
             window = {
                 mappings = {
-                    ['\\'] = 'close_window',
                     ['[g'] = 'none',
                     [']g'] = 'none',
                     ['[h'] = 'prev_git_modified',
@@ -128,7 +99,7 @@ return {
                 },
             },
             document_symbols = {
-                kinds = custom.icons.kind,
+                kinds = kinds,
             },
         },
     },
@@ -137,6 +108,8 @@ return {
         vim.api.nvim_create_augroup('load_neo_tree', {})
     end,
     keys = {
-        { '\\', ':Neotree reveal<CR>', { desc = 'NeoTree reveal', silent = true } },
+        { '\\', '<Cmd>Neotree toggle<CR>', { desc = 'NeoTree toggle' } },
+        { '<leader>nb', '<Cmd>Neotree source=buffers toggle=true<CR>', { desc = '[N]eotree show [B]uffers' } },
+        { '<leader>ng', '<Cmd>Neotree source=git_status toggle=true<CR>', { desc = '[N]eotree show [G]it status' } },
     },
 }

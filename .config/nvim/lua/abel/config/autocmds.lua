@@ -3,7 +3,7 @@
 -- automatically after the event is triggered
 
 local number_group = vim.api.nvim_create_augroup('toggle-line-number', { clear = true })
-local indent_group = vim.api.nvim_create_augroup('toggle-indent', {})
+local indent_group = vim.api.nvim_create_augroup('toggle-indent', { clear = true })
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -16,7 +16,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Show the Absolute line number when enter
 -- the Insert mode.
-
 vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
     desc = 'Disable the relative line number when enter insert mode',
     group = number_group,
@@ -33,13 +32,15 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
     end,
 })
 
+-- Specific files
 vim.api.nvim_create_autocmd('FileType', {
     group = indent_group,
     pattern = 'yaml',
     desc = 'Set indent for yaml',
     callback = function()
-        vim.bo.tabstop = 4
-        vim.bo.shiftwidth = 4
-        vim.bo.expandtab = false
+        local bufnr = vim.api.nvim_get_current_buf()
+        vim.bo[bufnr].tabstop = 4
+        vim.bo[bufnr].shiftwidth = 4
+        vim.bo[bufnr].expandtab = false
     end,
 })

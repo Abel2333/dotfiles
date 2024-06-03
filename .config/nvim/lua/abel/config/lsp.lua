@@ -26,7 +26,7 @@ vim.diagnostic.config {
 -- WARN: Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
 -- Be aware that you also will need to properly configure your LSP server to
 -- provide the inlay hints.:
--- vim.lsp.inlay_hint.enable()
+vim.lsp.inlay_hint.enable()
 
 -- LSP provides Neovim with features like:
 --  - Go to definition
@@ -86,7 +86,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- Opens a popup that displays documentation about the word under your cursor
         --  See `:help K` for why this keymap.
-        map('K', vim.lsp.buf.hover, 'Hover Documentation')
+        --  NOTE: merged in plugin ufo
+        --
+        -- map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
@@ -119,7 +121,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- This may be unwanted, since they displace some of your code
         if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
             map('<leader>th', function()
-                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                ---@diagnostic disable-next-line: param-type-mismatch
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(nil), nil)
             end, '[T]oggle Inlay [H]ints')
         end
     end,
