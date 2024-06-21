@@ -4,7 +4,7 @@
 
 local number_group = vim.api.nvim_create_augroup('toggle-line-number', { clear = true })
 local indent_group = vim.api.nvim_create_augroup('toggle-indent', { clear = true })
-local chekc_group = vim.api.nvim_create_augroup('check status', { clear = true })
+local check_group = vim.api.nvim_create_augroup('check status', { clear = true })
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd({
     'BufEnter',
     'CursorHold',
 }, {
-    group = chekc_group,
+    group = check_group,
     desc = 'Reload buffer on focus',
     callback = function()
         if vim.fn.getcmdwintype() == '' then
