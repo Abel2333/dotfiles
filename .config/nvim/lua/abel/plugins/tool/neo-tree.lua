@@ -92,7 +92,6 @@ return {
             },
             window = {
                 mappings = {
-                    ['\\'] = 'close_window',
                     ['[g'] = 'none',
                     [']g'] = 'none',
                     ['[h'] = 'prev_git_modified',
