@@ -1,5 +1,8 @@
 -- The tables of LSP servers and Linters
 local M = {}
+local workspaceFolder = function()
+    return vim.fn.getcwd()
+end
 M.servers = {
     --  Add any additional override configuration in the following tables. Available keys are:
     --  - cmd (table): Override the default command used to start the server
@@ -36,7 +39,10 @@ M.servers = {
     },
     neocmake = {},
     -- gopls = {},
-    pyright = {},
+    pyright = {
+        root_dir = workspaceFolder,
+    },
+    -- ruff = {},
     -- rust_analyzer = {},
     -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
     --
@@ -78,7 +84,7 @@ M.linters_by_ft = {
     -- Use clangd in LSP server will use clang-tidy
     -- cpp = { 'clangtidy' },
     cmake = { 'cmakelint' },
-    python = { 'ruff' },
+    -- python = { 'ruff' },
 }
 
 M.get_linters = function()

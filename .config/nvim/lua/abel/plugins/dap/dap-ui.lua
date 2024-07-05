@@ -108,6 +108,7 @@ return {
                     position = 'center',
                 })
             end,
+            desc = 'UI: Open Scopes',
         },
         {
             '<leader>db',

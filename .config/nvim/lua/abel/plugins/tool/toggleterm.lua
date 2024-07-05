@@ -68,7 +68,6 @@ return {
 
             -- External programs
             {
-<<<<<<< HEAD
                 '<leader>tl',
                 function()
                     lazygit:toggle()
