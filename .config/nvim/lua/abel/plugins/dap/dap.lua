@@ -71,7 +71,8 @@ return {
             desc = 'Debug: Continuew',
         },
         {
-            '<S-F5>',
+            -- '<S-F5>',
+            '<F17>', -- Shift + <F5>. 17 = 12 + 5
             function()
                 require('dap').terminate()
             end,
@@ -92,7 +93,7 @@ return {
             desc = 'Debug: Step into',
         },
         {
-            '<S-F11>',
+            '<F23>',
             function()
                 require('dap').step_out()
             end,

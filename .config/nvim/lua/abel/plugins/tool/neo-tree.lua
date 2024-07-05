@@ -96,6 +96,7 @@ return {
                     [']g'] = 'none',
                     ['[h'] = 'prev_git_modified',
                     [']h'] = 'next_git_modified',
+                    ['\\'] = 'close_window',
                 },
             },
             document_symbols = {
