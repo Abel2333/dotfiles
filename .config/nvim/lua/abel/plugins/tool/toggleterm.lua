@@ -1,4 +1,5 @@
--- Persist and toggle multiple terminals during an editing session
+---Persist and toggle multiple terminals during an editing session
+
 local custom = require 'abel.config.custom'
 
 ---@type LazyPluginSpec
@@ -68,11 +69,11 @@ return {
 
             -- External programs
             {
-                '<leader>tl',
+                '<leader>pl',
                 function()
                     lazygit:toggle()
                 end,
-                desc = '[T]oggle [L]azyGit',
+                desc = 'LazyGit',
             },
             {
                 '<leader>pd',
@@ -89,11 +90,11 @@ return {
                 desc = 'GitHub Dash',
             },
             {
-                '<leader>N',
+                '<leader>pn',
                 function()
                     lf:toggle()
                 end,
-                desc = 'File [N]avigator',
+                desc = 'File Manager',
             },
         }
     end,

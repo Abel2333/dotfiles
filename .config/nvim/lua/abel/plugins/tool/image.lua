@@ -6,12 +6,17 @@ return {
     '3rd/image.nvim',
     -- This plugin could not work under the Windows
     enabled = not misc_util.is_win(),
-    -- event = function(plugin)
-    --     return {
-    --         event = 'BufRead',
-    --         pattern = plugin.opts.hijack_file_patterns,
-    --     }
-    -- end,
+    dependencies = {
+        'leafo/magick',
+    },
+    event = function(plugin)
+        return {
+            {
+                event = 'BufRead',
+                pattern = plugin.opts.hijack_file_patterns,
+            },
+        }
+    end,
     opts = {
         hijack_file_patterns = { '*.png', '*.jpg', '*.jpeg', '*.gif', '*.webp', '*.avif' },
         backend = 'kitty',
@@ -39,7 +44,9 @@ return {
         },
         max_width = nil,
         max_height = nil,
-        max_width_window_percentage = 100,
-        max_height_window_percentage = 100,
+        max_width_window_percentage = nil,
+        max_height_window_percentage = 50,
+        tmux_show_only_in_active_window = true,
+        editor_only_render_when_focused = true,
     },
 }

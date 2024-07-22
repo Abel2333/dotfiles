@@ -1,10 +1,10 @@
 ---@type LazyPluginSpec
 return {
     'stevearc/conform.nvim',
-    lazy = false,
+    lazy = true,
     keys = {
         {
-            '<leader>f',
+            '<leader>F',
             function()
                 require('conform').format { async = true, lsp_fallback = true }
             end,

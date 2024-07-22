@@ -18,6 +18,6 @@ return {
     init = function()
         local notify = require 'notify'
         vim.notify = notify
-        vim.keymap.set('n', '<leader>sm', '<Cmd>Telescope notify<CR>', { desc = '[S]earch Notify [M]mory' })
+        vim.keymap.set('n', '<leader>fh', '<Cmd>Telescope notify<CR>', { desc = 'Notify History' })
     end,
 }

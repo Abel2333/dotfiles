@@ -1,4 +1,4 @@
---A task runner and job management plugin for Neovim
+---A task runner and job management plugin for Neovim
 
 local custom = require 'abel.config.custom'
 
@@ -22,7 +22,7 @@ return {
             task_win = {
                 border = custom.border,
             },
-            comonent_aliases = {
+            component_aliases = {
                 default = {
                     { 'display_duration', detail_level = 2 },
                     'on_output_summarize',

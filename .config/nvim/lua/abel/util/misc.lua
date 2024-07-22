@@ -73,8 +73,16 @@ function M.move_block(direction)
     local end_line = math.max(vstart[2], vend[2])
 
     if direction == 'down' then
+        if end_line == vim.api.nvim_buf_line_count(0) then
+            M.info('This is the last line of buf', { title = 'Move down' })
+            return
+        end
         vim.cmd(start_line .. ',' .. end_line .. 'move ' .. end_line .. '+1')
     elseif direction == 'up' then
+        if start_line == 1 then
+            M.info('This is the first line of buf', { title = 'Move up' })
+            return
+        end
         vim.cmd(start_line .. ',' .. end_line .. 'move' .. start_line .. '-2')
     end
 

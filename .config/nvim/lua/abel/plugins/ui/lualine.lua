@@ -24,6 +24,9 @@ return {
             globalstatus = true,
             disabled_filetypes = {
                 statusline = {
+                    -- 'alpha',
+                },
+                winbar = {
                     'alpha',
                 },
             },

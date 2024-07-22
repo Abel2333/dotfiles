@@ -14,6 +14,8 @@ return {
         'williamboman/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim',
 
+        'folke/neoconf.nvim',
+
         -- Useful status updates for LSP.
         { 'j-hui/fidget.nvim', opts = {} },
 
@@ -52,4 +54,20 @@ return {
             },
         }
     end,
+    keys = {
+        {
+            '<leader>lR',
+            function()
+                vim.cmd.LspRestart()
+            end,
+            desc = 'Reload',
+        },
+        {
+            '<leader>lI',
+            function()
+                vim.cmd.LspInfo()
+            end,
+            desc = 'Info',
+        },
+    },
 }
