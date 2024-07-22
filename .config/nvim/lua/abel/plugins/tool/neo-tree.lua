@@ -1,5 +1,5 @@
--- Neo-tree is a Neovim plugin to browse the file system
--- https://github.com/nvim-neo-tree/neo-tree.nvim
+---Neo-tree is a Neovim plugin to browse the file system
+
 local custom = require 'abel.config.custom'
 local tree_util = require 'abel.util.neo-tree'
 local kinds = vim.iter(custom.icons.kind):fold({}, function(t, k, v)
@@ -40,6 +40,9 @@ return {
                 folder_closed = '',
                 folder_open = '',
                 folder_empty = '',
+            },
+            file_icons = {
+                ['norg'] = '󱞁',
             },
         },
         -- source_selector = {

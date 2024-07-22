@@ -15,10 +15,10 @@ return {
 
             dashboard.section.header.val = custom.get_random_art()
             dashboard.section.buttons.val = {
-                dashboard.button('f', ' ' .. ' [F]ind File', '<cmd> Telescope find_files <cr>'),
-                dashboard.button('n', ' ' .. ' [N]ew File', '<cmd> ene <BAR> startinsert <cr>'),
-                dashboard.button('r', ' ' .. ' [R]ecent Files', '<cmd> Telescope oldfiles <cr>'),
-                dashboard.button('t', ' ' .. ' Find [T]ext', '<cmd> Telescope live_grep <cr>'),
+                dashboard.button('f', ' ' .. ' [F]ind File', "<Cmd> lua require('fzf-lua').files()<CR>"),
+                dashboard.button('n', ' ' .. ' [N]ew File', '<Cmd> ene <BAR> startinsert <CR>'),
+                dashboard.button('r', ' ' .. ' [R]ecent Files', "<Cmd> lua require('fzf-lua').oldfiles()<CR>"),
+                dashboard.button('t', ' ' .. ' Find [T]ext', "<Cmd> lua require('fzf-lua').live_grep_native()<CR>"),
                 dashboard.button('l', '󰒲 ' .. ' [L]azy', '<cmd> Lazy <cr>'),
                 dashboard.button('q', ' ' .. ' [Q]uit', '<cmd> qa <cr>'),
             }
@@ -54,7 +54,7 @@ return {
                 callback = function()
                     local stats = require('lazy').stats()
                     local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                    dashboard.section.footer.val = '⚡ Neovim loaded ' .. stats.loaded .. '/' .. stats.count .. ' plugins in ' .. ms .. 'ms'
+                    dashboard.section.footer.val = '󱐋 Neovim loaded ' .. stats.loaded .. '/' .. stats.count .. ' plugins in ' .. ms .. 'ms'
                     pcall(vim.cmd.AlphaRedraw)
                 end,
             })

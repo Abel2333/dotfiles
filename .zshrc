@@ -35,11 +35,20 @@ bindkey -v
 alias ll="ls -l --color"
 alias ls="ls --color"
 alias lfub="${HOME}/.config/lf/lfub"
+alias k="kitty +kitten"
+alias v="nvim"
 
 # Environment variable
 export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
+# export XCURSOR_THEME='Bibata-Modern-Classic'
+# export XCURSOR_SIZE=24
 export RANGER_LOAD_DEFAULT_RC=false
 export EDITOR=nvim
+export SUDO_EDITOR=/usr/bin/nvim
+## For lua require
+export LUA_PATH='/usr/share/lua/5.1/?.lua;./?.lua;/usr/share/lua/5.1/?/init.lua;/usr/lib64/lua/5.1/?.lua;/usr/lib64/lua/5.1/?/init.lua;/home/abel/.luarocks/share/lua/5.1/?.lua;/home/abel/.luarocks/share/lua/5.1/?/init.lua;/usr/share/lua/5.1/share/lua/5.1/?.lua;/usr/share/lua/5.1/share/lua/5.1/?/init.lua'
+export LUA_CPATH='./?.so;/usr/lib64/lua/5.1/?.so;/usr/lib64/lua/5.1/loadall.so;/home/abel/.luarocks/lib/lua/5.1/?.so;/usr/share/lua/5.1/lib/lua/5.1/?.so'
+export PATH='/home/abel/.luarocks/bin:/usr/share/lua/5.1/bin:/home/abel/miniconda3/bin:/home/abel/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/bin:/usr/lib/llvm/17/bin:/etc/eselect/wine/bin'
 
 # End of lines configured by zsh-newuser-install
 source "/usr/share/zsh/site-functions/powerlevel10k/powerlevel10k.zsh-theme"

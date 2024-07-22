@@ -2,8 +2,6 @@
 -- See lazy.nvim document to get more information
 --     https://github.com/folke/lazy.nvim
 return {
-    'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
     -- INFO: This format will automatically import
     -- the plugins in specific folder.
 
@@ -14,6 +12,8 @@ return {
     { import = 'abel.plugins.ui' },
 
     { import = 'abel.plugins.tool' },
+
+    { import = 'abel.plugins.git' },
 
     { import = 'abel.plugins.efficiency' },
 

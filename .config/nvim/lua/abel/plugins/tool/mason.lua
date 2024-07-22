@@ -1,10 +1,10 @@
--- The tool to manage LSP servers, linters, and formaters
+---The tool to manage LSP servers, linters, and formaters
 
 ---@type LazyPluginSpec
 return {
     'williamboman/mason.nvim',
     keys = {
-        { '<leader>mm', '<Cmd>Mason<CR>', desc = 'Mason' },
+        { '<leader>lm', '<Cmd>Mason<CR>', desc = 'Mason' },
     },
     opts = {
         ui = {

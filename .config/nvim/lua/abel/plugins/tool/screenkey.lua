@@ -1,4 +1,5 @@
 ---Show the key you pressed on the screen
+
 local custom = require 'abel.config.custom'
 
 ---@type LazyPluginSpec

@@ -1,7 +1,7 @@
 ---@type LazyPluginSpec
 return {
     'aserowy/tmux.nvim',
-    cond = vim.env.TMUS ~= nil,
+    cond = vim.env.TMUX ~= nil,
     opts = {},
     event = 'VeryLazy',
 }

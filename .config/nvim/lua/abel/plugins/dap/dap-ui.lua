@@ -61,14 +61,14 @@ return {
             function()
                 require('dapui').toggle()
             end,
-            desc = 'UI: Toggle full UI',
+            desc = 'Toggle full UI',
         },
         {
             '<M-k>',
             function()
                 require('dapui').eval()
             end,
-            desc = 'UI: Evaluate Expression',
+            desc = 'Evaluate Expression',
             mode = { 'n', 'v' },
         },
         {
@@ -82,7 +82,7 @@ return {
                     position = 'center',
                 })
             end,
-            desc = 'UI: Open Stacks',
+            desc = 'Open Stacks',
         },
         {
             '<leader>dw',
@@ -95,7 +95,7 @@ return {
                     position = 'center',
                 })
             end,
-            desc = 'UI: Open Watches',
+            desc = 'Open Watches',
         },
         {
             '<leader>dv',
@@ -108,7 +108,7 @@ return {
                     position = 'center',
                 })
             end,
-            desc = 'UI: Open Scopes',
+            desc = 'Open Scopes',
         },
         {
             '<leader>db',
@@ -121,7 +121,7 @@ return {
                     position = 'center',
                 })
             end,
-            desc = 'UI: Open BreakPoints',
+            desc = 'Open BreakPoints',
         },
         {
             '<leader>dc',
@@ -134,7 +134,7 @@ return {
                     position = 'center',
                 })
             end,
-            desc = 'UI: Open Console',
+            desc = 'Open Console',
         },
         {
             '<leader>dr',
@@ -147,7 +147,7 @@ return {
                     position = 'center',
                 })
             end,
-            desc = 'UI: Open Repl',
+            desc = 'Open Repl',
         },
     },
 }

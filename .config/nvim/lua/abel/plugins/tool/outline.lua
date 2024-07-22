@@ -1,5 +1,5 @@
--- Show the outline of file
---
+---Show the outline of file
+
 ---@type LazyPluginSpec
 return {
     'hedyhli/outline.nvim',

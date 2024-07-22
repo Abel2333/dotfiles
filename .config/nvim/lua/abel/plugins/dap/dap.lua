@@ -10,13 +10,15 @@ return {
     config = function()
         local dap = require 'dap'
         dap.defaults.fallback.external_terminal = {
-            command = 'wezterm',
+            command = '/usr/bin/kitty',
             args = {
-                'start',
-                '--',
-                'sh',
+                '--class',
+                'kitty-dap',
+                '--hold',
+                '--detach',
+                'nvim-dap',
                 '-c',
-                'nvim-dap --interactive',
+                'DAP',
             },
         }
 
@@ -115,21 +117,21 @@ return {
                 end
                 require('dap').set_breakpoint(condition)
             end,
-            desc = 'Debug: Set Condition Breakpoint',
+            desc = 'Set Condition Breakpoint',
         },
         {
             '<leader>dP',
             function()
                 require('dap').repl.toggle()
             end,
-            desc = 'Debug: Toggle REPL',
+            desc = 'Toggle REPL',
         },
         {
             '<leader>dl',
             function()
                 require('dap').run_last()
             end,
-            desc = 'Debug: Run last',
+            desc = 'Run last',
         },
     },
 }

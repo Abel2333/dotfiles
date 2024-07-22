@@ -3,9 +3,14 @@
 
 local misc_util = require 'abel.util.misc'
 
--- Set highlight on search, but clear on pressing, <Esc> in normal mode
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<Cmd>nohlsearch<CR>')
+
+vim.keymap.set('', 'j', 'gj')
+vim.keymap.set('', 'k', 'gk')
+vim.keymap.set('', 'gj', 'j')
+vim.keymap.set('', 'gk', 'k')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -22,10 +27,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Disable arrow keys in normal mode
-vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set('n', '<left>', '<Cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<Cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<Cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<Cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows

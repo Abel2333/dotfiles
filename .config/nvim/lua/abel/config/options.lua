@@ -13,14 +13,33 @@ vim.opt.mouse = 'a'
 -- Do not show the mode, since it is already in the status line
 vim.opt.showmode = false
 
--- Sync clipboard between OS and Neovim.
-vim.opt.clipboard = 'unnamedplus'
+-- Enable true color
+vim.opt.termguicolors = true
+
+-- If using Neovim under SSH, using OSC52 to synchronous system clipboard.
+vim.opt.clipboard:append 'unnamedplus'
+if vim.fn.exists '$SSH_TTY' == 1 and vim.env.TMUX == nil then
+    vim.g.clipboard = {
+        name = 'OSC 52',
+        copy = {
+            ['+'] = require('vim.ui.clipboard.osc52').copy '+',
+            ['*'] = require('vim.ui.clipboard.osc52').copy '*',
+        },
+        paste = {
+            ['+'] = require('vim.ui.clipboard.osc52').paste '+',
+            ['*'] = require('vim.ui.clipboard.osc52').paste '*',
+        },
+    }
+end
 
 -- Enable break indent
 vim.opt.breakindent = true
 
 -- Save undo history
 vim.opt.undofile = true
+
+-- Update window title
+vim.opt.title = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital
 -- letters in the search term
@@ -29,6 +48,9 @@ vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
+
+-- Show a virtual column for suggest length
+vim.opt.colorcolumn = '101'
 
 -- Decrease update time
 vim.opt.updatetime = 250
@@ -59,3 +81,14 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.autoindent = true
 vim.opt.expandtab = true
+
+-- Completions
+vim.opt.completeopt = { 'menu', 'menuone', 'noinsert' }
+
+vim.opt.fillchars = {
+    eob = ' ',
+    diff = '╱',
+    foldopen = '',
+    foldclose = '',
+    foldsep = '▕',
+}
