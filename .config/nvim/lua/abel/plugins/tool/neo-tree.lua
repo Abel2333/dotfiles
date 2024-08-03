@@ -45,27 +45,7 @@ return {
                 ['norg'] = '󱞁',
             },
         },
-        -- source_selector = {
-        --     winbar = true,
-        --     sources = {
-        --         {
-        --             source = 'filesystem',
-        --             display_name = '  Files ',
-        --         },
-        --         {
-        --             source = 'buffers',
-        --             display_name = '  Buffers ',
-        --         },
-        --         {
-        --             source = 'git_status',
-        --             display_name = '  Git ',
-        --         },
-        --         {
-        --             source = 'document_symbols',
-        --             display_name = '  Symbols',
-        --         },
-        --     },
-        -- },
+        separator = { left = '▏', right = '▕' },
         window = {
             width = custom.width,
             mappings = {

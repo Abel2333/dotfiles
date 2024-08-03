@@ -2,9 +2,23 @@
 -- autocmd is using to execute the specified function
 -- automatically after the event is triggered
 
+local misc_uitl = require 'abel.util.misc'
+
 local number_group = vim.api.nvim_create_augroup('toggle-line-number', { clear = true })
-local indent_group = vim.api.nvim_create_augroup('toggle-indent', { clear = true })
+local indent_group = vim.api.nvim_create_augroup('indent-adjust', { clear = true })
 local check_group = vim.api.nvim_create_augroup('check status', { clear = true })
+
+local ignored_filetypes = { 'text', 'markdown', 'org', 'norg' }
+vim.api.nvim_create_autocmd({ 'OptionSet' }, {
+    group = indent_group,
+    pattern = { 'shiftwidth', 'tabstop' },
+    desc = 'Change indent in current buffer when options changed',
+    callback = function(args)
+        if not vim.tbl_contains(ignored_filetypes, vim.bo[args.buf].filetype) then
+            misc_uitl.set_breakindentopt(vim.v.option_type)
+        end
+    end,
+})
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd('TextYankPost', {

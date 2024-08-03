@@ -19,7 +19,7 @@ function M.has_software(software)
     return state_code == 1
 end
 
--- Send notify
+---Send notify
 ---@param massage string
 ---@param opts table
 function M.info(massage, opts)
@@ -38,7 +38,7 @@ function M.err(massage, opts)
     vim.notify(massage, vim.log.levels.ERROR, opts)
 end
 
---- Turn the first letter of a string to uppercase
+---Turn the first letter of a string to uppercase
 ---@param str string
 ---@return string uppercased
 function M.firstToUpper(str)
@@ -94,6 +94,13 @@ function M.move_block(direction)
     elseif direction == 'up' then
         vim.api.nvim_feedkeys(start_line - 1 .. 'GV' .. end_line - 1 .. 'G', '!', true)
     end
+end
+
+---Set the indent option
+---@param scope "global" | "local"
+function M.set_breakindentopt(scope)
+    local identvalue = vim.o.expandtab and vim.o.shiftwidth or vim.o.tabstop
+    vim.api.nvim_set_option_value('breakindentopt', 'shift:' .. identvalue, { scope = scope })
 end
 
 return M

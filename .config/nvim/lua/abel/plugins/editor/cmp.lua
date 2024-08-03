@@ -1,4 +1,4 @@
--- Autocompletion
+---Autocompletion
 
 local custom = require 'abel.config.custom'
 
