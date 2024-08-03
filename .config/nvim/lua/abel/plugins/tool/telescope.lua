@@ -35,10 +35,6 @@ return {
         -- NOTE: Many functions are replaced by fzf-lua
         -- See `:help telescope.builtin`
         local builtin = require 'telescope.builtin'
-        vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Keymaps' })
         vim.keymap.set('n', '<leader>fi', builtin.diagnostics, { desc = 'Diagnostics' })
-        vim.keymap.set('n', '<leader>fn', function()
-            builtin.find_files { cwd = vim.fn.stdpath 'config' }
-        end, { desc = 'Neovim files' })
     end,
 }

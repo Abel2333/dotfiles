@@ -51,6 +51,13 @@ return {
             desc = 'Files',
         },
         {
+            '<leader>fn',
+            function()
+                require('fzf-lua').files { cwd = vim.fn.stdpath 'config' }
+            end,
+            desc = 'Neovim files',
+        },
+        {
             '<leader>fb',
             function()
                 require('fzf-lua').buffers()
@@ -77,6 +84,13 @@ return {
                 require('fzf-lua').marks()
             end,
             desc = 'Marks',
+        },
+        {
+            '<leader>fk',
+            function()
+                require('fzf-lua').keymaps()
+            end,
+            desc = 'Keymaps',
         },
         {
             '<leader>fs',
@@ -109,7 +123,7 @@ return {
         {
             '<leader>fj',
             function()
-                require('fzf-lua').jump()
+                require('fzf-lua').jumps()
             end,
             desc = 'Jumplist',
         },

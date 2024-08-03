@@ -1,4 +1,4 @@
---- Better status column, include git signs and fold signs
+---Better status column, include git signs and fold signs
 ---@type LazyPluginSpec
 return {
     'luukvbaal/statuscol.nvim',

@@ -1,4 +1,4 @@
--- Smart commenting plugin
+--_Smart commenting plugin
 
 ---@type LazyPluginSpec
 return {

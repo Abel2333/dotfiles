@@ -1,4 +1,4 @@
---- A little status progress
+---A little status progress
 
 local custom = require 'abel.config.custom'
 

@@ -98,7 +98,7 @@ return {
             { '<leader>l', group = 'LSP' },
             { '<leader>n', group = 'Neotree' },
             { '<leader>p', group = 'Program' },
-            { '<leader>r', group = 'Rename' },
+            { '<leader>r', group = 'Run' },
             { '<leader>s', group = 'Search' },
             { '<leader>S', group = 'Session' },
             { '<leader>t', group = 'Toggle' },

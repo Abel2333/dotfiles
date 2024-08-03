@@ -49,7 +49,7 @@ return {
         local gh_dash = require('toggleterm.terminal').Terminal:new {
             -- https://github.com/dlvhdr/gh-dash/issues/316
             env = { LANG = 'en_US.UTF-8' },
-            cmd = 'gh-dash',
+            cmd = 'gh dash',
             hidden = true,
             direction = 'float',
             float_opts = float_opts,

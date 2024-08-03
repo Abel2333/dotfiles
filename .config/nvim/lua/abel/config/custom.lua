@@ -6,7 +6,7 @@ local M = {}
 M.theme = 'catppuccin'
 
 -- Where a tab is a tabpage or buffer
-M.prefer_tabpage = false
+M.prefer_tabpage = true
 
 -- Border style of floating windows
 M.border = 'rounded'
