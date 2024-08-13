@@ -1,4 +1,4 @@
---- show color in line
+---show color in line
 ---@type LazyPluginSpec
 return {
     'NvChad/nvim-colorizer.lua',

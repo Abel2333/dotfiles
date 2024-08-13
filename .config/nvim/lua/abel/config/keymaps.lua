@@ -2,6 +2,7 @@
 -- See `:help vim.keymap.set()'
 
 local misc_util = require 'abel.util.misc'
+local Color = require("abel.util.color")
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
@@ -13,10 +14,10 @@ vim.keymap.set('', 'gj', 'j')
 vim.keymap.set('', 'gk', 'k')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous Diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next Diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic Error messages' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic Quickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, just normally need to press <C-\><C-n>, which
@@ -24,7 +25,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = 'Enter terminal mode' })
 
 -- Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<Cmd>echo "Use h to move!!"<CR>')
@@ -55,3 +56,9 @@ end, { desc = 'Move the selected text down' })
 vim.keymap.set('v', 'K', function()
     misc_util.move_block 'up'
 end, { desc = 'Move the selected text up' })
+
+local red = Color:new('hex', {'#CB8475'})
+
+vim.keymap.set('n', '<leader>tc', function()
+    print(red:get_hsi())
+end, { desc = 'Test Color' })

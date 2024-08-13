@@ -1,4 +1,6 @@
-local custom = require 'abel.config.custom'
+local figure = require 'abel.util.figure'
+local render = require 'abel.util.render'
+
 return {
 
     { 'nvimdev/dashboard-nvim', enabled = false },
@@ -12,13 +14,16 @@ return {
         init = false,
         opts = function()
             local dashboard = require 'alpha.themes.dashboard'
+            local header, colorized = render.ascii_render(figure.Neorange[1], figure.Neorange[2])
 
-            dashboard.section.header.val = custom.get_random_art()
+            dashboard.section.header.val = header
+            dashboard.section.header.opts = {
+                hl = colorized,
+                position = 'center',
+            }
             dashboard.section.buttons.val = {
                 dashboard.button('f', ' ' .. ' [F]ind File', "<Cmd> lua require('fzf-lua').files()<CR>"),
-                dashboard.button('n', ' ' .. ' [N]ew File', '<Cmd> ene <BAR> startinsert <CR>'),
                 dashboard.button('r', ' ' .. ' [R]ecent Files', "<Cmd> lua require('fzf-lua').oldfiles()<CR>"),
-                dashboard.button('t', ' ' .. ' Find [T]ext', "<Cmd> lua require('fzf-lua').live_grep_native()<CR>"),
                 dashboard.button('l', '󰒲 ' .. ' [L]azy', '<cmd> Lazy <cr>'),
                 dashboard.button('q', ' ' .. ' [Q]uit', '<cmd> qa <cr>'),
             }
@@ -26,7 +31,7 @@ return {
                 button.opts.hl = 'AlphaButtons'
                 button.opts.hl_shortcut = 'AlphaShortcut'
             end
-            dashboard.section.header.opts.hl = 'AlphaHeader'
+            -- dashboard.section.header.opts.hl = 'AlphaHeader'
             dashboard.section.buttons.opts.hl = 'AlphaButtons'
             dashboard.section.footer.opts.hl = 'AlphaFooter'
             -- dashboard.opts.layout[1].val = 8

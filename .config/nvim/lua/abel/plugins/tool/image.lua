@@ -18,7 +18,7 @@ return {
         }
     end,
     opts = {
-        hijack_file_patterns = { '*.png', '*.jpg', '*.jpeg', '*.gif', '*.webp', '*.avif' },
+        hijack_file_patterns = { '*.png', '*.jpg', '*.jpeg', '*.gif', '*.webp', '*.avif', '*.svg' },
         backend = 'kitty',
         integrations = {
             markdown = {

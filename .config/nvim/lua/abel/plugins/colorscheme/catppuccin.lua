@@ -7,11 +7,16 @@ return {
     lazy = true,
     opts = {
         term_colors = true,
+        color_overrides = theme.catppuccin_color_theme,
         custom_highlights = theme.catppuccin_highlight,
         transparent_background = true,
         integrations = {
             aerial = true,
+            bufferline = true,
+            cmp = true,
+            diffview = true,
             fidget = true,
+            fzf = true,
             markdown = true,
             mason = true,
             neotree = true,

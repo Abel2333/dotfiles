@@ -1,4 +1,4 @@
---- Generate the image to show code block
+---Generate the image to show code block
 ---@type LazyPluginSpec
 return {
     'mistricky/codesnap.nvim',
