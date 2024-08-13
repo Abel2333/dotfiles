@@ -9,6 +9,7 @@ return {
     dependencies = {
         'leafo/magick',
     },
+    ft = { 'markdown' },
     event = function(plugin)
         return {
             {
