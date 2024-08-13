@@ -6,6 +6,7 @@
 -- for conveniently jumping
 vim.opt.number = true
 vim.opt.relativenumber = true
+-- vim.opt.numberwidth = 6
 
 -- Enable mouse, can be useful for resizing splits.
 vim.opt.mouse = 'a'

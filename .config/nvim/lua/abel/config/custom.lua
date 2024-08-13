@@ -3,7 +3,7 @@
 local M = {}
 
 -- Colorscheme
-M.theme = 'catppuccin'
+M.theme = 'catppuccin-frappe'
 
 -- Where a tab is a tabpage or buffer
 M.prefer_tabpage = true

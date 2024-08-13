@@ -29,7 +29,7 @@ return {
         custom.prefer_tabpage and { '<M-S-Right>', '<Cmd>+tabmove<CR>', desc = 'Move tab to next' }
             or { '<M-S-Right>', '<Cmd>BufferLineMoveNext<CR>', desc = 'Move buffer to next' },
         custom.prefer_tabpage and { '<M-S-Left>', '<Cmd>-tabmove<CR>', desc = 'Move tab to previous' }
-            or { '<M-S-Right>', '<Cmd>BufferLineMovePrev<CR>', desc = 'Move buffer to previous' },
+            or { '<M-S-Left>', '<Cmd>BufferLineMovePrev<CR>', desc = 'Move buffer to previous' },
 
         custom.prefer_tabpage and { '<leader>bn', '<Cmd>tabnew<CR>', desc = 'New tab' },
 

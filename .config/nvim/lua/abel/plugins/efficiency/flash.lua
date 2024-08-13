@@ -1,3 +1,4 @@
+---Enhance the search function
 ---@type LazyPluginSpec
 return {
     'folke/flash.nvim',

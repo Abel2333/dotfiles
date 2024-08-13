@@ -1,4 +1,4 @@
---- Auto change input method in normal mode
+---Auto change input method in normal mode
 ---@type LazyPluginSpec
 return {
     'keaising/im-select.nvim',

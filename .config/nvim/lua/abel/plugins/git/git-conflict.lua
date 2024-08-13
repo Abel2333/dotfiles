@@ -1,4 +1,4 @@
---- help to dealing with conflicts easily
+---Help to dealing with conflicts easily
 ---@type LazyPluginSpec
 return {
     'akinsho/git-conflict.nvim',
