@@ -16,7 +16,7 @@ return {
             cmp = true,
             diffview = true,
             fidget = true,
-            fzf = true,
+            -- fzf = true,
             markdown = true,
             mason = true,
             neotree = true,

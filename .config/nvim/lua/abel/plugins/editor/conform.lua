@@ -34,6 +34,7 @@ return {
             -- javascript = { { "prettierd", "prettier" } },
             cpp = { 'clangd-format' },
             cmake = { 'cmake_format' },
+            json = { 'biome' },
         },
     },
 }

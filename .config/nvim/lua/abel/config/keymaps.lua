@@ -57,8 +57,7 @@ vim.keymap.set('v', 'K', function()
     misc_util.move_block 'up'
 end, { desc = 'Move the selected text up' })
 
-local red = Color:new('hex', {'#CB8475'})
 
 vim.keymap.set('n', '<leader>tc', function()
-    print(red:get_hsi())
+    print(misc_util.has_plugin('kitty-scrollback'))
 end, { desc = 'Test Color' })

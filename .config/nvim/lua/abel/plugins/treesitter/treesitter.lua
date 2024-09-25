@@ -36,6 +36,9 @@ return {
         endwise = {
             enable = true,
         },
+        matchup = {
+            enable = true,
+        },
     },
     config = function(_, opts)
         -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
