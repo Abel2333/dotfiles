@@ -18,7 +18,9 @@ vim.opt.showmode = false
 vim.opt.termguicolors = true
 
 -- If using Neovim under SSH, using OSC52 to synchronous system clipboard.
+-- In wsl, using clip.exe
 vim.opt.clipboard:append 'unnamedplus'
+
 if vim.fn.exists '$SSH_TTY' == 1 and vim.env.TMUX == nil then
     vim.g.clipboard = {
         name = 'OSC 52',
@@ -30,6 +32,19 @@ if vim.fn.exists '$SSH_TTY' == 1 and vim.env.TMUX == nil then
             ['+'] = require('vim.ui.clipboard.osc52').paste '+',
             ['*'] = require('vim.ui.clipboard.osc52').paste '*',
         },
+    }
+elseif vim.fn.has 'wsl' == 1 then
+    vim.g.clipboard = {
+        name = 'WslClipboard',
+        copy = {
+            ['+'] = 'clip.exe',
+            ['*'] = 'clip.exe',
+        },
+        paste = {
+            ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        },
+        cache_enabled = 0,
     }
 end
 

@@ -9,23 +9,6 @@ return {
     dependencies = {
         {
             'L3MON4D3/LuaSnip',
-            build = (function()
-                -- Build Step is needed for regex support in snippets.
-                -- This step is not supported in many windows environments.
-                if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-                    return
-                end
-                return 'make install_jsregexp'
-            end)(),
-            dependencies = {
-                -- `friendly-snippets` contains a variety of premade snippets.
-                {
-                    'rafamadriz/friendly-snippets',
-                    config = function()
-                        require('luasnip.loaders.from_vscode').lazy_load()
-                    end,
-                },
-            },
         },
         { 'saadparwaiz1/cmp_luasnip' },
 
@@ -73,8 +56,8 @@ return {
                     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
                     ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
-                    -- Use <Tab> as the select signal
-                    ['<Tab>'] = cmp.mapping.confirm { select = true },
+                    -- Use [y]es to select signal
+                    ['<C-y>'] = cmp.mapping.confirm { select = true },
 
                     -- Manually trigger a completion from nvim-cmp.
                     ['<C-e>'] = cmp.mapping.complete {},
@@ -83,7 +66,7 @@ return {
                     -- <C-h> is similar, except moving you backwards.
                     ['<C-l>'] = cmp.mapping(function()
                         if luasnip.expand_or_locally_jumpable() then
-                            luasnip.expand_or_jump()
+                            luasnip.expand_or_jump(1)
                         end
                     end, { 'i', 's' }),
                     ['<C-h>'] = cmp.mapping(function()

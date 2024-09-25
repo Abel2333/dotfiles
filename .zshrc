@@ -50,6 +50,9 @@ export LUA_PATH='/usr/share/lua/5.1/?.lua;./?.lua;/usr/share/lua/5.1/?/init.lua;
 export LUA_CPATH='./?.so;/usr/lib64/lua/5.1/?.so;/usr/lib64/lua/5.1/loadall.so;/home/abel/.luarocks/lib/lua/5.1/?.so;/usr/share/lua/5.1/lib/lua/5.1/?.so'
 export PATH='/home/abel/.luarocks/bin:/usr/share/lua/5.1/bin:/home/abel/miniconda3/bin:/home/abel/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/bin:/usr/lib/llvm/17/bin:/etc/eselect/wine/bin'
 
+## For fzf
+export FZF_DEFAULT_COMMAND='fd --type f'
+
 # End of lines configured by zsh-newuser-install
 source "/usr/share/zsh/site-functions/powerlevel10k/powerlevel10k.zsh-theme"
 

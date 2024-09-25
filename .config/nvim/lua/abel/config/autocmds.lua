@@ -36,6 +36,11 @@ vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
     group = number_group,
     callback = function()
         local buftype = vim.bo.buftype
+        local winid = vim.api.nvim_get_current_win()
+        if vim.wo[winid].statuscolumn == '' then
+            return
+        end
+
         if buftype == '' then
             vim.opt.relativenumber = false
         end
@@ -47,6 +52,11 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
     group = number_group,
     callback = function()
         local buftype = vim.bo.buftype
+        local winid = vim.api.nvim_get_current_win()
+        if vim.wo[winid].statuscolumn == '' then
+            return
+        end
+
         if buftype == '' then
             vim.opt.relativenumber = true
         end

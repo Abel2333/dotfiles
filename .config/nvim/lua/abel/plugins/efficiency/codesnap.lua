@@ -1,7 +1,10 @@
 ---Generate the image to show code block
+local misc_util = require 'abel.util.misc'
+
 ---@type LazyPluginSpec
 return {
     'mistricky/codesnap.nvim',
+    enabled = not misc_util.is_win(),
     build = 'make',
     event = 'VeryLazy',
     keys = {
