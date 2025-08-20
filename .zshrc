@@ -5,6 +5,15 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Install zinit
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Install powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
 
 # The following lines were added by compinstall
 
@@ -37,45 +46,22 @@ alias ls="ls --color"
 alias lfub="${HOME}/.config/lf/lfub"
 alias k="kitty +kitten"
 alias v="nvim"
+alias ac="aria2c -c -x 8 -s 8 -d ${HOME}/Downloads"
 
 # Environment variable
-export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
-# export XCURSOR_THEME='Bibata-Modern-Classic'
-# export XCURSOR_SIZE=24
-export RANGER_LOAD_DEFAULT_RC=false
-export EDITOR=nvim
-export SUDO_EDITOR=/usr/bin/nvim
-## For lua require
-export LUA_PATH='/usr/share/lua/5.1/?.lua;./?.lua;/usr/share/lua/5.1/?/init.lua;/usr/lib64/lua/5.1/?.lua;/usr/lib64/lua/5.1/?/init.lua;/home/abel/.luarocks/share/lua/5.1/?.lua;/home/abel/.luarocks/share/lua/5.1/?/init.lua;/usr/share/lua/5.1/share/lua/5.1/?.lua;/usr/share/lua/5.1/share/lua/5.1/?/init.lua'
-export LUA_CPATH='./?.so;/usr/lib64/lua/5.1/?.so;/usr/lib64/lua/5.1/loadall.so;/home/abel/.luarocks/lib/lua/5.1/?.so;/usr/share/lua/5.1/lib/lua/5.1/?.so'
-export PATH='/home/abel/.luarocks/bin:/usr/share/lua/5.1/bin:/home/abel/miniconda3/bin:/home/abel/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/bin:/usr/lib/llvm/17/bin:/etc/eselect/wine/bin'
-
-## For fzf
-export FZF_DEFAULT_COMMAND='fd --type f'
-
-# End of lines configured by zsh-newuser-install
-source "/usr/share/zsh/site-functions/powerlevel10k/powerlevel10k.zsh-theme"
+source $HOME/.zshenv
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Plugins
 eval "$(atuin init zsh)"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/abel/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/abel/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/abel/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/abel/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+eval "$(zoxide init zsh)"
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/abel/.lmstudio/bin"
+# End of LM Studio CLI section
+
