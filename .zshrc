@@ -39,6 +39,11 @@ SAVEHIST=1000
 setopt nomatch
 unsetopt autocd extendedglob
 bindkey -v
+setopt INC_APPEND_HISTORY       # 每条命令执行后立即追加到文件
+setopt SHARE_HISTORY            # 多个 shell 实时共享历史
+setopt HIST_IGNORE_DUPS         # 忽略重复命令
+setopt HIST_IGNORE_SPACE        # 忽略以空格开头的命令
+setopt HIST_SAVE_NO_DUPS        # 不保存重复命令
 
 # Alias
 alias ll="ls -l --color"
@@ -55,7 +60,7 @@ source $HOME/.zshenv
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Plugins
-eval "$(atuin init zsh)"
+# eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
 
 # Set up fzf key bindings and fuzzy completion
@@ -64,4 +69,3 @@ source <(fzf --zsh)
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/home/abel/.lmstudio/bin"
 # End of LM Studio CLI section
-
