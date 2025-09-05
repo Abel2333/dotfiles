@@ -62,6 +62,7 @@ source $HOME/.zshenv
 # Plugins
 # eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
+eval "$(gh copilot alias -- zsh)"
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
