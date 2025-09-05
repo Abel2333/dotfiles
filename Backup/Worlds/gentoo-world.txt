@@ -31,6 +31,7 @@ app-shells/fzf
 app-shells/zoxide
 app-shells/zsh
 app-text/evince
+app-text/texlive
 app-text/tree
 dev-cpp/tree
 dev-db/dbeaver-bin
@@ -38,8 +39,10 @@ dev-db/mariadb
 dev-db/redis
 dev-python/uv
 dev-python/virtualenv
+dev-util/github-cli
 dev-util/nvidia-cuda-toolkit
 dev-util/rustup
+dev-util/tree-sitter-cli
 dev-vcs/git-filter-repo
 dev-vcs/lazygit
 gui-apps/hypridle
@@ -79,6 +82,7 @@ net-wireless/iw
 net-wireless/wpa_supplicant
 sci-ml/ollama
 sys-apps/fd
+sys-apps/pnpm
 sys-apps/ripgrep
 sys-apps/systemd
 sys-auth/hyprpolkitagent
