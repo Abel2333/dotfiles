@@ -64,6 +64,7 @@ mail-client/thunderbird
 media-fonts/lxgw-wenkai
 media-fonts/nerd-fonts
 media-gfx/imagemagick
+net-analyzer/nload
 net-dialup/ppp
 net-ftp/filezilla
 net-im/discord
@@ -75,7 +76,7 @@ net-misc/aria2
 net-misc/bridge-utils
 net-misc/chrony
 net-misc/dhcpcd
-net-misc/onedrive
+net-misc/rclone
 net-p2p/amule
 net-proxy/v2rayA
 net-wireless/iw
