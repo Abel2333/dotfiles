@@ -1,0 +1,73 @@
+# Get editor completions based on th config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+format = """
+╭─ $username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$fill\
+$cmd_duration \
+$time\
+$line_break\
+╰─ $python\
+$character"""
+
+[time]
+disabled = false
+format = "[$time]($style)"
+
+[fill]
+symbol = "·"
+
+[palettes.catppuccin_mocha]
+rosewater = "#F5E0DC"
+flamingo = "#F2CDCD"
+pink = "#F5C2E7"
+mauve = "#CBA6F7"
+peach = "FAB387"
+yellow = "F9E2AF"
+green = "#A6E3A1"
+
+
+[directory]
+style = "blue"
+
+# [character]#
+# success_symbol = "[>](green)"
+# error_symbol = "[>](red)"
+# vimcmd_symbol = "[<](sky)"
+
+[git_branch]
+format = "[$branch]($style)"
+style = "bright-black"
+
+[git_status]
+format = "[[(*$conflicted$untrackd$modifid$staged$rnamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+style = "cyan"
+conflicted = ""
+untracked = ""
+modified = ""
+staged = ""
+renamed = ""
+deleted = ""
+stashed = ""
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($styl)\) '
+style = "bright-black"
+
+[cmd_duration]
+format = "[$duration]($style)"
+style = "yellow"
+
+[python]
+format = "[$virtualenv]($style)"
+style = "bright-black"
+
+[hostname]
+ssh_symbol = " "

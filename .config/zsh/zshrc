@@ -1,0 +1,34 @@
+source $HOME/.config/zsh/plugins.zsh
+source $HOME/.config/zsh/env.zsh
+source $HOME/.config/zsh/alias.zsh
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' file-sort name
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select=1
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' verbose true
+zstyle :compinstall filename '/home/abel/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# Configuration of history
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt nomatch
+unsetopt autocd extendedglob
+bindkey -v
+setopt INC_APPEND_HISTORY       # 每条命令执行后立即追加到文件
+setopt SHARE_HISTORY            # 多个 shell 实时共享历史
+setopt HIST_IGNORE_DUPS         # 忽略重复命令
+setopt HIST_IGNORE_SPACE        # 忽略以空格开头的命令
+setopt HIST_SAVE_NO_DUPS        # 不保存重复命令
