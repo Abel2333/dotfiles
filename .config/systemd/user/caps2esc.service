@@ -1,0 +1,10 @@
+[Unit]
+Description=CapsLock to Esc/Ctrl remapping
+After=graphical.target
+
+[Service]
+ExecStart=/usr/bin/udevmon -c /home/abel/.config/interception/caps2esc.yaml
+Restart=always
+
+[Install]
+WantedBy=default.target

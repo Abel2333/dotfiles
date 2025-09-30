@@ -1,7 +1,7 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 32,
+  "height": 36,
   "modules-left": [
     "custom/launcher",
     "sway/workspaces",
@@ -129,12 +129,11 @@
     "format-charging": "<span foreground='#f7768e'>{icon}</span> {capacity}%",
     "format-time": "{H}h {M}m",
     "format-icons": [
-      "",
-      "󰣐",
-      "󰣐󰣐",
-      "󰣐󰣐󰣐",
-      "󰣐󰣐󰣐󰣐",
-      "󰣐󰣐󰣐󰣐󰣐"
+      " ",
+      " ",
+      " ",
+      " ",
+      " "
     ]
   },
   "tray": {
@@ -152,7 +151,7 @@
   "pulseaudio": {
     "format": "<span foreground='#D08770'>{icon}  </span>{volume}% ",
     "format-bluetooth": "<span foreground='#00BFFF'>{icon}</span>{volume}%",
-    "format-muted": "󰖁  Muted",
+    "format-mut ed": "󰖁  Muted",
     "format-icons": {
       "headphone": "",
       "hands-free": "󰂑",
