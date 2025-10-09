@@ -4,7 +4,6 @@
   "height": 36,
   "modules-left": [
     "custom/launcher",
-    "sway/workspaces",
     "hyprland/workspaces",
     "temperature",
     "idle_inhibitor",
@@ -151,7 +150,7 @@
   "pulseaudio": {
     "format": "<span foreground='#D08770'>{icon}  </span>{volume}% ",
     "format-bluetooth": "<span foreground='#00BFFF'>{icon}</span>{volume}%",
-    "format-mut ed": "󰖁  Muted",
+    "format-muted": "󰖁  Muted",
     "format-icons": {
       "headphone": "",
       "hands-free": "󰂑",
