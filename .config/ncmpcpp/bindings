@@ -1,0 +1,179 @@
+######################################################################
+##                  ncmpcpp Key Bindings Configuration              ##
+##                                                                  ##
+##  This file defines custom key bindings for ncmpcpp.              ##
+##  All comments are in English for clarity.                        ##
+##                                                                  ##
+##  Sections:                                                       ##
+##   1. Playback Controls                                           ##
+##   2. Playlist Management                                         ##
+##   3. Navigation (Vim-style)                                      ##
+##   4. Screen / Interface Controls                                 ##
+##   5. Selection & Batch Actions                                   ##
+######################################################################
+
+############################
+# 1. Playback Controls
+############################
+
+def_key "p"        # Play / Pause toggle
+  pause
+
+def_key "."        # Next track
+  next
+
+def_key ","        # Previous track
+  previous
+
+def_key "f"        # Seek forward
+  seek_forward
+
+def_key "b"        # Seek backward
+  seek_backward
+
+def_key "z"        # Toggle random playback
+  toggle_random
+
+def_key "r"        # Toggle repeat mode
+  toggle_repeat
+
+def_key "s"        # Toggle single (repeat one) mode
+  toggle_single
+
+def_key "+"        # Volume up
+  volume_up
+
+def_key "-"        # Volume down
+  volume_down
+
+def_key "i"        # Show song info
+  show_song_info
+
+def_key "I"        # Show artist info
+  show_artist_info
+
+def_key "L"        # Show lyrics
+  show_lyrics
+
+
+############################
+# 2. Playlist Management
+############################
+
+def_key "a"        # Add selected items to playlist
+  add_selected_items
+
+def_key "x"        # Delete selected items from playlist
+  delete_playlist_items
+
+def_key "c"        # Clear current playlist
+  clear_playlist
+
+def_key "S"        # Save current playlist
+  save_playlist
+
+def_key "d"        # Delete stored playlist
+  delete_stored_playlist
+
+
+############################
+# 3. Navigation (Vim-style)
+############################
+
+def_key "j"        # Scroll down
+  scroll_down
+
+def_key "k"        # Scroll up
+  scroll_up
+
+def_key "h"        # Move to previous column / parent directory
+  previous_column
+  jump_to_parent_directory
+
+def_key "l"        # Move to next column / enter directory / play item
+  next_column
+  enter_directory
+  play_item
+
+def_key "enter"    # Play selected item
+  play_item
+
+def_key "backspace" # Go up one directory
+  jump_to_parent_directory
+
+def_key "ctrl-u"   # Page up
+  page_up
+
+def_key "ctrl-d"   # Page down
+  page_down
+
+def_key "g"        # Jump to top
+  move_home
+
+def_key "G"        # Jump to bottom
+  move_end
+
+def_key "$"        # Jump to currently playing song
+  jump_to_playing_song
+
+def_key "~"        # Jump to media library
+  jump_to_media_library
+
+def_key "n"        # Next search result
+  next_found_item
+
+def_key "N"        # Previous search result
+  previous_found_item
+
+def_key "/"        # Open search engine
+  show_search_engine
+
+def_key "U"        # Update database
+  update_database
+
+def_key "M"        # Show media library
+  show_media_library
+
+def_key "t"        # Open tag editor
+  show_tag_editor
+
+def_key "P"        # Show playlist screen
+  show_playlist
+
+
+############################
+# 4. Screen / Interface Controls
+############################
+
+def_key "o"        # Toggle screen lock
+  toggle_screen_lock
+
+def_key "ctrl-h"   # Switch to master screen
+  master_screen
+
+def_key "ctrl-l"   # Switch to slave screen
+  slave_screen
+
+
+############################
+# 5. Selection & Batch Actions
+############################
+
+def_key "space"    # Select item and scroll down
+  select_item
+  scroll_down
+
+def_key "v"        # Reverse selection
+  reverse_selection
+
+def_key "u"        # Clear selection
+  remove_selection
+
+def_key "B"        # Select entire album
+  select_album
+
+def_key "J"        # Move selected items down
+  move_selected_items_down
+
+def_key "K"        # Move selected items up
+  move_selected_items_up
