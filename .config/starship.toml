@@ -7,6 +7,8 @@ format = """
 ╭─ $username\
 $hostname\
 $directory\
+$python\
+$conda\
 $git_branch\
 $git_state\
 $git_status\
@@ -14,8 +16,7 @@ $fill\
 $cmd_duration \
 $time\
 $line_break\
-╰─ $python\
-$character"""
+╰─ $character"""
 
 [time]
 disabled = false
@@ -58,7 +59,7 @@ deleted = ""
 stashed = ""
 
 [git_state]
-format = '\([$state( $progress_current/$progress_total)]($styl)\) '
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
 style = "bright-black"
 
 [cmd_duration]
@@ -66,7 +67,16 @@ format = "[$duration]($style)"
 style = "yellow"
 
 [python]
-format = "[$virtualenv]($style)"
+format = "via [$symbol$virtualenv]($style)"
+symbol = "󰌠 "
+style = "bright-black"
+
+[conda]
+# Remember to use 
+#   `conda config --set changeps1 False`
+# to delete the conda's own prompt modifier
+format = "via [$symbol$environment]($style)"
+symbol = " "
 style = "bright-black"
 
 [hostname]
