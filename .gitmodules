@@ -4,3 +4,6 @@
 [submodule "/home/abel/.config/nvim"]
 	path = /home/abel/.config/nvim
 	url = git@github.com:Abel2333/nvim.git
+[submodule ".config/tmux/.config/tmux/plugins/catppuccin/tmux"]
+	path = .config/tmux/.config/tmux/plugins/catppuccin/tmux
+	url = https://github.com/catppuccin/tmux.git

@@ -1,5 +1,6 @@
 # Alias
 alias ll="ls -l --color"
+alias l="ls -al --color"
 alias ls="ls --color"
 alias lfub="${HOME}/.config/lf/lfub"
 alias k="kitty +kitten"
