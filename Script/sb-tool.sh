@@ -1,4 +1,32 @@
 #!/bin/bash
+
+# Copyright (c) 2025 Abel, abelsparda@outlook.com.
+#
+# Licensed under the Apache License, Version 2.0 (the "License")
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writting, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# ===== Script Description =====
+# This script automates Secure Boot key management and kernel signing.
+# Features:
+#   - Generate Platform Key (PK), Key Exchange Key (KEK), and db certificates
+#   - Backuo factory keys and create custom keys
+#   - Install keys into firmware (requires Setup Mode)
+#   - Sign kernel or Unified Kernel Image (UKI) with db key
+#
+# Usage:
+#   ./sb-tool.sh -g <gpg-recipient> -b <base-dir> [options]
+#
+# See the repository README for detailed instructions.
+
 set -euo pipefail
 
 # ====== Color output function ======
