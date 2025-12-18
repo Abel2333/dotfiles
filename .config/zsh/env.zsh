@@ -1,5 +1,6 @@
 # Path
 export PATH="$HOME/.local/bin:/usr/lib64/qt6/bin:$HOME/.cargo/bin:$PATH"
+export PATH=/usr/local/cuda-13.0/bin:$PATH
 export OLLAMA_MODELS="$HOME/Public/Model/Ollama"
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -11,3 +12,15 @@ export LC_TIME=C.UTF-8
 
 # LFS
 export LFS=/mnt/lfs
+
+# Use NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Use pnpm
+export PNPM_HOME="/home/abel/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
