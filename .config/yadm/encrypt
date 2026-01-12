@@ -1,0 +1,6 @@
+.config/zsh/secrets.zsh
+.ssh/id_ed25519
+.ssh/id_rsa
+.ssh/jenkins_key
+.ssh/jenkins_key.bak
+.ssh/work-ssh-key
