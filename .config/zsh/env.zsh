@@ -10,6 +10,9 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=zh_CN.UTF-8
 export LC_TIME=C.UTF-8
 
+# OpenGPG
+export GPG_TTY=$(tty)
+
 # LFS
 export LFS=/mnt/lfs
 
