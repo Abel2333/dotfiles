@@ -1,0 +1,67 @@
+install = [
+  "git",
+  "gcc",
+  "curl",
+  "make",
+  "zsh",
+  "neovim",
+  "ripgrep",
+  "fzf",
+  "fd",
+  "keyd",
+  "yazi"
+]
+
+[packages.git]
+arch = { method = "system", name = "git" }
+debian = { method = "system", name = "git" }
+ubuntu = { method = "system", name = "git" }
+gentoo = { method = "system", name = "dev-vcs/git" }
+
+[packages.gcc]
+arch = { method = "system", name = "gcc" }
+debian = { method = "system", name = "gcc" }
+ubuntu = { method = "system", name = "gcc" }
+gentoo = { method = "system", name = "sys-devel/gcc" }
+
+[packages.curl]
+arch = { method = "system", name = "curl" }
+debian = { method = "system", name = "curl" }
+ubuntu = { method = "system", name = "curl" }
+gentoo = { method = "system", name = "net-misc/curl" }
+
+[packages.make]
+arch = { method = "system", name = "make" }
+debian = { method = "system", name = "make" }
+ubuntu = { method = "system", name = "make" }
+gentoo = { method = "system", name = "dev-build/make" }
+
+[packages.zsh]
+arch = { method = "system", name = "zsh" }
+debian = { method = "system", name = "zsh" }
+ubuntu = { method = "system", name = "zsh" }
+gentoo = { method = "system", name = "app-shells/zsh" }
+
+[packages.neovim]
+arch = { method = "system", name = "neovim" }
+gentoo = { method = "system", name = "app-editors/neovim" }
+
+[packages.keyd]
+gentoo = { method = "system", name = "app-misc/keyd" }
+
+[packages.rustup]
+gentoo = { method = "system", name = "dev-util/rustup", post = [
+  "rustup-init-gentoo --symlink"
+] }
+
+[packages.ripgrep]
+gentoo = { method = "system", name = "sys-apps/ripgrep" }
+debian = { method = "cargo", name = "ripgrep" }
+
+[packages.fd]
+gentoo = { method = "system", name = "sys-apps/fd" }
+debian = { method = "cargo", name = "fd" }
+
+[packages.yazi]
+gentoo = { method = "system", name = "app-misc/yazi" }
+debian = { method = "cargo", name = "yazi-cli" }

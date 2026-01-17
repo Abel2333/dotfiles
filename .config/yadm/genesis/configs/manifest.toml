@@ -1,0 +1,7 @@
+[[files]]
+src = "keyd/default.conf"
+dest = "/etc/keyd/default.conf"
+mode = "0644"
+owner = "root"
+group = "root"
+backup = true
