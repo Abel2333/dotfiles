@@ -1,0 +1,10 @@
+media-plugins/alsa-plugins pulseaudio
+media-video/pipewire pipewire-alse sound-server
+media-sound/ncmpcpp clock outputs visualizer
+
+media-video/ffmpeg opus vpx
+
+# required by dev-python/pyqt6-webengine-6.9.0::gentoo
+# required by app-text/calibre-8.9.0::gentoo[python_single_target_python3_13]
+# required by calibre (argument)
+>=dev-python/pyqt6-6.9.1 quick webchannel

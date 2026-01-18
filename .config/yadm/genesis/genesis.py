@@ -15,8 +15,8 @@ def run(cmd: list[str]):
     subprocess.check_call(cmd)
 
 
-def ensure_pip():
-    run(["python3", "-m", "ensurepip", "--user"])
+# def ensure_pip():
+#     run(["python3", "-m", "ensurepip", "--user"])
 
 
 def setup_venv():
@@ -34,7 +34,7 @@ def run_app():
 
 def main():
     print("== yadm python bootstrap ==")
-    ensure_pip()
+    # ensure_pip()
     setup_venv()
     run_app()
 

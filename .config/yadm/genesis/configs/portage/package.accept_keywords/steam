@@ -1,0 +1,4 @@
+games-util/steam-launcher
+# Required by steam-launcher
+sys-libs/libudev-compat
+games-util/game-device-udev-rules

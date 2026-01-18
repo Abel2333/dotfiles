@@ -1,0 +1,5 @@
+app-misc/keyd ~amd64
+app-shells/zoxide
+dev-vcs/lazygit
+app-misc/yazi
+net-misc/baidunetdisk

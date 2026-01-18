@@ -1,15 +1,19 @@
+# Install order is used to preserve deterministic ordering within the same phase.
+# Grouped roughly by: base tools, shell, editor, search utilities, file tools, system tools.
 install = [
   "git",
-  "gcc",
+  # "gcc",
   "curl",
-  "make",
-  "zsh",
-  "neovim",
-  "ripgrep",
-  "fzf",
-  "fd",
-  "keyd",
-  "yazi"
+  # "make",
+  # "cmake",
+  # "zsh",
+  # "neovim",
+  # "rustup",
+  # "ripgrep",
+  # "fzf",
+  # "fd",
+  # "yazi",
+  # "keyd"
 ]
 
 [packages.git]
@@ -36,6 +40,12 @@ debian = { method = "system", name = "make" }
 ubuntu = { method = "system", name = "make" }
 gentoo = { method = "system", name = "dev-build/make" }
 
+[packages.cmake]
+arch = { method = "system", name = "cmake" }
+gentoo = { method = "system", name = "dev-build/cmake" }
+debian = { method = "system", name = "cmake" }
+ubuntu = { method = "system", name = "cmake" }
+
 [packages.zsh]
 arch = { method = "system", name = "zsh" }
 debian = { method = "system", name = "zsh" }
@@ -45,6 +55,10 @@ gentoo = { method = "system", name = "app-shells/zsh" }
 [packages.neovim]
 arch = { method = "system", name = "neovim" }
 gentoo = { method = "system", name = "app-editors/neovim" }
+
+[packages.fzf]
+arch = { method = "system", name = "fzf" }
+gentoo = { method = "system", name = "app-shells/fzf" }
 
 [packages.keyd]
 gentoo = { method = "system", name = "app-misc/keyd" }
@@ -56,12 +70,12 @@ gentoo = { method = "system", name = "dev-util/rustup", post = [
 
 [packages.ripgrep]
 gentoo = { method = "system", name = "sys-apps/ripgrep" }
-debian = { method = "cargo", name = "ripgrep" }
+debian = { method = "cargo", name = "ripgrep", phase = 1 }
 
 [packages.fd]
 gentoo = { method = "system", name = "sys-apps/fd" }
-debian = { method = "cargo", name = "fd" }
+debian = { method = "cargo", name = "fd", phase = 1 }
 
 [packages.yazi]
 gentoo = { method = "system", name = "app-misc/yazi" }
-debian = { method = "cargo", name = "yazi-cli" }
+debian = { method = "cargo", name = "yazi-cli", phase = 1 }

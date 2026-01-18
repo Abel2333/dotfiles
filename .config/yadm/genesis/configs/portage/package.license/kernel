@@ -1,0 +1,3 @@
+app-arch/unrar unRAR
+sys-kernel/linux-firmware linux-fw-redistributable
+sys-firmware/intel-microcode intel-ucode

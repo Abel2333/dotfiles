@@ -1,0 +1,6 @@
+# net-im/tencent-qq bwrap
+# required by tencent-qq
+>=media-plugins/alsa-plugins-1.2.12 pulseaudio
+
+# Required by telegram-desktop
+>=media-libs/libwebp-1.5.0 abi_x86_32

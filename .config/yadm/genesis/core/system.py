@@ -1,6 +1,7 @@
 import shutil
 import subprocess
 import threading
+from typing import Optional
 
 from rich import print
 
@@ -18,7 +19,7 @@ PKG_MANAGERS = {
 NO_SUDO = {"brew"}
 
 
-def detect_pkg_manager() -> tuple[str, list[str]] | None:
+def detect_pkg_manager() -> Optional[tuple[str, list[str]]]:
     """Detect the first available package manager in PATH.
 
     Returns:
@@ -41,6 +42,8 @@ class SudoRunner:
         self._started = False
 
     def _keepalive(self, stop_event: threading.Event) -> None:
+        """Periodically refresh sudo privileges."""
+
         while not stop_event.wait(240):
             subprocess.run(
                 ["sudo", "-v"],
@@ -50,29 +53,35 @@ class SudoRunner:
 
     def start(self) -> bool:
         """Authenticate sudo and start the keepalive thread."""
+
         if self._started:
             return True
+
         if subprocess.run(["sudo", "-v"]).returncode != 0:
             print("[red]sudo authentication failed[/red]")
             return False
+
         self._thread.start()
         self._started = True
         return True
 
     def run(self, cmd: list[str]) -> None:
         """Run a command through sudo without prompting."""
+
         subprocess.run(["sudo", "-n"] + cmd, check=False)
 
     def stop(self) -> None:
         """Stop the keepalive thread."""
+
         if not self._started:
             return
+
         self._stop_event.set()
         self._thread.join(timeout=1)
         self._started = False
 
 
-def install_system(pkgs: list[str], runner: SudoRunner | None = None) -> bool:
+def install_system(pkgs: list[str], runner: Optional[SudoRunner] = None) -> bool:
     """Install packages via the detected system package manager.
 
     This triggers sudo authentication (interactive) and then keeps the
@@ -95,13 +104,16 @@ def install_system(pkgs: list[str], runner: SudoRunner | None = None) -> bool:
         subprocess.run(cmd + pkgs, check=False)
         return True
 
-    owns_runner = False
+    owns_runner: bool = False
     if runner is None:
         runner = SudoRunner()
         owns_runner = True
+
     if not runner.start():
         return False
+
     runner.run(cmd + pkgs)
     if owns_runner:
         runner.stop()
+
     return True

@@ -1,0 +1,10 @@
+gui-apps/hypridle
+gui-apps/hyprlock
+gui-apps/hyprpaper
+gui-apps/hyprpicker
+gui-apps/hyprutils
+gui-libs/xdg-desktop-portal-hyprland
+sys-auth/hyprpolkitagent
+
+# Required by hyprlock
+dev-cpp/sdbus-c++

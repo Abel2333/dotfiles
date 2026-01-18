@@ -1,0 +1,10 @@
+gui-apps/waybar mpd network tray wifi pulseaudio
+
+# Required by gui-apps/waybar
+dev-libs/libdbusmenu gtk3
+# End required
+
+app-admin/keepassxc keyring network autotype browser
+
+# required by mail-client/thunderbird (argument)
+>=media-libs/libvpx-1.15.2 postproc

@@ -5,3 +5,10 @@ mode = "0644"
 owner = "root"
 group = "root"
 backup = true
+
+[[files]]
+type = "dir"
+src = "portage"
+dest = "/etc/portage"
+only = ["gentoo"]
+backup = true

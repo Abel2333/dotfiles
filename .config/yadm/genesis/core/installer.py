@@ -118,20 +118,29 @@ def install_packages(mode: str, runner: SudoRunner | None = None) -> None:
         install_source(pkgs)
         return
 
-    system_items = [i for i in items if i.get("method") == "system"]
-    cargo_items = [i for i in items if i.get("method") == "cargo"]
-    script_items = [i for i in items if i.get("method") == "script"]
+    phases: dict[int, list[dict[str, object]]] = {}
+    for item in items:
+        phase = item.get("phase", 0)
+        if not isinstance(phase, int):
+            phase = 0
+        phases.setdefault(phase, []).append(item)
 
-    if system_items:
-        system_names = [str(i["name"]) for i in system_items]
-        install_system(system_names, runner=runner)
-        run_post(system_items)
-    if cargo_items:
-        install_cargo(cargo_items)
-        run_post(cargo_items)
-    if script_items:
-        install_script(script_items)
-        run_post(script_items)
+    for phase in sorted(phases):
+        phase_items = phases[phase]
+        system_items = [i for i in phase_items if i.get("method") == "system"]
+        script_items = [i for i in phase_items if i.get("method") == "script"]
+        cargo_items = [i for i in phase_items if i.get("method") == "cargo"]
+
+        if system_items:
+            system_names = [str(i["name"]) for i in system_items]
+            install_system(system_names, runner=runner)
+            run_post(system_items)
+        if script_items:
+            install_script(script_items)
+            run_post(script_items)
+        if cargo_items:
+            install_cargo(cargo_items)
+            run_post(cargo_items)
 
 
 def run_tasks(mode: str, task: str) -> None:
@@ -142,10 +151,20 @@ def run_tasks(mode: str, task: str) -> None:
         task: Task selector: "install", "config", or "all".
     """
     runner = SudoRunner()
+    actions = {
+        "install": [lambda: install_packages(mode, runner=runner)],
+        "config": [lambda: deploy_configs(runner=runner)],
+        "all": [
+            # Deploy configuration files before installation to ensure the installer uses the correct settings.
+            # Then install the packages.
+            # Finally, redeploy the configuration files to prevent them from being overwritten.
+            lambda: deploy_configs(runner=runner),
+            lambda: install_packages(mode, runner=runner),
+            lambda: deploy_configs(runner=runner),
+        ],
+    }
     try:
-        if task in ("install", "all"):
-            install_packages(mode, runner=runner)
-        if task in ("config", "all"):
-            deploy_configs(runner=runner)
+        for action in actions[task]:
+            action()
     finally:
         runner.stop()

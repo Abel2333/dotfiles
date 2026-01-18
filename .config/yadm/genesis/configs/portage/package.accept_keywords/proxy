@@ -1,0 +1,7 @@
+net-proxy/dae ~amd64
+app-alternatives/v2ray-geoip
+app-alternatives/v2ray-geosite
+virtual/v2ray-geoip
+virtual/v2ray-domain-list-community
+dev-libs/v2ray-geoip-bin
+dev-libs/v2ray-domain-list-community-bin

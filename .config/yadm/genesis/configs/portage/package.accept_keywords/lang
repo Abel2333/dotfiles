@@ -1,0 +1,13 @@
+dev-util/rustup
+
+# Pandoc
+app-text/pandoc
+app-text/pandoc-cli
+dev-haskell/pandoc
+dev-haskell/text
+dev-lang/ghc
+dev-haskell/*
+app-admin/haskell-updater
+
+# Typst
+app-text/typst

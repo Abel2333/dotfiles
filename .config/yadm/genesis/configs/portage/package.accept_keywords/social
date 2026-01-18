@@ -1,0 +1,7 @@
+net-im/tencent-qq
+# Required by tencent-qq
+media-libs/openslide
+media-libs/libdicom
+x11-misc/snapd-xdg-open
+x11-misc/flatpak-xdg-utils
+# End Require

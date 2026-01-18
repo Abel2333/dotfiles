@@ -1,0 +1,4 @@
+# Required by pfl
+sys-apps/util-linux  caps
+
+app-portage/eix sqlite

@@ -1,19 +1,22 @@
 import os
 import shutil
+import subprocess
 import time
 from pathlib import Path
 
 import tomllib
 from rich import print
+from pydantic import ValidationError
 
-from .mapping import ROOT
+from .models import ConfigManifest, ConfigFileEntry
+from .mapping import ROOT, detect_distro_ids
 from .system import SudoRunner
 
 CONFIGS_DIR = ROOT / "configs"
 MANIFEST_FILE = CONFIGS_DIR / "manifest.toml"
 
 
-def _load_manifest() -> list[dict[str, object]]:
+def _load_manifest() -> list[ConfigFileEntry]:
     """Load the config deployment manifest."""
     if not MANIFEST_FILE.exists():
         print("[yellow]No configs/manifest.toml found[/yellow]")
@@ -23,11 +26,12 @@ def _load_manifest() -> list[dict[str, object]]:
     except tomllib.TOMLDecodeError:
         print("[yellow]Invalid configs/manifest.toml; ignoring[/yellow]")
         return []
-    entries = data.get("files", [])
-    if not isinstance(entries, list):
-        print("[yellow]configs/manifest.toml: files must be a list[/yellow]")
+    try:
+        manifest = ConfigManifest.model_validate(data)
+    except ValidationError:
+        print("[yellow]configs/manifest.toml: invalid schema[/yellow]")
         return []
-    return [e for e in entries if isinstance(e, dict)]
+    return manifest.files
 
 
 def _needs_sudo(dest: Path, owner: str | None, group: str | None) -> bool:
@@ -49,6 +53,24 @@ def _parse_mode(value: object) -> str | None:
     return None
 
 
+def _matches_only(only: list[str]) -> bool:
+    if not only:
+        return True
+    distro_ids = detect_distro_ids()
+    return any(item in distro_ids for item in only)
+
+
+def _sync_dir(src: Path, dest: Path, runner: SudoRunner | None) -> None:
+    cmd = ["rsync", "-a"]
+    if runner:
+        cmd += ["--chown=root:root"]
+    cmd += [f"{src}/", f"{dest}/"]
+    if runner:
+        runner.run(cmd)
+    else:
+        subprocess.run(cmd, check=False)
+
+
 def deploy_configs(runner: SudoRunner | None = None) -> None:
     """Deploy configuration files from the manifest."""
     entries = _load_manifest()
@@ -58,26 +80,21 @@ def deploy_configs(runner: SudoRunner | None = None) -> None:
     owns_runner = False
     try:
         for entry in entries:
-            src_rel = entry.get("src")
-            dest_str = entry.get("dest")
-            if not isinstance(src_rel, str) or not isinstance(dest_str, str):
-                print("[yellow]Invalid manifest entry; missing src/dest[/yellow]")
+            if not _matches_only(entry.only):
                 continue
-            src = CONFIGS_DIR / src_rel
+            src = CONFIGS_DIR / entry.src
             if not src.exists():
                 print(f"[yellow]Missing source file: {src}[/yellow]")
                 continue
-            dest = Path(dest_str)
+            dest = Path(entry.dest)
             if not dest.is_absolute():
                 print(f"[yellow]Destination must be absolute: {dest}[/yellow]")
                 continue
 
-            owner = entry.get("owner")
-            group = entry.get("group")
-            owner = owner if isinstance(owner, str) and owner else None
-            group = group if isinstance(group, str) and group else None
-            mode = _parse_mode(entry.get("mode"))
-            backup = entry.get("backup", True) is not False
+            owner = entry.owner
+            group = entry.group
+            mode = _parse_mode(entry.mode)
+            backup = entry.backup is not False
 
             needs_sudo = _needs_sudo(dest, owner, group)
             if needs_sudo and runner is None:
@@ -88,6 +105,20 @@ def deploy_configs(runner: SudoRunner | None = None) -> None:
 
             timestamp = time.strftime("%Y%m%d%H%M%S")
             backup_path = dest.with_suffix(dest.suffix + f".bak.{timestamp}")
+
+            if entry.type == "dir":
+                if backup and dest.exists():
+                    backup_path = dest.with_suffix(dest.suffix + f".bak.{timestamp}")
+                    if runner:
+                        runner.run(["cp", "-a", str(dest), str(backup_path)])
+                    else:
+                        shutil.copytree(dest, backup_path)
+                if needs_sudo and runner:
+                    _sync_dir(src, dest, runner)
+                else:
+                    dest.mkdir(parents=True, exist_ok=True)
+                    _sync_dir(src, dest, None)
+                continue
 
             if needs_sudo and runner:
                 if backup and dest.exists():
