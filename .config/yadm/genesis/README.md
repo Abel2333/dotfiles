@@ -8,6 +8,7 @@ A small bootstrap tool to install packages and deploy system configuration files
 - Multiple install methods: system package manager, cargo, local scripts
 - Post-install commands per package
 - Config file deployment with optional sudo, ownership, and backups
+- Directory sync support (e.g. Gentoo /etc/portage) with distro gating
 - One-time sudo prompt for a full task chain
 
 ## Requirements
@@ -23,7 +24,7 @@ A small bootstrap tool to install packages and deploy system configuration files
 python3 genesis.py
 ```
 
-By default this runs all tasks with system installs.
+By default this runs config deploy -> install -> config deploy (system mode).
 
 ## Usage
 
@@ -63,6 +64,9 @@ Supported methods:
 
 `post = ["..."]` runs after the package is installed.
 
+`phase` controls ordering across methods (lower first). The `install` list preserves
+deterministic ordering within the same phase.
+
 ## Local Script Installers
 
 Place scripts under:
@@ -90,6 +94,21 @@ owner = "root"
 group = "root"
 backup = true
 ```
+
+Directory sync (Gentoo example):
+
+```toml
+[[files]]
+type = "dir"
+src = "portage"
+dest = "/etc/portage"
+only = ["gentoo"]
+backup = true
+```
+
+Notes:
+- Directory sync uses `rsync -a` (no delete). With sudo, ownership is forced to root.
+- `only` matches `/etc/os-release` `ID` and `ID_LIKE`.
 
 Files live under:
 

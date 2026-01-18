@@ -2,18 +2,18 @@
 # Grouped roughly by: base tools, shell, editor, search utilities, file tools, system tools.
 install = [
   "git",
-  # "gcc",
+  "gcc",
   "curl",
-  # "make",
-  # "cmake",
-  # "zsh",
-  # "neovim",
-  # "rustup",
-  # "ripgrep",
-  # "fzf",
-  # "fd",
-  # "yazi",
-  # "keyd"
+  "make",
+  "cmake",
+  "zsh",
+  "neovim",
+  "rustup",
+  "ripgrep",
+  "fzf",
+  "fd",
+  "yazi",
+  "keyd"
 ]
 
 [packages.git]
