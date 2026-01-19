@@ -1,2 +1,4 @@
 [yadm]
 	gpg-recipient = abelsparda@outlook.com
+[user]
+	signingkey = E0674C9F6FCC8913DB1ABEBC9714DD5B4D76B643
