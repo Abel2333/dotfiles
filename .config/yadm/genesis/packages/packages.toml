@@ -3,89 +3,103 @@
 install = [
   "git",
   "gcc",
-  "go",
   "curl",
   "make",
   "cmake",
+  "golang",
   "zsh",
+  "keyd",
+  "lazygit",
+  "tmux",
+  "kitty",
   "neovim",
   "rustup",
   "ripgrep",
   "fzf",
   "fd",
   "yazi",
-  "keyd",
-  "golang"
 ]
 
 [packages.git]
 arch = { method = "system", name = "git" }
 debian = { method = "system", name = "git" }
 ubuntu = { method = "system", name = "git" }
-gentoo = { method = "system", name = "dev-vcs/git" }
+gentoo = { method = "system", name = "dev-vcs/git", bin = ["git"] }
 
 [packages.gcc]
 arch = { method = "system", name = "gcc" }
 debian = { method = "system", name = "gcc" }
 ubuntu = { method = "system", name = "gcc" }
-gentoo = { method = "system", name = "sys-devel/gcc" }
+gentoo = { method = "system", name = "sys-devel/gcc", bin = ["gcc"] }
 
 [packages.curl]
 arch = { method = "system", name = "curl" }
 debian = { method = "system", name = "curl" }
 ubuntu = { method = "system", name = "curl" }
-gentoo = { method = "system", name = "net-misc/curl" }
+gentoo = { method = "system", name = "net-misc/curl", bin = ["curl"] }
 
 [packages.make]
 arch = { method = "system", name = "make" }
 debian = { method = "system", name = "make" }
 ubuntu = { method = "system", name = "make" }
-gentoo = { method = "system", name = "dev-build/make" }
+gentoo = { method = "system", name = "dev-build/make", bin = ["make"] }
 
 [packages.cmake]
 arch = { method = "system", name = "cmake" }
-gentoo = { method = "system", name = "dev-build/cmake" }
+gentoo = { method = "system", name = "dev-build/cmake", bin = ["cmake"] }
 debian = { method = "system", name = "cmake" }
 ubuntu = { method = "system", name = "cmake" }
+
+[packages.golang]
+debian = { method = "system", name = "golang-go", bin = ["go", "gofmt"] }
+ubuntu = { method = "system", name = "golang-go", bin = ["go", "gofmt"] }
+gentoo = { method = "system", name = "dev-lang/go", bin = ["go", "gofmt"] }
 
 [packages.zsh]
 arch = { method = "system", name = "zsh" }
 debian = { method = "system", name = "zsh" }
 ubuntu = { method = "system", name = "zsh" }
-gentoo = { method = "system", name = "app-shells/zsh" }
+gentoo = { method = "system", name = "app-shells/zsh", bin = ["zsh"] }
 
 [packages.neovim]
 arch = { method = "system", name = "neovim", bin = ["nvim"] }
 gentoo = { method = "system", name = "app-editors/neovim", bin = ["nvim"] }
-debian = { method = "script", name = "neovim", bin = ["nvim"] }
+debian = { method = "script", name = "neovim", bin = ["nvim"], script = "install_neovim.sh" }
 
 [packages.fzf]
 arch = { method = "system", name = "fzf" }
-gentoo = { method = "system", name = "app-shells/fzf" }
+gentoo = { method = "system", name = "app-shells/fzf", bin = ["fzf"] }
 
 [packages.keyd]
-gentoo = { method = "system", name = "app-misc/keyd" }
+gentoo = { method = "system", name = "app-misc/keyd", bin = ["keyd"] }
 debian = { method = "system", name = "keyd" }
 
+[packages.lazygit]
+gentoo = { method = "system", name = "dev-vcs/lazygit", bin = ["lazygit"] }
+
+[packages.tmux]
+gentoo = { method = "system", name = "app-misc/tmux", bin = ["tmux"] }
+
+[packages.kitty]
+gentoo = { method = "system", name = "x11-terms/kitty", bin = ["kitty"] }
+
+# Rustup and Cargo-install packages
+
 [packages.rustup]
-gentoo = { method = "system", name = "dev-util/rustup", post = [
+gentoo = { method = "system", name = "dev-util/rustup", bin = ["rustup"], post = [
   "rustup-init-gentoo --symlink"
 ] }
 debian = { method = "script", script = "install_rustup.sh" }
 ubuntu = { method = "script", script = "install_rustup.sh" }
 
 [packages.ripgrep]
-gentoo = { method = "system", name = "sys-apps/ripgrep" }
+gentoo = { method = "system", name = "sys-apps/ripgrep", bin = ["rg"] }
 debian = { method = "cargo", name = "ripgrep", phase = 1 }
 
 [packages.fd]
-gentoo = { method = "system", name = "sys-apps/fd" }
+gentoo = { method = "system", name = "sys-apps/fd", bin = ["fd"] }
 debian = { method = "cargo", name = "fd-find", bin = ["fd"], phase = 1 }
 
 [packages.yazi]
-gentoo = { method = "system", name = "app-misc/yazi" }
+gentoo = { method = "system", name = "app-misc/yazi", bin = ["yazi"] }
 debian = { method = "cargo", name = "yazi-cli", phase = 1 }
-
-[packages.golang]
-debian = { method = "system", name = "golang-go", bin = ["go", "gofmt"] }
-ubuntu = { method = "system", name = "golang-go", bin = ["go", "gofmt"] }
