@@ -101,6 +101,10 @@ def is_bin_present(item: dict[str, object]) -> bool:
     bins = item.get("bin", [])
     if not isinstance(bins, list):
         return False
+    if not bins:
+        name = item.get("name")
+        if isinstance(name, str) and name and shutil.which(name):
+            return True
     for bin_name in bins:
         if isinstance(bin_name, str) and bin_name and shutil.which(bin_name):
             return True
@@ -138,20 +142,24 @@ def install_packages(mode: str, runner: SudoRunner | None = None) -> None:
 
     for phase in sorted(phases):
         phase_items = phases[phase]
+        skipped_items = [i for i in phase_items if is_bin_present(i)]
+        for item in skipped_items:
+            name = item.get("name", "unknown")
+            print(f"[yellow]Skipping {name}: already present on PATH[/yellow]")
         system_items = [
             i
             for i in phase_items
-            if i.get("method") == "system" and not is_bin_present(i)
+            if i.get("method") == "system" and i not in skipped_items
         ]
         script_items = [
             i
             for i in phase_items
-            if i.get("method") == "script" and not is_bin_present(i)
+            if i.get("method") == "script" and i not in skipped_items
         ]
         cargo_items = [
             i
             for i in phase_items
-            if i.get("method") == "cargo" and not is_bin_present(i)
+            if i.get("method") == "cargo" and i not in skipped_items
         ]
 
         if system_items:

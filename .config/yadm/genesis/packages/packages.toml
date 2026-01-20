@@ -3,6 +3,7 @@
 install = [
   "git",
   "gcc",
+  "go",
   "curl",
   "make",
   "cmake",
@@ -13,7 +14,8 @@ install = [
   "fzf",
   "fd",
   "yazi",
-  "keyd"
+  "keyd",
+  "golang"
 ]
 
 [packages.git]
@@ -53,8 +55,9 @@ ubuntu = { method = "system", name = "zsh" }
 gentoo = { method = "system", name = "app-shells/zsh" }
 
 [packages.neovim]
-arch = { method = "system", name = "neovim" }
-gentoo = { method = "system", name = "app-editors/neovim" }
+arch = { method = "system", name = "neovim", bin = ["nvim"] }
+gentoo = { method = "system", name = "app-editors/neovim", bin = ["nvim"] }
+debian = { method = "script", name = "neovim", bin = ["nvim"] }
 
 [packages.fzf]
 arch = { method = "system", name = "fzf" }
@@ -62,11 +65,14 @@ gentoo = { method = "system", name = "app-shells/fzf" }
 
 [packages.keyd]
 gentoo = { method = "system", name = "app-misc/keyd" }
+debian = { method = "system", name = "keyd" }
 
 [packages.rustup]
 gentoo = { method = "system", name = "dev-util/rustup", post = [
   "rustup-init-gentoo --symlink"
 ] }
+debian = { method = "script", script = "install_rustup.sh" }
+ubuntu = { method = "script", script = "install_rustup.sh" }
 
 [packages.ripgrep]
 gentoo = { method = "system", name = "sys-apps/ripgrep" }
@@ -74,8 +80,12 @@ debian = { method = "cargo", name = "ripgrep", phase = 1 }
 
 [packages.fd]
 gentoo = { method = "system", name = "sys-apps/fd" }
-debian = { method = "cargo", name = "fd", phase = 1 }
+debian = { method = "cargo", name = "fd-find", bin = ["fd"], phase = 1 }
 
 [packages.yazi]
 gentoo = { method = "system", name = "app-misc/yazi" }
 debian = { method = "cargo", name = "yazi-cli", phase = 1 }
+
+[packages.golang]
+debian = { method = "system", name = "golang-go", bin = ["go", "gofmt"] }
+ubuntu = { method = "system", name = "golang-go", bin = ["go", "gofmt"] }
