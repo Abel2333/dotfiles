@@ -96,6 +96,17 @@ def run_post(items: list[dict[str, object]]) -> None:
                 subprocess.run(cmd, shell=True, check=False)
 
 
+def is_bin_present(item: dict[str, object]) -> bool:
+    """Check whether any declared binaries are already on PATH."""
+    bins = item.get("bin", [])
+    if not isinstance(bins, list):
+        return False
+    for bin_name in bins:
+        if isinstance(bin_name, str) and bin_name and shutil.which(bin_name):
+            return True
+    return False
+
+
 def install_packages(mode: str, runner: SudoRunner | None = None) -> None:
     """Install packages according to the selected mode and mapping rules.
 
@@ -127,9 +138,21 @@ def install_packages(mode: str, runner: SudoRunner | None = None) -> None:
 
     for phase in sorted(phases):
         phase_items = phases[phase]
-        system_items = [i for i in phase_items if i.get("method") == "system"]
-        script_items = [i for i in phase_items if i.get("method") == "script"]
-        cargo_items = [i for i in phase_items if i.get("method") == "cargo"]
+        system_items = [
+            i
+            for i in phase_items
+            if i.get("method") == "system" and not is_bin_present(i)
+        ]
+        script_items = [
+            i
+            for i in phase_items
+            if i.get("method") == "script" and not is_bin_present(i)
+        ]
+        cargo_items = [
+            i
+            for i in phase_items
+            if i.get("method") == "cargo" and not is_bin_present(i)
+        ]
 
         if system_items:
             system_names = [str(i["name"]) for i in system_items]

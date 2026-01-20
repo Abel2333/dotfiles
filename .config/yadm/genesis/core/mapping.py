@@ -115,12 +115,13 @@ def normalize_item(name: str, mapped: PackageVariant | None) -> dict[str, object
         mapped: Mapping result which may be None, str, or dict.
 
     Returns:
-        A dict with keys: method, name, url, args, post, phase.
+        A dict with keys: method, name, bin, url, args, post, phase.
     """
     if mapped is None:
-        return {"method": "system", "name": name, "post": [], "phase": 0}
+        return {"method": "system", "name": name, "bin": [], "post": [], "phase": 0}
     method = mapped.method
     item_name = mapped.name or name
+    bin_names = mapped.bin
     url = mapped.url
     args = mapped.args
     post = mapped.post
@@ -129,6 +130,7 @@ def normalize_item(name: str, mapped: PackageVariant | None) -> dict[str, object
     return {
         "method": method,
         "name": item_name,
+        "bin": bin_names,
         "url": url,
         "args": args,
         "post": post,

@@ -12,13 +12,14 @@ class PackageVariant(BaseModel):
 
     method: Literal["system", "cargo", "script"] = "system"
     name: Optional[str] = None
+    bin: list[str] = []
     url: Optional[str] = None
     args: list[str] = []
     post: list[str] = []
     phase: int = 0
     script: Optional[str] = None
 
-    @field_validator("args", "post", mode="before")
+    @field_validator("args", "post", "bin", mode="before")
     @classmethod
     def _ensure_list(cls, value):
         if value is None:
