@@ -1,4 +1,5 @@
 .config/zsh/secrets.zsh
+.config/newsboat/urls
 .ssh/id_ed25519
 .ssh/id_rsa
 .ssh/jenkins_key
