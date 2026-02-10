@@ -1,0 +1,34 @@
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+    baba-is-float false
+}
+
+window-rule {
+    match is-active=true
+    opacity 0.9
+}
+
+window-rule {
+    match is-active=false
+    opacity 0.85
+}
+
+window-rule {
+    match is-floating=true
+    focus-ring {
+        on
+    }
+}
+
+
+window-rule {
+    match app-id="^zen$"
+    default-column-width { proportion 1.0; }
+}
+
+window-rule {
+    match title="^Kitty@float"
+    open-floating true
+}
+

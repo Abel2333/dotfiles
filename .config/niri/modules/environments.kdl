@@ -1,0 +1,23 @@
+environment {
+    OZONE_PLATFORM "wayland"
+    ELECTRON_ENABLE_WAYLAND "1"
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+
+    // fix fcitx problem
+    // GTK_IM_MODULE "fcitx"
+    // QT_IM_MODULE "fcitx"
+    XMODIFIERS "@im=fcitx"
+    SDL_IM_MODULE "fcitx"
+    GLFW_IM_MODULE "ibus"
+
+    GDK_BACKEND "wayland,x11,*"
+    // QT_QPA_PLATFORM "wayland;xcb"
+    SDL_VIDEODRIVER "wayland"
+    CLUTTER_BACKEND "wayland"
+
+    XDG_CURRENT_DESKTOP "Niri"
+    XDG_SESSION_TYPE "wayland"
+    XDG_SESSION_DESKTOP "Niri"
+
+    QT_QPA_PLATFORMTHEME "qt6ct"
+}
