@@ -6,9 +6,9 @@ spawn-at-startup "wl-paste" "-t" "text" "--watch" "clipman" "store" "--no-persis
 spawn-at-startup "awww-daemon"
 spawn-at-startup "awww" "img" "~/Pictures/Wallpaper/wallhaven-paper.png"
 
-spawn-at-startup "pidof" "mpd" "||" "mpd"
+spawn-at-startup "/bin/sh" "-c" "$HOME/Script/switch_state.sh mpd"
 spawn-at-startup "pipewire"
 spawn-at-startup "fcitx5"
 
 // Idle
-spawn-at-startup "swayidle" "-w" "timeout" "1200" "$HOME/Script/fuzzy_lock.sh" "timeout" "1800" "swaymsg" "output * power off" "resume" "swaymsg" "output * power on" "before-sleep" "$HOME/Script/fuzzy_lock.sh"
+spawn-at-startup "/bin/sh" "-c" "swayidle -w timeout 1200 '$HOME/Script/fuzzy_lock.sh' timeout 1800 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"' before-sleep '$HOME/Script/fuzzy_lock.sh'"
