@@ -45,8 +45,9 @@ swaylock \
   --text-color "$TEXT_COLOR" \
   --font "Noto Sans" \
   --font-size 18 \
-  --show-failed-attempts
+  --show-failed-attempts \
+  --daemonize
 
-# cleanup
-rm -f "$TMPIMG"
-echo "$(date --iso-8601=seconds) fuzzy_lock end" >> "$LOGFILE"
+# # cleanup
+# rm -f "$TMPIMG"
+# echo "$(date --iso-8601=seconds) fuzzy_lock end" >> "$LOGFILE"

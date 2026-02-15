@@ -1,6 +1,12 @@
 output "HDMI-A-1" {
    mode "2560x1600@120.000"
     scale 1
-    position x=0 y=0
-    focus-at-startup
+    // position x=0 y=0
+    // focus-at-startup
+}
+
+output "DP-1" {
+   mode "2560x1440@180.002"
+   scale 1
+   focus-at-startup
 }
