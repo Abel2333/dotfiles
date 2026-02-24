@@ -1,4 +1,5 @@
 # Path
+export GOBIN=$HOME/.local/bin
 export PATH="$HOME/.local/bin:/usr/lib64/qt6/bin:$HOME/.cargo/bin:$PATH"
 export PATH=/usr/local/cuda-13.0/bin:$PATH
 export OLLAMA_MODELS="$HOME/Public/Model/Ollama"
