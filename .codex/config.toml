@@ -1,0 +1,58 @@
+profile = "fox"
+
+[model_providers.fox]
+name = "fox"
+base_url = "https://code.newcli.com/codex/v1"
+wire_api = "responses"
+requires_openai_auth = true
+env_key = "CODEX_API_KEY_FOX"
+
+[model_providers.gac]
+name = "gac"
+base_url = "https://gaccode.com/codex/v1"
+wire_api = "responses"
+env_key = "CODEX_API_KEY"
+
+[model_providers.smm]
+name = "smm"
+base_url = "http://newapi.dev.ai.smm.cn/v1"
+wire_api = "responses"
+env_key = "CODEX_API_KEY_SMM"
+
+[profiles.gac]
+model_provider = "gac"
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+approval_policy = "on-request"
+personality = "pragmatic"
+
+[profiles.fox]
+model_provider = "fox"
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+approval_policy = "on-request"
+personality = "pragmatic"
+
+[profiles.smm]
+model_provider = "smm"
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+approval_policy = "on-request"
+personality = "pragmatic"
+
+[notice]
+"hide_gpt-5.1-codex-max_migration_prompt" = true
+
+[notice.model_migrations]
+"gpt-5.1-codex-max" = "gpt-5.2-codex"
+"gpt-5.2-codex" = "gpt-5.3-codex"
+"gpt-5.3-codex" = "gpt-5.4"
+
+[projects."/home/abel/Code/work/tencent_search"]
+trust_level = "trusted"
+
+[projects."/home/abel/Code/personal/DevInventory"]
+trust_level = "trusted"
+
+[projects."/home/abel/Code/work/xiaojin/xiaojin_langgraph"]
+trust_level = "trusted"
