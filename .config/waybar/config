@@ -5,6 +5,7 @@
   "modules-left": [
     "custom/launcher",
     "hyprland/workspaces",
+    "niri/workspaces",
     "temperature",
     "idle_inhibitor",
     "mpd",
@@ -92,7 +93,7 @@
   "mpd": {
     "max-length": 90,
     "format": "<span foreground='#BB9AF7'>󰫔 </span> {title} - {artist}",
-    "format-paused": "<span style='italic'>󰽷 {title}</span>",
+    "format-paused": "<span style='italic'>󰽬 {title}</span>",
     "format-stopped": "<span foreground='#BB9AF7'>󰽳 </span>",
     "format-disconnected": "<span foreground='#BB9AF7'> Mpd disconnected</span>",
     "on-click": "mpc --quiet toggle",
