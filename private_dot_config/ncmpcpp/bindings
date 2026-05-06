@@ -1,0 +1,37 @@
+######################################################################
+##                  Minimal ncmpcpp Key Bindings                    ##
+##                                                                  ##
+##  This config defines a minimal set of key bindings for fast      ##
+##  navigation and control using only four keys.                   ##
+######################################################################
+
+############################
+# Navigation
+############################
+
+# Scroll up in the current view
+def_key "k"
+  scroll_up
+
+# Scroll down in the current view
+def_key "j"
+  scroll_down
+
+def_key "g"
+    page_up
+
+def_key "G"
+    page_down
+
+
+############################
+# Playback / Actions
+############################
+
+# Play the selected item (song or directory)
+def_key "n"
+  play_item
+
+# Toggle audio output (e.g. switch between devices)
+def_key "n"
+  toggle_output

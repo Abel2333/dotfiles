@@ -1,0 +1,199 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "modules-left": [
+    "custom/launcher",
+    "hyprland/workspaces",
+    "niri/workspaces",
+    "temperature",
+    "idle_inhibitor",
+    "mpd",
+    "custom/todo"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "network",
+    "pulseaudio",
+    "cpu",
+    "memory",
+    "disk",
+    "battery",
+    "tray",
+    "custom/powermenu",
+  ],
+  "custom/launcher": {
+    "interval": 40,
+    "format": " ",
+    "on-click": "wofi --show=drun",
+    "tooltip": true,
+    "tooltip-format": "<span style='italic'>Launch Applications</span>"
+  },
+  "sway/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+      "1": " ",
+      "2": " ",
+      "3": "󰇩 ",
+      "4": " ",
+      "5": " ",
+      "urgent": " ",
+      "active": " ",
+      "default": " "
+    },
+    "sort-by-number": true
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "󰇩",
+      "4": "",
+      "5": "",
+      "active": "",
+      "default": ""
+    },
+    "persistent-workspaces": {
+      "*": 5,
+      "HDMI-A-1": 3
+    }
+  },
+  "clock": {
+    "format": "{:%H:%M}  ",
+    "format-alt": "{:%A %B %d, %Y (%R)} 󰃯 ",
+    "interval": 60,
+    "tooltip": true,
+    "tooltip-format": "<span color='#FF8C00'>Enjoy the Moment!</span>\n<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_down",
+      "on-scroll-down": "shift_up"
+    }
+  },
+  "mpd": {
+    "max-length": 90,
+    "format": "<span foreground='#BB9AF7'>󰫔 </span> {title} - {artist}",
+    "format-paused": "<span style='italic'>󰽬 {title}</span>",
+    "format-stopped": "<span foreground='#BB9AF7'>󰽳 </span>",
+    "format-disconnected": "<span foreground='#BB9AF7'> Mpd disconnected</span>",
+    "on-click": "mpc --quiet toggle",
+    "on-click-right": "notify-send -c mpd \"Playlist\" \"$(mpc ls)\"",
+    "on-click-middle": "alacritty -e ncmpcpp",
+    "on-scroll-up": "mpc --quiet prev",
+    "on-scroll-down": "mpc --quiet next",
+    "smooth-scrolling-threshold": 5,
+    "tooltip-format": "{title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%H:%M:%S})"
+  },
+  "disk": {
+    "interval": 900,
+    "format": "<span foreground='#9ece6a'>󰗮</span> {percentage_used}%",
+    "tooltip-format": "{used} used out of {total} on {path}",
+  },
+  "cpu": {
+    "interval": 1,
+    "format": "<span foreground='#e0af68'>󰍛</span> {usage}%"
+  },
+  "memory": {
+    "interval": 300,
+    "format": "<span foreground='#7aa2f7'> </span> {percentage}% ",
+    "tooltip-format": "{used:0.2f}GiB used out of {total:0.2f}GiB"
+  },
+  "battery": {
+    "interval": 600,
+    "design-capacity": false,
+    "states": {
+      "warning": 15,
+      "critical": 10
+    },
+    "format": "<span foreground='#f7768e'>{icon}</span> {capacity}%",
+    "format-charging": "<span foreground='#f7768e'>{icon}</span> {capacity}%",
+    "format-time": "{H}h {M}m",
+    "format-icons": [
+      " ",
+      " ",
+      " ",
+      " ",
+      " "
+    ]
+  },
+  "tray": {
+    "icon-size": 15,
+    "spacing": 5
+  },
+  "network": {
+    "interval": 1,
+    "format-wifi": "<span foreground='#61AF1F'>󰘊</span> {essid} ({signaldBm}) ",
+    "format-ethernet": "<span foreground='#61AF1F'>󰈀</span> {ifname} ({ipaddr}) ",
+    "format-linked": "<span foreground='#61AF1F'>󰘊</span> {essid} (No IP) ",
+    "format-disconnected": "<span foreground='#61AF1F'>󰌙</span> Disconnected ",
+    "tooltip-format": "{ifname} via {gwaddr} 󰩠 "
+  },
+  "pulseaudio": {
+    "format": "<span foreground='#D08770'>{icon}  </span>{volume}% ",
+    "format-bluetooth": "<span foreground='#00BFFF'>{icon}</span>{volume}%",
+    "format-muted": "󰖁  Muted",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "󰂑",
+      "headset": "󰂑",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "states": {
+      "warning": 39
+    },
+    "scroll-step": 1,
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "tooltip": false
+  },
+  "temperature": {
+    "thermal-zone": 0,
+    "hwmon-path": [
+      "/sys/class/hwmon/hwmon2/temp1_input",
+      "/sys/class/hwmon/hwmon4/temp1_input"
+    ],
+    "warning-threshold": 85,
+    "critical-threshold": 95,
+    "format": " {temperatureC}°C",
+    "tooltip": false
+  },
+  "idle_inhibitor": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰈈",
+      "deactivated": "󰈉"
+    }
+  },
+  "custom/powermenu": {
+    "format": " ",
+    "on-click": "systemctl poweroff",
+    "tooltip": false
+  }
+}

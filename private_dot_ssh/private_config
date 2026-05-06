@@ -1,0 +1,53 @@
+Host Gentux
+    HostName 100.121.67.27
+    Port 22
+    User abel
+    IdentityFile /home/abel/.ssh/id_rsa
+
+Host ssh.abelprime.click
+    User git
+    Hostname ssh.abelprime.click
+    Port 2133
+    IdentityFile /home/abel/.ssh/personal-ssh-key
+
+Host Tencent_Personal
+    HostName 43.132.168.148
+    Port 22
+    User ubuntu
+    IdentityFile /home/abel/.ssh/personal-ssh-key
+
+Host github.com
+    User git
+    Hostname github.com
+    PreferredAuthentications publickey
+
+Host git.code.tencent.com
+    User git
+    HostKeyAlgorithms +ssh-rsa
+    PubkeyAcceptedAlgorithms +ssh-rsa
+    IdentityFile /home/abel/.ssh/jenkins_key
+
+Host smmgitea.smm.cn
+    User git
+    Hostname 118.89.82.93
+    Port 22
+    IdentityFile /home/abel/.ssh/gpg_auth.pub
+
+Host WorkTest
+    User ubuntu
+    Hostname 10.6.3.122
+    Port 22
+    IdentityFile /home/abel/.ssh/id_ed25519
+
+Host Buckethead
+    HostName buckethead.eng.gla.ac.uk
+    Port 22
+    User 2930221Z
+    IdentityFile /home/abel/.ssh/id_ed25519
+
+Host WorkDev
+    User zhanzimo
+    Hostname dev.ai.smm.cn
+    Port 22
+    IdentityFile /home/abel/.ssh/work-ssh-key
+

@@ -1,0 +1,61 @@
+## Global configuration options
+#
+# Set maximum number of expired notifications to keep in the history buffer.
+max-history=5
+
+# Sorts incoming notifications by time and/or priority.
+sort=-time
+
+default-timeout=10000
+
+## Binding options
+# Bindings allow one to perform an action when an event is triggerd.
+#
+on-button-left=invoke-default-action
+on-button-middle=none
+on-button-right=dismiss
+on-touch=dismiss
+on-notify=none
+
+## Style options
+#
+font="Source Serif" 12
+background-color=#2e34407F
+text-color=#FFFFFFFF
+width=450
+height=250
+
+# This margin applies to the outside of the whole notification list.
+outer-margin=0
+
+# This margin applies to each individual notification.
+margin=12
+
+padding=12,20
+border-size=3
+border-color=#99C0D0
+border-radius=12
+
+icons=1
+max-icon-size=64
+
+# If set, mako will save notifications that have reached their timeout into the history buffer instead of immediately deleting them.
+history=1
+
+
+text-alignment=center
+
+[urgency=low]
+border-color=#CCCCCC
+
+[urgency=normal]
+#border-color=#D08770
+border-color=#66CCFF
+
+[urgency=high]
+border-color=#FF0000
+default-timeout=0
+
+[category=mpd]
+default-timeout=2000
+group-by=category
