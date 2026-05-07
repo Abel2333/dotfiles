@@ -6,7 +6,7 @@ add_newline = true
 palette = "catppuccin"
 
 format = """
-╭─ $os\
+[╭─ ](bold green)$os\
 $username\
 $hostname\
 $directory\
@@ -20,7 +20,7 @@ $fill\
 $cmd_duration\
 $time\
 $line_break\
-╰─ $character"""
+[╰─ ](bold green)$character"""
 
 [time]
 disabled = false
