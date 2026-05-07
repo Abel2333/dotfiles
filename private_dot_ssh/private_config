@@ -10,6 +10,11 @@ Host ssh.abelprime.click
     Port 2133
     IdentityFile /home/abel/.ssh/personal-ssh-key
 
+Host Forumtux
+    HostName 100.96.95.54
+    Port 2233
+    User abel
+
 Host Tencent_Personal
     HostName 43.132.168.148
     Port 22
