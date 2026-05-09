@@ -6,9 +6,9 @@ include current-theme.conf
 
 # font
 {{- if eq .chezmoi.hostname "lite-power" }}
-font_size           22
+font_size           15
 {{- else if eq .chezmoi.hostname "machine-b" }}
-font_size           16
+font_size           20
 {{- else }}
 font_size           18
 {{- end }}
@@ -31,8 +31,8 @@ enable_powerline_fonts yes
 # the quick brown fox jumps over the lazy dog
 # THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
 #  () 
-adjust_line_height          110%
-adjust_column_width         105%
+# adjust_line_height          110%
+# adjust_column_width         105%
 # adjust_baseline             -10%
 
 # Cursor
