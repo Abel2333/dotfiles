@@ -48,35 +48,5 @@ personality = "pragmatic"
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
 
-[projects."/home/abel/Code/work/tencent_search"]
-trust_level = "trusted"
-
-[projects."/home/abel/Code/personal/DevInventory"]
-trust_level = "trusted"
-
-[projects."/home/abel/Code/work/xiaojin/xiaojin_langgraph"]
-trust_level = "trusted"
-
-[projects."/home/abel/Code/DevInventory"]
-trust_level = "trusted"
-
-[projects."/home/abel/Code/casket"]
-trust_level = "trusted"
-
-[projects."/home/abel/.config/nvim"]
-trust_level = "trusted"
-
-[projects."/home/abel/Code/slater"]
-trust_level = "trusted"
-
-[projects."/home/abel/Code/tutorials/nix-hello"]
-trust_level = "trusted"
-
-[projects."/home/abel/Code/power-os"]
-trust_level = "trusted"
-
-[projects."/home/abel/.config/niri"]
-trust_level = "trusted"
-
 [tui.model_availability_nux]
-"gpt-5.5" = 2
+"gpt-5.5" = 4
