@@ -11,3 +11,8 @@ output "DP-1" {
    scale 1
    focus-at-startup
 }
+
+output "eDP-1" {
+   mode "3200x2000@165.000"
+   scale 1.5
+}

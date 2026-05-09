@@ -109,6 +109,7 @@ disabled = false
 [os.symbols]
 Arch = "󰣇 "
 Debian = " "
+Fedora = " "
 Gentoo = " "
 Windows = " "
 Ubuntu = " "

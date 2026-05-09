@@ -21,6 +21,14 @@ window-rule {
     }
 }
 
+// Hide
+window-rule {
+    match app-id="xwaylandvideobridge"
+    open-floating false
+    default-column-width { fixed 1; }
+    default-window-height { fixed 1; }
+}
+
 // Full Screen
 window-rule {
     match app-id="^zen$"

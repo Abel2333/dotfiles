@@ -181,16 +181,74 @@ def _ls_relativize [result: table, targets: list<string>] {
     return $result
 }
 
+# Add ANSI colors to file names for custom listing helpers.
+#
+# Examples:
+#   Colorize file names after reshaping `ls` output.
+#   > ls --long --short-names | select name type mode | _ls_colorize_name
+def _ls_colorize_name [base_dir?: string]: table -> table {
+    $in | update name { |row|
+        let plain = $row.name
+        let symlink_color = if $row.type == symlink {
+            let target_path = if ($row.target | is-empty) {
+                null
+            } else if ($row.target | path type) != null {
+                $row.target
+            } else if ($base_dir != null) {
+                $base_dir | path join $row.target
+            } else {
+                null
+            }
+
+            if ($target_path != null) and (($target_path | path type) == dir) {
+                (ansi cyan_bold)
+            } else {
+                (ansi cyan)
+            }
+        } else {
+            ""
+        }
+
+        let color = if $row.type == dir {
+            (ansi blue_bold)
+        } else if $row.type == symlink {
+            $symlink_color
+        } else if $row.type == socket {
+            (ansi magenta)
+        } else if $row.type == pipe {
+            (ansi yellow)
+        } else if (($row.mode | into string) | str contains "x") {
+            (ansi green)
+        } else {
+            ""
+        }
+
+        if $color == "" {
+            $plain
+        } else {
+            $"($color)($plain)(ansi reset)"
+        }
+    }
+}
+
 # List files including hidden entries with long-format metadata.
 #
 # Examples:
 #   List all files, including hidden ones, in the current directory.
 #   > l
-export def l [...paths: string]: nothing -> table {
+export def l [--full-paths, ...paths: string]: nothing -> table {
     let targets = _ls_targets ...$paths
-    ls --all --long ...$targets
-    | select name type mode group user size modified
-    | _ls_relativize $in $targets
+    let color_base = if ($targets | length) == 1 { $targets | first } else { null }
+
+    if $full_paths {
+        ls --all --long ...$targets
+        | select name type mode group user size modified
+    } else {
+        ls --all --long --short-names ...$targets
+        | select name type target mode group user size modified
+        | _ls_colorize_name $color_base
+        | reject target
+    }
 }
 
 # List files without hidden entries using long-format metadata.
@@ -198,11 +256,19 @@ export def l [...paths: string]: nothing -> table {
 # Examples:
 #   List visible files in a directory with detailed metadata.
 #   > ll ~/.config
-export def ll [...paths: string]: nothing -> table {
+export def ll [--full-paths, ...paths: string]: nothing -> table {
     let targets = _ls_targets ...$paths
-    ls --long ...$targets
-    | select name type mode group user size modified
-    | _ls_relativize $in $targets
+    let color_base = if ($targets | length) == 1 { $targets | first } else { null }
+
+    if $full_paths {
+        ls --long ...$targets
+        | select name type mode group user size modified
+    } else {
+        ls --long --short-names ...$targets
+        | select name type target mode group user size modified
+        | _ls_colorize_name $color_base
+        | reject target
+    }
 }
 
 # Load variables from a dotenv-style file into the current shell session.
