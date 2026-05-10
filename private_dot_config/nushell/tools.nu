@@ -271,6 +271,38 @@ export def ll [--full-paths, ...paths: string]: nothing -> table {
     }
 }
 
+# Show detailed metadata for a file or directory itself.
+#
+# Examples:
+#   Show detailed info for a file.
+#   > path-info ~/.zshrc
+#
+#   Show detailed info for a directory instead of its contents.
+#   > path-info ~/.config
+#
+#   Show info for the first selected entry from a listing.
+#   > ll | where type == dir | first | path-info
+export def path-info [target?: path]: [ nothing -> record, string -> record, record -> record ] {
+    let raw = if $target != null {
+        $target
+    } else if (($in | describe) | str starts-with "record") {
+        $in.name
+    } else {
+        $in
+    }
+
+    if $raw == null {
+        error make { msg: "Provide a path as an argument or via pipeline" }
+    }
+
+    let p = ($raw | path expand)
+    if not ($p | path exists) {
+        error make { msg: $"path not found: ($p)" }
+    }
+
+    ls --long --directory $p | first
+}
+
 # Load variables from a dotenv-style file into the current shell session.
 #
 # Examples:
