@@ -1,0 +1,113 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+palette = "catppuccin"
+
+format = """
+[╭─ ](bold green)$os\
+$username\
+$hostname\
+$directory\
+$rust\
+$python\
+$conda\
+$git_branch\
+$git_state\
+$git_status\
+$fill\
+$cmd_duration\
+$time\
+$line_break\
+[╰─ ](bold green)"""
+
+[time]
+disabled = false
+format = "[$time]($style)"
+
+[fill]
+symbol = "·"
+
+[palettes.catppuccin]
+rosewater = "#F5E0DC"
+flamingo = "#F2CDCD"
+pink = "#F5C2E7"
+mauve = "#CBA6F7"
+peach = "#FAB387"
+yellow = "#F9E2AF"
+green = "#A6E3A1"
+teal = "#94E2D5"
+sky = "#89DCEB"
+sapphire = "#74C7EC"
+blue = "#89B4FA"
+lavender = "#B4BEFE"
+text = "#CDD6F4"
+subtext1 = "#BAC2DE"
+subtext0 = "#A6ADC8"
+overlay2 = "#9399B2"
+overlay1 = "#7F849C"
+overlay0 = "#6C7086"
+surface2 = "#585B70"
+surface1 = "#45475A"
+surface0 = "#313244"
+base = "#1E1E2E"
+mantle = "#181825"
+crust = "#11111B"
+
+[directory]
+style = "blue"
+
+[git_branch]
+format = "on [$symbol$branch]($style) "
+symbol = " "
+style = "bold purple"
+
+[git_status]
+format = '([\[$all_status$ahead_behind$stashed\]]($style)) '
+style = "bold cyan"
+conflicted = "✘"
+untracked = "?"
+modified  = "!"
+staged    = "+"
+renamed   = "»"
+deleted   = ""
+stashed   = " 󰋻 "
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bold yellow"
+
+[cmd_duration]
+format = "[$duration ]($style)"
+style = "yellow"
+
+[rust]
+symbol = "󱘗 "
+
+[python]
+format = "[$symbol($virtualenv )$version ]($style)"
+symbol = "󰌠 "
+style = "bold yellow"
+
+[conda]
+# Remember to use
+#   `conda config --set changeps1 False`
+# to delete the conda's own prompt modifier
+format = "via [$symbol$environment ]($style)"
+symbol = " "
+style = "bold green"
+
+[os]
+disabled = false
+
+[os.symbols]
+Arch = "󰣇 "
+Debian = " "
+Fedora = " "
+Gentoo = " "
+Windows = " "
+Ubuntu = " "
+
+[hostname]
+ssh_symbol = " "

@@ -19,9 +19,10 @@
 
 use ~/.config/nushell/tools.nu *
 
+$env.STARSHIP_CONFIG = ($nu.home-dir | path join ".config" "starship-nu.toml")
+
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
-
 
 # Alias
 alias k = kitty +kitten
@@ -33,3 +34,37 @@ source ~/.zoxide.nu
 
 # Carapace
 source $"($nu.cache-dir)/carapace.nu"
+source ~/.config/nushell/completions.nu
+
+$env.config.keybindings ++= [
+    {
+        name: fzf_file_insert
+        modifier: control
+        keycode: char_t
+        mode: [emacs vi_normal vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: "fzf-file-insert"
+        }
+    }
+    {
+        name: fzf_history
+        modifier: control
+        keycode: char_r
+        mode: [emacs vi_normal vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: "fzf-history"
+        }
+    }
+    {
+        name: fzf_cd
+        modifier: alt
+        keycode: char_c
+        mode: [emacs vi_normal vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: "fzf-cd"
+        }
+    }
+]

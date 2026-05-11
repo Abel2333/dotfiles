@@ -1,3 +1,7 @@
+use ~/.config/nushell/lib/commandline.nu
+use ~/.config/nushell/lib/fs.nu
+use ~/.config/nushell/lib/system.nu
+
 # Create a directory and enter it immediately.
 #
 # Examples:
@@ -49,12 +53,6 @@ export def bak [target?: path]: [ nothing -> path, string -> path, record -> pat
     $dst
 }
 
-def _require_cmd [cmd: string] {
-    if ((which $cmd | length) == 0) {
-        error make { msg: $"Required command not found: ($cmd)" }
-    }
-}
-
 # Extract an archive based on its file extension.
 #
 # Examples:
@@ -97,43 +95,43 @@ export def extract [source?: path, --to(-t): path]: [ nothing -> nothing, string
     let lower = ($p | str downcase)
 
     if ($lower | str ends-with ".tar.gz") or ($lower | str ends-with ".tgz") {
-        _require_cmd tar
+        system require-cmd tar
         ^tar -xzf $p -C $out_dir
     } else if ($lower | str ends-with ".tar.bz2") or ($lower | str ends-with ".tbz2") {
-        _require_cmd tar
+        system require-cmd tar
         ^tar -xjf $p -C $out_dir
     } else if ($lower | str ends-with ".tar.xz") or ($lower | str ends-with ".txz") {
-        _require_cmd tar
+        system require-cmd tar
         ^tar -xJf $p -C $out_dir
     } else if ($lower | str ends-with ".tar.zst") or ($lower | str ends-with ".tzst") {
-        _require_cmd tar
+        system require-cmd tar
         ^tar --zstd -xf $p -C $out_dir
     } else if ($lower | str ends-with ".tar") {
-        _require_cmd tar
+        system require-cmd tar
         ^tar -xf $p -C $out_dir
     } else if ($lower | str ends-with ".zip") {
-        _require_cmd unzip
+        system require-cmd unzip
         ^unzip $p -d $out_dir
     } else if ($lower | str ends-with ".gz") {
-        _require_cmd gzip
+        system require-cmd gzip
         ^gzip -dkc $p | save -f ($out_dir | path join ($p | path parse | get stem))
     } else if ($lower | str ends-with ".bz2") {
-        _require_cmd bzip2
+        system require-cmd bzip2
         ^bzip2 -dkc $p | save -f ($out_dir | path join ($p | path parse | get stem))
     } else if ($lower | str ends-with ".xz") {
-        _require_cmd xz
+        system require-cmd xz
         ^xz -dkc $p | save -f ($out_dir | path join ($p | path parse | get stem))
     } else if ($lower | str ends-with ".zst") {
-        _require_cmd zstd
+        system require-cmd zstd
         ^zstd -dkc $p | save -f ($out_dir | path join ($p | path parse | get stem))
     } else if ($lower | str ends-with ".7z") {
-        _require_cmd 7z
+        system require-cmd 7z
         ^7z x $"-o($out_dir)" $p
     } else if ($lower | str ends-with ".rar") {
         if ((which unrar | length) > 0) {
             ^unrar x $p $out_dir
         } else {
-            _require_cmd 7z
+            system require-cmd 7z
             ^7z x $"-o($out_dir)" $p
         }
     } else {
@@ -150,94 +148,13 @@ export def --env up [n: int = 1]: nothing -> nothing {
     cd (0..<$n | reduce -f "." { |_, acc| $acc | path join ".." })
 }
 
-# Resolve list targets for listing helpers.
-#
-# Examples:
-#   Expand the given paths for downstream listing commands.
-#   > _ls_targets src tests
-def --env _ls_targets [...paths: string] {
-    if ($paths | is-empty) {
-        ["."]
-    } else {
-        $paths | each { |p| $p | path expand }
-    }
-}
-
-# Adjust displayed names in listing output.
-#
-# Examples:
-#   Relativize names when listing a single directory target.
-#   > ls --long src | _ls_relativize $in [($'($env.PWD)/src')]
-def _ls_relativize [result: table, targets: list<string>] {
-    if ($targets == ["."]) {
-        return $result
-    }
-
-    if ($targets | length) == 1 {
-        let base = $targets | first
-        return ($result | update name { |row| $row.name |  path relative-to $base })
-    }
-
-    return $result
-}
-
-# Add ANSI colors to file names for custom listing helpers.
-#
-# Examples:
-#   Colorize file names after reshaping `ls` output.
-#   > ls --long --short-names | select name type mode | _ls_colorize_name
-def _ls_colorize_name [base_dir?: string]: table -> table {
-    $in | update name { |row|
-        let plain = $row.name
-        let symlink_color = if $row.type == symlink {
-            let target_path = if ($row.target | is-empty) {
-                null
-            } else if ($row.target | path type) != null {
-                $row.target
-            } else if ($base_dir != null) {
-                $base_dir | path join $row.target
-            } else {
-                null
-            }
-
-            if ($target_path != null) and (($target_path | path type) == dir) {
-                (ansi cyan_bold)
-            } else {
-                (ansi cyan)
-            }
-        } else {
-            ""
-        }
-
-        let color = if $row.type == dir {
-            (ansi blue_bold)
-        } else if $row.type == symlink {
-            $symlink_color
-        } else if $row.type == socket {
-            (ansi magenta)
-        } else if $row.type == pipe {
-            (ansi yellow)
-        } else if (($row.mode | into string) | str contains "x") {
-            (ansi green)
-        } else {
-            ""
-        }
-
-        if $color == "" {
-            $plain
-        } else {
-            $"($color)($plain)(ansi reset)"
-        }
-    }
-}
-
 # List files including hidden entries with long-format metadata.
 #
 # Examples:
 #   List all files, including hidden ones, in the current directory.
 #   > l
 export def l [--full-paths, ...paths: string]: nothing -> table {
-    let targets = _ls_targets ...$paths
+    let targets = (fs ls-targets ...$paths)
     let color_base = if ($targets | length) == 1 { $targets | first } else { null }
 
     if $full_paths {
@@ -246,7 +163,7 @@ export def l [--full-paths, ...paths: string]: nothing -> table {
     } else {
         ls --all --long --short-names ...$targets
         | select name type target mode group user size modified
-        | _ls_colorize_name $color_base
+        | fs ls-colorize-name $color_base
         | reject target
     }
 }
@@ -257,7 +174,7 @@ export def l [--full-paths, ...paths: string]: nothing -> table {
 #   List visible files in a directory with detailed metadata.
 #   > ll ~/.config
 export def ll [--full-paths, ...paths: string]: nothing -> table {
-    let targets = _ls_targets ...$paths
+    let targets = (fs ls-targets ...$paths)
     let color_base = if ($targets | length) == 1 { $targets | first } else { null }
 
     if $full_paths {
@@ -266,7 +183,7 @@ export def ll [--full-paths, ...paths: string]: nothing -> table {
     } else {
         ls --long --short-names ...$targets
         | select name type target mode group user size modified
-        | _ls_colorize_name $color_base
+        | fs ls-colorize-name $color_base
         | reject target
     }
 }
@@ -346,4 +263,117 @@ export def --env unload-env-file []: nothing -> nothing {
     hide-env ...$keys
     hide-env _LOADED_ENV_KEYS
     print $"Unloaded ($keys | length) variables"
+}
+
+# Fuzzy-pick a directory under the current working tree and `cd` into it.
+#
+# Examples:
+#   Open `fzf` with directories (including hidden ones except `.git`) and jump
+#   to the selected directory.
+#   > fzf-cd
+export def --env fzf-cd [] {
+    let dir = (fd --type d --hidden --exclude .git | to text | fzf --height 100% --border | str trim)
+    if ($dir | is-not-empty) { cd $dir }
+}
+
+# Fuzzy-search shell history and replace the current command line buffer.
+#
+# Examples:
+#   Open `fzf` with command history and paste the selected entry into the prompt.
+#   > fzf-history
+export def --env fzf-history [] {
+    let query = (commandline)
+    commandline edit --replace ""
+    print -n $'(ansi --escape "2K")\r'
+
+    let selected = (
+        history
+        | get command
+        | reverse
+        | uniq
+        | to text
+        | fzf --height 100% --border --query $query
+        | str trim
+    )
+
+    commandline edit --replace (if ($selected | is-not-empty) { $selected } else { $query })
+}
+
+# Fuzzy-pick a file or directory and insert its path into the current command line.
+#
+# Examples:
+#   Open `fzf` with project entries and insert the selected path at the cursor.
+#   > fzf-file-insert
+export def --env fzf-file-insert [] {
+    let line = (commandline state)
+    let left = $line.left
+    let right = $line.right
+    let selected_raw = (
+        fd --hidden --exclude .git
+        | to text
+        | fzf --height 100% --border
+        | str trim
+    )
+
+    if ($selected_raw | is-not-empty) {
+        let selected = if ($selected_raw =~ '^[[:alnum:]_./~-]+$') {
+            $selected_raw
+        } else {
+            $selected_raw | to nuon
+        }
+        let spacer = if (($left | is-empty) or ($left | str ends-with " ")) {
+            ""
+        } else {
+            " "
+        }
+        let next = $"($left)($spacer)($selected)($right)"
+        commandline edit --replace $next
+        commandline set-cursor (($left | str length) + ($spacer | str length) + ($selected | str length))
+    }
+}
+
+# Search project contents with ripgrep, filter matches in `fzf`, and open the
+# selected result in Neovim at the matching line.
+#
+# Examples:
+#   Search for `prompt` in the current project and jump to the selected match.
+#   > rg-fzf prompt
+export def rg-fzf [
+    pattern?: string
+]: nothing -> nothing {
+    system require-cmd rg
+    system require-cmd fzf
+
+    let query = if $pattern == null { "" } else { $pattern }
+    let editor = (system editor-command)
+    let sep = (char --integer 31)
+    let preview = "sh -c 'line=$2; start=$(( line > 3 ? line - 3 : 1 )); end=$(( line + 3 )); sed -n \"${start},${end}p\" \"$1\"' _ {1} {2}"
+    let selected = (
+        ^rg --json --color=never --smart-case $query
+        | from json --objects
+        | where { |row| $row.type == "match" }
+        | each { |row|
+            let file = $row.data.path.text
+            let line = ($row.data.line_number | into string)
+            let text = (
+                $row.data.lines.text
+                | str trim
+                | str replace --all "\t" " "
+            )
+            let display = $"($file):($line): ($text)"
+            [$file, $line, $display] | str join $sep
+        }
+        | to text
+        | fzf --height 100% --border --ansi --query $query --delimiter $sep --with-nth 3 --preview $preview
+        | str trim
+    )
+
+    if ($selected | is-empty) {
+        return
+    }
+
+    let parts = ($selected | split row $sep --number 3)
+    let file = ($parts | get 0)
+    let line = ($parts | get 1)
+    run-external ...$editor $"+($line)" $file
 }

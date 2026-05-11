@@ -40,6 +40,49 @@ zoxide init nushell | save -f $"($env.HOME)/.zoxide.nu"
 $env.EDITOR = 'nvim'
 $env.VISUAL = 'nvim'
 
+# Use vi editing mode in Nushell.
+$env.config.edit_mode = "vi"
+
+# Let Starship render the main prompt body and keep Nushell responsible for the
+# mode indicator only. The indicator color reflects the last command status:
+# green/magenta on success, red on failure.
+$env.PROMPT_INDICATOR = ""
+$env.PROMPT_INDICATOR_VI_INSERT = {||
+    if $env.LAST_EXIT_CODE == 0 {
+        $"(ansi green_bold)❯ (ansi reset)"
+    } else {
+        $"(ansi red_bold)❯ (ansi reset)"
+    }
+}
+$env.PROMPT_INDICATOR_VI_NORMAL = {||
+    if $env.LAST_EXIT_CODE == 0 {
+        $"(ansi magenta_bold)❮ (ansi reset)"
+    } else {
+        $"(ansi red_bold)❮ (ansi reset)"
+    }
+}
+$env.PROMPT_MULTILINE_INDICATOR = "::: "
+
+# After a command runs, Nushell rewrites the previous prompt line using the
+# transient prompt variables. Keep them aligned with the live prompt so the
+# scrollback shows the same mode/status colors.
+$env.TRANSIENT_PROMPT_INDICATOR = ""
+$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = {||
+    if $env.LAST_EXIT_CODE == 0 {
+        $"(ansi green_bold)❯ (ansi reset)"
+    } else {
+        $"(ansi red_bold)❯ (ansi reset)"
+    }
+}
+$env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = {||
+    if $env.LAST_EXIT_CODE == 0 {
+        $"(ansi magenta_bold)❮ (ansi reset)"
+    } else {
+        $"(ansi red_bold)❮ (ansi reset)"
+    }
+}
+$env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = ""
+
 ############
 #  Locale  #
 ############
@@ -85,6 +128,12 @@ if $need_update {
   mkdir ($nu.cache-dir | into string)
   carapace _carapace nushell | save --force $cache_file
 }
+
+############
+#  Nodejs  #
+############
+fnm env --json | from json | load-env
+$env.PATH = ($env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join "bin"))
 
 #############
 #  Secrets  #
