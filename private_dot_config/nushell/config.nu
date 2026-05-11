@@ -36,6 +36,8 @@ source ~/.zoxide.nu
 source $"($nu.cache-dir)/carapace.nu"
 source ~/.config/nushell/completions.nu
 
+$env.config.history.file_format = "sqlite"
+
 $env.config.keybindings ++= [
     {
         name: fzf_file_insert
