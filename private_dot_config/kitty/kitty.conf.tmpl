@@ -9,8 +9,8 @@ include current-theme.conf
 font_size           15
 {{- else if eq .chezmoi.hostname "forumtux" }}
 font_size           20
-{{- else }}
-font_size           18
+{{- else if eq .chezmoi.hostname "zhanzimo10"}}
+font_size           22
 {{- end }}
 font_family         FiraCode Nerd Font
 bold_font           FiraCode Nerd Font Bold
@@ -43,7 +43,11 @@ enable_ligatures always
 # disable_ligatures cursor
 
 # Shell
-shell ~/.cargo/bin/nu
+{{- if eq .chezmoi.hostname "zhanzimo10" }}
+shell /home/abel/.cargo/bin/nu
+{{- else }}
+shell /usr/bin/nu
+{{- end }}
 
 # window
 hide_window_decorations     titlebar-only
