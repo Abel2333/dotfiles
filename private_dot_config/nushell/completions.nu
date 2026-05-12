@@ -1,4 +1,4 @@
-use ~/.config/nushell/lib/commandline.nu
+use ~/.config/nushell/lib/completion.nu *
 
 # Custom completions layered on top of the existing external completer.
 #
@@ -6,9 +6,84 @@ use ~/.config/nushell/lib/commandline.nu
 # intercepts docker/podman container-name completion for subcommands where Nu's
 # external-completer bridge tends to miss the trailing empty argument.
 
-def _completion_has_trailing_space [] {
-    let left = (commandline state).left
-    ($left | is-not-empty) and ($left =~ '\s$')
+def _ssh_config_hosts [] {
+    let ssh_config = ($env.HOME | path join ".ssh" "config")
+    if not ($ssh_config | path exists) {
+        return []
+    }
+
+    open $ssh_config
+    | lines
+    | where { |line| $line =~ '^\s*[Hh][Oo][Ss][Tt]\s+' }
+    | each { |line|
+        $line
+        | str replace --regex '\s+#.*$' ''
+        | str replace --regex '^\s*[Hh][Oo][Ss][Tt]\s+' ''
+        | split row --regex '\s+'
+        | where { |pattern|
+            let item = ($pattern | str trim)
+            ($item != "") and ($item !~ '[*?]') and ($item !~ '^!')
+        }
+    }
+    | flatten
+    | uniq
+    | sort
+}
+
+def _ssh_completion_request [spans: list<string>, trailing_space: bool] {
+    if ($spans | is-empty) {
+        return null
+    }
+
+    let count = ($spans | length)
+
+    if (($spans | get 0) == "ssh") {
+        let args = ($spans | skip 1)
+        return {
+            prefix: (current-prefix $args $trailing_space)
+            replace_current: true
+            command_prefix: ""
+        }
+    }
+
+    if ($count >= 2) and (($spans | get 0) == "k") and (($spans | get 1) == "ssh") {
+        let args = ($spans | skip 2)
+        let replace_current = (($args | is-not-empty) or $trailing_space)
+        return {
+            prefix: (current-prefix $args $trailing_space)
+            replace_current: $replace_current
+            command_prefix: "ssh "
+        }
+    }
+
+    if ($count >= 3) and (($spans | get 0) == "kitty") and (($spans | get 1) == "+kitten") and (($spans | get 2) == "ssh") {
+        let args = ($spans | skip 3)
+        let replace_current = (($args | is-not-empty) or $trailing_space)
+        return {
+            prefix: (current-prefix $args $trailing_space)
+            replace_current: $replace_current
+            command_prefix: "ssh "
+        }
+    }
+
+    null
+}
+
+def _ssh_host_completions [spans: list<string>] {
+    let request = (_ssh_completion_request $spans (has-trailing-space))
+    if $request == null {
+        return []
+    }
+
+    filter-prefix-ci (_ssh_config_hosts) $request.prefix
+    | each { |host|
+        let value = (completion-value $host $request.replace_current $request.command_prefix)
+        {
+            value: $value
+            display: $host
+            description: "ssh host"
+        }
+    }
 }
 
 def _container_completion_mode [subcommand: string] {
@@ -80,7 +155,7 @@ def _container_completion_request_for [spans: list<string>, trailing_space: bool
 }
 
 def _container_completion_request [spans: list<string>] {
-    _container_completion_request_for $spans (_completion_has_trailing_space)
+    _container_completion_request_for $spans (has-trailing-space)
 }
 
 def _container_records [engine: string, mode: string] {
@@ -124,8 +199,17 @@ let fallback_external_completer = (
     | default {|_: list<string>| [] }
 )
 
+def _custom_external_completions [spans: list<string>] {
+    let ssh = (_ssh_host_completions $spans)
+    if ($ssh | is-not-empty) {
+        $ssh
+    } else {
+        _docker_podman_container_completions $spans
+    }
+}
+
 let wrapped_external_completer = {|spans: list<string>|
-    let custom = (_docker_podman_container_completions $spans)
+    let custom = (_custom_external_completions $spans)
     if ($custom | is-not-empty) {
         $custom
     } else {
