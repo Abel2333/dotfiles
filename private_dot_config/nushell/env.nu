@@ -132,8 +132,10 @@ if $need_update {
 ############
 #  Nodejs  #
 ############
-fnm env --json | from json | load-env
-$env.PATH = ($env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join "bin"))
+if not (which fnm | is-empty) {
+    fnm env --json | from json | load-env
+    $env.PATH = ($env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join "bin"))
+}
 
 #############
 #  Secrets  #
