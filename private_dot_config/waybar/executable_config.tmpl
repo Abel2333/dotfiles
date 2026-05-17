@@ -1,4 +1,14 @@
 {
+  {{- $launcherIcon := " " -}}
+  {{- if eq .chezmoi.osRelease.id "fedora" -}}
+  {{- $launcherIcon = " " -}}
+  {{- else if eq .chezmoi.osRelease.id "arch" -}}
+  {{- $launcherIcon = " " -}}
+  {{- else if eq .chezmoi.osRelease.id "nixos" -}}
+  {{- $launcherIcon = " " -}}
+  {{- else if eq .chezmoi.osRelease.id "ubuntu" -}}
+  {{- $launcherIcon = " " -}}
+  {{- end }}
   "layer": "top",
   "position": "top",
   "height": 36,
@@ -26,7 +36,7 @@
   ],
   "custom/launcher": {
     "interval": 40,
-    "format": " ",
+    "format": "{{ $launcherIcon }}",
     "on-click": "wofi --show=drun",
     "tooltip": true,
     "tooltip-format": "<span style='italic'>Launch Applications</span>"

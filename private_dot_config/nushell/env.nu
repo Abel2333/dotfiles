@@ -8,6 +8,7 @@ $env.GOBIN = $"($env.HOME)/.local/bin"
 $env.PATH = ($env.PATH | prepend [
     $"($env.HOME)/.local/bin",
     $"($env.HOME)/.cargo/bin",
+    $"($env.HOME)/.pixi/bin"
     $"($env.HOME)/.dotnet",
     "/usr/lib64/qt6/bin",
     "/usr/local/cuda-13.0/bin",

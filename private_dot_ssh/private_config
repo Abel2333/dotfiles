@@ -24,7 +24,8 @@ Host Tencent_Personal
 Host github.com
     User git
     Hostname github.com
-    PreferredAuthentications publickey
+    # PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_ed25519
 
 Host git.code.tencent.com
     User git
