@@ -9,6 +9,7 @@ Host ssh.abelprime.click
     Hostname ssh.abelprime.click
     Port 62133
     IdentityFile ~/.ssh/personal-ssh-key
+    PubkeyAuthentication unbound
 
 Host codeberg.org
     User git
