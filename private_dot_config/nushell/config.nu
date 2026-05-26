@@ -28,6 +28,7 @@ starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.n
 alias k = kitty +kitten
 alias v = nvim
 alias ac = aria2c -c -x 8 -s 8 -d ~/Downloads
+alias lg = lazygit
 
 # Zoxide
 source ~/.zoxide.nu

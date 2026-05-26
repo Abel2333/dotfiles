@@ -7,13 +7,18 @@ Host Gentux
 Host ssh.abelprime.click
     User git
     Hostname ssh.abelprime.click
-    Port 2133
+    Port 62133
+    IdentityFile ~/.ssh/personal-ssh-key
+
+Host codeberg.org
+    User git
     IdentityFile ~/.ssh/personal-ssh-key
 
 Host Forumtux
     HostName 100.96.95.54
     Port 2233
     User abel
+    IdentityFile ~/.ssh/personal-ssh-key
 
 Host Tencent_Personal
     HostName 43.132.168.148
@@ -24,8 +29,7 @@ Host Tencent_Personal
 Host github.com
     User git
     Hostname github.com
-    # PreferredAuthentications publickey
-    IdentityFile ~/.ssh/id_ed25519
+    PreferredAuthentications publickey
 
 Host git.code.tencent.com
     User git
@@ -36,6 +40,12 @@ Host git.code.tencent.com
 Host smmgitea.smm.cn
     User git
     Hostname 118.89.82.93
+    Port 22
+    IdentityFile ~/.ssh/gpg_auth.pub
+
+Host gitlab.smm.cn
+    User git
+    Hostname 49.235.92.172
     Port 22
     IdentityFile ~/.ssh/gpg_auth.pub
 
