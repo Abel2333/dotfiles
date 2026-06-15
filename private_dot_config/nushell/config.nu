@@ -39,7 +39,7 @@ source ~/.config/nushell/completions.nu
 
 $env.config.history.file_format = "sqlite"
 
-$env.config.keybindings ++= [
+$env.config.keybindings = ([
     {
         name: fzf_file_insert
         modifier: control
@@ -70,4 +70,4 @@ $env.config.keybindings ++= [
             cmd: "fzf-cd"
         }
     }
-]
+] ++ $env.config.keybindings)

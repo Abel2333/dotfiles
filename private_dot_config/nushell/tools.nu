@@ -278,80 +278,39 @@ export def --env fzf-cd [] {
     if ($dir | is-not-empty) { cd $dir }
 }
 
-# Fuzzy-search shell history and replace the current command line buffer.
-#
-# Examples:
-#   Open `fzf` with command history and paste the selected entry into the prompt.
-#   > fzf-history
 export def --env fzf-history [] {
     let query = (commandline)
     commandline edit --replace ""
     print -n $'(ansi --escape "2K")\r'
-    let sep = (char --integer 31)
-    let history_long = (history --long)
-    let history_columns = ($history_long | columns)
-    let ts_column = (history timestamp-column $history_columns)
-    let entries = (
-        if $ts_column == null {
-            history
-            | get command
-            | reverse
-            | uniq
-            | enumerate
-            | each { |it|
-                {
-                    id: ($it.index | into string)
-                    command: $it.item
-                    display: $it.item
-                }
-            }
-        } else {
-            $history_long
-            | reverse
-            | uniq-by command
-            | enumerate
-            | each { |it|
-                let command = $it.item.command
-                let command_display = (
-                    $command
-                    | str replace --all "\r\n" " ↩ "
-                    | str replace --all "\n" " ↩ "
-                    | str replace --all "\r" " ↩ "
-                )
-                let age = (history timestamp-display ($it.item | get $ts_column))
-                let display = if ($age | is-empty) {
-                    $command_display
-                } else {
-                    let age_col = (ui pad-right-aligned $age 16)
-                    let age_display = $"(ansi cyan_dimmed)($age_col)(ansi reset)"
-                    $"($age_display) ($command_display)"
-                }
-                {
-                    id: ($it.index | into string)
-                    command: $command
-                    display: $display
-                }
-            }
-        }
-    )
+    let nul = (char --integer 0)
+    let sep = (char tab)
+    let history_state = (history fzf-rows)
+    let has_timestamps = $history_state.has_timestamps
+    let entry_state = (history fzf-entries $history_state.rows $has_timestamps)
+    let entries = $entry_state.entries
 
     let selected = (
         $entries
-        | each { |row| [$row.id, $row.display] | str join $sep }
-        | to text
-        | fzf --height 100% --border --ansi --query $query --delimiter $sep --with-nth 2
+        | each { |row| $row.display }
+        | str join $nul
+        | fzf
+            --read0
+            --height 40%
+            --min-height 20+
+            --scheme history
+            --bind 'ctrl-r:toggle-sort'
+            --highlight-line
+            --wrap
+            --wrap-sign $entry_state.wrap_sign
+            --ansi
+            --tabstop 1
+            --query $query
+            --delimiter $sep
+            --nth $entry_state.nth
+            +m
         | str trim
     )
-
-    let command = if ($selected | is-empty) {
-        $query
-    } else {
-        let selected_id = ($selected | split row $sep --number 2 | first)
-        $entries
-        | where id == $selected_id
-        | first
-        | get command
-    }
+    let command = (history selected-command $selected $query $entries $has_timestamps)
 
     commandline edit --replace $command
 }
