@@ -17,9 +17,13 @@
 # options using:
 #     config nu --doc | nu-highlight | less -R
 
-use ~/.config/nushell/tools.nu *
+const CONFIG_DIR = $nu.default-config-dir
+const CACHE_DIR = $nu.cache-dir
+const DOWNLOADS_DIR = ($nu.home-dir | path join "Downloads")
 
-$env.STARSHIP_CONFIG = ($nu.home-dir | path join ".config" "starship-nu.toml")
+use $"($CONFIG_DIR)/tools.nu" *
+
+$env.STARSHIP_CONFIG = ($CONFIG_DIR | path join "starship.toml")
 
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
@@ -27,15 +31,15 @@ starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.n
 # Alias
 alias k = kitty +kitten
 alias v = nvim
-alias ac = aria2c -c -x 8 -s 8 -d ~/Downloads
+alias ac = aria2c -c -x 8 -s 8 -d $DOWNLOADS_DIR
 alias lg = lazygit
 
 # Zoxide
-source ~/.zoxide.nu
+source $"($CACHE_DIR)/zoxide.nu"
 
 # Carapace
 source $"($nu.cache-dir)/carapace.nu"
-source ~/.config/nushell/completions.nu
+source $"($CONFIG_DIR)/completions.nu"
 
 $env.config.history.file_format = "sqlite"
 

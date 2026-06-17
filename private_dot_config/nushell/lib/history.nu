@@ -1,4 +1,6 @@
-use ~/.config/nushell/lib/ui.nu
+const LIB_DIR = ($nu.default-config-dir | path join "lib")
+
+use $"($LIB_DIR)/ui.nu"
 
 export def timestamp-column [columns: list<string>] {
     $columns

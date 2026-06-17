@@ -1,8 +1,11 @@
-use ~/.config/nushell/lib/commandline.nu
-use ~/.config/nushell/lib/fs.nu
-use ~/.config/nushell/lib/history.nu
-use ~/.config/nushell/lib/system.nu
-use ~/.config/nushell/lib/ui.nu
+const LIB_DIR = ($nu.default-config-dir | path join "lib")
+const FZF_PANEL_ARGS = ["--height", "100%", "--border"]
+
+use $"($LIB_DIR)/commandline.nu"
+use $"($LIB_DIR)/fs.nu"
+use $"($LIB_DIR)/history.nu"
+use $"($LIB_DIR)/system.nu"
+use $"($LIB_DIR)/ui.nu"
 
 # Create a directory and enter it immediately.
 #
@@ -274,7 +277,7 @@ export def --env unload-env-file []: nothing -> nothing {
 #   to the selected directory.
 #   > fzf-cd
 export def --env fzf-cd [] {
-    let dir = (fd --type d --hidden --exclude .git | to text | fzf --height 100% --border | str trim)
+    let dir = (fd --type d --hidden --exclude .git | to text | ^fzf ...$FZF_PANEL_ARGS | str trim)
     if ($dir | is-not-empty) { cd $dir }
 }
 
@@ -293,10 +296,9 @@ export def --env fzf-history [] {
         $entries
         | each { |row| $row.display }
         | str join $nul
-        | fzf
+        | ^fzf
+            ...$FZF_PANEL_ARGS
             --read0
-            --height 40%
-            --min-height 20+
             --scheme history
             --bind 'ctrl-r:toggle-sort'
             --highlight-line
@@ -327,7 +329,7 @@ export def --env fzf-file-insert [] {
     let selected_raw = (
         fd --hidden --exclude .git
         | to text
-        | fzf --height 100% --border
+        | ^fzf ...$FZF_PANEL_ARGS
         | str trim
     )
 
@@ -363,7 +365,8 @@ export def rg-fzf [
     let query = if $pattern == null { "" } else { $pattern }
     let editor = (system editor-command)
     let sep = (char --integer 31)
-    let preview = "sh -c 'line=$2; start=$(( line > 3 ? line - 3 : 1 )); end=$(( line + 3 )); sed -n \"${start},${end}p\" \"$1\"' _ {1} {2}"
+    let preview_script = ($nu.default-config-dir | path join "lib" "rg_preview.nu")
+    let preview = $'"($nu.current-exe)" "($preview_script)" {1} {2}'
     let selected = (
         ^rg --json --color=never --smart-case $query
         | from json --objects
@@ -380,7 +383,7 @@ export def rg-fzf [
             [$file, $line, $display] | str join $sep
         }
         | to text
-        | fzf --height 100% --border --ansi --query $query --delimiter $sep --with-nth 3 --preview $preview
+        | ^fzf ...$FZF_PANEL_ARGS --ansi --query $query --delimiter $sep --with-nth 3 --preview $preview
         | str trim
     )
 

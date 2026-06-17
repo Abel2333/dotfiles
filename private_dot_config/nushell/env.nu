@@ -1,46 +1,18 @@
 # env.nu
 #
 
+const CONFIG_DIR = $nu.default-config-dir
+const CACHE_DIR = $nu.cache-dir
+
 ##########
 #  Path  #
 ##########
-$env.GOBIN = $"($env.HOME)/.local/bin"
-$env.PATH = ($env.PATH | prepend [
-    $"($env.HOME)/.local/bin",
-    $"($env.HOME)/.cargo/bin",
-    $"($env.HOME)/.pixi/bin"
-    $"($env.HOME)/.dotnet",
-    "/usr/lib64/qt6/bin",
-    "/usr/local/cuda-13.0/bin",
-])
+if $nu.os-info.family == "unix" {
+    source $"($CONFIG_DIR)/modules/platform/unix.nu"
+}
 
-###############
-#  SSH-Agent  #
-###############
-do --env {
-    let ssh_agent_file = (
-        $nu.temp-dir | path join $"ssh-agent-(whoami).nuon"
-    )
-
-    if ($ssh_agent_file | path exists) {
-        let ssh_agent_env = open ($ssh_agent_file)
-        if ($"/proc/($ssh_agent_env.SSH_AGENT_PID)" | path exists) {
-            load-env $ssh_agent_env
-            return
-        } else {
-            rm $ssh_agent_file
-        }
-    }
-
-    let ssh_agent_env = ^ssh-agent -c
-        | lines
-        | first 2
-        | parse "setenv {name} {value};"
-        | transpose --header-row
-        | into record
-
-    load-env $ssh_agent_env
-    $ssh_agent_env | save --force $ssh_agent_file
+if $nu.os-info.name == "linux" {
+    source $"($CONFIG_DIR)/modules/platform/linux.nu"
 }
 
 ############
@@ -57,18 +29,6 @@ $env.LC_CTYPE = 'zh_CN.UTF-8'
 $env.LC_TIME = 'C.UTF-8'
 
 #############
-#  OpenGPG  #
-#############
-$env.GPG_TTY = (^tty | str trim)
-$env.SSH_AUTH_SOCK = (^gpgconf --list-dirs agent-ssh-socket | str trim)
-^gpg-connect-agent updatestartuptty /bye o+e>| ignore
-
-#########
-#  LFS  #
-#########
-$env.LFS = '/mnt/lfs'
-
-#############
 #  Python   #
 #############
 $env.VIRTUAL_ENV_DISABLE_PROMPT = "1"
@@ -76,12 +36,12 @@ $env.VIRTUAL_ENV_DISABLE_PROMPT = "1"
 ############
 #  Zoxide  #
 ############
-zoxide init nushell | save -f $"($env.HOME)/.zoxide.nu"
+zoxide init nushell | save -f $"($CACHE_DIR)/zoxide.nu"
 
 ##########
 #  PNPM  #
 ##########
-$env.PNPM_HOME = $"($env.HOME)/.local/share/pnpm"
+$env.PNPM_HOME = ($nu.home-dir | path join ".local" "share" "pnpm")
 
 # Add only once to avoid duplicating the PNPM bin directory.
 if not ($env.PATH | any {|p| $p == $env.PNPM_HOME}) {
@@ -145,4 +105,4 @@ if not (which fnm | is-empty) {
 #############
 #  Secrets  #
 #############
-source ~/.config/nushell/secrets.nu
+source $"($CONFIG_DIR)/secrets.nu"

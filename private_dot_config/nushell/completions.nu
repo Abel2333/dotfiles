@@ -1,4 +1,6 @@
-use ~/.config/nushell/lib/completion.nu
+const LIB_DIR = ($nu.default-config-dir | path join "lib")
+
+use $"($LIB_DIR)/completion.nu"
 
 # Custom completions layered on top of the existing external completer.
 #

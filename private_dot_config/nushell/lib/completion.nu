@@ -1,4 +1,6 @@
-use ~/.config/nushell/lib/commandline.nu
+const LIB_DIR = ($nu.default-config-dir | path join "lib")
+
+use $"($LIB_DIR)/commandline.nu"
 
 export def has-trailing-space [] {
     let left = (commandline state).left
@@ -31,7 +33,7 @@ export def completion-value [candidate: string, replace_current: bool, command_p
 }
 
 def ssh-config-hosts [] {
-    let ssh_config = ($env.HOME | path join ".ssh" "config")
+    let ssh_config = ($nu.home-dir | path join ".ssh" "config")
     if not ($ssh_config | path exists) {
         return []
     }
