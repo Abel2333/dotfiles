@@ -41,6 +41,15 @@ $env.config.history.file_format = "sqlite"
 
 $env.config.keybindings = ([
     {
+        name: insert_newline
+        modifier: control
+        keycode: char_j
+        mode: [emacs vi_insert]
+        event: {
+            edit: insertnewline
+        }
+    }
+    {
         name: fzf_file_insert
         modifier: control
         keycode: char_t
