@@ -23,10 +23,8 @@ const DOWNLOADS_DIR = ($nu.home-dir | path join "Downloads")
 
 use $"($CONFIG_DIR)/tools.nu" *
 
-$env.STARSHIP_CONFIG = ($CONFIG_DIR | path join "starship.toml")
-
-mkdir ($nu.data-dir | path join "vendor/autoload")
-starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+# Keep starship.toml as a visual reference while the prompt is rendered
+# natively by Nushell.
 
 # Alias
 alias k = kitty +kitten
