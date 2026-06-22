@@ -20,11 +20,9 @@
 const CONFIG_DIR = $nu.default-config-dir
 const CACHE_DIR = $nu.cache-dir
 const DOWNLOADS_DIR = ($nu.home-dir | path join "Downloads")
+const DATA_DIR = ($CONFIG_DIR | path join "data")
 
 use $"($CONFIG_DIR)/tools.nu" *
-
-# Keep starship.toml as a visual reference while the prompt is rendered
-# natively by Nushell.
 
 # Alias
 alias k = kitty +kitten
@@ -39,6 +37,8 @@ source $"($CACHE_DIR)/zoxide.nu"
 source $"($nu.cache-dir)/carapace.nu"
 source $"($CONFIG_DIR)/completions.nu"
 
+mkdir $DATA_DIR
+$env.config.history.path = ($DATA_DIR | path join "history.sqlite3")
 $env.config.history.file_format = "sqlite"
 
 $env.config.keybindings = ([
