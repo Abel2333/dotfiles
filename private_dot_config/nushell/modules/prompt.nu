@@ -457,7 +457,7 @@ def prompt-git-count-symbol [count: int, symbol: string] {
     } else if $count == 1 {
         $symbol
     } else {
-        $"($symbol)($count)"
+        $"($symbol) ($count)"
     }
 }
 
@@ -509,12 +509,12 @@ def prompt-git-status [git_ctx: record] {
         (prompt-git-count-symbol $git_ctx.deleted "")
         (prompt-git-ahead-behind $git_ctx)
         (prompt-git-count-symbol $git_ctx.stashed "󰋻")
-    ])
+    ] "  ")
 
     if ($status_body | is-empty) {
         ""
     } else {
-        prompt-style "cyan_bold" $"[($status_body)] "
+        prompt-style "cyan_bold" $"[ ($status_body) ]"
     }
 }
 
