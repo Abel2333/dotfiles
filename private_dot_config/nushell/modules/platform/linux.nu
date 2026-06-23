@@ -1,9 +1,11 @@
 # Linux-specific environment customizations.
 
-$env.PATH = ($env.PATH | prepend [
+use $"($nu.default-config-dir)/lib/path.nu" prepend-paths
+
+prepend-paths [
     "/usr/lib64/qt6/bin",
     "/usr/local/cuda-13.0/bin",
-])
+]
 
 do --env {
     let ssh_agent_file = (

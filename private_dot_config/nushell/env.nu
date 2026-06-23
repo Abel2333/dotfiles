@@ -4,11 +4,14 @@
 const CONFIG_DIR = $nu.default-config-dir
 const CACHE_DIR = $nu.cache-dir
 
+use $"($CONFIG_DIR)/lib/path.nu" prepend-paths
+
 ##########
 #  Path  #
 ##########
 if $nu.os-info.family == "unix" {
     source $"($CONFIG_DIR)/modules/platform/unix.nu"
+    source $"($CONFIG_DIR)/modules/platform/nix.nu"
 }
 
 if $nu.os-info.name == "linux" {
@@ -42,11 +45,7 @@ zoxide init nushell | save -f $"($CACHE_DIR)/zoxide.nu"
 #  PNPM  #
 ##########
 $env.PNPM_HOME = ($nu.home-dir | path join ".local" "share" "pnpm")
-
-# Add only once to avoid duplicating the PNPM bin directory.
-if not ($env.PATH | any {|p| $p == $env.PNPM_HOME}) {
-    $env.PATH = ($env.PATH | prepend $env.PNPM_HOME)
-}
+prepend-paths [$env.PNPM_HOME]
 
 ############
 #  Prompt  #
@@ -76,7 +75,7 @@ if $need_update {
 ############
 if not (which fnm | is-empty) {
     fnm env --json | from json | load-env
-    $env.PATH = ($env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join "bin"))
+    prepend-paths [($env.FNM_MULTISHELL_PATH | path join "bin")]
 }
 
 #############
