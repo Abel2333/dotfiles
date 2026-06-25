@@ -461,6 +461,14 @@ def prompt-git-count-symbol [count: int, symbol: string] {
     }
 }
 
+def prompt-git-presence-symbol [count: int, symbol: string] {
+    if $count <= 0 {
+        ""
+    } else {
+        $symbol
+    }
+}
+
 def prompt-git-ahead-behind [git_ctx: record] {
     if $git_ctx.ahead > 0 and $git_ctx.behind > 0 {
         $"⇡($git_ctx.ahead)⇣($git_ctx.behind)"
@@ -501,15 +509,15 @@ def prompt-git-status [git_ctx: record] {
     }
 
     let status_body = (prompt-join [
-        (prompt-git-count-symbol $git_ctx.conflicted "✘")
-        (prompt-git-count-symbol $git_ctx.untracked "?")
-        (prompt-git-count-symbol $git_ctx.modified "!")
-        (prompt-git-count-symbol $git_ctx.staged "+")
-        (prompt-git-count-symbol $git_ctx.renamed "»")
-        (prompt-git-count-symbol $git_ctx.deleted "")
+        (prompt-git-presence-symbol $git_ctx.conflicted "✘")
+        (prompt-git-presence-symbol $git_ctx.untracked "?")
+        (prompt-git-presence-symbol $git_ctx.modified "!")
+        (prompt-git-presence-symbol $git_ctx.staged "+")
+        (prompt-git-presence-symbol $git_ctx.renamed "»")
+        (prompt-git-presence-symbol $git_ctx.deleted "")
         (prompt-git-ahead-behind $git_ctx)
-        (prompt-git-count-symbol $git_ctx.stashed "󰋻")
-    ] "  ")
+        (prompt-git-presence-symbol $git_ctx.stashed "󰋻")
+    ] " ")
 
     if ($status_body | is-empty) {
         ""

@@ -10,10 +10,12 @@ Host ssh.abelprime.click
     Port 62133
     IdentityFile ~/.ssh/personal-ssh-key
     PubkeyAuthentication unbound
+    RequestTTY no
 
 Host codeberg.org
     User git
     IdentityFile ~/.ssh/personal-ssh-key
+    RequestTTY no
 
 Host Forumtux
     HostName 100.96.95.54
@@ -31,18 +33,21 @@ Host github.com
     User git
     Hostname github.com
     PreferredAuthentications publickey
+    RequestTTY no
 
 Host git.code.tencent.com
     User git
     HostKeyAlgorithms +ssh-rsa
     PubkeyAcceptedAlgorithms +ssh-rsa
     IdentityFile ~/.ssh/jenkins_key
+    RequestTTY no
 
 Host smmgitea.smm.cn
     User git
     Hostname 118.89.82.93
     Port 22
     IdentityFile ~/.ssh/gpg_auth.pub
+    RequestTTY no
 
 Host gitlab.smm.cn
     User git
