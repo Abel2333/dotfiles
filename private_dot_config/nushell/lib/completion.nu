@@ -219,11 +219,73 @@ def docker-podman-container-completions [spans: list<string>] {
     }
 }
 
+def vcpkg-executable [] {
+    let root = ($env | get --optional VCPKG_ROOT)
+    if $root == null {
+        return null
+    }
+
+    let executable = ($root | path join "vcpkg")
+    if ($executable | path exists) {
+        $executable
+    } else {
+        null
+    }
+}
+
+def vcpkg-completions [spans: list<string>] {
+    if ($spans | is-empty) or (($spans | get 0) != "vcpkg") {
+        return []
+    }
+
+    let executable = (vcpkg-executable)
+    if $executable == null {
+        return []
+    }
+
+    let trailing_space = (has-trailing-space)
+    let args = ($spans | skip 1)
+    let arg_text = if ($args | is-empty) {
+        ""
+    } else if $trailing_space {
+        $"(($args | str join ' ')) "
+    } else {
+        $args | str join " "
+    }
+
+    let raw = try {
+        if ($args | is-empty) {
+            run-external $executable autocomplete
+        } else {
+            run-external $executable autocomplete $arg_text "--"
+        }
+    } catch {
+        ""
+    }
+
+    $raw
+    | lines
+    | where {|item| ($item | str trim) != ""}
+    | uniq
+    | each {|item|
+        {
+            value: $"($item) "
+            display: $item
+            description: "vcpkg"
+        }
+    }
+}
+
 export def external-custom-completions [spans: list<string>] {
     let ssh = (ssh-host-completions $spans)
     if ($ssh | is-not-empty) {
         $ssh
     } else {
-        docker-podman-container-completions $spans
+        let containers = (docker-podman-container-completions $spans)
+        if ($containers | is-not-empty) {
+            $containers
+        } else {
+            vcpkg-completions $spans
+        }
     }
 }

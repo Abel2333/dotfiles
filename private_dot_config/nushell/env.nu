@@ -47,6 +47,19 @@ zoxide init nushell | save -f $"($CACHE_DIR)/zoxide.nu"
 $env.PNPM_HOME = ($nu.home-dir | path join ".local" "share" "pnpm")
 prepend-paths [$env.PNPM_HOME]
 
+###########
+#  vcpkg  #
+###########
+let vcpkg_root = ($nu.home-dir | path join "Tools" "vcpkg")
+if ($vcpkg_root | path exists) {
+    $env.VCPKG_ROOT = $vcpkg_root
+
+    let vcpkg_executable = ($vcpkg_root | path join "vcpkg")
+    if ($vcpkg_executable | path exists) {
+        prepend-paths [$vcpkg_root]
+    }
+}
+
 ############
 #  Prompt  #
 ############
