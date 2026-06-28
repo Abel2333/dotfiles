@@ -33,6 +33,7 @@
     aria2
     qq
     telegram-desktop
+    pi-coding-agent
     codex
     prettier
   ];
@@ -50,7 +51,17 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    # Put npm global packages in a user-writable directory.
+    # This avoids npm trying to write to Nix's read-only /nix/store
+    ".npmrc".text = ''
+      prefix=${config.home.homeDirectory}/.local/share/npm
+    '';
   };
+
+  home.sessionPath = [
+    "${config.home.homeDirectory}/.local/share/npm/bin"
+  ];
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
