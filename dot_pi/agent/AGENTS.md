@@ -17,6 +17,11 @@
 ## After Code Changes
 - Run relevant tests and linters automatically after making changes.
 
+## File Changes
+- When the user has not explicitly requested a file modification, do not edit
+  files directly. You may ask whether to proceed, but you must not make the
+  change without confirmation.
+
 ## System
 - Make no assumptions about the operating system or architecture.
 - When the environment matters, ask.
