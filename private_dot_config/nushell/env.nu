@@ -86,10 +86,10 @@ if $need_update {
 ############
 #  Nodejs  #
 ############
-if not (which fnm | is-empty) {
-    fnm env --json | from json | load-env
-    prepend-paths [($env.FNM_MULTISHELL_PATH | path join "bin")]
-}
+# if not (which fnm | is-empty) {
+#     fnm env --json | from json | load-env
+#     prepend-paths [($env.FNM_MULTISHELL_PATH | path join "bin")]
+# }
 
 #############
 #  Secrets  #

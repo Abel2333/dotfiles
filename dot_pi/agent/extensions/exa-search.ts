@@ -1,12 +1,18 @@
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { Type } from "typebox";
-import { StringEnum } from "@earendil-works/pi-ai/compat";
 
 // ---------------------------------------------------------------------------
 // Exa API client
 // ---------------------------------------------------------------------------
 
 const EXA_API_BASE = "https://api.exa.ai";
+
+function stringEnum<const T extends readonly string[]>(
+  values: T,
+  options?: { description?: string },
+) {
+  return Type.Union(values.map((value) => Type.Literal(value)), options);
+}
 
 interface ExaSearchResult {
   title?: string;
@@ -118,8 +124,8 @@ function formatResults(response: ExaSearchResponse, query: string): string {
 
   const lines: string[] = [];
 
-  if (response.autoprintString) {
-    lines.push(`**Auto-optimized query:** "${response.autoprintString}"`);
+  if (response.autopromptString) {
+    lines.push(`**Auto-optimized query:** "${response.autopromptString}"`);
     lines.push("");
   }
 
@@ -163,8 +169,6 @@ function formatResults(response: ExaSearchResponse, query: string): string {
 // ---------------------------------------------------------------------------
 
 export default function (pi: ExtensionAPI) {
-  const hasKey = !!getApiKey();
-
   pi.registerTool({
     name: "exa_search",
     label: "Exa Search",
@@ -201,7 +205,7 @@ export default function (pi: ExtensionAPI) {
         }),
       ),
       recencyFilter: Type.Optional(
-        StringEnum(["day", "week", "month", "year"], {
+        stringEnum(["day", "week", "month", "year"], {
           description: "Filter results by publication date",
         }),
       ),
@@ -228,7 +232,7 @@ export default function (pi: ExtensionAPI) {
     },
 
     async execute(_toolCallId, params, signal, onUpdate, ctx) {
-      if (!hasKey) {
+      if (!getApiKey()) {
         const errorMsg =
           "EXA_API_KEY environment variable is not set. Set it to your Exa API key to use this tool.";
         return {
@@ -304,7 +308,7 @@ export default function (pi: ExtensionAPI) {
           allMetadata.push({
             query,
             resultCount,
-            autoprintString: response.autoprintString,
+            autopromptString: response.autopromptString,
             requestId: response.requestId,
             costDollars: cost,
           });

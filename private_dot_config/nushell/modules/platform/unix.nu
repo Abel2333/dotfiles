@@ -6,6 +6,6 @@ $env.GOBIN = ($nu.home-dir | path join ".local" "bin")
 prepend-paths [
     ($nu.home-dir | path join ".local" "bin"),
     ($nu.home-dir | path join ".cargo" "bin"),
-    ($nu.home-dir | path join ".pixi" "bin")
+    ($nu.home-dir | path join ".local" "share" "npm" "bin"),
     ($nu.home-dir | path join ".dotnet"),
 ]
