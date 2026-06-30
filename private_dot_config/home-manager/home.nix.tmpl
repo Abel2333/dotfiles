@@ -21,23 +21,41 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    starship
-    ripgrep
-    eza
-    fd
-    lazygit
-    texlive.combined.scheme-medium
-    tmux
-    typst
-    zoxide
-    fastfetch
-    mpc
-    aria2
-    qq
-    telegram-desktop
-    pi-coding-agent
-    codex
-    prettier
+    # --- Shell & CLI essentials ---
+    starship                         # Shell prompt
+    zoxide                           # Smarter cd (autojump)
+    eza                              # Modern ls replacement
+    ripgrep                          # Fast grep alternative
+    fd                               # Fast find alternative
+    fastfetch                        # System info on shell start
+
+    # --- Terminal ---
+    tmux                             # Terminal multiplexer
+
+    # --- Version control ---
+    lazygit                          # Git TUI
+
+    # --- Document typesetting ---
+    texlive.combined.scheme-medium   # LaTeX distribution
+    typst                            # Modern LaTeX alternative
+
+    # --- Code tools ---
+    prettier                         # Code formatter
+    pi-coding-agent                  # Pi coding agent
+    codex                            # OpenAI Codex CLI
+
+    # --- Runtimes ---
+    nodejs                           # Node.js runtime
+
+    # --- Download utilities ---
+    aria2                            # Multi-protocol downloader
+
+    # --- Media ---
+    mpc                              # MPD command-line client
+
+    # --- Messaging ---
+    qq                               # QQ
+    telegram-desktop                 # Telegram
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
