@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "extractionEnabled": true,
+  "useCurrentModelIfUnset": false,
+  "minConfidence": 0.72,
+  "autoInjectEnabled": true,
+  "autoInjectMaxItems": 6,
+  "autoInjectTokenBudget": 600,
+  "extractorModel": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash"
+  },
+  "llmRerankEnabled": false
+}
