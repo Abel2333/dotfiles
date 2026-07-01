@@ -45,6 +45,8 @@ interface MemoryRecord {
   status: MemoryStatus;
   source_session: string | null;
   source_entry_ids: string;
+  evidence_source: ExtractedMemory["evidenceSource"];
+  evidence: string;
   created_at: string;
   updated_at: string;
   last_seen_at: string | null;
@@ -73,10 +75,10 @@ const DEFAULT_CONFIG: MemoryConfig = {
   enabled: true,
   extractionEnabled: true,
   useCurrentModelIfUnset: true,
-  minConfidence: 0.72,
+  minConfidence: 0.85,
   autoInjectEnabled: true,
-  autoInjectMaxItems: 6,
-  autoInjectTokenBudget: 600,
+  autoInjectMaxItems: 4,
+  autoInjectTokenBudget: 400,
   llmRerankEnabled: false,
 };
 
@@ -99,9 +101,31 @@ Return JSON only, with this shape:
   ]
 }
 
-Only extract memories likely useful in future sessions.
-Do not extract one-off questions, guesses, temporary logs, or facts not supported by the conversation.
-Do not extract secrets, API keys, tokens, passwords, credential values, or auth file contents.
+Only extract memories likely to remain useful across future sessions.
+Be conservative: default to returning no memories.
+Only extract when the user explicitly states a durable preference, default, convention, rule, or decision that should carry forward.
+
+Prefer these categories:
+- user preferences and defaults
+- project conventions and workflow rules
+- stable environment facts that the user clearly wants carried forward
+- durable decisions that change future behavior
+
+Do not extract:
+- task lists, temporary todos, or cleanup checklists
+- one-off questions, temporary troubleshooting state, or transient status
+- implementation notes about the memory plugin itself unless the user explicitly frames them as a lasting design decision
+- bookkeeping facts about file counts, what is managed or not managed, or similar administrative detail unless the user explicitly says this is a standing rule
+- login state, account state, auth state, session state, or whether a tool is currently signed in
+- secrets, API keys, tokens, passwords, credential values, auth file contents, account IDs, workspace IDs, emails, or GPG fingerprints / key IDs
+- article existence, help-center metadata, release-note metadata, or statements like "updated around <date>"
+- pure freshness facts about pricing, policies, docs, release notes, current model limits, or current availability unless the conversation explicitly says to remember them for near-term reuse
+
+For freshness-sensitive facts (pricing, policy, docs, versions, release notes, current limits, current availability):
+- default to not extracting them
+- only extract them if the user explicitly asks to remember them temporarily
+- when you do extract them, set ttlDays to a short value such as 7 or 14
+
 Do not invent dates. If a date matters, use only dates explicitly present in the conversation or the provided current date/time.
 Use higher confidence only when the user explicitly stated it or tool output verified it.
 Assistant explanations, plans, and guesses are not durable evidence by themselves.
@@ -129,6 +153,12 @@ function saveConfig(config: MemoryConfig): void {
   fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2) + "\n", "utf-8");
 }
 
+function ensureColumn(db: DatabaseSync, table: string, column: string, definition: string): void {
+  const columns = db.prepare(`PRAGMA table_info(${table})`).all() as Array<{ name: string }>;
+  if (columns.some((item) => item.name === column)) return;
+  db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+}
+
 function openDb(): DatabaseSync {
   ensureDir();
   const db = new DatabaseSync(DB_FILE);
@@ -147,6 +177,8 @@ function openDb(): DatabaseSync {
       status TEXT NOT NULL DEFAULT 'active',
       source_session TEXT,
       source_entry_ids TEXT NOT NULL DEFAULT '[]',
+      evidence_source TEXT NOT NULL DEFAULT 'unknown',
+      evidence TEXT NOT NULL DEFAULT '',
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL,
       last_seen_at TEXT,
@@ -187,6 +219,8 @@ function openDb(): DatabaseSync {
       VALUES (new.id, new.subject, new.content, new.keywords);
     END;
   `);
+  ensureColumn(db, "memories", "evidence_source", "TEXT NOT NULL DEFAULT 'unknown'");
+  ensureColumn(db, "memories", "evidence", "TEXT NOT NULL DEFAULT ''");
   return db;
 }
 
@@ -284,16 +318,19 @@ function getLastUserText(ctx: ExtensionContext): string {
   return "";
 }
 
-function shouldExtract(text: string): boolean {
+function hasExplicitMemoryIntent(text: string): boolean {
   const normalized = text.toLowerCase();
   const patterns = [
-    /remember|记住|以后|下次|默认|偏好|prefer|preference/,
-    /不要|别|never|always|must|必须|应该/,
-    /decision|决定|约定|convention|standard|workflow|流程/,
-    /todo|待办|next step|后续|继续/,
-    /verified|确认|事实|environment|环境|路径|命令/,
+    /remember|记住|帮我记住|请记住|下次记得|以后都|默认|偏好|prefer|preference/,
+    /不要|别|never|always|must|必须|约定|convention|standard|workflow|规则/,
+    /以后默认|以后都按|今后都按|作为约定|作为规则|长期沿用/,
   ];
-  return text.length >= 80 && patterns.some((pattern) => pattern.test(normalized));
+  return patterns.some((pattern) => pattern.test(normalized));
+}
+
+function shouldExtract(text: string): boolean {
+  const normalized = text.trim();
+  return normalized.length >= 12 && hasExplicitMemoryIntent(normalized);
 }
 
 function normalizeExtracted(input: unknown): ExtractedMemory[] {
@@ -334,12 +371,26 @@ function normalizeExtracted(input: unknown): ExtractedMemory[] {
 }
 
 function containsSecretLikeText(memory: ExtractedMemory): boolean {
-  const text = `${memory.subject}\n${memory.content}\n${(memory.keywords ?? []).join(" ")}`.toLowerCase();
+  const text = `${memory.subject}\n${memory.content}\n${(memory.keywords ?? []).join(" ")}\n${memory.evidence ?? ""}`;
   const patterns = [
     /\bsk-[a-z0-9][a-z0-9_-]{6,}/i,
     /\b(api[_ -]?key|token|secret|password)\s*[:=]\s*['"]?[a-z0-9._-]{8,}/i,
     /\b(plaintext|contains|stores?|stored|saved).{0,60}\b(api[_ -]?key|token|secret|password|credential)\b/i,
     /\b(auth\.json|\.env).{0,80}\b(api[_ -]?key|token|secret|password|credential)\b/i,
+    /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i,
+    /\b(auth0\|[A-Za-z0-9_-]+|account[_ -]?id|workspace[_ -]?id|user[_ -]?id)\b/i,
+    /\b(gpg|pgp|fingerprint|key id|cv25519).{0,40}\b([A-F0-9]{16}|[A-F0-9]{32,40})\b/i,
+  ];
+  return patterns.some((pattern) => pattern.test(text));
+}
+
+function isFreshnessSensitiveMemory(memory: ExtractedMemory): boolean {
+  const text = `${memory.subject}\n${memory.content}`.toLowerCase();
+  const patterns = [
+    /\b(current|currently|latest|recent|today|yesterday|this week|this month|as of)\b/,
+    /\b(pricing|price|rate card|policy|terms of use|help center|release note|release notes|docs?|documentation|article)\b/,
+    /\b(context window|model limit|availability|quota|service tier|updated around)\b/,
+    /当前|最近|最新|今天|昨天|本周|本月|截至|价格|资费|条款|政策|帮助中心|发布说明|文档|上下文窗口|可用性/,
   ];
   return patterns.some((pattern) => pattern.test(text));
 }
@@ -354,6 +405,27 @@ function isEphemeralMemory(memory: ExtractedMemory): boolean {
     /\bneeds to be added\b/,
     /\btemporary\b/,
     /\bone-off\b/,
+    /\b(currently|now) logged in\b/,
+    /\blogged in via\b/,
+    /\blogin status\b/,
+    /\bsigned in\b/,
+    /\bhelp article\b/,
+    /\barticle exists\b/,
+    /\bupdated around\b/,
+    /\bupdated:?\s*\d+\s*(day|days|hour|hours)\s+ago\b/,
+  ];
+  return patterns.some((pattern) => pattern.test(text));
+}
+
+function isRejectedTopicMemory(memory: ExtractedMemory): boolean {
+  const text = `${memory.subject}\n${memory.content}`.toLowerCase();
+  const patterns = [
+    /\b(login|logged in|signed in|oauth|auth state|session state|account state)\b/,
+    /\b(help article|article exists|updated around|suspicious activity alert article|account sharing policy article)\b/,
+    /\b(cleanup|todo|checklist|mark as stale|manual cleanup|schema migration|audit trail after write|generic words)\b/,
+    /\b(memory plugin|memory extension).{0,80}\b(lacked|missing|issue|problem|overhaul|cleanup|triggered broad|exact scope)\b/,
+    /\b(not managed by chezmoi|worth managing|file count|managed files)\b/,
+    /登录|已登录|登录状态|授权状态|会话状态|帮助文章|文章存在|更新于|清理|待办|检查清单|schema|迁移|文件数量/,
   ];
   return patterns.some((pattern) => pattern.test(text));
 }
@@ -361,6 +433,25 @@ function isEphemeralMemory(memory: ExtractedMemory): boolean {
 function isPiAgentMemory(text: string): boolean {
   return /pi-agent|pi agent|~\/\.pi\/agent|\.pi\/agent|memory extension|extension|skill|hook|models\.json|settings\.json|trust\.json|auth\.json/i
     .test(text);
+}
+
+function normalizeSubject(subject: string, content: string): string {
+  const normalized = `${subject}\n${content}`.toLowerCase();
+  if (/settings\.json|default provider|default model|默认 provider|默认 model/.test(normalized)) {
+    return "pi-agent-settings-default-provider-model";
+  }
+  if (/freshness-check/.test(normalized)) {
+    return "freshness-check-skill";
+  }
+  return subject.trim().replace(/\s+/g, "-").toLowerCase().slice(0, 120);
+}
+
+function subjectAliases(subject: string): string[] {
+  const aliasMap: Record<string, string[]> = {
+    "pi-agent-settings-default-provider-model": ["settings-json-defaults", "pi-agent settings default provider model"],
+    "freshness-check-skill": ["freshness-check skill added", "freshness-check-skill"],
+  };
+  return Array.from(new Set([subject, ...(aliasMap[subject] ?? [])]));
 }
 
 function requiresExternalEvidence(memory: ExtractedMemory): boolean {
@@ -407,13 +498,28 @@ function hasNonAssistantSupport(memory: ExtractedMemory, evidenceText: string): 
   return overlap >= Math.max(2, Math.ceil(tokens.length * 0.3));
 }
 
+function normalizedTtlDays(memory: ExtractedMemory): number | null {
+  const raw = typeof memory.ttlDays === "number" && Number.isFinite(memory.ttlDays)
+    ? Math.max(1, Math.min(30, Math.round(memory.ttlDays)))
+    : null;
+  if (!isFreshnessSensitiveMemory(memory)) return raw;
+  return raw;
+}
+
 function classifyMemory(memory: ExtractedMemory, cwd: string): ExtractedMemory | null {
+  if (memory.kind === "todo" || memory.scope === "task") return null;
   if (containsSecretLikeText(memory)) return null;
   if (isEphemeralMemory(memory)) return null;
+  if (isRejectedTopicMemory(memory)) return null;
   if (requiresExternalEvidence(memory) && !hasReliableEvidence(memory)) return null;
 
   const text = `${memory.subject}\n${memory.content}\n${(memory.keywords ?? []).join(" ")}`.toLowerCase();
-  const classified: ExtractedMemory = { ...memory };
+  const classified: ExtractedMemory = {
+    ...memory,
+    ttlDays: normalizedTtlDays(memory),
+  };
+
+  if (isFreshnessSensitiveMemory(classified) && classified.ttlDays === null) return null;
 
   const isDotfilesContext = /chezmoi|home-manager|\.chezmoiignore|\bdot_[a-z0-9_-]+/i.test(text);
   const isPiAgentContext = isPiAgentMemory(text);
@@ -436,6 +542,7 @@ function classifyMemory(memory: ExtractedMemory, cwd: string): ExtractedMemory |
     }
   }
 
+  classified.subject = normalizeSubject(classified.subject, classified.content);
   return classified;
 }
 
@@ -455,6 +562,15 @@ function sourceSession(ctx: ExtensionContext): string | null {
   }
 }
 
+function markSuperseded(db: DatabaseSync, ids: number[], replacementSubject: string, now: string): void {
+  for (const id of ids) {
+    db.prepare("UPDATE memories SET status = 'superseded', updated_at = ? WHERE id = ?")
+      .run(now, id);
+    db.prepare("INSERT INTO memory_events(memory_id, action, details, created_at) VALUES (?, ?, ?, ?)")
+      .run(id, "superseded", JSON.stringify({ replacementSubject }), now);
+  }
+}
+
 function upsertMemory(
   db: DatabaseSync,
   memory: ExtractedMemory,
@@ -467,16 +583,18 @@ function upsertMemory(
   if (!classified) return null;
 
   const projectKey = classified.scope === "project" || classified.scope === "task" ? toProjectKey(ctx.cwd) : null;
-  const existing = db.prepare(
+  const subjectKeys = subjectAliases(classified.subject).map((subject) => subject.toLowerCase());
+  const placeholders = subjectKeys.map(() => "?").join(", ");
+  const existingRows = db.prepare(
     `SELECT * FROM memories
      WHERE status = 'active'
        AND scope = ?
        AND IFNULL(project_key, '') = IFNULL(?, '')
        AND kind = ?
-       AND lower(subject) = lower(?)
-     ORDER BY updated_at DESC
-     LIMIT 1`,
-  ).get(classified.scope, projectKey, classified.kind, classified.subject) as MemoryRecord | undefined;
+       AND lower(subject) IN (${placeholders})
+     ORDER BY updated_at DESC`,
+  ).all(classified.scope, projectKey, classified.kind, ...subjectKeys) as MemoryRecord[];
+  const existing = existingRows[0];
 
   const now = nowIso();
   const keywords = Array.from(new Set([...(classified.keywords ?? []), ...tokenize(classified.subject), ...tokenize(classified.content)]))
@@ -485,21 +603,27 @@ function upsertMemory(
   const expiresAt = classified.ttlDays && classified.ttlDays > 0
     ? new Date(Date.now() + classified.ttlDays * 86400000).toISOString()
     : null;
+  const evidenceSource = classified.evidenceSource ?? "unknown";
+  const evidence = (classified.evidence ?? "").trim().slice(0, 300);
 
   if (existing) {
     const isNewerOrMoreConfident = classified.confidence >= existing.confidence || classified.content.length > existing.content.length;
     if (isNewerOrMoreConfident) {
       db.prepare(
         `UPDATE memories
-         SET content = ?, keywords = ?, confidence = ?, source_session = ?,
-             source_entry_ids = ?, updated_at = ?, last_seen_at = ?, expires_at = ?
+         SET subject = ?, content = ?, keywords = ?, confidence = ?, source_session = ?,
+             source_entry_ids = ?, evidence_source = ?, evidence = ?, updated_at = ?,
+             last_seen_at = ?, expires_at = ?
          WHERE id = ?`,
       ).run(
+        classified.subject,
         classified.content,
         keywords,
         Math.max(classified.confidence, existing.confidence),
         sourceSession(ctx),
         JSON.stringify(sourceEntryIds),
+        evidenceSource,
+        evidence,
         now,
         now,
         expiresAt,
@@ -508,17 +632,20 @@ function upsertMemory(
       db.prepare("INSERT INTO memory_events(memory_id, action, details, created_at) VALUES (?, ?, ?, ?)")
         .run(existing.id, "updated", JSON.stringify({ subject: classified.subject }), now);
     } else {
-      db.prepare("UPDATE memories SET last_seen_at = ?, confidence = max(confidence, ?) WHERE id = ?")
-        .run(now, classified.confidence, existing.id);
+      db.prepare(
+        "UPDATE memories SET last_seen_at = ?, confidence = max(confidence, ?), evidence_source = ?, evidence = ? WHERE id = ?",
+      ).run(now, classified.confidence, evidenceSource, evidence, existing.id);
     }
+    markSuperseded(db, existingRows.slice(1).map((row) => row.id), classified.subject, now);
     return existing.id;
   }
 
   const result = db.prepare(
     `INSERT INTO memories(
       scope, project_key, kind, subject, content, keywords, confidence, pinned,
-      status, source_session, source_entry_ids, created_at, updated_at, last_seen_at, expires_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, 0, 'active', ?, ?, ?, ?, ?, ?)`,
+      status, source_session, source_entry_ids, evidence_source, evidence,
+      created_at, updated_at, last_seen_at, expires_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, 0, 'active', ?, ?, ?, ?, ?, ?, ?, ?)`,
   ).run(
     classified.scope,
     projectKey,
@@ -529,6 +656,8 @@ function upsertMemory(
     classified.confidence,
     sourceSession(ctx),
     JSON.stringify(sourceEntryIds),
+    evidenceSource,
+    evidence,
     now,
     now,
     now,
@@ -537,6 +666,7 @@ function upsertMemory(
   const id = Number(result.lastInsertRowid);
   db.prepare("INSERT INTO memory_events(memory_id, action, details, created_at) VALUES (?, ?, ?, ?)")
     .run(id, "created", JSON.stringify({ subject: classified.subject }), now);
+  markSuperseded(db, existingRows.map((row) => row.id), classified.subject, now);
   return id;
 }
 
@@ -695,7 +825,8 @@ async function runExtraction(ctx: ExtensionContext, conversationText: string): P
 
 async function extractAndStore(ctx: ExtensionContext): Promise<number> {
   const { text, evidenceText, entryIds } = getRecentConversation(ctx, 10);
-  if (!shouldExtract(evidenceText)) return 0;
+  const lastUserText = getLastUserText(ctx);
+  if (!shouldExtract(lastUserText)) return 0;
 
   const db = openDb();
   try {
@@ -936,6 +1067,8 @@ export default function (pi: ExtensionAPI) {
               confidence: memory.confidence,
               score: memory.score,
               pinned: Boolean(memory.pinned),
+              evidenceSource: memory.evidence_source,
+              expiresAt: memory.expires_at,
             })),
           },
         };

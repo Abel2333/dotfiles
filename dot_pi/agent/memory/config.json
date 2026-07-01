@@ -2,10 +2,10 @@
   "enabled": true,
   "extractionEnabled": true,
   "useCurrentModelIfUnset": false,
-  "minConfidence": 0.72,
+  "minConfidence": 0.85,
   "autoInjectEnabled": true,
-  "autoInjectMaxItems": 6,
-  "autoInjectTokenBudget": 600,
+  "autoInjectMaxItems": 4,
+  "autoInjectTokenBudget": 400,
   "extractorModel": {
     "provider": "deepseek",
     "model": "deepseek-v4-flash"
