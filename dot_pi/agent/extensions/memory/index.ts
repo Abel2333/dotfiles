@@ -12,8 +12,8 @@ import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { complete, type Model, type UserMessage } from "@earendil-works/pi-ai";
 import type { ExtensionAPI, ExtensionCommandContext, ExtensionContext } from "@earendil-works/pi-coding-agent";
+import { StringEnum } from "@earendil-works/pi-ai";
 import { Type } from "typebox";
 
 type MemoryScope = "user" | "project" | "env" | "task";
@@ -71,6 +71,13 @@ const CONFIG_FILE = path.join(MEMORY_DIR, "config.json");
 const DB_FILE = path.join(MEMORY_DIR, "memory.db");
 const CUSTOM_TYPE = "memory";
 
+// Shared SQLite connection. Opened lazily by openDb() (and warmed at
+// session_start), closed at session_shutdown. Holding one connection for the
+// whole session avoids the per-call open/close overhead from the previous
+// design. node:sqlite DatabaseSync is synchronous and JS is single-threaded, so
+// concurrent tool calls serialize naturally on this one handle.
+let dbInstance: DatabaseSync | null = null;
+
 const DEFAULT_CONFIG: MemoryConfig = {
   enabled: true,
   extractionEnabled: true,
@@ -81,57 +88,6 @@ const DEFAULT_CONFIG: MemoryConfig = {
   autoInjectTokenBudget: 400,
   llmRerankEnabled: false,
 };
-
-const EXTRACTION_SYSTEM_PROMPT = `You extract durable long-term memories for a coding agent.
-
-Return JSON only, with this shape:
-{
-  "memories": [
-    {
-      "scope": "user" | "project" | "env" | "task",
-      "kind": "preference" | "convention" | "fact" | "decision" | "todo",
-      "subject": "short stable key",
-      "content": "one concise memory sentence",
-      "keywords": ["keyword"],
-      "confidence": 0.0,
-      "ttlDays": null,
-      "evidenceSource": "user" | "tool" | "mixed" | "assistant" | "unknown",
-      "evidence": "short quote or summary of the supporting user/tool evidence"
-    }
-  ]
-}
-
-Only extract memories likely to remain useful across future sessions.
-Be conservative: default to returning no memories.
-Only extract when the user explicitly states a durable preference, default, convention, rule, or decision that should carry forward.
-
-Prefer these categories:
-- user preferences and defaults
-- project conventions and workflow rules
-- stable environment facts that the user clearly wants carried forward
-- durable decisions that change future behavior
-
-Do not extract:
-- task lists, temporary todos, or cleanup checklists
-- one-off questions, temporary troubleshooting state, or transient status
-- implementation notes about the memory plugin itself unless the user explicitly frames them as a lasting design decision
-- bookkeeping facts about file counts, what is managed or not managed, or similar administrative detail unless the user explicitly says this is a standing rule
-- login state, account state, auth state, session state, or whether a tool is currently signed in
-- secrets, API keys, tokens, passwords, credential values, auth file contents, account IDs, workspace IDs, emails, or GPG fingerprints / key IDs
-- article existence, help-center metadata, release-note metadata, or statements like "updated around <date>"
-- pure freshness facts about pricing, policies, docs, release notes, current model limits, or current availability unless the conversation explicitly says to remember them for near-term reuse
-
-For freshness-sensitive facts (pricing, policy, docs, versions, release notes, current limits, current availability):
-- default to not extracting them
-- only extract them if the user explicitly asks to remember them temporarily
-- when you do extract them, set ttlDays to a short value such as 7 or 14
-
-Do not invent dates. If a date matters, use only dates explicitly present in the conversation or the provided current date/time.
-Use higher confidence only when the user explicitly stated it or tool output verified it.
-Assistant explanations, plans, and guesses are not durable evidence by themselves.
-For code, config, dependency, filesystem, installed-version, or environment facts, only extract when evidenceSource is "user", "tool", or "mixed".
-If a code/config change is only claimed by the assistant and not confirmed by user text or tool output, do not extract it.
-If nothing durable should be remembered, return {"memories":[]}.`;
 
 function ensureDir(): void {
   fs.mkdirSync(MEMORY_DIR, { recursive: true });
@@ -160,6 +116,8 @@ function ensureColumn(db: DatabaseSync, table: string, column: string, definitio
 }
 
 function openDb(): DatabaseSync {
+  if (dbInstance) return dbInstance;
+
   ensureDir();
   const db = new DatabaseSync(DB_FILE);
   db.exec(`
@@ -221,22 +179,23 @@ function openDb(): DatabaseSync {
   `);
   ensureColumn(db, "memories", "evidence_source", "TEXT NOT NULL DEFAULT 'unknown'");
   ensureColumn(db, "memories", "evidence", "TEXT NOT NULL DEFAULT ''");
+  dbInstance = db;
   return db;
+}
+
+// Close the shared connection. Called from session_shutdown so /reload and
+// session replacement free the handle before the new instance opens its own.
+function closeDb(): void {
+  try {
+    dbInstance?.close();
+  } catch {
+    // Ignore double-close or already-closed errors.
+  }
+  dbInstance = null;
 }
 
 function nowIso(): string {
   return new Date().toISOString();
-}
-
-function currentTimeContext(): string {
-  const now = new Date();
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "local";
-  const local = new Intl.DateTimeFormat("en-CA", {
-    timeZone,
-    dateStyle: "full",
-    timeStyle: "long",
-  }).format(now);
-  return `Current date/time: ${local}; timezone: ${timeZone}; ISO: ${now.toISOString()}.`;
 }
 
 function toProjectKey(cwd: string): string {
@@ -281,30 +240,6 @@ function extractTextParts(content: unknown): string[] {
   return parts;
 }
 
-function getRecentConversation(ctx: ExtensionContext, maxEntries = 8): { text: string; evidenceText: string; entryIds: string[] } {
-  const branch = ctx.sessionManager.getBranch() as Array<{
-    id?: string;
-    type: string;
-    message?: { role?: string; content?: unknown };
-  }>;
-  const chunks: string[] = [];
-  const evidenceChunks: string[] = [];
-  const entryIds: string[] = [];
-
-  for (const entry of branch.slice(-maxEntries)) {
-    if (entry.type !== "message" || !entry.message?.role) continue;
-    const role = entry.message.role;
-    if (role !== "user" && role !== "assistant" && role !== "toolResult") continue;
-    const text = extractTextParts(entry.message.content).join("\n").trim();
-    if (!text) continue;
-    chunks.push(`${role}: ${text}`);
-    if (role !== "assistant") evidenceChunks.push(`${role}: ${text}`);
-    if (entry.id) entryIds.push(entry.id);
-  }
-
-  return { text: chunks.join("\n\n"), evidenceText: evidenceChunks.join("\n\n"), entryIds };
-}
-
 function getLastUserText(ctx: ExtensionContext): string {
   const branch = ctx.sessionManager.getBranch() as Array<{
     type: string;
@@ -318,60 +253,20 @@ function getLastUserText(ctx: ExtensionContext): string {
   return "";
 }
 
-function hasExplicitMemoryIntent(text: string): boolean {
-  const normalized = text.toLowerCase();
-  const patterns = [
-    /remember|记住|帮我记住|请记住|下次记得|以后都|默认|偏好|prefer|preference/,
-    /不要|别|never|always|must|必须|约定|convention|standard|workflow|规则/,
-    /以后默认|以后都按|今后都按|作为约定|作为规则|长期沿用/,
-  ];
-  return patterns.some((pattern) => pattern.test(normalized));
+// Combined text helpers used by the safety classifiers below. The two
+// variants cover (a) subject+content, used by the freshness/ephemeral/
+// rejected-topic checks, and (b) subject+content+keywords, used by the
+// evidence and classify checks.
+function memoryText(memory: { subject: string; content: string }): string {
+  return `${memory.subject}\n${memory.content}`.toLowerCase();
 }
 
-function shouldExtract(text: string): boolean {
-  const normalized = text.trim();
-  return normalized.length >= 12 && hasExplicitMemoryIntent(normalized);
-}
-
-function normalizeExtracted(input: unknown): ExtractedMemory[] {
-  if (!input || typeof input !== "object") return [];
-  const memories = (input as { memories?: unknown }).memories;
-  if (!Array.isArray(memories)) return [];
-
-  const validScopes = new Set<MemoryScope>(["user", "project", "env", "task"]);
-  const validKinds = new Set<MemoryKind>(["preference", "convention", "fact", "decision", "todo"]);
-  const validEvidenceSources = new Set(["user", "tool", "mixed", "assistant", "unknown"]);
-
-  return memories
-    .map((item): ExtractedMemory | null => {
-      if (!item || typeof item !== "object") return null;
-      const raw = item as Record<string, unknown>;
-      const scope = raw.scope;
-      const kind = raw.kind;
-      const subject = typeof raw.subject === "string" ? raw.subject.trim().slice(0, 120) : "";
-      const content = typeof raw.content === "string" ? raw.content.trim().slice(0, 800) : "";
-      const confidence = typeof raw.confidence === "number" ? Math.max(0, Math.min(1, raw.confidence)) : 0;
-      if (!validScopes.has(scope as MemoryScope) || !validKinds.has(kind as MemoryKind)) return null;
-      if (!subject || !content || confidence <= 0) return null;
-      return {
-        scope: scope as MemoryScope,
-        kind: kind as MemoryKind,
-        subject,
-        content,
-        keywords: Array.isArray(raw.keywords) ? raw.keywords.filter((k): k is string => typeof k === "string") : [],
-        confidence,
-        ttlDays: typeof raw.ttlDays === "number" ? raw.ttlDays : null,
-        evidenceSource: typeof raw.evidenceSource === "string" && validEvidenceSources.has(raw.evidenceSource)
-          ? raw.evidenceSource as ExtractedMemory["evidenceSource"]
-          : "unknown",
-        evidence: typeof raw.evidence === "string" ? raw.evidence.trim().slice(0, 300) : "",
-      };
-    })
-    .filter((item): item is ExtractedMemory => item !== null);
+function memoryTextWithKeywords(memory: ExtractedMemory): string {
+  return `${memory.subject}\n${memory.content}\n${(memory.keywords ?? []).join(" ")}`.toLowerCase();
 }
 
 function containsSecretLikeText(memory: ExtractedMemory): boolean {
-  const text = `${memory.subject}\n${memory.content}\n${(memory.keywords ?? []).join(" ")}\n${memory.evidence ?? ""}`;
+  const text = `${memoryTextWithKeywords(memory)}\n${memory.evidence ?? ""}`;
   const patterns = [
     /\bsk-[a-z0-9][a-z0-9_-]{6,}/i,
     /\b(api[_ -]?key|token|secret|password)\s*[:=]\s*['"]?[a-z0-9._-]{8,}/i,
@@ -385,18 +280,23 @@ function containsSecretLikeText(memory: ExtractedMemory): boolean {
 }
 
 function isFreshnessSensitiveMemory(memory: ExtractedMemory): boolean {
-  const text = `${memory.subject}\n${memory.content}`.toLowerCase();
-  const patterns = [
+  const text = memoryText(memory);
+  const timeIndicators = [
     /\b(current|currently|latest|recent|today|yesterday|this week|this month|as of)\b/,
+    /当前|最近|最新|今天|昨天|本周|本月|截至/,
+  ];
+  const topicIndicators = [
     /\b(pricing|price|rate card|policy|terms of use|help center|release note|release notes|docs?|documentation|article)\b/,
     /\b(context window|model limit|availability|quota|service tier|updated around)\b/,
-    /当前|最近|最新|今天|昨天|本周|本月|截至|价格|资费|条款|政策|帮助中心|发布说明|文档|上下文窗口|可用性/,
+    /价格|资费|条款|政策|帮助中心|发布说明|文档|上下文窗口|可用性/,
   ];
-  return patterns.some((pattern) => pattern.test(text));
+  const hasTime = timeIndicators.some((p) => p.test(text));
+  const hasTopic = topicIndicators.some((p) => p.test(text));
+  return hasTime && hasTopic;
 }
 
 function isEphemeralMemory(memory: ExtractedMemory): boolean {
-  const text = `${memory.subject}\n${memory.content}`.toLowerCase();
+  const text = memoryText(memory);
   const patterns = [
     /\bcurrently contains no\b/,
     /\bno stored memories\b/,
@@ -418,7 +318,7 @@ function isEphemeralMemory(memory: ExtractedMemory): boolean {
 }
 
 function isRejectedTopicMemory(memory: ExtractedMemory): boolean {
-  const text = `${memory.subject}\n${memory.content}`.toLowerCase();
+  const text = memoryText(memory);
   const patterns = [
     /\b(login|logged in|signed in|oauth|auth state|session state|account state)\b/,
     /\b(help article|article exists|updated around|suspicious activity alert article|account sharing policy article)\b/,
@@ -457,7 +357,7 @@ function subjectAliases(subject: string): string[] {
 function requiresExternalEvidence(memory: ExtractedMemory): boolean {
   if (memory.kind === "preference") return false;
 
-  const text = `${memory.subject}\n${memory.content}\n${(memory.keywords ?? []).join(" ")}`.toLowerCase();
+  const text = memoryTextWithKeywords(memory);
   const codeOrEnvTarget = [
     isPiAgentMemory,
     /index\.ts|config\.json|settings\.json|models\.json|trust\.json|auth\.json|package\.json/,
@@ -479,25 +379,6 @@ function hasReliableEvidence(memory: ExtractedMemory): boolean {
   return memory.evidenceSource === "user" || memory.evidenceSource === "tool" || memory.evidenceSource === "mixed";
 }
 
-function hasNonAssistantSupport(memory: ExtractedMemory, evidenceText: string): boolean {
-  if (!requiresExternalEvidence(memory)) return true;
-  if (!hasReliableEvidence(memory)) return false;
-
-  const haystack = evidenceText.toLowerCase();
-  const evidence = (memory.evidence ?? "").trim().toLowerCase();
-  if (evidence.length >= 20 && haystack.includes(evidence)) return true;
-  if (evidence.length >= 10) return false;
-
-  const evidenceTokens = tokenize(evidence).filter((token) => token.length >= 3);
-  const memoryTokens = tokenize(`${memory.subject} ${memory.content}`).filter((token) => (
-    token.length >= 6 || /[./_~-]/.test(token)
-  ));
-  const tokens = Array.from(new Set([...evidenceTokens, ...memoryTokens])).slice(0, 30);
-  const overlap = tokens.filter((token) => haystack.includes(token)).length;
-
-  return overlap >= Math.max(2, Math.ceil(tokens.length * 0.3));
-}
-
 function normalizedTtlDays(memory: ExtractedMemory): number | null {
   const raw = typeof memory.ttlDays === "number" && Number.isFinite(memory.ttlDays)
     ? Math.max(1, Math.min(30, Math.round(memory.ttlDays)))
@@ -513,7 +394,7 @@ function classifyMemory(memory: ExtractedMemory, cwd: string): ExtractedMemory |
   if (isRejectedTopicMemory(memory)) return null;
   if (requiresExternalEvidence(memory) && !hasReliableEvidence(memory)) return null;
 
-  const text = `${memory.subject}\n${memory.content}\n${(memory.keywords ?? []).join(" ")}`.toLowerCase();
+  const text = memoryTextWithKeywords(memory);
   const classified: ExtractedMemory = {
     ...memory,
     ttlDays: normalizedTtlDays(memory),
@@ -544,14 +425,6 @@ function classifyMemory(memory: ExtractedMemory, cwd: string): ExtractedMemory |
 
   classified.subject = normalizeSubject(classified.subject, classified.content);
   return classified;
-}
-
-function parseJsonObject(text: string): unknown {
-  const trimmed = text.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "");
-  const start = trimmed.indexOf("{");
-  const end = trimmed.lastIndexOf("}");
-  if (start === -1 || end === -1 || end <= start) return undefined;
-  return JSON.parse(trimmed.slice(start, end + 1));
 }
 
 function sourceSession(ctx: ExtensionContext): string | null {
@@ -774,103 +647,26 @@ function clampToBudget(lines: string[], tokenBudget: number): string[] {
   return selected;
 }
 
-async function resolveExtractorModel(ctx: ExtensionContext, config: MemoryConfig): Promise<Model<any> | undefined> {
-  ctx.modelRegistry.refresh();
-  if (config.extractorModel) {
-    return ctx.modelRegistry.find(config.extractorModel.provider, config.extractorModel.model);
-  }
-  return config.useCurrentModelIfUnset ? ctx.model : undefined;
-}
-
-async function runExtraction(ctx: ExtensionContext, conversationText: string): Promise<ExtractedMemory[]> {
-  const config = loadConfig();
-  if (!config.enabled || !config.extractionEnabled) return [];
-  const model = await resolveExtractorModel(ctx, config);
-  if (!model) return [];
-
-  const auth = await ctx.modelRegistry.getApiKeyAndHeaders(model);
-  if (!auth.ok || !auth.apiKey) return [];
-
-  const userMessage: UserMessage = {
-    role: "user",
-    content: [
-      {
-        type: "text",
-        text: [
-          currentTimeContext(),
-          `Current cwd: ${ctx.cwd}`,
-          "",
-          "<conversation>",
-          conversationText,
-          "</conversation>",
-        ].join("\n"),
-      },
-    ],
-    timestamp: Date.now(),
-  };
-
-  const response = await complete(
-    model,
-    { systemPrompt: EXTRACTION_SYSTEM_PROMPT, messages: [userMessage] },
-    { apiKey: auth.apiKey, headers: auth.headers, maxTokens: 2048, signal: ctx.getSignal?.() },
-  );
-
-  const text = response.content
-    .filter((part): part is { type: "text"; text: string } => part.type === "text")
-    .map((part) => part.text)
-    .join("\n");
-  if (!text.trim()) return [];
-  return normalizeExtracted(parseJsonObject(text));
-}
-
-async function extractAndStore(ctx: ExtensionContext): Promise<number> {
-  const { text, evidenceText, entryIds } = getRecentConversation(ctx, 10);
-  const lastUserText = getLastUserText(ctx);
-  if (!shouldExtract(lastUserText)) return 0;
-
-  const db = openDb();
-  try {
-    const extracted = await runExtraction(ctx, text);
-    let count = 0;
-    for (const memory of extracted.slice(0, 8)) {
-      if (!hasNonAssistantSupport(memory, evidenceText)) continue;
-      const id = upsertMemory(db, memory, ctx, entryIds);
-      if (id !== null) count += 1;
-    }
-    return count;
-  } finally {
-    db.close();
-  }
-}
-
 function setMemoryStatus(id: number, status: MemoryStatus): boolean {
   const db = openDb();
-  try {
-    const result = db.prepare("UPDATE memories SET status = ?, updated_at = ? WHERE id = ?")
-      .run(status, nowIso(), id);
-    if (result.changes > 0) {
-      db.prepare("INSERT INTO memory_events(memory_id, action, details, created_at) VALUES (?, ?, ?, ?)")
-        .run(id, status, "{}", nowIso());
-    }
-    return result.changes > 0;
-  } finally {
-    db.close();
+  const result = db.prepare("UPDATE memories SET status = ?, updated_at = ? WHERE id = ?")
+    .run(status, nowIso(), id);
+  if (result.changes > 0) {
+    db.prepare("INSERT INTO memory_events(memory_id, action, details, created_at) VALUES (?, ?, ?, ?)")
+      .run(id, status, "{}", nowIso());
   }
+  return result.changes > 0;
 }
 
 function setPinned(id: number, pinned: boolean): boolean {
   const db = openDb();
-  try {
-    const result = db.prepare("UPDATE memories SET pinned = ?, updated_at = ? WHERE id = ?")
-      .run(pinned ? 1 : 0, nowIso(), id);
-    if (result.changes > 0) {
-      db.prepare("INSERT INTO memory_events(memory_id, action, details, created_at) VALUES (?, ?, ?, ?)")
-        .run(id, pinned ? "pinned" : "unpinned", "{}", nowIso());
-    }
-    return result.changes > 0;
-  } finally {
-    db.close();
+  const result = db.prepare("UPDATE memories SET pinned = ?, updated_at = ? WHERE id = ?")
+    .run(pinned ? 1 : 0, nowIso(), id);
+  if (result.changes > 0) {
+    db.prepare("INSERT INTO memory_events(memory_id, action, details, created_at) VALUES (?, ?, ?, ?)")
+      .run(id, pinned ? "pinned" : "unpinned", "{}", nowIso());
   }
+  return result.changes > 0;
 }
 
 function sendDisplayMessage(pi: ExtensionAPI, content: string): void {
@@ -890,29 +686,25 @@ function registerCommands(pi: ExtensionAPI) {
     handler: async (_args, ctx) => {
       const config = loadConfig();
       const db = openDb();
-      try {
-        const total = db.prepare("SELECT count(*) AS count FROM memories WHERE status = 'active'").get() as { count: number };
-        const model = config.extractorModel
-          ? `${config.extractorModel.provider}/${config.extractorModel.model}`
-          : config.useCurrentModelIfUnset
-            ? "current conversation model"
-            : "(unset)";
-        sendDisplayMessage(
-          pi,
-          [
-            "Memory status",
-            "",
-            `- Enabled: ${config.enabled}`,
-            `- Active memories: ${total.count}`,
-            `- Extractor model: ${model}`,
-            `- Auto inject: ${config.autoInjectEnabled} (${config.autoInjectMaxItems} items, ~${config.autoInjectTokenBudget} tokens)`,
-            `- Config: ${CONFIG_FILE}`,
-            `- Database: ${DB_FILE}`,
-          ].join("\n"),
-        );
-      } finally {
-        db.close();
-      }
+      const total = db.prepare("SELECT count(*) AS count FROM memories WHERE status = 'active'").get() as { count: number };
+      const model = config.extractorModel
+        ? `${config.extractorModel.provider}/${config.extractorModel.model}`
+        : config.useCurrentModelIfUnset
+          ? "current conversation model"
+          : "(unset)";
+      sendDisplayMessage(
+        pi,
+        [
+          "Memory status",
+          "",
+          `- Enabled: ${config.enabled}`,
+          `- Active memories: ${total.count}`,
+          `- Extractor model: ${model}`,
+          `- Auto inject: ${config.autoInjectEnabled} (${config.autoInjectMaxItems} items, ~${config.autoInjectTokenBudget} tokens)`,
+          `- Config: ${CONFIG_FILE}`,
+          `- Database: ${DB_FILE}`,
+        ].join("\n"),
+      );
     },
   });
 
@@ -925,12 +717,8 @@ function registerCommands(pi: ExtensionAPI) {
         return;
       }
       const db = openDb();
-      try {
-        const results = recallMemories(db, query, ctx.cwd, 12);
-        sendDisplayMessage(pi, formatSearchResults(results));
-      } finally {
-        db.close();
-      }
+      const results = recallMemories(db, query, ctx.cwd, 12);
+      sendDisplayMessage(pi, formatSearchResults(results));
     },
   });
 
@@ -938,18 +726,14 @@ function registerCommands(pi: ExtensionAPI) {
     description: "List recent active memories",
     handler: async (_args, ctx) => {
       const db = openDb();
-      try {
-        const rows = db.prepare(
-          `SELECT * FROM memories
-           WHERE status = 'active'
-             AND (scope IN ('user', 'env') OR project_key = ?)
-           ORDER BY pinned DESC, updated_at DESC
-           LIMIT 30`,
-        ).all(toProjectKey(ctx.cwd)) as MemoryRecord[];
-        sendDisplayMessage(pi, formatSearchResults(rows));
-      } finally {
-        db.close();
-      }
+      const rows = db.prepare(
+        `SELECT * FROM memories
+         WHERE status = 'active'
+           AND (scope IN ('user', 'env') OR project_key = ?)
+         ORDER BY pinned DESC, updated_at DESC
+         LIMIT 30`,
+      ).all(toProjectKey(ctx.cwd)) as MemoryRecord[];
+      sendDisplayMessage(pi, formatSearchResults(rows));
     },
   });
 
@@ -1020,19 +804,22 @@ function registerCommands(pi: ExtensionAPI) {
       ctx.ui.notify(`Memory extractor model set to ${choice}`, "info");
     },
   });
-
-  pi.registerCommand("memory-extract", {
-    description: "Run memory extraction on recent conversation now",
-    handler: async (_args, ctx) => {
-      ctx.ui.notify("Extracting memory candidates...", "info");
-      const count = await extractAndStore(ctx);
-      ctx.ui.notify(`Stored or updated ${count} memories`, "info");
-    },
-  });
 }
 
 export default function (pi: ExtensionAPI) {
-  openDb().close();
+  // Warm the shared connection and ensure schema at session start so any
+  // init errors surface early. Tools/commands also call openDb() lazily, so
+  // this is an optimization, not a requirement.
+  pi.on("session_start", () => {
+    openDb();
+  });
+
+  // Release the shared SQLite handle on shutdown so reload / session
+  // replacement can open a fresh connection cleanly.
+  pi.on("session_shutdown", () => {
+    closeDb();
+  });
+
   registerCommands(pi);
 
   pi.registerTool({
@@ -1053,28 +840,87 @@ export default function (pi: ExtensionAPI) {
       const query = typeof params.query === "string" ? params.query : "";
       const limit = Math.min(Math.max(typeof params.limit === "number" ? params.limit : 8, 1), 20);
       const db = openDb();
-      try {
-        const results = recallMemories(db, query, ctx.cwd, limit);
-        return {
-          content: [{ type: "text", text: formatSearchResults(results) }],
-          details: {
-            query,
-            results: results.map((memory) => ({
-              id: memory.id,
-              scope: memory.scope,
-              kind: memory.kind,
-              subject: memory.subject,
-              confidence: memory.confidence,
-              score: memory.score,
-              pinned: Boolean(memory.pinned),
-              evidenceSource: memory.evidence_source,
-              expiresAt: memory.expires_at,
-            })),
-          },
-        };
-      } finally {
-        db.close();
+      const results = recallMemories(db, query, ctx.cwd, limit);
+      return {
+        content: [{ type: "text", text: formatSearchResults(results) }],
+        details: {
+          query,
+          results: results.map((memory) => ({
+            id: memory.id,
+            scope: memory.scope,
+            kind: memory.kind,
+            subject: memory.subject,
+            confidence: memory.confidence,
+            score: memory.score,
+            pinned: Boolean(memory.pinned),
+            evidenceSource: memory.evidence_source,
+            expiresAt: memory.expires_at,
+          })),
+        },
+      };
+    },
+  });
+
+  pi.registerTool({
+    name: "memory_save",
+    label: "Memory Save",
+    description:
+      "Save a durable fact, preference, convention, or decision to long-term memory. Use when the user explicitly states a preference, rule, or convention that should persist across sessions, or when you discover important project/environment facts that will be useful later.",
+    promptSnippet: "Save durable facts, preferences, conventions, or decisions to long-term memory.",
+    promptGuidelines: [
+      "Use memory_save when the user explicitly states a preference, convention, rule, or decision that should carry forward to future sessions.",
+      "Only save information likely to remain useful across sessions. Do not save temporary state, one-off questions, or transient facts.",
+      "Verify important facts from tool output or explicit user statements before saving. Do not save your own assumptions.",
+      "For scope: use 'user' for personal preferences, 'project' for project-specific conventions, 'env' for environment/setup facts, 'task' for task-specific context.",
+      "For kind: use 'preference' for user likes/dislikes, 'convention' for workflow rules, 'fact' for verified facts, 'decision' for resolved choices.",
+    ],
+    parameters: Type.Object({
+      scope: StringEnum(["user", "project", "env", "task"] as const, {
+        description: "Memory scope: 'user', 'project', 'env', or 'task'",
+      }),
+      kind: StringEnum(["preference", "convention", "fact", "decision"] as const, {
+        description: "Memory kind: 'preference', 'convention', 'fact', or 'decision'",
+      }),
+      subject: Type.String({ description: "Short stable key for this memory (e.g., 'pi-agent-bash-nix-store')" }),
+      content: Type.String({ description: "One concise memory sentence" }),
+      keywords: Type.Optional(Type.Array(Type.String(), { description: "Keywords for search indexing" })),
+      confidence: Type.Optional(Type.Number({ description: "Confidence 0-1, default 0.9" })),
+      ttlDays: Type.Optional(Type.Number({ description: "Optional TTL in days, null/omit for permanent" })),
+    }),
+    async execute(_toolCallId, params, _signal, _onUpdate, ctx) {
+      const scope = params.scope as MemoryScope;
+      const kind = params.kind as MemoryKind;
+
+      const memory: ExtractedMemory = {
+        scope,
+        kind,
+        subject: String(params.subject).trim().slice(0, 120),
+        content: String(params.content).trim().slice(0, 800),
+        keywords: Array.isArray(params.keywords) ? params.keywords.filter((k): k is string => typeof k === "string") : [],
+        confidence: typeof params.confidence === "number" ? Math.max(0, Math.min(1, params.confidence)) : 0.9,
+        ttlDays: typeof params.ttlDays === "number" ? params.ttlDays : null,
+        evidenceSource: "user",
+        evidence: "Model explicitly saved this memory via memory_save tool based on conversation context.",
+      };
+
+      if (!memory.subject || !memory.content) {
+        return { content: [{ type: "text", text: "Subject and content are required." }] };
       }
+
+      const db = openDb();
+      const preCheck = classifyMemory(memory, ctx.cwd);
+      if (!preCheck) {
+        return { content: [{ type: "text", text: "Memory rejected by safety filter (may contain secrets, ephemeral data, or rejected topics)." }] };
+      }
+
+      const id = upsertMemory(db, memory, ctx, []);
+      if (id !== null) {
+        return {
+          content: [{ type: "text", text: `Memory saved: #${id} [${scope}/${kind}] "${memory.content}"` }],
+          details: { id, scope, kind, subject: memory.subject },
+        };
+      }
+      return { content: [{ type: "text", text: "Memory rejected: confidence too low or filtered by safety checks." }] };
     },
   });
 
@@ -1089,52 +935,33 @@ export default function (pi: ExtensionAPI) {
     }
 
     const db = openDb();
-    try {
-      const recalled = recallMemories(db, query, ctx.cwd, config.autoInjectMaxItems);
-      if (recalled.length === 0) {
-        return undefined;
-      }
-
-      const lines = clampToBudget(recalled.map((memory) => formatMemory(memory)), config.autoInjectTokenBudget);
-      if (lines.length === 0) {
-        return undefined;
-      }
-
-      const injectedAt = nowIso();
-      for (const memory of recalled.slice(0, lines.length)) {
-        db.prepare("UPDATE memories SET last_injected_at = ? WHERE id = ?").run(injectedAt, memory.id);
-      }
-
-      const contextLines: string[] = [];
-      contextLines.push("Relevant memory:");
-      contextLines.push(...lines);
-
-      return {
-        message: {
-          customType: CUSTOM_TYPE,
-          content: contextLines.join("\n").trim(),
-          display: false,
-          details: { memoryIds: recalled.slice(0, lines.length).map((memory) => memory.id) },
-        },
-      };
-    } finally {
-      db.close();
+    const recalled = recallMemories(db, query, ctx.cwd, config.autoInjectMaxItems);
+    if (recalled.length === 0) {
+      return undefined;
     }
+
+    const lines = clampToBudget(recalled.map((memory) => formatMemory(memory)), config.autoInjectTokenBudget);
+    if (lines.length === 0) {
+      return undefined;
+    }
+
+    const injectedAt = nowIso();
+    for (const memory of recalled.slice(0, lines.length)) {
+      db.prepare("UPDATE memories SET last_injected_at = ? WHERE id = ?").run(injectedAt, memory.id);
+    }
+
+    const contextLines: string[] = [];
+    contextLines.push("Relevant memory:");
+    contextLines.push(...lines);
+
+    return {
+      message: {
+        customType: CUSTOM_TYPE,
+        content: contextLines.join("\n").trim(),
+        display: false,
+        details: { memoryIds: recalled.slice(0, lines.length).map((memory) => memory.id) },
+      },
+    };
   });
 
-  pi.on("agent_end", async (_event, ctx) => {
-    const config = loadConfig();
-    if (!config.enabled || !config.extractionEnabled) return;
-    try {
-      const count = await extractAndStore(ctx);
-      if (count > 0 && ctx.hasUI) {
-        ctx.ui.notify(`memory: stored or updated ${count}`, "info");
-      }
-    } catch (error) {
-      if (ctx.hasUI) {
-        const message = error instanceof Error ? error.message : String(error);
-        ctx.ui.notify(`memory extraction skipped: ${message.slice(0, 160)}`, "warning");
-      }
-    }
-  });
 }

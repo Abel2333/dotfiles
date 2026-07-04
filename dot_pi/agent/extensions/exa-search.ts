@@ -1,4 +1,5 @@
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { StringEnum } from "@earendil-works/pi-ai";
 import { Type } from "typebox";
 
 // ---------------------------------------------------------------------------
@@ -6,13 +7,6 @@ import { Type } from "typebox";
 // ---------------------------------------------------------------------------
 
 const EXA_API_BASE = "https://api.exa.ai";
-
-function stringEnum<const T extends readonly string[]>(
-  values: T,
-  options?: { description?: string },
-) {
-  return Type.Union(values.map((value) => Type.Literal(value)), options);
-}
 
 interface ExaSearchResult {
   title?: string;
@@ -177,8 +171,8 @@ export default function (pi: ExtensionAPI) {
     promptSnippet:
       "Use for deep web research with Exa neural search. Prefer {queries:[...]} with 2-4 varied angles for broad coverage. Best for finding articles, documentation, or specific web pages.",
     promptGuidelines: [
-      "Use exa_search for research questions that benefit from neural semantic matching (finding relevant pages even without keyword overlap). Use it when you need full page text extraction (includeContent: true) for deeper analysis.",
-      "Exa search returns number of results as configured by numResults, with highlights and optional full text. Use get_search_content to retrieve full content when includeContent was true.",
+      "Use exa_search for research questions that benefit from neural semantic matching (finding relevant pages even without keyword overlap). Use exa_search when you need full page text extraction (includeContent: true) for deeper analysis.",
+      "exa_search returns results as configured by numResults, with highlights and optional full text. When includeContent is true, each result includes full page text directly in the response.",
     ],
     parameters: Type.Object({
       query: Type.Optional(
@@ -205,7 +199,7 @@ export default function (pi: ExtensionAPI) {
         }),
       ),
       recencyFilter: Type.Optional(
-        stringEnum(["day", "week", "month", "year"], {
+        StringEnum(["day", "week", "month", "year"] as const, {
           description: "Filter results by publication date",
         }),
       ),
@@ -321,26 +315,6 @@ export default function (pi: ExtensionAPI) {
           for (const r of response.results ?? []) {
             if (r.url && !allUrls.includes(r.url)) allUrls.push(r.url);
           }
-
-          // Store full text content for later retrieval via get_search_content if available
-          if (params.includeContent && ctx) {
-            const fullContent = (response.results ?? [])
-              .filter(
-                (r): r is ExaSearchResult & { url: string; text: string } =>
-                  !!r.url && typeof r.text === "string" && r.text.length > 0,
-              )
-              .map((r) => ({
-                url: r.url!,
-                title: r.title || "",
-                content: r.text!,
-                error: null as string | null,
-              }));
-
-            if (fullContent.length > 0) {
-              // Store results for get_search_content tool to retrieve later
-              (ctx as any)._exaFullContent = fullContent;
-            }
-          }
         } catch (err) {
           const message = err instanceof Error ? err.message : String(err);
           if (message.toLowerCase().includes("abort")) {
@@ -384,10 +358,7 @@ export default function (pi: ExtensionAPI) {
   });
 
   pi.on("session_start", async (_event, ctx) => {
-    const key = getApiKey();
-    if (key) {
-      // Key is set — tool is ready
-    } else {
+    if (!getApiKey()) {
       ctx.ui?.notify?.(
         "exa-search: EXA_API_KEY not set. Tool will return an error until configured.",
         "warning",
