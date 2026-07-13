@@ -39,7 +39,9 @@ $env.VIRTUAL_ENV_DISABLE_PROMPT = "1"
 ############
 #  Zoxide  #
 ############
-zoxide init nushell | save -f $"($CACHE_DIR)/zoxide.nu"
+if ((which zoxide | length) > 0) {
+    zoxide init nushell | save -f $"($CACHE_DIR)/zoxide.nu"
+}
 
 ##########
 #  PNPM  #

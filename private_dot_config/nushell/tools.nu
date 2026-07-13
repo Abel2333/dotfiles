@@ -39,13 +39,7 @@ export def --env mkcd [dir?: path]: [ nothing -> nothing, string -> nothing ] {
 #   Backup the first matching file record from a listing.
 #   > ll | where name has txt | first | bak
 export def bak [target?: path]: [ nothing -> path, string -> path, record -> path ] {
-    let raw = if $target != null {
-        $target
-    } else if (($in | describe) | str starts-with "record") {
-        $in.name
-    } else {
-        $in
-    }
+    let raw = fs path-from-input $target
 
     if $raw == null {
         error make { msg: "Provide a target path as an argument or via pipeline" }
@@ -73,13 +67,7 @@ export def bak [target?: path]: [ nothing -> path, string -> path, record -> pat
 #   Extract the first matching archive record from a listing.
 #   > ll | where name has ".zip" | first | extract --to ./out
 export def extract [source?: path, --to(-t): path]: [ nothing -> nothing, string -> nothing, record -> nothing ] {
-    let raw = if $source != null {
-        $source
-    } else if (($in | describe) | str starts-with "record") {
-        $in.name
-    } else {
-        $in
-    }
+    let raw = fs path-from-input $source
 
     if $raw == null {
         error make { msg: "Provide an archive path as an argument or via pipeline" }
@@ -205,13 +193,7 @@ export def ll [--full-paths, ...paths: string]: nothing -> table {
 #   Show info for the first selected entry from a listing.
 #   > ll | where type == dir | first | path-info
 export def path-info [target?: path]: [ nothing -> record, string -> record, record -> record ] {
-    let raw = if $target != null {
-        $target
-    } else if (($in | describe) | str starts-with "record") {
-        $in.name
-    } else {
-        $in
-    }
+    let raw = fs path-from-input $target
 
     if $raw == null {
         error make { msg: "Provide a path as an argument or via pipeline" }
