@@ -55,7 +55,7 @@ export def bak [target?: path]: [ nothing -> path, string -> path, record -> pat
 # Extract an archive based on its file extension.
 #
 # Examples:
-#   Extract a zip archive in the current directory.
+#   Extract a zip archive into a new same-named directory in the current directory.
 #   > extract archive.zip
 #
 #   Extract an archive into a specific target directory.
@@ -79,11 +79,21 @@ export def extract [source?: path, --to(-t): path]: [ nothing -> nothing, string
     }
 
     let out_dir = if $to == null {
-        $env.PWD
+        let archive_name = ($p | path basename)
+        let dir_name = ($archive_name | str replace --regex '(?i)\.(tar\.(gz|bz2|xz|zst)|tgz|tbz2|txz|tzst|tar|zip|gz|bz2|xz|zst|7z|rar)$' '')
+        let target = ($env.PWD | path join $dir_name)
+
+        if ($target | path exists) {
+            error make { msg: $"Extraction directory already exists: ($target)" }
+        }
+
+        mkdir $target
+        $target
     } else {
-        ($to | path expand)
+        let target = ($to | path expand)
+        mkdir $target
+        $target
     }
-    mkdir $out_dir
 
     let lower = ($p | str downcase)
 
@@ -146,18 +156,29 @@ export def --env up [n: int = 1]: nothing -> nothing {
 # Examples:
 #   List all files, including hidden ones, in the current directory.
 #   > l
-export def l [--full-paths, ...paths: string]: nothing -> table {
+#
+#   Include symbolic-link targets in the listing.
+#   > l --target
+export def l [--full-paths, --target(-t), ...paths: string]: nothing -> table {
     let targets = (fs ls-targets ...$paths)
     let color_base = if ($targets | length) == 1 { $targets | first } else { null }
 
     if $full_paths {
         ls --all --long ...$targets
-        | select name type mode group user size modified
+        | if $target {
+            select name type target mode group user size modified
+        } else {
+            select name type mode group user size modified
+        }
     } else {
         ls --all --long --short-names ...$targets
-        | select name type target mode group user size modified
-        | fs ls-colorize-name $color_base
-        | reject target
+        | if $target {
+            select name type target mode group user size modified
+        } else {
+            select name type mode group user size modified
+        }
+        # | fs ls-colorize-name $color_base
+        # | reject target
     }
 }
 
@@ -166,18 +187,29 @@ export def l [--full-paths, ...paths: string]: nothing -> table {
 # Examples:
 #   List visible files in a directory with detailed metadata.
 #   > ll ~/.config
-export def ll [--full-paths, ...paths: string]: nothing -> table {
+#
+#   Include symbolic-link targets in the listing.
+#   > ll --target /etc
+export def ll [--full-paths, --target(-t), ...paths: string]: nothing -> table {
     let targets = (fs ls-targets ...$paths)
     let color_base = if ($targets | length) == 1 { $targets | first } else { null }
 
     if $full_paths {
         ls --long ...$targets
-        | select name type mode group user size modified
+        | if $target {
+            select name type target mode group user size modified
+        } else {
+            select name type mode group user size modified
+        }
     } else {
         ls --long --short-names ...$targets
-        | select name type target mode group user size modified
-        | fs ls-colorize-name $color_base
-        | reject target
+        | if $target {
+            select name type target mode group user size modified
+        } else {
+            select name type mode group user size modified
+        }
+        # | fs ls-colorize-name $color_base
+        # | reject target
     }
 }
 
@@ -186,6 +218,9 @@ export def ll [--full-paths, ...paths: string]: nothing -> table {
 # Examples:
 #   Show detailed info for a file.
 #   > path-info ~/.zshrc
+#
+#   Show a broken symbolic link and its missing target status.
+#   > path-info /etc/vconsole.conf
 #
 #   Show detailed info for a directory instead of its contents.
 #   > path-info ~/.config
@@ -199,12 +234,27 @@ export def path-info [target?: path]: [ nothing -> record, string -> record, rec
         error make { msg: "Provide a path as an argument or via pipeline" }
     }
 
-    let p = ($raw | path expand)
-    if not ($p | path exists) {
+    let p = ($raw | path expand --no-symlink)
+    let path_type = ($p | path type)
+    if $path_type == null {
         error make { msg: $"path not found: ($p)" }
     }
 
-    ls --long --directory $p | first
+    let info = (ls --long --directory $p | first)
+    if $path_type == symlink {
+        let target_exists = ($p | path exists)
+        let link_status = if $target_exists {
+            "valid"
+        } else {
+            "broken (target does not exist)"
+        }
+
+        $info
+        | upsert target_exists $target_exists
+        | upsert link_status $link_status
+    } else {
+        $info
+    }
 }
 
 # Load variables from a dotenv-style file into the current shell session.
@@ -221,7 +271,7 @@ export def --env load-env-file [file: string=".env"]: nothing -> nothing {
         error make { msg: $"File not found: ($p)" }
     }
 
- let vars = (
+    let vars = (
         open $p
         | lines
         | where { |l| ($l | str trim | str length) > 0 and not ($l | str trim | str starts-with "#") }
@@ -266,13 +316,11 @@ export def --env fzf-cd [] {
 export def --env fzf-history [] {
     let query = (commandline)
     commandline edit --replace ""
-    print -n $'(ansi --escape "2K")\r'
     let nul = (char --integer 0)
     let sep = (char tab)
     let history_state = (history fzf-rows)
-    let has_timestamps = $history_state.has_timestamps
-    let entry_state = (history fzf-entries $history_state.rows $has_timestamps)
-    let entries = $entry_state.entries
+    let entry_config = (history fzf-entries $history_state.rows)
+    let entries = $entry_config.entries
 
     let selected = (
         $entries
@@ -285,16 +333,17 @@ export def --env fzf-history [] {
             --bind 'ctrl-r:toggle-sort'
             --highlight-line
             --wrap
-            --wrap-sign $entry_state.wrap_sign
+            --wrap-sign $entry_config.wrap_sign
             --ansi
+            --color 'hl:bright-white:bold,hl+:bright-white:bold'
             --tabstop 1
             --query $query
             --delimiter $sep
-            --nth $entry_state.nth
+            --nth $entry_config.nth
             +m
         | str trim
     )
-    let command = (history selected-command $selected $query $entries $has_timestamps)
+    let command = (history selected-command $selected $query $entries)
 
     commandline edit --replace $command
 }
