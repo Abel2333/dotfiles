@@ -623,8 +623,9 @@ def prompt-indicator [success_style: string, error_style: string, symbol: string
 export-env {
     $env.config.edit_mode = "vi"
     $env.config.render_right_prompt_on_last_line = false
+    $env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | append {|| print "" })
 
-    $env.PROMPT_COMMAND = {|| create-left-prompt "\n" }
+    $env.PROMPT_COMMAND = {|| create-left-prompt }
     $env.PROMPT_COMMAND_RIGHT = {|| create-right-prompt }
 
     $env.PROMPT_INDICATOR = ""
@@ -636,6 +637,6 @@ export-env {
     $env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = {|| prompt-indicator "green_bold" "red_bold" "❯" }
     $env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = {|| prompt-indicator "magenta_bold" "red_bold" "❮" }
     $env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = ""
-    $env.TRANSIENT_PROMPT_COMMAND = {|| create-left-prompt "\n" }
+    $env.TRANSIENT_PROMPT_COMMAND = {|| create-left-prompt }
     $env.TRANSIENT_PROMPT_COMMAND_RIGHT = {|| create-right-prompt }
 }

@@ -23,6 +23,9 @@ const DOWNLOADS_DIR = ($nu.home-dir | path join "Downloads")
 const DATA_DIR = ($CONFIG_DIR | path join "data")
 
 use $"($CONFIG_DIR)/tools.nu" *
+use $"($CONFIG_DIR)/modules/fzf.nu" *
+
+let has_fzf = not (which fzf | is-empty)
 
 # Alias
 alias k = kitty +kitten
@@ -41,6 +44,43 @@ mkdir $DATA_DIR
 $env.config.history.path = ($DATA_DIR | path join "history.sqlite3")
 $env.config.history.file_format = "sqlite"
 
+let fzf_keybindings = if $has_fzf {
+    [
+        {
+            name: fzf_file_insert
+            modifier: control
+            keycode: char_t
+            mode: [emacs vi_normal vi_insert]
+            event: {
+                send: executehostcommand
+                cmd: "fzf-file-insert"
+            }
+        }
+        {
+            name: fzf_history
+            modifier: control
+            keycode: char_r
+            mode: [emacs vi_normal vi_insert]
+            event: {
+                send: executehostcommand
+                cmd: "fzf-history"
+            }
+        }
+        {
+            name: fzf_cd
+            modifier: alt
+            keycode: char_c
+            mode: [emacs vi_normal vi_insert]
+            event: {
+                send: executehostcommand
+                cmd: "fzf-cd"
+            }
+        }
+    ]
+} else {
+    []
+}
+
 $env.config.keybindings = ([
     {
         name: insert_newline
@@ -51,34 +91,4 @@ $env.config.keybindings = ([
             edit: insertnewline
         }
     }
-    {
-        name: fzf_file_insert
-        modifier: control
-        keycode: char_t
-        mode: [emacs vi_normal vi_insert]
-        event: {
-            send: executehostcommand
-            cmd: "fzf-file-insert"
-        }
-    }
-    {
-        name: fzf_history
-        modifier: control
-        keycode: char_r
-        mode: [emacs vi_normal vi_insert]
-        event: {
-            send: executehostcommand
-            cmd: "fzf-history"
-        }
-    }
-    {
-        name: fzf_cd
-        modifier: alt
-        keycode: char_c
-        mode: [emacs vi_normal vi_insert]
-        event: {
-            send: executehostcommand
-            cmd: "fzf-cd"
-        }
-    }
-] ++ $env.config.keybindings)
+] ++ $fzf_keybindings ++ $env.config.keybindings)
