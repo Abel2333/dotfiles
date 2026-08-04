@@ -147,6 +147,29 @@ export def --env up [n: int = 1]: nothing -> nothing {
     cd (0..<$n | reduce -f "." { |_, acc| $acc | path join ".." })
 }
 
+# Core listing logic shared by `l` and `ll`.
+def ls-long [targets: list<string>, hidden: bool, full_paths: bool, with_target: bool] {
+    let result = if $hidden {
+        if $full_paths {
+            ls --all --long ...$targets
+        } else {
+            ls --all --long --short-names ...$targets
+        }
+    } else {
+        if $full_paths {
+            ls --long ...$targets
+        } else {
+            ls --long --short-names ...$targets
+        }
+    }
+
+    $result | if $with_target {
+        select name type target mode group user size modified
+    } else {
+        select name type mode group user size modified
+    }
+}
+
 # List files including hidden entries with long-format metadata.
 #
 # Examples:
@@ -156,26 +179,7 @@ export def --env up [n: int = 1]: nothing -> nothing {
 #   Include symbolic-link targets in the listing.
 #   > l --target
 export def l [--full-paths, --target(-t), ...paths: string]: nothing -> table {
-    let targets = (fs ls-targets ...$paths)
-    let color_base = if ($targets | length) == 1 { $targets | first } else { null }
-
-    if $full_paths {
-        ls --all --long ...$targets
-        | if $target {
-            select name type target mode group user size modified
-        } else {
-            select name type mode group user size modified
-        }
-    } else {
-        ls --all --long --short-names ...$targets
-        | if $target {
-            select name type target mode group user size modified
-        } else {
-            select name type mode group user size modified
-        }
-        # | fs ls-colorize-name $color_base
-        # | reject target
-    }
+    ls-long (fs ls-targets ...$paths) true $full_paths $target
 }
 
 # List files without hidden entries using long-format metadata.
@@ -187,26 +191,7 @@ export def l [--full-paths, --target(-t), ...paths: string]: nothing -> table {
 #   Include symbolic-link targets in the listing.
 #   > ll --target /etc
 export def ll [--full-paths, --target(-t), ...paths: string]: nothing -> table {
-    let targets = (fs ls-targets ...$paths)
-    let color_base = if ($targets | length) == 1 { $targets | first } else { null }
-
-    if $full_paths {
-        ls --long ...$targets
-        | if $target {
-            select name type target mode group user size modified
-        } else {
-            select name type mode group user size modified
-        }
-    } else {
-        ls --long --short-names ...$targets
-        | if $target {
-            select name type target mode group user size modified
-        } else {
-            select name type mode group user size modified
-        }
-        # | fs ls-colorize-name $color_base
-        # | reject target
-    }
+    ls-long (fs ls-targets ...$paths) false $full_paths $target
 }
 
 # Show detailed metadata for a file or directory itself.
@@ -277,7 +262,7 @@ export def --env load-env-file [file: string=".env"]: nothing -> nothing {
         }
     )
 
-    $env._LOADED_ENV_KEYS = ($vars | get key)
+    $env._LOADED_ENV_KEYS = (($env | get --optional _LOADED_ENV_KEYS | default [] | append ($vars | get key)) | uniq)
     load-env ($vars | transpose -r | first)
     print $"Loaded ($vars | length) variables from ($p)"
 }

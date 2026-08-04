@@ -1,7 +1,7 @@
 # config.nu
 #
 # Installed by:
-# version = "0.112.2"
+# version = "0.113.1"
 #
 # This file is used to override default Nushell settings, define
 # (or import) custom commands, or run any other startup tasks.
@@ -34,10 +34,15 @@ alias ac = aria2c -c -x 8 -s 8 -d $DOWNLOADS_DIR
 alias lg = lazygit
 
 # Zoxide
-source $"($CACHE_DIR)/zoxide.nu"
+#
+# Note: `source` must stay at the top level and only the path may be
+# conditional. Wrapping `source` itself in `if` would scope the file's
+# `export`ed definitions (like the `z` alias) to that block, silently
+# dropping them once the block ends.
+source (if ($"($CACHE_DIR)/zoxide.nu" | path exists) { $"($CACHE_DIR)/zoxide.nu" } else { "/dev/null" })
 
 # Carapace
-source $"($nu.cache-dir)/carapace.nu"
+source (if (($nu.cache-dir | path join "carapace.nu") | path exists) { ($nu.cache-dir | path join "carapace.nu") } else { "/dev/null" })
 source $"($CONFIG_DIR)/completions.nu"
 
 mkdir $DATA_DIR

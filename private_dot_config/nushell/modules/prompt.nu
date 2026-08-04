@@ -271,14 +271,18 @@ def prompt-git-status-info [] {
     }
 }
 
-def prompt-git-stash-count [] {
-    let result = (do { ^git rev-list --walk-reflogs --count refs/stash } | complete)
-    if $result.exit_code != 0 {
+def prompt-git-stash-count [git_dir: string] {
+    # Read the stash reflog directly instead of spawning `git rev-list` on
+    # every prompt render; each stash push appends one reflog line.
+    let stash_log = ($git_dir | path join "logs" "refs" "stash")
+    if not ($stash_log | path exists) {
         return 0
     }
 
     try {
-        $result.stdout | str trim | into int
+        open --raw $stash_log
+        | lines --skip-empty
+        | length
     } catch {
         0
     }
@@ -324,7 +328,7 @@ def prompt-git-context [] {
     | merge $state
     | merge {
         branch_display: $branch_display
-        stashed: (prompt-git-stash-count)
+        stashed: (prompt-git-stash-count $rev.git_dir)
     }
 }
 
@@ -355,34 +359,44 @@ def prompt-rust-project [] {
     ] | any {|name| (($env.PWD | path join $name) | path exists)}
 }
 
-def prompt-python-version [] {
-    if (which python | is-empty) {
-        ""
-    } else {
-        try {
-            ^python --version
-            | str trim
-            | split row " "
-            | get 1
-        } catch {
-            ""
-        }
+# Query a `--version`-style binary once per machine state and cache the result,
+# instead of spawning a subprocess on every prompt render inside a matching
+# project directory. The cache is keyed by the resolved binary path, so
+# toolchain updates that change the path invalidate it automatically.
+def cached-binary-version [cmd: string, cache_name: string] {
+    let bin = (which $cmd | get 0?.path | default "")
+    if ($bin | is-empty) {
+        return ""
     }
+
+    let cache_file = ($nu.cache-dir | path join $cache_name)
+    let cached = (try { open --raw $cache_file | from nuon } catch { null })
+    if ($cached != null) and ($cached.path == $bin) {
+        return $cached.version
+    }
+
+    let version = (try {
+        ^$cmd --version
+        | str trim
+        | split row " "
+        | get 1
+    } catch {
+        ""
+    })
+
+    if ($version | is-not-empty) {
+        try { { path: $bin, version: $version } | to nuon | save --force $cache_file } catch {}
+    }
+
+    $version
+}
+
+def prompt-python-version [] {
+    cached-binary-version python "prompt-python-version.nuon"
 }
 
 def prompt-rust-version [] {
-    if (which rustc | is-empty) {
-        ""
-    } else {
-        try {
-            ^rustc --version
-            | str trim
-            | split row " "
-            | get 1
-        } catch {
-            ""
-        }
-    }
+    cached-binary-version rustc "prompt-rust-version.nuon"
 }
 
 def prompt-format-duration [ms: int] {
@@ -585,8 +599,7 @@ def prompt-right-time [] {
     prompt-style "cyan" (date now | format date "%H:%M:%S")
 }
 
-def create-left-prompt [leading_newline: string = ""] {
-    let git_ctx = (prompt-git-context)
+def render-left-prompt [git_ctx: record, leading_newline: string = ""] {
     let user_host = (prompt-join [(prompt-username) (prompt-hostname)])
     let segments = (prompt-join [
         (prompt-os)
@@ -601,6 +614,40 @@ def create-left-prompt [leading_newline: string = ""] {
     ])
 
     $"($leading_newline)(prompt-prefix '╭─ ')($segments)\n(prompt-prefix '╰─ ')"
+}
+
+def prompt-git-cache-file [] {
+    $nu.temp-dir | path join $"nu-prompt-git-($nu.pid).nuon"
+}
+
+def save-git-context-cache [git_ctx: record] {
+    try {
+        { pwd: $env.PWD, ctx: $git_ctx } | to nuon | save --force (prompt-git-cache-file)
+    } catch {}
+}
+
+def create-left-prompt [leading_newline: string = ""] {
+    let git_ctx = (prompt-git-context)
+    save-git-context-cache $git_ctx
+    render-left-prompt $git_ctx $leading_newline
+}
+
+# The transient prompt reuses the git context from the last live render when
+# the working directory is unchanged, halving the git subprocess load that a
+# full recomputation would cost on every entered command.
+def create-transient-left-prompt [leading_newline: string = ""] {
+    let cache_file = (prompt-git-cache-file)
+    let cached = (try { open --raw $cache_file | from nuon } catch { null })
+
+    let git_ctx = if ($cached != null) and ($cached.pwd == $env.PWD) {
+        $cached.ctx
+    } else {
+        let ctx = (prompt-git-context)
+        save-git-context-cache $ctx
+        $ctx
+    }
+
+    render-left-prompt $git_ctx $leading_newline
 }
 
 def create-right-prompt [] {
@@ -637,6 +684,6 @@ export-env {
     $env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = {|| prompt-indicator "green_bold" "red_bold" "❯" }
     $env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = {|| prompt-indicator "magenta_bold" "red_bold" "❮" }
     $env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = ""
-    $env.TRANSIENT_PROMPT_COMMAND = {|| create-left-prompt }
+    $env.TRANSIENT_PROMPT_COMMAND = {|| create-transient-left-prompt }
     $env.TRANSIENT_PROMPT_COMMAND_RIGHT = {|| create-right-prompt }
 }

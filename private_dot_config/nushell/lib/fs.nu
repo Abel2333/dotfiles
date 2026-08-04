@@ -18,19 +18,6 @@ export def --env ls-targets [...paths: string] {
     }
 }
 
-export def ls-relativize [result: table, targets: list<string>] {
-    if ($targets == ["."]) {
-        return $result
-    }
-
-    if ($targets | length) == 1 {
-        let base = $targets | first
-        return ($result | update name { |row| $row.name | path relative-to $base })
-    }
-
-    $result
-}
-
 export def ls-colorize-name [base_dir?: string]: table -> table {
     $in | update name { |row|
         let plain = $row.name

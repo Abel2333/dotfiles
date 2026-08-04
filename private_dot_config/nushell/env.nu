@@ -39,8 +39,16 @@ $env.VIRTUAL_ENV_DISABLE_PROMPT = "1"
 ############
 #  Zoxide  #
 ############
-if ((which zoxide | length) > 0) {
-    zoxide init nushell | save -f $"($CACHE_DIR)/zoxide.nu"
+let zoxide_bin = (which zoxide | get 0?.path)
+if $zoxide_bin != null {
+    let zoxide_cache = $"($CACHE_DIR)/zoxide.nu"
+    let zoxide_stale = (
+        (not ($zoxide_cache | path exists))
+        or (try { (ls $zoxide_bin | get modified.0) > (ls $zoxide_cache | get modified.0) } catch { true })
+    )
+    if $zoxide_stale {
+        zoxide init nushell | save -f $zoxide_cache
+    }
 }
 
 ##########
@@ -72,12 +80,14 @@ use $"($CONFIG_DIR)/modules/prompt.nu" *
 ##############
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # Optional.
 let cache_file = $"($nu.cache-dir)/carapace.nu"
-let carapace_bin = (which carapace | get path.0)
+let carapace_bin = (which carapace | get 0?.path)
 
 let need_update = (
-    (not ($cache_file | path exists))
-    or
-    (try { (ls $carapace_bin | get modified.0) > (ls $cache_file | get modified.0) } catch { true })
+    ($carapace_bin != null)
+    and (
+        (not ($cache_file | path exists))
+        or (try { (ls $carapace_bin | get modified.0) > (ls $cache_file | get modified.0) } catch { true })
+    )
 )
 
 if $need_update {

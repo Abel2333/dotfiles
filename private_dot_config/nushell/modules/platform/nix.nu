@@ -67,7 +67,7 @@ if (($env | get --optional NIX_SSL_CERT_FILE) == null) {
             "/etc/pki/tls/certs/ca-bundle.crt",
         ]
         | where {|path| $path | path exists}
-        | first
+        | get 0?
     )
 
     if $system_cert != null {
@@ -82,7 +82,7 @@ if (($env | get --optional NIX_SSL_CERT_FILE) == null) {
                 ($nix_link | path join "etc" "ca-bundle.crt"),
             ]
             | where {|path| $path | path exists}
-            | first
+            | get 0?
         )
 
         if $profile_cert != null {
