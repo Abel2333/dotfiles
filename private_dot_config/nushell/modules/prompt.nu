@@ -134,7 +134,7 @@ def prompt-git-rev-info [] {
         }
     }
 
-    let result = (do { ^git rev-parse --show-toplevel --show-prefix --absolute-git-dir } | complete)
+    let result = (do { ^git rev-parse --show-toplevel --show-prefix --absolute-git-dir --git-common-dir } | complete)
     if $result.exit_code != 0 {
         return {
             inside_repo: false
@@ -142,13 +142,15 @@ def prompt-git-rev-info [] {
             root_name: ""
             prefix: ""
             git_dir: ""
+            common_dir: ""
         }
     }
 
-    let lines = (($result.stdout | split row "\n") ++ ["", "", ""])
+    let lines = (($result.stdout | split row "\n") ++ ["", "", "", ""])
     let root = (($lines | get 0) | str trim)
     let prefix = (($lines | get 1) | str trim)
     let git_dir = (($lines | get 2) | str trim)
+    let common_dir = (($lines | get 3) | str trim)
 
     {
         inside_repo: true
@@ -156,6 +158,7 @@ def prompt-git-rev-info [] {
         root_name: ($root | path basename)
         prefix: $prefix
         git_dir: $git_dir
+        common_dir: $common_dir
     }
 }
 
@@ -328,7 +331,7 @@ def prompt-git-context [] {
     | merge $state
     | merge {
         branch_display: $branch_display
-        stashed: (prompt-git-stash-count $rev.git_dir)
+        stashed: (prompt-git-stash-count $rev.common_dir)
     }
 }
 
@@ -463,16 +466,6 @@ def prompt-directory [git_ctx: record] {
     }
 
     prompt-style "#89B4FA" $"($display_path) "
-}
-
-def prompt-git-count-symbol [count: int, symbol: string] {
-    if $count <= 0 {
-        ""
-    } else if $count == 1 {
-        $symbol
-    } else {
-        $"($symbol) ($count)"
-    }
 }
 
 def prompt-git-presence-symbol [count: int, symbol: string] {
@@ -616,37 +609,8 @@ def render-left-prompt [git_ctx: record, leading_newline: string = ""] {
     $"($leading_newline)(prompt-prefix '╭─ ')($segments)\n(prompt-prefix '╰─ ')"
 }
 
-def prompt-git-cache-file [] {
-    $nu.temp-dir | path join $"nu-prompt-git-($nu.pid).nuon"
-}
-
-def save-git-context-cache [git_ctx: record] {
-    try {
-        { pwd: $env.PWD, ctx: $git_ctx } | to nuon | save --force (prompt-git-cache-file)
-    } catch {}
-}
-
 def create-left-prompt [leading_newline: string = ""] {
     let git_ctx = (prompt-git-context)
-    save-git-context-cache $git_ctx
-    render-left-prompt $git_ctx $leading_newline
-}
-
-# The transient prompt reuses the git context from the last live render when
-# the working directory is unchanged, halving the git subprocess load that a
-# full recomputation would cost on every entered command.
-def create-transient-left-prompt [leading_newline: string = ""] {
-    let cache_file = (prompt-git-cache-file)
-    let cached = (try { open --raw $cache_file | from nuon } catch { null })
-
-    let git_ctx = if ($cached != null) and ($cached.pwd == $env.PWD) {
-        $cached.ctx
-    } else {
-        let ctx = (prompt-git-context)
-        save-git-context-cache $ctx
-        $ctx
-    }
-
     render-left-prompt $git_ctx $leading_newline
 }
 
@@ -684,6 +648,6 @@ export-env {
     $env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = {|| prompt-indicator "green_bold" "red_bold" "❯" }
     $env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = {|| prompt-indicator "magenta_bold" "red_bold" "❮" }
     $env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = ""
-    $env.TRANSIENT_PROMPT_COMMAND = {|| create-transient-left-prompt }
+    $env.TRANSIENT_PROMPT_COMMAND = {|| create-left-prompt }
     $env.TRANSIENT_PROMPT_COMMAND_RIGHT = {|| create-right-prompt }
 }

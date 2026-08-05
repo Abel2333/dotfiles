@@ -147,29 +147,6 @@ export def --env up [n: int = 1]: nothing -> nothing {
     cd (0..<$n | reduce -f "." { |_, acc| $acc | path join ".." })
 }
 
-# Core listing logic shared by `l` and `ll`.
-def ls-long [targets: list<string>, hidden: bool, full_paths: bool, with_target: bool] {
-    let result = if $hidden {
-        if $full_paths {
-            ls --all --long ...$targets
-        } else {
-            ls --all --long --short-names ...$targets
-        }
-    } else {
-        if $full_paths {
-            ls --long ...$targets
-        } else {
-            ls --long --short-names ...$targets
-        }
-    }
-
-    $result | if $with_target {
-        select name type target mode group user size modified
-    } else {
-        select name type mode group user size modified
-    }
-}
-
 # List files including hidden entries with long-format metadata.
 #
 # Examples:
@@ -179,7 +156,23 @@ def ls-long [targets: list<string>, hidden: bool, full_paths: bool, with_target:
 #   Include symbolic-link targets in the listing.
 #   > l --target
 export def l [--full-paths, --target(-t), ...paths: string]: nothing -> table {
-    ls-long (fs ls-targets ...$paths) true $full_paths $target
+    let targets = (fs ls-targets ...$paths)
+
+    if $full_paths {
+        ls --all --long ...$targets
+        | if $target {
+            select name type target mode group user size modified
+        } else {
+            select name type mode group user size modified
+        }
+    } else {
+        ls --all --long --short-names ...$targets
+        | if $target {
+            select name type target mode group user size modified
+        } else {
+            select name type mode group user size modified
+        }
+    }
 }
 
 # List files without hidden entries using long-format metadata.
@@ -191,7 +184,23 @@ export def l [--full-paths, --target(-t), ...paths: string]: nothing -> table {
 #   Include symbolic-link targets in the listing.
 #   > ll --target /etc
 export def ll [--full-paths, --target(-t), ...paths: string]: nothing -> table {
-    ls-long (fs ls-targets ...$paths) false $full_paths $target
+    let targets = (fs ls-targets ...$paths)
+
+    if $full_paths {
+        ls --long ...$targets
+        | if $target {
+            select name type target mode group user size modified
+        } else {
+            select name type mode group user size modified
+        }
+    } else {
+        ls --long --short-names ...$targets
+        | if $target {
+            select name type target mode group user size modified
+        } else {
+            select name type mode group user size modified
+        }
+    }
 }
 
 # Show detailed metadata for a file or directory itself.
