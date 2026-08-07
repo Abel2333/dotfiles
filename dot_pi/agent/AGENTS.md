@@ -53,6 +53,19 @@
 - Ask the user only when the information cannot be determined safely or when
   choosing between materially different environments.
 
+## Tooling
+- Manage Python dependencies with uv only, in isolated projects under
+  ~/Tools/pyenvs/<purpose>/; never install Python packages into the system Python.
+- Run such projects with `uv run --project ~/Tools/pyenvs/<project> python <script>`.
+- When a uv project under ~/Tools/pyenvs/ is needed but does not exist yet,
+  create it automatically (uv init + uv add + uv sync) and tell the user what
+  was created; do not ask for permission first, do not create it silently.
+- For PDF tasks, use existing tooling before writing custom parsers:
+  the pdf-tools uv env (scripts/pdf_extract.py: `render` / `images` subcommands),
+  then qpdf, Ghostscript, ImageMagick, ffmpeg.
+- If the needed tool is missing, ask the user how to proceed instead of
+  silently hand-rolling a replacement.
+
 ## Secrets
 - Never expose secrets, API keys, tokens, or decrypted credential values in
   replies, logs, diffs, or commits.
