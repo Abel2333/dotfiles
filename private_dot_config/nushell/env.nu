@@ -18,6 +18,25 @@ if $nu.os-info.name == "linux" {
     source $"($CONFIG_DIR)/modules/platform/linux.nu"
 }
 
+##########
+#  Mise  #
+##########
+const mise_cache = $"($CACHE_DIR)/mise.nu"
+let mise_bin = (which mise | get 0?.path)
+if $mise_bin != null {
+    let mise_stale = (
+        (not ($mise_cache | path exists))
+        or (try { (ls $mise_bin | get modified.0) > (ls $mise_cache | get modified.0) } catch { true })
+    )
+    if $mise_stale {
+        mise activate nu | save -f $mise_cache
+    }
+}
+source (if ($mise_cache | path exists) { $mise_cache } else { "/dev/null" })
+if $mise_bin != null and ($mise_cache | path exists) {
+    mise hook-env -s nu | parse vars | update-env
+}
+
 ############
 #  Editor  #
 ############

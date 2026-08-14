@@ -1,0 +1,17 @@
+# mise configuration - replacement for home-manager user packages
+# See https://mise.jdx.dev for docs.
+
+[tools]
+starship = "latest"   # Shell prompt
+zoxide = "latest"     # Smarter cd (autojump)
+eza = "latest"        # Modern ls replacement
+ripgrep = "latest"    # Fast grep alternative
+fd = "latest"         # Fast find alternative
+fastfetch = "latest"  # System info on shell start
+tmux = "latest"       # Terminal multiplexer
+lazygit = "latest"    # Git TUI
+typst = "latest"      # Modern LaTeX alternative
+nodejs = "latest"     # Node.js runtime
+prettier = "latest"   # Code formatter (npm backend)
+codex = "latest"      # OpenAI Codex CLI
+"npm:@earendil-works/pi-coding-agent" = "latest"  # Pi coding agent; npm backend 跑 node CLI,支持扩展的 node:sqlite(aqua/bun 版不支持)
