@@ -1,6 +1,5 @@
-# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
-# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+# A TOML linter can use this schema to validate the config.
+#:schema https://yazi-rs.github.io/schemas/yazi.json
 
 [mgr]
 ratio           = [ 1, 4, 3 ]
@@ -125,7 +124,7 @@ preloaders = [
 	{ mime = "application/ms-opentype", run = "font" },
 ]
 previewers = [
-  { name = "*/", run = "folder", sync = true },
+  { url = "*/", run = "folder", sync = true },
   # Code
   { mime = "text/*", run = "code" },
   { mime = "*/xml", run = "code" },
