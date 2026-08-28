@@ -1,0 +1,227 @@
+# pi security gate rules. Loaded on every tool call; edits take effect immediately.
+# Engine: ~/.pi/agent/extensions/security/engine/
+#
+# Two rule kinds:
+#
+#   [[bash]]  argv-level matching of bash command segments.
+#             Fields (all specified fields must match, i.e. AND):
+#               cmd           command name (basename), string or list
+#               subcmd        matches if ANY positional equals it (e.g. git push)
+#               any / all     token conditions; outer AND for all, OR for any;
+#                             inner lists are OR. Token forms: "--force" long
+#                             flag, "-f" short flag (matches clusters like -rf),
+#                             anything else = positional argument
+#               args_re       regexes (OR) against positional arguments
+#               args_glob     globs (OR) against positionals (raw and cwd-resolved)
+#               redirect_glob globs (OR) against file redirect targets (> >> N>)
+#               path_outside  whitelist: at least one positional path resolves
+#                             outside every listed prefix (~ and $HOME expand;
+#                             relative paths resolve against the session cwd)
+#               pipe_to       another segment's command is in this list
+#             Quoting is handled: separators inside quotes do not split,
+#             heredoc bodies and operands after `--` are not matched.
+#
+#   [[tool]]  any tool, matched on input fields.
+#               tool   tool name (pi names, lowercase): bash, read, write, edit, ...
+#               where  { field = { matcher } } - matchers: equals, contains,
+#                      prefix, suffix, glob, domain, re (arrays are OR),
+#                      not = { ... } negates a nested matcher
+#
+# decision:
+#   deny  block; reason is fed back to the model (use for redirection/preference)
+#   ask   confirmation dialog; without UI it downgrades to deny
+#   log   allow, but audit-log and show a notice
+#
+# First match wins. For bash, all [[bash]] rules run before [[tool]] rules.
+# Ordering matters: keep deny rules (protected paths) ahead of ask rules,
+# or an approvable ask would shadow the hard deny.
+
+# ════ Protected paths (deny) —— keep these FIRST: first match wins, and a
+# deny that sits behind an ask rule is dead code. ════
+
+[[bash]]
+name = "protect-paths-bash"
+cmd = ["rm", "mv", "cp", "shred", "dd", "tee", "ln"]
+args_glob = [
+  "**/.env", "**/.env.*",
+  "**/.git", "**/.git/**",
+  "**/node_modules", "**/node_modules/**",
+  "**/package-lock.json", "**/yarn.lock", "**/pnpm-lock.yaml",
+  "**/Gemfile.lock", "**/Cargo.lock", "**/poetry.lock",
+]
+decision = "deny"
+reason = "Protected path (.env / lockfile / .git / node_modules); do not touch it via bash. If a change is truly needed, ask the user to do it manually"
+
+[[bash]]
+name = "protect-paths-redirect"
+redirect_glob = [
+  "**/.env", "**/.env.*",
+  "**/.git", "**/.git/**",
+  "**/package-lock.json", "**/yarn.lock", "**/pnpm-lock.yaml",
+  "**/Gemfile.lock", "**/Cargo.lock", "**/poetry.lock",
+]
+decision = "deny"
+reason = "Redirect would overwrite a protected file (.env / lockfile / .git)"
+
+# ════ Destructive filesystem operations ════
+
+[[bash]]
+name = "rm-recursive"
+cmd = "rm"
+all = [["-r", "-R", "--recursive"]]
+path_outside = ["/tmp"]
+decision = "ask"
+reason = "Recursive delete (-r/-R/--recursive); only allowed under /tmp"
+
+[[bash]]
+name = "rm-force"
+cmd = "rm"
+any = ["-f", "--force"]
+path_outside = ["/tmp"]
+decision = "ask"
+reason = "rm --force deletes without prompting; only quiet under /tmp"
+
+[[bash]]
+name = "disk-level"
+cmd = ["dd", "mkfs", "fdisk", "parted", "wipefs"]
+decision = "ask"
+reason = "Disk-level operation"
+
+[[bash]]
+name = "redirect-block-device"
+redirect_glob = ["/dev/sd*", "/dev/nvme*", "/dev/mmcblk*"]
+decision = "ask"
+reason = "Redirect writes to a block device"
+
+[[bash]]
+name = "pipe-to-shell"
+cmd = ["curl", "wget"]
+pipe_to = ["sh", "bash", "zsh"]
+decision = "ask"
+reason = "Piping a remote script into a shell"
+
+[[bash]]
+name = "chmod-permissive"
+cmd = "chmod"
+args_re = ['^0?[0-7]*7[0-7]*7$', 'o\+w', 'a\+w']
+decision = "ask"
+reason = "chmod makes files world-writable; use narrower modes (755/644)"
+
+[[bash]]
+name = "chown"
+cmd = "chown"
+decision = "ask"
+reason = "chown changes file ownership"
+
+# ════ Dangerous git operations ════
+
+[[bash]]
+name = "git-push"
+cmd = "git"
+subcmd = "push"
+decision = "ask"
+reason = "git push requires user confirmation (including --force)"
+
+[[bash]]
+name = "git-reset-hard"
+cmd = "git"
+subcmd = "reset"
+any = ["--hard", "--merge"]
+decision = "ask"
+reason = "git reset --hard discards working-tree changes"
+
+[[bash]]
+name = "git-clean-force"
+cmd = "git"
+subcmd = "clean"
+any = ["-f", "--force"]
+decision = "ask"
+reason = "git clean -f deletes untracked files"
+
+# ════ System paths and privilege escalation ════
+
+[[bash]]
+name = "mvcp-system-dir"
+cmd = ["mv", "cp"]
+args_glob = ["/etc/**", "/boot/**", "/usr/**", "/var/**"]
+decision = "ask"
+reason = "mv/cp touches a system directory"
+
+[[bash]]
+name = "sudo"
+cmd = ["sudo", "doas"]
+decision = "log"
+reason = "sudo privilege escalation (log only)"
+
+[[bash]]
+name = "redirect-etc"
+redirect_glob = ["/etc/**"]
+decision = "ask"
+reason = "Redirect writes into /etc"
+
+[[bash]]
+name = "redirect-sensitive-dotfile"
+redirect_glob = ["**/.ssh/**", "**/.gnupg/**", "**/.config/**"]
+decision = "ask"
+reason = "Redirect writes into a sensitive config directory"
+
+# ════ Protected paths on dedicated tools (deny) ════
+
+[[tool]]
+name = "protect-paths-write"
+tool = ["write", "edit"]
+where = { path = { glob = [
+  "**/.env", "**/.env.*",
+  "**/.git", "**/.git/**",
+  "**/node_modules", "**/node_modules/**",
+  "**/package-lock.json", "**/yarn.lock", "**/pnpm-lock.yaml",
+  "**/Gemfile.lock", "**/Cargo.lock", "**/poetry.lock",
+], not = { suffix = ".example" } } }
+decision = "deny"
+reason = "Protected path; do not modify it directly. Present the change and let the user apply it"
+
+# .env may contain secrets; reading requires confirmation (.example exempted)
+[[tool]]
+name = "dotenv-read"
+tool = "read"
+where = { path = { glob = ["**/.env", "**/.env.*"], not = { suffix = ".example" } } }
+decision = "ask"
+reason = ".env may contain secrets"
+
+# Bash-side equivalent so `cat .env` etc. cannot bypass the read-tool ask
+[[bash]]
+name = "dotenv-read-bash"
+cmd = ["cat", "bat", "less", "more", "head", "tail", "xxd", "sed", "awk", "rg", "source", "."]
+args_glob = ["**/.env", "**/.env.*"]
+decision = "ask"
+reason = ".env may contain secrets"
+
+# ════ Tool preference redirects (deny reason is fed back to the model, which retries with the preferred tool) ════
+
+[[bash]]
+name = "prefer-ripgrep"
+cmd = "grep"
+decision = "deny"
+reason = "Tool preference: use rg instead of grep (rg recurses by default; -n line numbers; -g file filter; -e explicit pattern)"
+
+# Guard against rg's -r trap: -r/--replace rewrites matched text, it is NOT recursive
+[[bash]]
+name = "rg-no-replace"
+cmd = "rg"
+any = ["-r", "--replace"]
+decision = "deny"
+reason = "rg's -r/--replace rewrites matched text instead of recursing (recursion is the default) - `-rn` means 'replace with n', not 'recursive + line numbers'. Use -n for line numbers. If replace is truly intended, explain why"
+
+[[bash]]
+name = "prefer-fd"
+cmd = "find"
+decision = "deny"
+reason = "Tool preference: use fd instead of find (fd PATTERN PATH; a plain pattern replaces -name; use fd -x instead of -exec). If a find-only feature is needed, explain why"
+
+# More preference-rule examples:
+#
+# [[bash]]
+# name = "uv-not-pip"
+# cmd = ["pip", "pip3"]
+# decision = "deny"
+# reason = "Python goes through uv: uv add for dependencies, uvx for one-off tools"
