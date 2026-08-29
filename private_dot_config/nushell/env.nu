@@ -5,13 +5,14 @@ const CONFIG_DIR = $nu.default-config-dir
 const CACHE_DIR = $nu.cache-dir
 
 use $"($CONFIG_DIR)/lib/path.nu" prepend-paths
+use $"($CONFIG_DIR)/modules/platform/no-nix.nu" sanitize-nix-environment
 
 ##########
 #  Path  #
 ##########
 if $nu.os-info.family == "unix" {
     source $"($CONFIG_DIR)/modules/platform/unix.nu"
-    source $"($CONFIG_DIR)/modules/platform/nix.nu"
+    sanitize-nix-environment
 }
 
 if $nu.os-info.name == "linux" {
@@ -21,26 +22,8 @@ if $nu.os-info.name == "linux" {
 ##########
 #  Mise  #
 ##########
-const mise_cache = $"($CACHE_DIR)/mise.nu"
-let mise_bin = (which mise | get 0?.path)
-if $mise_bin != null {
-    let mise_stale = (
-        (not ($mise_cache | path exists))
-        or (try { (ls $mise_bin | get modified.0) > (ls $mise_cache | get modified.0) } catch { true })
-    )
-    if $mise_stale {
-        mise activate nu | save -f $mise_cache
-    }
-}
-source (if ($mise_cache | path exists) { $mise_cache } else { "/dev/null" })
-# `exec nu` inherits __MISE_SESSION from the parent shell while the cached
-# activation script only hides __MISE_DIFF. In that inconsistent state,
-# `mise hook-env` silently emits nothing and PATH loses all mise tool dirs.
-# Drop the stale session state so hook-env emits the full env again.
-if ($env.__MISE_SESSION? != null) { hide-env __MISE_SESSION }
-if $mise_bin != null and ($mise_cache | path exists) {
-    mise hook-env -s nu | parse vars | update-env
-}
+let mise_path = $nu.default-config-dir | path join "mise.nu"
+^mise activate nu | save $mise_path --force
 
 ############
 #  Editor  #

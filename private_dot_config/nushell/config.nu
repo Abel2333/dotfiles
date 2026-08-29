@@ -22,6 +22,9 @@ const CACHE_DIR = $nu.cache-dir
 const DOWNLOADS_DIR = ($nu.home-dir | path join "Downloads")
 const DATA_DIR = ($CONFIG_DIR | path join "data")
 
+# Mise
+use ($nu.default-config-dir | path join "mise.nu")
+
 use $"($CONFIG_DIR)/tools.nu" *
 use $"($CONFIG_DIR)/modules/fzf.nu" *
 
