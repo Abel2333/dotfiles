@@ -291,3 +291,266 @@ export def --env unload-env-file []: nothing -> nothing {
     hide-env _LOADED_ENV_KEYS
     print $"Unloaded ($keys | length) variables"
 }
+
+# Warm up gpg-agent by unlocking the signing key, so later signed
+# operations (e.g. git commit) do not trigger a pinentry prompt.
+# Run this in your own terminal: pinentry needs direct TTY access.
+#
+# Examples:
+#   Unlock the key configured in git user.signingkey.
+#   > gpg-warmup
+#
+#   Only check whether the passphrase is already cached.
+#   > gpg-warmup --check
+#
+#   Warm up a specific key instead of the git signing key.
+#   > gpg-warmup --key AB11547CE665126A
+export def gpg-warmup [--key(-k): string, --check(-c)]: nothing -> nothing {
+    let key = if $key != null {
+        $key
+    } else {
+        (do -i { ^git config --get user.signingkey } | complete | get stdout | str trim)
+    }
+    let key_args = if ($key | is-empty) { [] } else { [--local-user $key] }
+    let label = if ($key | is-empty) { "default key" } else { $key }
+
+    # Probe: --pinentry-mode error makes this fail instead of prompting
+    # when the passphrase is not yet cached by the agent.
+    let probe = ("warmup-probe" | ^gpg --batch --yes --quiet --pinentry-mode error --clearsign ...$key_args --output /dev/null | complete)
+    if $probe.exit_code == 0 {
+        print $"gpg-agent already has a cached passphrase for ($label)"
+        return
+    }
+    if $check {
+        print $"No cached passphrase for ($label)"
+        return
+    }
+
+    print $"Unlocking ($label) - pinentry may prompt for the passphrase..."
+    "warmup" | ^gpg --yes --quiet --clearsign ...$key_args --output /dev/null
+    if ($env.LAST_EXIT_CODE != 0) {
+        error make { msg: $"gpg-warmup failed for ($label)" }
+    }
+
+    # Verify the agent now serves the key without prompting.
+    let verify = ("warmup-verify" | ^gpg --batch --yes --quiet --pinentry-mode error --clearsign ...$key_args --output /dev/null | complete)
+    if $verify.exit_code == 0 {
+        print $"gpg-agent warmed up for ($label); signed commits should not prompt until the cache TTL expires"
+    } else {
+        error make { msg: $"Unlock succeeded but ($label) is still not served from cache" }
+    }
+}
+
+# Parse `ssh-add -l` output into a table of identities.
+def parse-ssh-identities []: string -> table {
+    lines | parse --regex '^(?<bits>\d+) (?<fingerprint>\S+) (?<comment>.*) \((?<type>[^()]+)\)$'
+}
+
+# Shared core: warm the agent cache entry for a served SSH key by
+# signing a dummy file locally through the agent protocol. The agent
+# performs the private key operation itself and prompts via pinentry
+# once; the passphrase is then cached under the key's keygrip.
+def ssh-agent-warm [pubkey: string, keygrip: string, label: string, check: bool]: nothing -> nothing {
+    # Cache probe: keyinfo reports per-keygrip state; field index 6 is
+    # '1' when the passphrase is cached, '-' otherwise. Pure agent
+    # query - never triggers pinentry.
+    let probe = {^gpg-connect-agent 'keyinfo --list' /bye | complete | get stdout | lines | each {|l| $l | split row ' ' } | where {|f| ($f | get --optional 1 | default "") == "KEYINFO" and ($f | get --optional 2 | default "") == $keygrip } | get --optional 0 | default [] | get --optional 6 | default "" }
+
+    if (do $probe) == "1" {
+        print $"gpg-agent already has a cached passphrase for ($label)"
+        return
+    }
+    if $check {
+        print $"No cached passphrase for ($label)"
+        return
+    }
+
+    # Warm: ssh-keygen resolves the public key via the agent and asks
+    # it to sign; the agent prompts via pinentry if not yet cached.
+    let tmp = (mktemp --tmpdir ssh-warmup.XXXXXX)
+    $pubkey + "\n" | save --force $"($tmp).pub"
+    "warmup" | save --force $tmp
+    print $"Unlocking ($label) - pinentry may prompt for the passphrase..."
+    ^ssh-keygen -Y sign -f $"($tmp).pub" -n ssh-warmup $tmp
+    let rc = $env.LAST_EXIT_CODE
+    rm --force $tmp $"($tmp).pub" $"($tmp).sig"
+    if $rc != 0 {
+        error make { msg: $"ssh-warmup failed for ($label)" }
+    }
+
+    # Verify the passphrase is now served from cache.
+    if (do $probe) == "1" {
+        print $"gpg-agent warmed up for ($label); SSH connections should not prompt until the cache TTL expires"
+    } else {
+        error make { msg: $"Unlock succeeded but ($label) is still not served from cache" }
+    }
+}
+
+# Warm up the gpg-agent passphrase cache for the [A] (authentication)
+# subkey of the git signing key, which gpg-agent exposes as an SSH
+# identity. Signing a dummy file through the SSH agent protocol unlocks
+# the same per-keygrip cache entry a real SSH push uses, so no server
+# connection is needed.
+def ssh-warmup-gpg [check: bool]: nothing -> nothing {
+    let gkey = (do -i { ^git config --get user.signingkey } | complete | get stdout | str trim)
+    if ($gkey | is-empty) {
+        error make { msg: "git user.signingkey is not set; cannot locate the GPG key" }
+    }
+
+    # Find the keygrip of the [A] subkey: in --with-colons output the
+    # sub record carries key capabilities at index 11 ('a' = auth) and
+    # the grp record right after it carries the keygrip at index 9.
+    let records = (^gpg --list-keys --with-colons --with-keygrip $gkey | complete | get stdout | lines | each {|l| $l | split row ':' })
+    let auth_idx = ($records | enumerate | where {|r| ($r.item | get --optional 0 | default "") == "sub" and (($r.item | get --optional 11 | default "") | str contains "a") } | get --optional 0.index)
+    if $auth_idx == null {
+        error make { msg: $"GPG key ($gkey) has no [A] authentication subkey" }
+    }
+    let keygrip = ($records | skip ($auth_idx + 1) | where {|r| ($r | get --optional 0 | default "") == "grp" } | get --optional 0 | default [] | get --optional 9)
+    if $keygrip == null {
+        error make { msg: $"Cannot determine the keygrip of the [A] subkey of ($gkey)" }
+    }
+
+    # gpg-agent only serves SSH keys whose keygrip is whitelisted in
+    # ~/.gnupg/sshcontrol. Verify the key is served before anything
+    # else, otherwise the agent lookup fails with a cryptic error.
+    let ssh_pubkey = (^gpg --export-ssh-key $gkey | complete | get stdout | str trim)
+    let blob = ($ssh_pubkey | split row ' ' | get --optional 1 | default "")
+    let served = ($blob != "") and ((^ssh-add -L | complete | get stdout) | str contains $blob)
+    if not $served {
+        error make { msg: $"gpg-agent does not serve the [A] subkey of ($gkey) over SSH.\nAdd this line to ~/.gnupg/sshcontrol, then retry:\n\n    ($keygrip) 3600\n" }
+    }
+
+    ssh-agent-warm $ssh_pubkey $keygrip $"[A] subkey of ($gkey)" $check
+}
+
+# Warm up an agent-served SSH key selected by its SSH fingerprint (as
+# shown by `ssh-add -l`), without needing the key file path.
+def ssh-warmup-fp [fingerprint: string, check: bool]: nothing -> nothing {
+    let target = ($fingerprint | str replace --regex '^SHA256:' '')
+
+    # The key must actually be served over the SSH protocol...
+    let listed = (^ssh-add -l | complete)
+    if $listed.exit_code != 0 {
+        error make { msg: "The agent serves no SSH identities (ssh-add -l is empty)" }
+    }
+    if not ($listed.stdout | str contains $target) {
+        error make { msg: $"The agent does not serve a key with fingerprint ($fingerprint)" }
+    }
+
+    # ...and mappable to a keygrip for cache probing.
+    let keygrip = (^gpg-connect-agent 'keyinfo --list --ssh-fpr' /bye | complete | get stdout | lines | each {|l| $l | split row ' ' } | where {|f| ($f | get --optional 1 | default "") == "KEYINFO" and (($f | get --optional 8 | default "") | str contains $target) } | get --optional 0 | default [] | get --optional 2)
+    if $keygrip == null {
+        error make { msg: $"Cannot map fingerprint ($fingerprint) to an agent keygrip" }
+    }
+
+    # Public key line for the local sign, matched by fingerprint.
+    let pubkey = (^ssh-add -L | complete | get stdout | lines | where {|pk| (($pk | ^ssh-keygen -lf /dev/stdin | complete | get stdout) | str contains $target) } | get --optional 0)
+    if $pubkey == null {
+        error make { msg: $"Cannot read the public key for ($fingerprint) from the agent" }
+    }
+
+    ssh-agent-warm $pubkey $keygrip $"key ($fingerprint)" $check
+}
+
+# Warm up SSH authentication so git fetch/push over SSH does not
+# prompt for a passphrase. Key sources: plain key files (loaded via
+# ssh-add), the GPG [A] authentication subkey of the git signing key
+# (--gpg), or any key already served by the agent (--fingerprint).
+# Run this in your own terminal: pinentry needs direct TTY access.
+# Complements gpg-warmup, which covers commit signing.
+#
+# Examples:
+#   Load the default keys (~/.ssh/id_ed25519, ...) into the agent.
+#   > ssh-warmup
+#
+#   List the identities currently loaded in the agent.
+#   > ssh-warmup --check
+#
+#   Load a specific key instead of the defaults.
+#   > ssh-warmup --key ~/.ssh/id_ed25519_work
+#
+#   Warm up the GPG [A] subkey (of git user.signingkey) instead,
+#   without connecting to any server.
+#   > ssh-warmup --gpg
+#
+#   Warm up a key already served by the agent, selected by its SSH
+#   fingerprint (see `ssh-warmup --check`), without any file path.
+#   > ssh-warmup --fingerprint SHA256:cfwEjafvbwaRVGWiv2qF5lVPvSAPf/wh27yRpaA0qso
+export def ssh-warmup [--key(-k): path, --check(-c), --gpg(-g), --fingerprint(-f): string]: [ nothing -> nothing, nothing -> table ] {
+    let modes = ([($key != null) $gpg ($fingerprint != null)] | where {|m| $m } | length)
+    if $modes > 1 {
+        error make { msg: "--key, --gpg and --fingerprint are mutually exclusive" }
+    }
+    if $gpg {
+        return (ssh-warmup-gpg $check)
+    }
+    if $fingerprint != null {
+        return (ssh-warmup-fp $fingerprint $check)
+    }
+    # Probe: ssh-add -l exits 0 with identities, 1 with none, 2 when the
+    # agent is unreachable. Listing never triggers a passphrase prompt.
+    let list = (^ssh-add -l | complete)
+    if $list.exit_code == 2 {
+        error make { msg: "Cannot connect to the ssh agent (is SSH_AUTH_SOCK set?)" }
+    }
+
+    # Fingerprint of the requested key, to test whether that specific
+    # key is already served by the agent. Reads only the public part.
+    let target_fp = if $key != null {
+        let fp = (^ssh-keygen -lf ($key | path expand) | complete)
+        if $fp.exit_code != 0 {
+            error make { msg: $"Cannot read key: ($key)" }
+        }
+        ($fp.stdout | str trim | split row ' ' | get 1)
+    } else { null }
+
+    let already = if $target_fp != null {
+        ($list.stdout | str contains $target_fp)
+    } else {
+        $list.exit_code == 0
+    }
+
+    if $already {
+        if $key != null {
+            print $"ssh-agent already has ($key) loaded"
+            return
+        }
+        print $"ssh-agent already has ($list.stdout | lines | length) identities loaded:"
+        return ($list.stdout | parse-ssh-identities)
+    }
+    if $check {
+        if $key != null {
+            print $"Key not loaded in ssh-agent: ($key)"
+        } else {
+            print "No identities loaded in the ssh-agent"
+        }
+        return
+    }
+
+    let label = if $key != null { $key } else { "default keys" }
+    print $"Loading ($label) - pinentry may prompt for the passphrase..."
+    if $key != null {
+        ^ssh-add ($key | path expand)
+    } else {
+        ^ssh-add
+    }
+    if ($env.LAST_EXIT_CODE != 0) {
+        error make { msg: $"ssh-warmup failed for ($label)" }
+    }
+
+    # Verify the agent now serves the key.
+    let verify = (^ssh-add -l | complete)
+    let ok = if $target_fp != null {
+        ($verify.stdout | str contains $target_fp)
+    } else {
+        $verify.exit_code == 0
+    }
+    if $ok {
+        print $"ssh-agent warmed up for ($label); SSH connections should not prompt until the cache TTL expires"
+        if $key == null {
+            return ($verify.stdout | parse-ssh-identities)
+        }
+    } else {
+        error make { msg: $"ssh-add succeeded but ($label) is still not served by the agent" }
+    }
+}
