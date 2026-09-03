@@ -90,6 +90,11 @@
   manager inside it); create it automatically on first need, mirroring the
   uv convention above.
 
+## Skills
+- In SKILL.md frontmatter, always wrap `description` in double quotes on
+  a single line: YAML plain scalars fail to parse when the text contains
+  "colon + space".
+
 ## Secrets
 - Never expose secrets, API keys, tokens, or decrypted credential values in
   replies, logs, diffs, or commits.
