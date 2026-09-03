@@ -10,6 +10,7 @@ import { procStartToken } from "../lease.mjs";
 const EXTENSION_ROOT = path.dirname(
   path.dirname(fileURLToPath(import.meta.url)),
 );
+const INDEX_PATH = path.join(EXTENSION_ROOT, "index.ts");
 const JOBS_PATH = path.join(EXTENSION_ROOT, "jobs.ts");
 const RUNNER_PATH = path.join(EXTENSION_ROOT, "runner.ts");
 const WORKSPACE_PATH = path.join(EXTENSION_ROOT, "workspace.ts");
@@ -168,6 +169,17 @@ async function createOrphanFixture(root, name) {
 }
 
 test("Pi-loaded integration boundaries", { concurrency: 1 }, async (t) => {
+  await t.test("multi-agent extension module loads under pi", async () => {
+    const root = await fs.promises.mkdtemp(
+      path.join(os.tmpdir(), "pi-ma-load-test-"),
+    );
+    t.after(() => fs.promises.rm(root, { recursive: true, force: true }));
+    await runDriver(
+      root,
+      `import ${JSON.stringify(INDEX_PATH)};\nexport default async function() {}`,
+    );
+  });
+
   await t.test(
     "workspace lease blocks cleanup until explicitly released",
     async () => {

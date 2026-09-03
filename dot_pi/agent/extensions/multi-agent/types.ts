@@ -69,6 +69,7 @@ export interface PreparedWorkspace {
 export interface DelegatedTask {
   agent: AgentName;
   task: string;
+  summary: string;
   model?: string;
   workspace: WorkspaceMode;
 }
@@ -113,6 +114,7 @@ export interface SubagentJobRecord {
   id: string;
   agent: AgentName;
   task: string;
+  summary?: string;
   mode: WorkspaceMode;
   model: string;
   state: JobState;

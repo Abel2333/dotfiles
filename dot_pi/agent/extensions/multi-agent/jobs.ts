@@ -597,6 +597,7 @@ export async function startJob(options: {
     id,
     agent: options.task.agent,
     task: options.task.task,
+    summary: options.task.summary,
     mode: options.task.workspace,
     model: options.model,
     state: "queued",

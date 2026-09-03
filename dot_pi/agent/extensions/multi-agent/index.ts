@@ -25,6 +25,11 @@ import {
 } from "./jobs";
 import { truncateUtf8 } from "./limits.mjs";
 import { truncateOutput } from "./runner";
+import {
+  SUMMARY_MAX_CHARS,
+  fallbackSummary,
+  normalizeSummary,
+} from "./summary.mjs";
 import type {
   AgentConfig,
   AgentName,
@@ -33,6 +38,7 @@ import type {
   LeaseHandle,
   PreparedWorkspace,
   SubagentDetails,
+  SubagentJobRecord,
   WorkspaceMode,
   WorkspaceRecord,
 } from "./types";
@@ -51,6 +57,11 @@ const WORKSPACE_MODES = ["research", "scratch", "worktree"] as const;
 const ACTIONS = ["start", "status", "wait", "result", "abort", "list"] as const;
 const MAX_PARALLEL = 2;
 const DEFAULT_WAIT_SECONDS = 300;
+const SUMMARY_SCHEMA = {
+  maxLength: SUMMARY_MAX_CHARS,
+  description:
+    "One-line title (<= 160 chars) for the delegated task, shown to the user in the UI.",
+};
 const ACTIVITY_TEXT_CAP = 32 * 1024;
 const RESULT_DETAILS_CAP = 256 * 1024;
 const GUARD_PATH = path.join(
@@ -71,6 +82,7 @@ const ActionSchema = StringEnum(ACTIONS, {
 const ParallelTaskSchema = Type.Object({
   agent: AgentSchema,
   task: Type.String({ description: "Specific task delegated to the agent" }),
+  summary: Type.String(SUMMARY_SCHEMA),
   model: Type.Optional(
     Type.String({
       description:
@@ -107,6 +119,13 @@ const SubagentParams = Type.Object({
   ),
   agent: Type.Optional(AgentSchema),
   task: Type.Optional(Type.String()),
+  summary: Type.Optional(
+    Type.String({
+      ...SUMMARY_SCHEMA,
+      description:
+        "One-line title (<= 160 chars) for the delegated task, shown to the user in the UI. Required for action=start.",
+    }),
+  ),
   model: Type.Optional(
     Type.String({
       description:
@@ -131,11 +150,13 @@ type SubagentParamsType = {
   limit?: number;
   agent?: AgentName;
   task?: string;
+  summary?: string;
   model?: string;
   workspace?: WorkspaceMode;
   tasks?: Array<{
     agent: AgentName;
     task: string;
+    summary: string;
     model?: string;
     workspace?: WorkspaceMode;
   }>;
@@ -158,6 +179,7 @@ function formatTokens(value: number): string {
 function normalizeTask(input: {
   agent: AgentName;
   task: string;
+  summary?: string;
   model?: string;
   workspace?: WorkspaceMode;
 }): DelegatedTask {
@@ -165,7 +187,11 @@ function normalizeTask(input: {
   if (input.agent !== "feasibility" && workspace !== "research") {
     throw new Error(`${input.agent} supports research mode only`);
   }
-  return { ...input, workspace };
+  // Summary normalization enforces the one-line title and the shared 160
+  // char budget (schema maxLength applies first at the agent loop; this
+  // backstops direct callers). See summary.mjs.
+  const summary = normalizeSummary(input.summary, input.agent);
+  return { ...input, summary, workspace };
 }
 
 function resolveModel(
@@ -185,12 +211,18 @@ function resolveModel(
   return model;
 }
 
+function jobSummary(job: SubagentJobRecord): string {
+  if (job.summary) return job.summary;
+  // Fallback for job records written before summaries existed.
+  return fallbackSummary(job.task);
+}
+
 function snapshotLine(snapshot: JobSnapshot): string {
   const job = snapshot.job;
   const tool = snapshot.live.currentTool
     ? ` tool:${snapshot.live.currentTool.name} ${snapshot.live.currentTool.summary} (${formatDuration(snapshot.toolElapsedMs ?? 0)})`
     : ` activity:${snapshot.live.activity}`;
-  return `${job.id.slice(0, 12)} ${job.agent} [${job.mode}] ${job.state} ${formatDuration(snapshot.elapsedMs)}${tool}`;
+  return `${job.id.slice(0, 12)} ${job.agent} [${job.mode}] ${job.state} ${formatDuration(snapshot.elapsedMs)} "${jobSummary(job)}"${tool}`;
 }
 
 function snapshotText(
@@ -201,6 +233,7 @@ function snapshotText(
   const lines = [
     `job: ${job.id}`,
     `agent: ${job.agent}`,
+    `summary: ${jobSummary(job)}`,
     `mode: ${job.mode}`,
     `state: ${job.state}`,
     `elapsed: ${formatDuration(snapshot.elapsedMs)}`,
@@ -319,6 +352,7 @@ export default function multiAgent(pi: ExtensionAPI) {
       "Start and control persistent background subagents with status, wait, result, abort, and list actions",
     promptGuidelines: [
       "Use subagent action=start only when context isolation, independent verification, or parallel investigation provides clear value.",
+      "On action=start always provide summary: a one-line title (<= 160 chars) for the delegated work; the user sees it in the UI to understand what the subagent is for.",
       "After subagent action=start, retain the returned job ID and use action=wait, status, or result to observe it; wait defaults to 300 seconds and returns early on completion.",
       "Use subagent action=abort only after inspecting the job and deciding it should be stopped; cancelling a wait does not stop the child.",
       "When the user specifies a model for delegated work, pass that exact model in subagent.model or subagent.tasks[].model.",
@@ -353,6 +387,7 @@ export default function multiAgent(pi: ExtensionAPI) {
               normalizeTask({
                 agent: params.agent!,
                 task: params.task!,
+                summary: params.summary,
                 model: params.model,
                 workspace: params.workspace,
               }),
@@ -680,9 +715,13 @@ export default function multiAgent(pi: ExtensionAPI) {
       if (args.jobId) text += ` ${theme.fg("muted", args.jobId)}`;
       if (action === "start" && args.agent) {
         text += ` ${theme.fg("accent", args.agent)} [${args.workspace ?? "research"}]`;
+        if (args.summary) text += ` ${theme.fg("dim", `"${args.summary}"`)}`;
       }
       if (action === "start" && args.tasks?.length) {
         text += ` parallel (${args.tasks.length})`;
+        for (const item of args.tasks) {
+          text += `\n  ${theme.fg("accent", item.agent ?? "?")}${item.summary ? ` ${theme.fg("dim", `"${item.summary}"`)}` : ""}`;
+        }
       }
       return new Text(text, 0, 0);
     },
@@ -708,6 +747,7 @@ export default function multiAgent(pi: ExtensionAPI) {
             theme.bold(
               `${snapshot.job.id.slice(0, 12)} ${snapshot.job.agent}`,
             ) +
+              theme.fg("dim", ` "${jobSummary(snapshot.job)}"`) +
               theme.fg(
                 "dim",
                 ` ${snapshot.job.state} ${formatDuration(snapshot.elapsedMs)}`,
