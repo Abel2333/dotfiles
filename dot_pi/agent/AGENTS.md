@@ -36,6 +36,27 @@
 - Report failures clearly. Do not modify unrelated code merely to silence
   pre-existing failures.
 
+## Testing & Comments
+- New logic ships with tests; a bug fix ships with a regression test that
+  fails before the fix and passes after.
+- Never delete, weaken, or skip an existing test to make a change pass. If
+  the behavior intentionally changed, update the test and explain why.
+- Never claim a test result without running it. State which tests were run
+  and which were skipped; pre-existing failures are reported, not hidden.
+- Tests are deterministic and order-independent: no sleeps, no wall-clock or
+  locale dependence, no live network; use fixed seeds and fake clocks.
+- Test through public interfaces; do not test trivial getters/setters,
+  plain data definitions, framework-guaranteed behavior, or generated code.
+- Comments explain why, not what. Never restate code in prose; never leave
+  commented-out code.
+- Public APIs and exported symbols get contract docstrings (purpose,
+  params, returns, raised errors, side effects). Private functions need
+  none by default; write one only when name and signature cannot convey
+  the intent.
+- For the full decision table and examples, follow the
+  "testing-and-comments" skill when the task involves test writing or
+  code review.
+
 ## File Changes
 - When the user has not explicitly requested a file modification, do not edit
   files directly. You may ask whether to proceed, but you must not make the
@@ -60,11 +81,14 @@
 - When a uv project under ~/Tools/pyenvs/ is needed but does not exist yet,
   create it automatically (uv init + uv add + uv sync) and tell the user what
   was created; do not ask for permission first, do not create it silently.
-- For PDF tasks, use existing tooling before writing custom parsers:
-  the pdf-tools uv env (scripts/pdf_extract.py: `render` / `images` subcommands),
-  then qpdf, Ghostscript, ImageMagick, ffmpeg.
-- If the needed tool is missing, ask the user how to proceed instead of
-  silently hand-rolling a replacement.
+- For PDF tasks, use existing tooling first (follow the "pdf-tools"
+  skill). Do not hand-implement PDF parsing when a library or CLI already
+  covers it; if none fits, or the task itself is about building a parser,
+  explain why and ask the user before proceeding.
+- Non-Python toolchains: prefer a dedicated mise-managed project directory
+  (~/Tools/mise/<purpose>/ with mise.toml, deps via the language's package
+  manager inside it); create it automatically on first need, mirroring the
+  uv convention above.
 
 ## Secrets
 - Never expose secrets, API keys, tokens, or decrypted credential values in
