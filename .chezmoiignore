@@ -4,3 +4,6 @@ README.md
 # pi auth.json contains plaintext API keys set by `pi /login`. Keep it
 # machine-local; never sync it (even encrypted) to the dotfiles repo.
 .pi/agent/auth.json
+
+# pi memory database is machine-local and grows continuously; never sync it.
+pi/agent/memory/memory.db*
