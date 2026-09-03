@@ -1,6 +1,6 @@
 ---
 name: testing-and-comments
-description: Use when writing, modifying, or reviewing tests and code comments. Decides what to test and what not to test, how to structure and name tests, how to write regression tests, which functions need docstrings, and what comments should say. Triggers on: unit test, regression test, test coverage, flaky test, mock, docstring, comment, code review.
+description: "Use when writing, modifying, or reviewing tests and code comments. Decides what to test and what not to test, how to structure and name tests, how to write regression tests, which functions need docstrings, and what comments should say. Triggers on: unit test, regression test, test coverage, flaky test, mock, docstring, comment, code review."
 ---
 
 # Testing and Comments

@@ -1,9 +1,6 @@
 ---
 name: pdf-tools
-description: Use when handling PDF files or documents: extracting text or
-  embedded images, rendering pages to images, merging, splitting, converting,
-  checking, OCR. Provides the tool priority chain, the pdf-tools uv
-  environment, the mise-managed CLI project, and verified system CLI recipes.
+description: "Use when handling PDF files or documents: extracting text or embedded images, rendering pages to images, merging, splitting, converting, checking, OCR. Provides the tool priority chain, the pdf-tools uv environment, the mise-managed CLI project, and verified system CLI recipes."
 ---
 
 # PDF Tools
