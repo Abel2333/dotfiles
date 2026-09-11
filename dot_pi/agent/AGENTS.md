@@ -66,6 +66,13 @@
   identified the target path.
 - Ask before adding or upgrading project dependencies unless explicitly
   requested.
+- Never write to one file from parallel operations. Serialize every write to
+  a given path: no concurrent tool calls targeting the same file, and no
+  parallel or backgrounded shell writers on it (`cmd &`, `xargs -P`, parallel
+  redirections). Wait for one write to finish before starting the next;
+  concurrent same-file writes can fail, truncate, corrupt, or silently lose
+  data. To apply several changes to one file in a turn, use a single edit call
+  with multiple non-overlapping edits instead of multiple calls.
 
 ## Environment
 - Consult available long-term memory before investigating environment details.
