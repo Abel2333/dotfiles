@@ -7,6 +7,7 @@ const SUPPORTED_AGENTS = new Set<AgentName>([
   "scout",
   "feasibility",
   "reviewer",
+  "implementer",
 ]);
 
 export function discoverAgents(): AgentConfig[] {

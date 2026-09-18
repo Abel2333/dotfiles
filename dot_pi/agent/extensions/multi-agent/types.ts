@@ -1,7 +1,8 @@
 import type { Message } from "@earendil-works/pi-ai";
+import type { ApprovalRequest } from "../security/approval";
 
-export type AgentName = "scout" | "feasibility" | "reviewer";
-export type WorkspaceMode = "research" | "scratch" | "worktree";
+export type AgentName = "scout" | "feasibility" | "reviewer" | "implementer";
+export type WorkspaceMode = "research" | "scratch" | "worktree" | "project";
 export type ProcessIdentityState = "owned" | "dead" | "foreign" | "unverified";
 export type JobState =
   | "queued"
@@ -49,10 +50,11 @@ export interface LeaseHandle extends LeaseReference {
 export interface WorkspaceRecord {
   id: string;
   jobId?: string;
-  mode: Exclude<WorkspaceMode, "research">;
+  mode: "scratch" | "worktree";
   path: string;
   sourceRoot: string;
   repoRoot?: string;
+  gitCommonDir?: string;
   createdAt: string;
   task: string;
 }
@@ -139,6 +141,7 @@ export interface ProcessRecord {
   jobId: string;
   supervisorPid: number;
   supervisorStartToken?: string;
+  phase?: "launching" | "supervisor";
   childPid?: number;
   childStartToken?: string;
   updatedAt: string;
@@ -161,6 +164,7 @@ export interface JobSnapshot {
   childAlive?: boolean;
   supervisorIdentity: ProcessIdentityState;
   childIdentity: ProcessIdentityState;
+  pendingApprovals?: ApprovalRequest[];
 }
 
 export interface JobResultSnapshot extends JobSnapshot {
@@ -171,7 +175,8 @@ export interface JobResultSnapshot extends JobSnapshot {
 }
 
 export interface SubagentDetails {
-  action: "start" | "status" | "wait" | "result" | "abort" | "list";
+  action:
+    "start" | "status" | "wait" | "result" | "abort" | "list" | "authorize";
   jobs: JobSnapshot[];
   activities?: ActivityEvent[];
   nextCursor?: number;

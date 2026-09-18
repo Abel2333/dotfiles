@@ -3,13 +3,23 @@ import { randomUUID } from "node:crypto";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
-import { getAgentDir } from "@earendil-works/pi-coding-agent";
+import {
+  listPendingApprovals,
+  resolveApprovalRequest,
+  type ApprovalResponse,
+} from "../security/approval";
 import {
   acquireLease,
   leaseReference,
   releaseLease,
   transferLease,
 } from "./lease.mjs";
+import {
+  AGENT_DIR,
+  MULTI_AGENT_LEASE_DIR,
+  canonicalGitWorktreeRoot,
+  worktreeWriterLeasePath,
+} from "./lease-scope.mjs";
 import { truncateUtf8 } from "./limits.mjs";
 import { prepareAgentLaunch } from "./runner";
 import type {
@@ -31,14 +41,27 @@ import type {
 } from "./types";
 import { TERMINAL_JOB_STATES } from "./types";
 
-const AGENT_DIR = getAgentDir();
 const JOBS_ROOT = path.join(AGENT_DIR, "subagent-sessions");
 const FEASIBILITY_LEASE_PATH = path.join(
-  AGENT_DIR,
-  "multi-agent",
-  "leases",
+  MULTI_AGENT_LEASE_DIR,
   "feasibility.lock",
 );
+const IMPLEMENTER_CAPACITY_GUARD_PATH = path.join(
+  MULTI_AGENT_LEASE_DIR,
+  "implementer-capacity.lock",
+);
+const IMPLEMENTER_CAPACITY_PATH = path.join(
+  AGENT_DIR,
+  "multi-agent",
+  "implementer-capacity.json",
+);
+const LEGACY_PROJECT_WRITER_PATH = path.join(
+  MULTI_AGENT_LEASE_DIR,
+  "project-writer.lock",
+);
+const DEFAULT_MAX_IMPLEMENTERS = 5;
+const MAX_CONFIGURED_IMPLEMENTERS = 64;
+const IMPLEMENTER_LEASE_WAIT_MS = 1000;
 const SUPERVISOR_PATH = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
   "supervisor.mjs",
@@ -82,6 +105,338 @@ async function readJson<T>(filePath: string): Promise<T> {
   return JSON.parse(await fs.promises.readFile(filePath, "utf8")) as T;
 }
 
+interface ImplementerCapacityRecord {
+  version: 1;
+  limit: number;
+  updatedAt: string;
+}
+
+interface LegacyWriterRetirementRecord {
+  version: 1;
+  name: "project-writer:retired";
+  token: string;
+  ownerPid: 0;
+  retiredProjectWriter: true;
+  createdAt: string;
+}
+
+function legacyWriterRetirementRecord(): LegacyWriterRetirementRecord {
+  return {
+    version: 1,
+    name: "project-writer:retired",
+    token: randomUUID(),
+    ownerPid: 0,
+    retiredProjectWriter: true,
+    createdAt: new Date().toISOString(),
+  };
+}
+
+function isLegacyWriterRetired(
+  value: unknown,
+): value is LegacyWriterRetirementRecord {
+  if (!value || typeof value !== "object") return false;
+  const record = value as Partial<LegacyWriterRetirementRecord>;
+  return (
+    record.version === 1 &&
+    record.name === "project-writer:retired" &&
+    record.retiredProjectWriter === true &&
+    typeof record.token === "string" &&
+    Boolean(record.token)
+  );
+}
+
+async function publishLegacyWriterRetirement(): Promise<void> {
+  await fs.promises.mkdir(path.dirname(LEGACY_PROJECT_WRITER_PATH), {
+    recursive: true,
+    mode: 0o700,
+  });
+  const candidate = `${LEGACY_PROJECT_WRITER_PATH}.${process.pid}.${randomUUID()}.candidate`;
+  try {
+    const handle = await fs.promises.open(candidate, "wx", 0o600);
+    try {
+      await handle.writeFile(
+        `${JSON.stringify(legacyWriterRetirementRecord(), null, 2)}\n`,
+        "utf8",
+      );
+      await handle.sync();
+    } finally {
+      await handle.close();
+    }
+    await fs.promises.link(candidate, LEGACY_PROJECT_WRITER_PATH);
+  } finally {
+    await fs.promises.rm(candidate, { force: true });
+  }
+}
+
+async function ensureLegacyProjectWriterRetired(
+  jobId: string,
+  signal?: AbortSignal,
+): Promise<void> {
+  for (;;) {
+    try {
+      const existing = await readJson<unknown>(LEGACY_PROJECT_WRITER_PATH);
+      if (isLegacyWriterRetired(existing)) return;
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+      try {
+        await publishLegacyWriterRetirement();
+        return;
+      } catch (publishError) {
+        if ((publishError as NodeJS.ErrnoException).code === "EEXIST") {
+          continue;
+        }
+        throw publishError;
+      }
+    }
+
+    let legacyLease: LeaseHandle;
+    try {
+      legacyLease = (await acquireLease(LEGACY_PROJECT_WRITER_PATH, {
+        name: "project-writer:migration",
+        jobId,
+        signal,
+        waitMs: 0,
+        canRecover: canRecoverJobLease,
+      })) as LeaseHandle;
+    } catch (error) {
+      throw new Error(
+        `Legacy project writer is still active; wait for it to finish before starting a new implementer: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+
+    let replaced = false;
+    try {
+      const current = await readJson<{ token?: string }>(
+        LEGACY_PROJECT_WRITER_PATH,
+      );
+      if (current.token !== legacyLease.token) {
+        throw new Error(
+          "Legacy project writer changed during protocol retirement",
+        );
+      }
+      await atomicWriteJson(
+        LEGACY_PROJECT_WRITER_PATH,
+        legacyWriterRetirementRecord(),
+      );
+      replaced = true;
+      await fs.promises.rm(
+        `${LEGACY_PROJECT_WRITER_PATH}.${legacyLease.token}.owner`,
+        { force: true },
+      );
+      return;
+    } finally {
+      if (!replaced) {
+        await releaseLease(leaseReference(legacyLease));
+      }
+    }
+  }
+}
+
+/**
+ * Resolve the configured global implementer capacity.
+ *
+ * @param env Environment containing PI_MULTI_AGENT_MAX_IMPLEMENTERS.
+ * @returns A positive implementer limit no greater than the safety cap.
+ * @throws When the configured value is not a strict supported integer.
+ */
+export function configuredImplementerLimit(
+  env: NodeJS.ProcessEnv = process.env,
+): number {
+  const raw = env.PI_MULTI_AGENT_MAX_IMPLEMENTERS;
+  if (raw === undefined) return DEFAULT_MAX_IMPLEMENTERS;
+  if (!/^[1-9]\d*$/.test(raw)) {
+    throw new Error(
+      "PI_MULTI_AGENT_MAX_IMPLEMENTERS must be a positive decimal integer",
+    );
+  }
+  const value = Number(raw);
+  if (!Number.isSafeInteger(value) || value > MAX_CONFIGURED_IMPLEMENTERS) {
+    throw new Error(
+      `PI_MULTI_AGENT_MAX_IMPLEMENTERS must be between 1 and ${MAX_CONFIGURED_IMPLEMENTERS}`,
+    );
+  }
+  return value;
+}
+
+function implementerSlotPath(index: number): string {
+  return path.join(
+    MULTI_AGENT_LEASE_DIR,
+    `implementer-slot-${index + 1}.lock`,
+  );
+}
+
+function isLeaseContention(error: unknown, namePrefix: string): boolean {
+  if (!(error instanceof Error)) return false;
+  if (!error.message.startsWith(`Lease ${namePrefix}`)) return false;
+  return (
+    error.message.includes(" is held") ||
+    error.message.includes(" recovery is already in progress") ||
+    error.message.includes(" recovery started during acquisition")
+  );
+}
+
+async function readImplementerCapacity(): Promise<
+  ImplementerCapacityRecord | undefined
+> {
+  try {
+    const record = await readJson<ImplementerCapacityRecord>(
+      IMPLEMENTER_CAPACITY_PATH,
+    );
+    if (
+      record.version !== 1 ||
+      !Number.isSafeInteger(record.limit) ||
+      record.limit < 1 ||
+      record.limit > MAX_CONFIGURED_IMPLEMENTERS
+    ) {
+      throw new Error("Invalid implementer capacity record");
+    }
+    return record;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return undefined;
+    throw error;
+  }
+}
+
+async function reconcileReservedImplementerSlots(): Promise<boolean> {
+  let entries: string[];
+  try {
+    entries = await fs.promises.readdir(MULTI_AGENT_LEASE_DIR);
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return false;
+    throw error;
+  }
+
+  let active = false;
+  for (const entry of entries) {
+    const match = /^implementer-slot-(\d+)\.lock$/.exec(entry);
+    if (!match) continue;
+    const index = Number(match[1]) - 1;
+    let probe: LeaseHandle;
+    try {
+      probe = (await acquireLease(implementerSlotPath(index), {
+        name: `implementer-slot:${index + 1}`,
+        waitMs: 0,
+        canRecover: canRecoverJobLease,
+      })) as LeaseHandle;
+    } catch (error) {
+      if (isLeaseContention(error, "implementer-slot:")) {
+        active = true;
+        continue;
+      }
+      throw error;
+    }
+    await releaseLease(leaseReference(probe));
+  }
+  return active;
+}
+
+async function ensureImplementerCapacity(
+  requested: number,
+): Promise<number> {
+  const current = await readImplementerCapacity();
+  if (current?.limit === requested) return requested;
+  const hasReservedSlot = await reconcileReservedImplementerSlots();
+  if (!current && hasReservedSlot) {
+    throw new Error(
+      "Implementer capacity record is missing while slots are reserved",
+    );
+  }
+  if (current && hasReservedSlot) {
+    throw new Error(
+      `Implementer active capacity is ${current.limit}; requested ${requested}. Wait for all implementers to finish before changing PI_MULTI_AGENT_MAX_IMPLEMENTERS.`,
+    );
+  }
+  await atomicWriteJson(IMPLEMENTER_CAPACITY_PATH, {
+    version: 1,
+    limit: requested,
+    updatedAt: new Date().toISOString(),
+  } satisfies ImplementerCapacityRecord);
+  return requested;
+}
+
+async function waitForLeaseRetry(
+  deadline: number,
+  signal?: AbortSignal,
+): Promise<void> {
+  if (signal?.aborted) {
+    throw new Error("Implementer lease acquisition cancelled");
+  }
+  const remaining = deadline - Date.now();
+  if (remaining <= 0) return;
+  await new Promise<void>((resolve, reject) => {
+    const finish = () => {
+      signal?.removeEventListener("abort", abort);
+      resolve();
+    };
+    const timer = setTimeout(finish, Math.min(50, remaining));
+    const abort = () => {
+      clearTimeout(timer);
+      signal?.removeEventListener("abort", abort);
+      reject(new Error("Implementer lease acquisition cancelled"));
+    };
+    signal?.addEventListener("abort", abort, { once: true });
+  });
+}
+
+async function acquireImplementerSlot(
+  jobId: string,
+  signal: AbortSignal | undefined,
+  waitMs: number,
+): Promise<LeaseHandle> {
+  const deadline = Date.now() + Math.max(0, waitMs);
+  for (;;) {
+    const guard = (await acquireLease(IMPLEMENTER_CAPACITY_GUARD_PATH, {
+      name: "implementer-capacity",
+      jobId,
+      signal,
+      waitMs: Math.max(0, deadline - Date.now()),
+    })) as LeaseHandle;
+    let slot: LeaseHandle | undefined;
+    let limit = 0;
+    let guardReleaseError: unknown;
+    try {
+      limit = await ensureImplementerCapacity(configuredImplementerLimit());
+      for (let index = 0; index < limit; index += 1) {
+        try {
+          slot = (await acquireLease(implementerSlotPath(index), {
+            name: `implementer-slot:${index + 1}`,
+            jobId,
+            signal,
+            waitMs: 0,
+            canRecover: canRecoverJobLease,
+          })) as LeaseHandle;
+          break;
+        } catch (error) {
+          if (!isLeaseContention(error, "implementer-slot:")) throw error;
+        }
+      }
+    } finally {
+      try {
+        await releaseLease(leaseReference(guard));
+      } catch (error) {
+        guardReleaseError = error;
+      }
+      if (guardReleaseError && slot) {
+        try {
+          await releaseLease(leaseReference(slot));
+          slot = undefined;
+        } catch (slotReleaseError) {
+          throw new AggregateError(
+            [guardReleaseError, slotReleaseError],
+            "Implementer capacity guard and reserved slot could not be released",
+          );
+        }
+      }
+      if (guardReleaseError) throw guardReleaseError;
+    }
+    if (slot) return slot;
+    if (Date.now() >= deadline) {
+      throw new Error(`Implementer concurrency limit of ${limit} is reached`);
+    }
+    await waitForLeaseRetry(deadline, signal);
+  }
+}
+
 function jobPath(jobDir: string): string {
   return path.join(jobDir, "job.json");
 }
@@ -104,6 +459,10 @@ function launchPath(jobDir: string): string {
 
 function readyPath(jobDir: string): string {
   return path.join(jobDir, "launch.ready");
+}
+
+function approvalDir(jobDir: string): string {
+  return path.join(jobDir, "approvals");
 }
 
 function procStartToken(pid: number): string | undefined {
@@ -187,7 +546,7 @@ function supervisorIdentity(
   return inspectProcessIdentity(
     record.supervisorPid,
     record.supervisorStartToken,
-    [SUPERVISOR_PATH, jobDir],
+    record.phase === "launching" ? [] : [SUPERVISOR_PATH, jobDir],
   );
 }
 
@@ -450,17 +809,47 @@ async function markStartFailed(
   return { job, live };
 }
 
+async function isLegacyProjectWriterPath(filePath: string): Promise<boolean> {
+  if (path.basename(filePath) !== "project-writer.lock") return false;
+  try {
+    const [candidate, canonical] = await Promise.all([
+      fs.promises.realpath(filePath),
+      fs.promises.realpath(LEGACY_PROJECT_WRITER_PATH),
+    ]);
+    if (candidate === canonical) return true;
+  } catch {
+    // Fall back to the persisted suffix for legacy relative paths.
+  }
+  return path
+    .normalize(filePath)
+    .endsWith(path.join("multi-agent", "leases", "project-writer.lock"));
+}
+
+async function releasePersistedLease(lease: LeaseReference): Promise<void> {
+  if (await isLegacyProjectWriterPath(lease.path)) {
+    try {
+      const current = await readJson<unknown>(LEGACY_PROJECT_WRITER_PATH);
+      if (isLegacyWriterRetired(current)) return;
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+    }
+  }
+  await releaseLease(lease);
+}
+
 async function releasePersistedJobLeases(
   job: SubagentJobRecord,
   strict = false,
 ): Promise<void> {
-  for (const lease of job.leases ?? []) {
+  let firstError: unknown;
+  for (const lease of [...(job.leases ?? [])].reverse()) {
     try {
-      await releaseLease(lease);
+      await releasePersistedLease(lease);
     } catch (error) {
-      if (strict) throw error;
+      firstError ??= error;
     }
   }
+  if (strict && firstError) throw firstError;
 }
 
 async function terminateStartingSupervisor(
@@ -495,10 +884,13 @@ async function terminateStartingSupervisor(
 function ownedJobLeases(options: {
   workspace: PreparedWorkspace;
   feasibilityLease?: LeaseHandle;
+  implementerLeases?: LeaseHandle[];
 }): LeaseHandle[] {
-  return [options.feasibilityLease, options.workspace.lease].filter(
-    (lease): lease is LeaseHandle => Boolean(lease),
-  );
+  return [
+    options.feasibilityLease,
+    ...(options.implementerLeases ?? []),
+    options.workspace.lease,
+  ].filter((lease): lease is LeaseHandle => Boolean(lease));
 }
 
 async function releaseOwnedLeases(leases: LeaseHandle[]): Promise<void> {
@@ -527,7 +919,7 @@ async function transferOwnedLeases(
   }
 }
 
-async function canRecoverFeasibilityLease(record: {
+async function canRecoverJobLease(record: {
   jobId?: string;
 }): Promise<boolean> {
   if (!record.jobId) return true;
@@ -548,6 +940,14 @@ async function canRecoverFeasibilityLease(record: {
   }
 }
 
+async function canRecoverWorktreeWriterLease(record: {
+  jobId?: string;
+}): Promise<boolean> {
+  // Cleanup commands transfer this lease to a gated Git PID before execution.
+  if (record.jobId?.startsWith("cleanup:")) return true;
+  return canRecoverJobLease(record);
+}
+
 export async function acquireFeasibilityLease(
   jobId: string,
   signal?: AbortSignal,
@@ -557,8 +957,56 @@ export async function acquireFeasibilityLease(
     jobId,
     signal,
     waitMs: 1000,
-    canRecover: canRecoverFeasibilityLease,
+    canRecover: canRecoverJobLease,
   })) as LeaseHandle;
+}
+
+/**
+ * Acquire one worktree writer lease and one global implementer capacity slot.
+ *
+ * @param worktreeRoot Existing Git worktree root or path alias.
+ * @param jobId Job that will own both leases.
+ * @param signal Optional cancellation signal.
+ * @param waitMs Total time allowed for each acquisition phase.
+ * @returns Leases in acquisition order: writer first, capacity slot second.
+ * @throws When the worktree is busy, capacity is exhausted, or config differs.
+ */
+export async function acquireImplementerLeases(
+  worktreeRoot: string,
+  jobId: string,
+  signal?: AbortSignal,
+  waitMs = IMPLEMENTER_LEASE_WAIT_MS,
+): Promise<LeaseHandle[]> {
+  await ensureLegacyProjectWriterRetired(jobId, signal);
+  const canonicalRoot = await canonicalGitWorktreeRoot(worktreeRoot);
+  const writer = (await acquireLease(worktreeWriterLeasePath(canonicalRoot), {
+    name: `worktree-writer:${canonicalRoot}`,
+    jobId,
+    signal,
+    waitMs,
+    canRecover: canRecoverWorktreeWriterLease,
+  })) as LeaseHandle;
+  try {
+    const slot = await acquireImplementerSlot(jobId, signal, waitMs);
+    return [writer, slot];
+  } catch (error) {
+    try {
+      await releaseLease(leaseReference(writer));
+    } catch (releaseError) {
+      throw new AggregateError(
+        [error, releaseError],
+        "Implementer slot acquisition failed and the worktree writer lease could not be released",
+      );
+    }
+    throw error;
+  }
+}
+
+/** Release an unstarted lease bundle in reverse acquisition order. */
+export async function releaseUnstartedLeases(
+  leases: LeaseHandle[] | undefined,
+): Promise<void> {
+  if (leases?.length) await releaseOwnedLeases(leases);
 }
 
 export async function releaseUnstartedLease(
@@ -578,6 +1026,7 @@ export async function startJob(options: {
   model: string;
   workspace: PreparedWorkspace;
   feasibilityLease?: LeaseHandle;
+  implementerLeases?: LeaseHandle[];
   guardPath: string;
 }): Promise<JobSnapshot> {
   const id = options.id;
@@ -590,6 +1039,13 @@ export async function startJob(options: {
   } catch (error) {
     await releaseOwnedLeases(leases);
     throw error;
+  }
+
+  const launcherStartToken = procStartToken(process.pid);
+  if (!launcherStartToken) {
+    await fs.promises.rm(jobDir, { recursive: true, force: true });
+    await releaseOwnedLeases(leases);
+    throw new Error("Launcher identity could not be verified");
   }
 
   const job: SubagentJobRecord = {
@@ -621,6 +1077,13 @@ export async function startJob(options: {
   };
 
   try {
+    await atomicWriteJson(processPath(jobDir), {
+      jobId: id,
+      supervisorPid: process.pid,
+      supervisorStartToken: launcherStartToken,
+      phase: "launching",
+      updatedAt: now,
+    } satisfies ProcessRecord);
     await atomicWriteJson(jobPath(jobDir), job);
     await atomicWriteJson(livePath(jobDir), live);
   } catch (error) {
@@ -664,6 +1127,7 @@ export async function startJob(options: {
       jobId: id,
       supervisorPid: supervisorPid!,
       supervisorStartToken,
+      phase: "supervisor",
       updatedAt: new Date().toISOString(),
     };
     await atomicWriteJson(processPath(jobDir), processRecord);
@@ -702,6 +1166,19 @@ export async function startJob(options: {
     let processRecoveryVerified = supervisorPid === undefined;
     try {
       processRecord = await readProcess(jobDir);
+      if (!supervisorPid) {
+        await fs.promises.rm(processPath(jobDir), { force: true });
+        processRecord = undefined;
+      } else if (processRecord?.phase === "launching") {
+        processRecord = {
+          jobId: id,
+          supervisorPid,
+          supervisorStartToken,
+          phase: "supervisor",
+          updatedAt: new Date().toISOString(),
+        };
+        await atomicWriteJson(processPath(jobDir), processRecord);
+      }
       processRecoveryVerified = true;
       if (processRecord && childIdentity(processRecord) === "owned") {
         await terminateOwnedChild(processRecord);
@@ -716,6 +1193,7 @@ export async function startJob(options: {
             jobId: id,
             supervisorPid,
             supervisorStartToken,
+            phase: "supervisor" as const,
             updatedAt: new Date().toISOString(),
           }
         : undefined);
@@ -827,6 +1305,9 @@ export async function getJobSnapshot(reference: string): Promise<JobSnapshot> {
   const toolElapsedMs = live.currentTool
     ? Math.max(0, Date.now() - Date.parse(live.currentTool.startedAt))
     : undefined;
+  const pendingApprovals = TERMINAL_JOB_STATES.has(job.state)
+    ? []
+    : await listPendingApprovals(approvalDir(jobDir));
   return {
     job,
     live,
@@ -836,6 +1317,7 @@ export async function getJobSnapshot(reference: string): Promise<JobSnapshot> {
     childAlive: childState === "owned",
     supervisorIdentity: supervisorState,
     childIdentity: childState,
+    pendingApprovals,
   };
 }
 
@@ -896,6 +1378,7 @@ export async function waitForJob(
   onUpdate?.(snapshot);
   while (
     !TERMINAL_JOB_STATES.has(snapshot.job.state) &&
+    !snapshot.pendingApprovals?.length &&
     Date.now() < deadline
   ) {
     await sleepWithSignal(
@@ -963,6 +1446,13 @@ export async function getJobResult(
 export async function abortJob(reference: string): Promise<JobSnapshot> {
   const snapshot = await getJobSnapshot(reference);
   const processRecord = await readProcess(snapshot.job.jobDir);
+
+  if (
+    processRecord?.phase === "launching" &&
+    snapshot.supervisorIdentity === "owned"
+  ) {
+    throw new Error(`Cannot abort job ${snapshot.job.id} while it is launching`);
+  }
 
   if (snapshot.supervisorIdentity === "owned" && processRecord) {
     try {
@@ -1048,6 +1538,29 @@ export async function hasActiveFeasibilityJob(): Promise<boolean> {
     (snapshot) =>
       snapshot.job.agent === "feasibility" &&
       !TERMINAL_JOB_STATES.has(snapshot.job.state),
+  );
+}
+
+/** Resolve one pending security request for an active retained job. */
+export async function resolveJobApproval(
+  reference: string,
+  requestId: string,
+  decision: "allow" | "deny",
+): Promise<ApprovalResponse> {
+  const snapshot = await getJobSnapshot(reference);
+  if (TERMINAL_JOB_STATES.has(snapshot.job.state)) {
+    throw new Error(`Cannot authorize terminal job ${snapshot.job.id}`);
+  }
+  if (!snapshot.pendingApprovals?.some((request) => request.id === requestId)) {
+    throw new Error(
+      `No pending approval ${requestId} for job ${snapshot.job.id}`,
+    );
+  }
+  return resolveApprovalRequest(
+    approvalDir(snapshot.job.jobDir),
+    requestId,
+    snapshot.job.id,
+    decision,
   );
 }
 

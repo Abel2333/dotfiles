@@ -233,26 +233,26 @@ export async function checkMutableBash(
   runtimeRoot?: string,
 ): Promise<string | null> {
   if (MUTATING_GIT_PATTERN.test(command)) {
-    return "Mutating Git commands are not allowed in feasibility experiments";
+    return "Mutating Git commands are not allowed in delegated write jobs";
   }
   for (const segment of command.split(/\|\||&&|\||;/)) {
     const words = shellWords(segment.trim());
     if (path.basename(words[0] ?? "") !== "git") continue;
     const subcommand = findGitSubcommand(words);
     if (!subcommand || !READ_ONLY_GIT_COMMANDS.has(subcommand)) {
-      return `Git subcommand is not allowed in feasibility experiments: ${subcommand ?? "unknown"}`;
+      return `Git subcommand is not allowed in delegated write jobs: ${subcommand ?? "unknown"}`;
     }
   }
   if (SYSTEM_INSTALL_PATTERN.test(command)) {
     return "System-level package installation is not allowed";
   }
   if (/\bdd\b/.test(command)) {
-    return "Raw dd operations are not allowed in feasibility experiments";
+    return "Raw dd operations are not allowed in delegated write jobs";
   }
   if (
     /\beval\b|\b(?:bash|sh|zsh|fish)\b[^\n]*(?:\s-c\b|\s-lc\b)/.test(command)
   ) {
-    return "Nested shell evaluation is not allowed in feasibility experiments";
+    return "Nested shell evaluation is not allowed in delegated write jobs";
   }
   if (GLOBAL_INSTALL_PATTERN.test(command)) {
     return "Global or user-level package installation is not allowed";
@@ -296,7 +296,10 @@ export default function childGuard(pi: ExtensionAPI) {
   const runtimeRoot = process.env.PI_MULTI_AGENT_RUNTIME_ROOT;
   if (!role || !mode) return;
 
-  const readOnly = role !== "feasibility" || mode === "research";
+  const writable =
+    (role === "feasibility" && mode !== "research") ||
+    (role === "implementer" && mode === "project");
+  const readOnly = !writable;
 
   pi.on("tool_call", async (event, ctx) => {
     const writePath = isToolCallEventType("write", event)

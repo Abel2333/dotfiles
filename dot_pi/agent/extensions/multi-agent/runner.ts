@@ -1,4 +1,5 @@
 import * as fs from "node:fs";
+import * as os from "node:os";
 import * as path from "node:path";
 import type { Message } from "@earendil-works/pi-ai";
 import { getAgentDir } from "@earendil-works/pi-coding-agent";
@@ -70,13 +71,17 @@ function dynamicInstructions(
   ];
 
   if (workspace.writableRoot) {
-    lines.push(`Writable experiment root: ${workspace.writableRoot}`);
-    lines.push("You may write only inside the writable experiment root.");
+    lines.push(`Writable root: ${workspace.writableRoot}`);
+    lines.push("You may write only inside the writable root.");
   } else {
-    lines.push("No writable experiment root is assigned. Remain read-only.");
+    lines.push("No writable root is assigned. Remain read-only.");
   }
 
-  if (task.workspace === "worktree") {
+  if (task.workspace === "project") {
+    lines.push(
+      "You are modifying the current Git working tree directly. Preserve all existing changes and do not mutate Git state.",
+    );
+  } else if (task.workspace === "worktree") {
     lines.push(
       "This is a detached Git worktree based on HEAD. Changes are experimental and must not be committed or merged.",
     );
@@ -184,6 +189,10 @@ export async function prepareAgentLaunch(options: {
       PI_MULTI_AGENT_WRITABLE_ROOT: workspace.writableRoot ?? "",
       PI_MULTI_AGENT_RUNTIME_ROOT: dirs.runtimeRoot,
       PI_MULTI_AGENT_JOB_ID: jobId,
+      PI_SECURITY_APPROVAL_DIR:
+        task.agent === "implementer" ? path.join(jobDir, "approvals") : "",
+      PI_SECURITY_POLICY_HOME: os.homedir(),
+      PI_SECURITY_LOG_DIR: path.join(jobDir, "security-logs"),
     },
   };
 }

@@ -1,15 +1,16 @@
 /**
  * Security logger - shared by all security modules.
  *
- * Logs to ~/.pi/agent/logs/security.log in JSONL format.
+ * Logs to ~/.pi/agent/logs/security.log by default. Headless subagents may
+ * override the directory so concurrent jobs retain independent audit logs.
  * Auto-rotates: max 2000 lines, oldest entries trimmed.
  */
 
 import * as fs from "node:fs";
 import * as path from "node:path";
-import * as os from "node:os";
+import { getAgentDir } from "@earendil-works/pi-coding-agent";
 
-const LOG_DIR = path.join(os.homedir(), ".pi", "agent", "logs");
+const LOG_DIR = process.env.PI_SECURITY_LOG_DIR || path.join(getAgentDir(), "logs");
 const LOG_FILE = path.join(LOG_DIR, "security.log");
 const MAX_LINES = 2000;
 

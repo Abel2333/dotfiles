@@ -499,7 +499,7 @@ async function finalize(exitCode, spawnError) {
       errorMessage,
     });
     let leaseError;
-    for (const lease of job.leases ?? []) {
+    for (const lease of [...(job.leases ?? [])].reverse()) {
       try {
         await releaseLease(lease);
       } catch (error) {

@@ -7,10 +7,13 @@ import {
 } from "@earendil-works/pi-coding-agent";
 import { Container, Markdown, Spacer, Text } from "@earendil-works/pi-tui";
 import { Type } from "typebox";
+import type { ApprovalRequest } from "../security/approval";
+import { writeLog } from "../security/logger";
 import { findAgent } from "./agents";
 import {
   abortJob,
   acquireFeasibilityLease,
+  acquireImplementerLeases,
   cleanupJob,
   createJobId,
   findActiveJobUsingWorkspace,
@@ -20,10 +23,13 @@ import {
   hasActiveFeasibilityJob,
   listJobSnapshots,
   releaseUnstartedLease,
+  releaseUnstartedLeases,
+  resolveJobApproval,
   startJob,
   waitForJob,
 } from "./jobs";
 import { truncateUtf8 } from "./limits.mjs";
+import { requiresSingleDispatch, resolveAgentWorkspace } from "./policy.mjs";
 import { truncateOutput } from "./runner";
 import {
   SUMMARY_MAX_CHARS,
@@ -52,9 +58,22 @@ import {
   releasePreparedWorkspaceLease,
 } from "./workspace";
 
-const AGENT_NAMES = ["scout", "feasibility", "reviewer"] as const;
-const WORKSPACE_MODES = ["research", "scratch", "worktree"] as const;
-const ACTIONS = ["start", "status", "wait", "result", "abort", "list"] as const;
+const AGENT_NAMES = [
+  "scout",
+  "feasibility",
+  "reviewer",
+  "implementer",
+] as const;
+const WORKSPACE_MODES = ["research", "scratch", "worktree", "project"] as const;
+const ACTIONS = [
+  "start",
+  "status",
+  "wait",
+  "result",
+  "abort",
+  "list",
+  "authorize",
+] as const;
 const MAX_PARALLEL = 2;
 const DEFAULT_WAIT_SECONDS = 300;
 const SUMMARY_SCHEMA = {
@@ -72,11 +91,11 @@ const GUARD_PATH = path.join(
 const AgentSchema = StringEnum(AGENT_NAMES);
 const WorkspaceSchema = StringEnum(WORKSPACE_MODES, {
   description:
-    "research is read-only; scratch writes in /tmp; worktree writes in a detached Git worktree",
+    "research is read-only; scratch writes in /tmp; worktree writes in a detached Git worktree; project writes directly in the current Git repository",
 });
 const ActionSchema = StringEnum(ACTIONS, {
   description:
-    "start, status, wait, result, abort, or list. Legacy start calls may omit action.",
+    "start, status, wait, result, abort, list, or authorize. Legacy start calls may omit action.",
 });
 
 const ParallelTaskSchema = Type.Object({
@@ -96,6 +115,12 @@ const SubagentParams = Type.Object({
   action: Type.Optional(ActionSchema),
   jobId: Type.Optional(
     Type.String({ description: "Full job ID or a unique job ID prefix" }),
+  ),
+  requestId: Type.Optional(
+    Type.String({
+      description:
+        "Pending approval request ID or unique prefix for action=authorize",
+    }),
   ),
   waitSeconds: Type.Optional(
     Type.Number({
@@ -137,7 +162,7 @@ const SubagentParams = Type.Object({
     Type.Array(ParallelTaskSchema, {
       maxItems: MAX_PARALLEL,
       description:
-        "Up to two parallel read-only scout or reviewer tasks. Feasibility cannot run in parallel.",
+        "Up to two parallel read-only scout or reviewer tasks. Writable roles require single-task dispatch.",
     }),
   ),
 });
@@ -145,6 +170,7 @@ const SubagentParams = Type.Object({
 type SubagentParamsType = {
   action?: (typeof ACTIONS)[number];
   jobId?: string;
+  requestId?: string;
   waitSeconds?: number;
   cursor?: number;
   limit?: number;
@@ -183,10 +209,10 @@ function normalizeTask(input: {
   model?: string;
   workspace?: WorkspaceMode;
 }): DelegatedTask {
-  const workspace = input.workspace ?? "research";
-  if (input.agent !== "feasibility" && workspace !== "research") {
-    throw new Error(`${input.agent} supports research mode only`);
-  }
+  const workspace = resolveAgentWorkspace(
+    input.agent,
+    input.workspace,
+  ) as WorkspaceMode;
   // Summary normalization enforces the one-line title and the shared 160
   // char budget (schema maxLength applies first at the agent loop; this
   // backstops direct callers). See summary.mjs.
@@ -219,10 +245,13 @@ function jobSummary(job: SubagentJobRecord): string {
 
 function snapshotLine(snapshot: JobSnapshot): string {
   const job = snapshot.job;
-  const tool = snapshot.live.currentTool
-    ? ` tool:${snapshot.live.currentTool.name} ${snapshot.live.currentTool.summary} (${formatDuration(snapshot.toolElapsedMs ?? 0)})`
-    : ` activity:${snapshot.live.activity}`;
-  return `${job.id.slice(0, 12)} ${job.agent} [${job.mode}] ${job.state} ${formatDuration(snapshot.elapsedMs)} "${jobSummary(job)}"${tool}`;
+  const approval = snapshot.pendingApprovals?.[0];
+  const activity = approval
+    ? ` approval:${approval.id.slice(0, 12)} ${approval.ruleName}`
+    : snapshot.live.currentTool
+      ? ` tool:${snapshot.live.currentTool.name} ${snapshot.live.currentTool.summary} (${formatDuration(snapshot.toolElapsedMs ?? 0)})`
+      : ` activity:${snapshot.live.activity}`;
+  return `${job.id.slice(0, 12)} ${job.agent} [${job.mode}] ${job.state} ${formatDuration(snapshot.elapsedMs)} "${jobSummary(job)}"${activity}`;
 }
 
 function snapshotText(
@@ -243,6 +272,16 @@ function snapshotText(
     `turns: ${live.usage.turns}`,
     `tokens: in ${formatTokens(live.usage.input)}, out ${formatTokens(live.usage.output)}, cache ${formatTokens(live.usage.cacheRead)}`,
   ];
+  for (const request of snapshot.pendingApprovals ?? []) {
+    lines.push(
+      `approval required: ${request.id}`,
+      `approval rule: ${request.ruleName}`,
+      `approval reason: ${request.reason}`,
+      `approval tool: ${request.toolName}`,
+    );
+    if (request.command) lines.push(`approval command: ${request.command}`);
+    if (request.path) lines.push(`approval path: ${request.path}`);
+  }
   if (snapshot.supervisorIdentity === "unverified") {
     lines.push(
       "supervisor identity: unverified (signals and cleanup disabled)",
@@ -304,6 +343,92 @@ function requireJobId(params: SubagentParamsType): string {
   return params.jobId;
 }
 
+function selectPendingApproval(
+  snapshot: JobSnapshot,
+  reference?: string,
+): ApprovalRequest {
+  const pending = snapshot.pendingApprovals ?? [];
+  if (pending.length === 0) {
+    throw new Error(`Job ${snapshot.job.id} has no pending approval request`);
+  }
+  if (!reference) {
+    if (pending.length === 1) return pending[0];
+    throw new Error(
+      `Job ${snapshot.job.id} has multiple pending approvals; specify requestId: ${pending.map((request) => request.id).join(", ")}`,
+    );
+  }
+  const matches = pending.filter((request) => request.id.startsWith(reference));
+  if (matches.length === 0) {
+    throw new Error(
+      `Unknown pending approval for job ${snapshot.job.id}: ${reference}`,
+    );
+  }
+  if (matches.length > 1) {
+    throw new Error(`Ambiguous approval request prefix: ${reference}`);
+  }
+  return matches[0];
+}
+
+function approvalConfirmationText(
+  snapshot: JobSnapshot,
+  request: ApprovalRequest,
+): string {
+  return [
+    `Job: ${snapshot.job.id}`,
+    `Agent: ${snapshot.job.agent}`,
+    `Model: ${snapshot.job.model}`,
+    `Project: ${snapshot.job.sourceRoot}`,
+    "",
+    `Rule: ${request.ruleName}`,
+    `Tool: ${request.toolName}`,
+    ...(request.command ? [`Command: ${request.command}`] : []),
+    ...(request.path ? [`Path: ${request.path}`] : []),
+    `Reason: ${request.reason}`,
+    ...(request.explanation
+      ? ["", `Worker explanation: ${request.explanation}`]
+      : []),
+    "",
+    "Approval applies once to this exact tool call.",
+  ].join("\n");
+}
+
+async function authorizePendingJob(
+  reference: string,
+  requestReference: string | undefined,
+  confirm: (title: string, message: string) => Promise<boolean>,
+): Promise<{
+  snapshot: JobSnapshot;
+  request: ApprovalRequest;
+  approved: boolean;
+}> {
+  const initial = await getJobSnapshot(reference);
+  const request = selectPendingApproval(initial, requestReference);
+  const approved = await confirm(
+    "Authorize implementer action?",
+    approvalConfirmationText(initial, request),
+  );
+  await resolveJobApproval(
+    initial.job.id,
+    request.id,
+    approved ? "allow" : "deny",
+  );
+  writeLog({
+    timestamp: new Date().toISOString(),
+    module: "gate",
+    action: approved ? "allowed" : "blocked",
+    tool: request.toolName,
+    command: request.command,
+    path: request.path,
+    reason: `subagent ${initial.job.id} ${request.ruleName}: ${request.reason}`,
+    userChoice: approved ? "parent-approved" : "parent-denied",
+  });
+  return {
+    snapshot: await getJobSnapshot(initial.job.id),
+    request,
+    approved,
+  };
+}
+
 async function workspaceCleanupBlocker(
   record: WorkspaceRecord,
 ): Promise<string | undefined> {
@@ -337,23 +462,60 @@ async function confirmWorktree(
   if (!approved) throw new Error("Worktree experiment cancelled");
 }
 
+async function confirmProjectExecution(
+  task: DelegatedTask,
+  cwd: string,
+  model: string,
+  hasUI: boolean,
+  confirm: (title: string, message: string) => Promise<boolean>,
+): Promise<void> {
+  if (task.workspace !== "project") return;
+  const git = await inspectGitState(cwd);
+  if (!git) throw new Error("Project mode requires a Git repository");
+  if (!hasUI) {
+    throw new Error(
+      "Project mode writes directly to the current repository and requires interactive confirmation",
+    );
+  }
+  const status = git.status
+    ? git.status.split("\n").slice(0, 12).join("\n")
+    : "(clean working tree)";
+  const approved = await confirm(
+    "Start project-writing subagent?",
+    [
+      `Agent: ${task.agent}`,
+      `Model: ${model}`,
+      `Repository: ${git.repoRoot}`,
+      "",
+      "The subagent will modify this working tree directly and must preserve all existing changes.",
+      "",
+      "Current status:",
+      status,
+    ].join("\n"),
+  );
+  if (!approved) throw new Error("Project-writing subagent cancelled");
+}
+
 export default function multiAgent(pi: ExtensionAPI) {
   pi.registerTool({
     name: "subagent",
     label: "Subagent",
     description: [
-      "Manage persistent background scout, feasibility, or reviewer jobs.",
+      "Manage persistent background scout, feasibility, reviewer, or implementer jobs.",
       "Use action=start to launch and receive a job ID immediately.",
-      "Use status, wait, result, abort, or list to control jobs later.",
-      "wait defaults to five minutes, returns early when the child finishes, and never terminates it.",
+      "Use status, wait, result, abort, list, or authorize to control jobs later.",
+      "wait defaults to five minutes, returns early when the child finishes or needs authorization, and never terminates it.",
       "Child sessions and activity logs are retained for later inspection.",
     ].join(" "),
     promptSnippet:
-      "Start and control persistent background subagents with status, wait, result, abort, and list actions",
+      "Start and control persistent background subagents with status, wait, result, abort, list, and parent-mediated authorization",
     promptGuidelines: [
-      "Use subagent action=start only when context isolation, independent verification, or parallel investigation provides clear value.",
+      "Use subagent action=start only when context isolation, independent verification, delegated implementation, or parallel investigation provides clear value.",
       "On action=start always provide summary: a one-line title (<= 160 chars) for the delegated work; the user sees it in the UI to understand what the subagent is for.",
-      "After subagent action=start, retain the returned job ID and use action=wait, status, or result to observe it; wait defaults to 300 seconds and returns early on completion.",
+      "Use the implementer agent only for an implementation plan the user approved; include the complete plan, constraints, acceptance criteria, and verification commands in its task.",
+      "After starting an implementer, do not modify project files concurrently; retain the job ID and wait until it completes or requests authorization.",
+      "When wait or status reports a pending approval, use subagent action=authorize for that job; the tool itself asks the user and records a one-shot decision.",
+      "After subagent action=start, retain the returned job ID and use action=wait, status, or result to observe it; wait defaults to 300 seconds and returns early on completion or authorization requests.",
       "Use subagent action=abort only after inspecting the job and deciding it should be stopped; cancelling a wait does not stop the child.",
       "When the user specifies a model for delegated work, pass that exact model in subagent.model or subagent.tasks[].model.",
       "Do not ask a subagent to invoke another agent.",
@@ -399,10 +561,12 @@ export default function multiAgent(pi: ExtensionAPI) {
           );
         }
         if (
-          tasks.length > 1 &&
-          tasks.some((task) => task.agent === "feasibility")
+          hasParallel &&
+          tasks.some((task) => requiresSingleDispatch(task.agent))
         ) {
-          throw new Error("Feasibility cannot run in parallel mode");
+          throw new Error(
+            "Feasibility and implementer roles require single agent + task dispatch",
+          );
         }
         if (
           tasks.some((task) => task.agent === "feasibility") &&
@@ -423,10 +587,17 @@ export default function multiAgent(pi: ExtensionAPI) {
               `Agent definition not found for ${task.agent} in ~/.pi/agent/agents`,
             );
           }
+          const model = resolveModel(task, config.model, ctx.model);
           await confirmWorktree(task, ctx.cwd, ctx.hasUI, (title, message) =>
             ctx.ui.confirm(title, message),
           );
-          const model = resolveModel(task, config.model, ctx.model);
+          await confirmProjectExecution(
+            task,
+            ctx.cwd,
+            model,
+            ctx.hasUI,
+            (title, message) => ctx.ui.confirm(title, message),
+          );
           launchItems.push({ task, config, model });
         }
 
@@ -436,6 +607,7 @@ export default function multiAgent(pi: ExtensionAPI) {
           const jobId = createJobId();
           let workspace: PreparedWorkspace | undefined;
           let feasibilityLease: LeaseHandle | undefined;
+          let implementerLeases: LeaseHandle[] | undefined;
           let startInvoked = false;
           try {
             if (item.task.agent === "feasibility") {
@@ -448,12 +620,25 @@ export default function multiAgent(pi: ExtensionAPI) {
               signal,
               jobId,
             );
+            if (item.task.agent === "implementer") {
+              if (!workspace.writableRoot) {
+                throw new Error(
+                  "Implementer project workspace has no writable root",
+                );
+              }
+              implementerLeases = await acquireImplementerLeases(
+                workspace.writableRoot,
+                jobId,
+                signal,
+              );
+            }
             startInvoked = true;
             const snapshot = await startJob({
               id: jobId,
               ...item,
               workspace,
               feasibilityLease,
+              implementerLeases,
               guardPath: GUARD_PATH,
             });
             jobs.push(snapshot);
@@ -477,6 +662,7 @@ export default function multiAgent(pi: ExtensionAPI) {
             if (!startInvoked) {
               for (const release of [
                 () => releasePreparedWorkspaceLease(workspace),
+                () => releaseUnstartedLeases(implementerLeases),
                 () => releaseUnstartedLease(feasibilityLease),
               ]) {
                 try {
@@ -544,6 +730,29 @@ export default function multiAgent(pi: ExtensionAPI) {
       }
 
       const jobId = requireJobId(params);
+      if (action === "authorize") {
+        if (!ctx.hasUI) {
+          throw new Error(
+            "action=authorize requires an interactive parent session",
+          );
+        }
+        const outcome = await authorizePendingJob(
+          jobId,
+          params.requestId,
+          (title, message) => ctx.ui.confirm(title, message),
+        );
+        const decision = outcome.approved ? "allowed" : "denied";
+        return {
+          content: [
+            {
+              type: "text",
+              text: `Authorization ${decision} for request ${outcome.request.id}. The subagent will continue.\n\n${snapshotText(outcome.snapshot)}`,
+            },
+          ],
+          details: details("authorize", [outcome.snapshot]),
+        };
+      }
+
       if (action === "status") {
         const snapshot = await getJobSnapshot(jobId);
         return {
@@ -572,7 +781,9 @@ export default function multiAgent(pi: ExtensionAPI) {
         );
         const reason = TERMINAL_JOB_STATES.has(snapshot.job.state)
           ? `Subagent reached terminal state: ${snapshot.job.state}`
-          : `Observation wait ended after ${formatDuration(waitSeconds * 1000)}; subagent continues running.`;
+          : snapshot.pendingApprovals?.length
+            ? "Subagent is waiting for parent authorization."
+            : `Observation wait ended after ${formatDuration(waitSeconds * 1000)}; subagent continues running.`;
         return {
           content: [
             { type: "text", text: `${reason}\n\n${snapshotText(snapshot)}` },
@@ -714,7 +925,10 @@ export default function multiAgent(pi: ExtensionAPI) {
       let text = `${theme.fg("toolTitle", theme.bold("subagent"))} ${theme.fg("accent", action)}`;
       if (args.jobId) text += ` ${theme.fg("muted", args.jobId)}`;
       if (action === "start" && args.agent) {
-        text += ` ${theme.fg("accent", args.agent)} [${args.workspace ?? "research"}]`;
+        const workspace =
+          args.workspace ??
+          (args.agent === "implementer" ? "project" : "research");
+        text += ` ${theme.fg("accent", args.agent)} [${workspace}]`;
         if (args.summary) text += ` ${theme.fg("dim", `"${args.summary}"`)}`;
       }
       if (action === "start" && args.tasks?.length) {
@@ -770,9 +984,10 @@ export default function multiAgent(pi: ExtensionAPI) {
   });
 
   pi.registerCommand("agent-jobs", {
-    description: "List, inspect, abort, or clean retained subagent jobs",
+    description:
+      "List, inspect, authorize, abort, or clean retained subagent jobs",
     async handler(args, ctx) {
-      const [action, id] = args.trim().split(/\s+/, 2);
+      const [action, id, requestId] = args.trim().split(/\s+/, 3);
       if (!action || action === "list") {
         const jobs = await listJobSnapshots(50);
         ctx.ui.notify(
@@ -785,13 +1000,32 @@ export default function multiAgent(pi: ExtensionAPI) {
       }
       if (!id) {
         ctx.ui.notify(
-          "Usage: /agent-jobs <status|abort|clean> <job-id>",
+          "Usage: /agent-jobs <status|authorize|abort|clean> <job-id> [request-id]",
           "warning",
         );
         return;
       }
       if (action === "status") {
         ctx.ui.notify(snapshotText(await getJobSnapshot(id)), "info");
+        return;
+      }
+      if (action === "authorize") {
+        if (!ctx.hasUI) {
+          ctx.ui.notify(
+            "Authorization requires an interactive session.",
+            "error",
+          );
+          return;
+        }
+        const outcome = await authorizePendingJob(
+          id,
+          requestId,
+          (title, message) => ctx.ui.confirm(title, message),
+        );
+        ctx.ui.notify(
+          `${outcome.approved ? "Allowed" : "Denied"} request ${outcome.request.id}.`,
+          outcome.approved ? "info" : "warning",
+        );
         return;
       }
       if (action === "abort") {

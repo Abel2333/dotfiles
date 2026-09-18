@@ -3,8 +3,20 @@ import { randomUUID } from "node:crypto";
 import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
-import { getAgentDir } from "@earendil-works/pi-coding-agent";
-import { acquireLease, leaseReference, releaseLease } from "./lease.mjs";
+import {
+  acquireLease,
+  leaseReference,
+  procStartToken,
+  releaseLease,
+  transferLease,
+} from "./lease.mjs";
+import {
+  MULTI_AGENT_LEASE_DIR,
+  MULTI_AGENT_STATE_DIR,
+  canonicalResourcePath,
+  gitMetadataLeasePath,
+  worktreeWriterLeasePath,
+} from "./lease-scope.mjs";
 import type {
   LeaseHandle,
   PreparedWorkspace,
@@ -12,37 +24,85 @@ import type {
   WorkspaceRecord,
 } from "./types";
 
-const STATE_DIR = path.join(getAgentDir(), "multi-agent");
+const STATE_DIR = MULTI_AGENT_STATE_DIR;
 const REGISTRY_PATH = path.join(STATE_DIR, "workspaces.json");
-const LEASE_DIR = path.join(STATE_DIR, "leases");
+const LEASE_DIR = MULTI_AGENT_LEASE_DIR;
 const REGISTRY_LEASE_PATH = path.join(LEASE_DIR, "workspace-registry.lock");
 const TEMP_ROOT = path.join(os.tmpdir(), "pi-multi-agent");
+const GIT_GATE_SCRIPT = [
+  'IFS= read -r gate || exit 125',
+  '[ "$gate" = run ] || exit 125',
+  'exec "$@"',
+].join("\n");
 
 interface GitState {
   repoRoot: string;
+  commonDir: string;
   relativeCwd: string;
   dirty: boolean;
   status: string;
 }
 
+async function waitForProcStartToken(
+  pid: number,
+  timeoutMs = 500,
+): Promise<string | undefined> {
+  const deadline = Date.now() + timeoutMs;
+  let token = procStartToken(pid);
+  while (!token && Date.now() < deadline) {
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    token = procStartToken(pid);
+  }
+  return token;
+}
+
+function terminateProcess(proc: ReturnType<typeof spawn>): void {
+  if (!proc.pid) return;
+  try {
+    process.kill(-proc.pid, "SIGTERM");
+    return;
+  } catch {
+    // Fall back when the process has no dedicated process group.
+  }
+  try {
+    proc.kill("SIGTERM");
+  } catch {
+    // The process may already have exited.
+  }
+}
+
 async function run(
   command: string,
   args: string[],
-  options: { cwd?: string; signal?: AbortSignal } = {},
+  options: {
+    cwd?: string;
+    signal?: AbortSignal;
+    leases?: LeaseHandle[];
+  } = {},
 ): Promise<{ stdout: string; stderr: string }> {
   return new Promise((resolve, reject) => {
-    const proc = spawn(command, args, {
-      cwd: options.cwd,
-      shell: false,
-      stdio: ["ignore", "pipe", "pipe"],
-    });
+    const gated = Boolean(options.leases?.length);
+    const proc = spawn(
+      gated ? "/bin/sh" : command,
+      gated
+        ? ["-c", GIT_GATE_SCRIPT, "pi-git-gate", command, ...args]
+        : args,
+      {
+        cwd: options.cwd,
+        detached: gated,
+        shell: false,
+        stdio: [gated ? "pipe" : "ignore", "pipe", "pipe"],
+      },
+    );
     let stdout = "";
     let stderr = "";
     let aborted = false;
+    let setupError: unknown;
 
     const abort = () => {
       aborted = true;
-      proc.kill("SIGTERM");
+      if (gated) terminateProcess(proc);
+      else proc.kill("SIGTERM");
     };
     if (options.signal?.aborted) abort();
     else options.signal?.addEventListener("abort", abort, { once: true });
@@ -53,15 +113,46 @@ async function run(
     proc.stderr.on("data", (chunk) => {
       stderr += chunk.toString();
     });
-    proc.on("error", reject);
+    proc.stdin?.on("error", (error) => {
+      if (aborted || setupError) return;
+      setupError = error;
+      terminateProcess(proc);
+    });
+    proc.on("spawn", () => {
+      if (!gated) return;
+      void (async () => {
+        if (aborted) throw new Error("Workspace operation aborted");
+        const ownerStartToken = await waitForProcStartToken(proc.pid!);
+        if (!ownerStartToken) {
+          throw new Error("Git operation owner identity is unverified");
+        }
+        for (const lease of options.leases ?? []) {
+          await transferLease(lease, {
+            ownerPid: proc.pid!,
+            ownerStartToken,
+            phase: "git-operation",
+          });
+        }
+        if (aborted) throw new Error("Workspace operation aborted");
+        proc.stdin!.end("run\n");
+      })().catch((error) => {
+        setupError = error;
+        terminateProcess(proc);
+      });
+    });
+    proc.on("error", (error) => {
+      setupError ??= error;
+    });
     proc.on("close", (code) => {
       options.signal?.removeEventListener("abort", abort);
-      if (aborted) {
+      if (setupError) {
+        reject(setupError);
+      } else if (aborted) {
         reject(new Error("Workspace operation aborted"));
       } else if (code !== 0) {
         reject(
           new Error(
-            `${command} ${args.join(" ")} failed (${code}): ${stderr.trim()}`,
+            `${command} ${args.join(" ")} failed (${code ?? 1}): ${stderr.trim()}`,
           ),
         );
       } else {
@@ -123,6 +214,15 @@ export async function inspectGitState(cwd: string): Promise<GitState | null> {
       "--show-toplevel",
     ]);
     const repoRoot = await fs.promises.realpath(rootResult.stdout.trim());
+    const commonDirResult = await run("git", [
+      "-C",
+      repoRoot,
+      "rev-parse",
+      "--git-common-dir",
+    ]);
+    const commonDir = await fs.promises.realpath(
+      path.resolve(repoRoot, commonDirResult.stdout.trim()),
+    );
     const resolvedCwd = await fs.promises.realpath(cwd);
     const relativeCwd = path.relative(repoRoot, resolvedCwd);
     const statusResult = await run("git", [
@@ -133,7 +233,13 @@ export async function inspectGitState(cwd: string): Promise<GitState | null> {
       "--untracked-files=normal",
     ]);
     const status = statusResult.stdout.trim();
-    return { repoRoot, relativeCwd, dirty: status.length > 0, status };
+    return {
+      repoRoot,
+      commonDir,
+      relativeCwd,
+      dirty: status.length > 0,
+      status,
+    };
   } catch {
     return null;
   }
@@ -167,6 +273,54 @@ async function acquireWorkspaceLease(
   })) as LeaseHandle;
 }
 
+async function runGitMetadataCommand(
+  commonDir: string,
+  args: string[],
+  options: {
+    signal?: AbortSignal;
+    waitMs?: number;
+    additionalLeases?: LeaseHandle[];
+  } = {},
+): Promise<void> {
+  const metadataLease = (await acquireLease(gitMetadataLeasePath(commonDir), {
+    name: `git-metadata:${commonDir}`,
+    signal: options.signal,
+    waitMs: options.waitMs ?? 5000,
+  })) as LeaseHandle;
+  try {
+    await run("git", args, {
+      signal: options.signal,
+      leases: [...(options.additionalLeases ?? []), metadataLease],
+    });
+  } finally {
+    await releaseLease(leaseReference(metadataLease));
+  }
+}
+
+async function resolveRecordCommonDir(
+  record: WorkspaceRecord,
+): Promise<string> {
+  if (record.gitCommonDir) {
+    return canonicalResourcePath(record.gitCommonDir);
+  }
+  if (!record.repoRoot) throw new Error("Worktree record has no repository");
+  const git = await inspectGitState(record.repoRoot);
+  if (!git) throw new Error(`Repository is unavailable: ${record.repoRoot}`);
+  return git.commonDir;
+}
+
+async function acquireCleanupWriterLease(
+  workspacePath: string,
+  waitMs: number,
+): Promise<LeaseHandle> {
+  const canonicalRoot = await canonicalResourcePath(workspacePath);
+  return (await acquireLease(worktreeWriterLeasePath(canonicalRoot), {
+    name: `worktree-writer:${canonicalRoot}`,
+    jobId: `cleanup:${process.pid}`,
+    waitMs,
+  })) as LeaseHandle;
+}
+
 export async function releasePreparedWorkspaceLease(
   workspace: PreparedWorkspace | undefined,
 ): Promise<void> {
@@ -185,6 +339,17 @@ export async function prepareWorkspace(
   const sourceRoot = await resolveSourceRoot(cwd);
   if (mode === "research") {
     return { mode, cwd, sourceRoot };
+  }
+
+  if (mode === "project") {
+    const git = await inspectGitState(cwd);
+    if (!git) throw new Error("Project mode requires a Git repository");
+    return {
+      mode,
+      cwd: await fs.promises.realpath(cwd),
+      sourceRoot: git.repoRoot,
+      writableRoot: git.repoRoot,
+    };
   }
 
   const git = mode === "worktree" ? await inspectGitState(cwd) : null;
@@ -206,6 +371,7 @@ export async function prepareWorkspace(
     path: workspacePath,
     sourceRoot: git?.repoRoot ?? sourceRoot,
     repoRoot: git?.repoRoot,
+    gitCommonDir: git?.commonDir,
     createdAt: new Date().toISOString(),
     task,
   };
@@ -218,8 +384,8 @@ export async function prepareWorkspace(
     if (mode === "scratch") {
       await fs.promises.mkdir(workspacePath, { mode: 0o700 });
     } else {
-      await run(
-        "git",
+      await runGitMetadataCommand(
+        git!.commonDir,
         [
           "-C",
           git!.repoRoot,
@@ -229,7 +395,7 @@ export async function prepareWorkspace(
           workspacePath,
           "HEAD",
         ],
-        { signal },
+        { signal, waitMs: 30_000 },
       );
     }
     resourceCreated = true;
@@ -239,16 +405,24 @@ export async function prepareWorkspace(
     try {
       if (mode === "worktree" && git) {
         if (fs.existsSync(workspacePath)) {
-          await run("git", [
-            "-C",
-            git.repoRoot,
-            "worktree",
-            "remove",
-            "--force",
-            workspacePath,
-          ]);
+          await runGitMetadataCommand(
+            git.commonDir,
+            [
+              "-C",
+              git.repoRoot,
+              "worktree",
+              "remove",
+              "--force",
+              workspacePath,
+            ],
+            { waitMs: 30_000 },
+          );
         }
-        await run("git", ["-C", git.repoRoot, "worktree", "prune"]);
+        await runGitMetadataCommand(
+          git.commonDir,
+          ["-C", git.repoRoot, "worktree", "prune"],
+          { waitMs: 30_000 },
+        );
       } else if (resourceCreated || fs.existsSync(workspacePath)) {
         await fs.promises.rm(workspacePath, { recursive: true, force: true });
       }
@@ -304,12 +478,15 @@ export async function cleanupWorkspace(
   id: string,
   options: {
     canRecoverLease?: (record: unknown) => Promise<boolean>;
+    writerWaitMs?: number;
+    metadataWaitMs?: number;
   } = {},
 ): Promise<WorkspaceRecord> {
   const lease = await acquireWorkspaceLease(id, `cleanup:${process.pid}`, {
     waitMs: 5000,
     canRecover: options.canRecoverLease,
   });
+  let writerLease: LeaseHandle | undefined;
   try {
     const records = await readRegistry();
     const record = records.find((item) => item.id === id);
@@ -317,16 +494,38 @@ export async function cleanupWorkspace(
 
     if (record.mode === "worktree" && record.repoRoot) {
       if (fs.existsSync(record.path)) {
-        await run("git", [
-          "-C",
-          record.repoRoot,
-          "worktree",
-          "remove",
-          "--force",
+        writerLease = await acquireCleanupWriterLease(
           record.path,
-        ]);
+          options.writerWaitMs ?? 5000,
+        );
       }
-      await run("git", ["-C", record.repoRoot, "worktree", "prune"]);
+      const commonDir = await resolveRecordCommonDir(record);
+      const additionalLeases = writerLease ? [writerLease] : [];
+      if (fs.existsSync(record.path)) {
+        await runGitMetadataCommand(
+          commonDir,
+          [
+            "-C",
+            record.repoRoot,
+            "worktree",
+            "remove",
+            "--force",
+            record.path,
+          ],
+          {
+            waitMs: options.metadataWaitMs ?? 5000,
+            additionalLeases,
+          },
+        );
+      }
+      await runGitMetadataCommand(
+        commonDir,
+        ["-C", record.repoRoot, "worktree", "prune"],
+        {
+          waitMs: options.metadataWaitMs ?? 5000,
+          additionalLeases,
+        },
+      );
     } else {
       await fs.promises.rm(record.path, { recursive: true, force: true });
     }
@@ -334,7 +533,11 @@ export async function cleanupWorkspace(
     await removeRecord(id);
     return record;
   } finally {
-    await releaseLease(leaseReference(lease));
+    try {
+      if (writerLease) await releaseLease(leaseReference(writerLease));
+    } finally {
+      await releaseLease(leaseReference(lease));
+    }
   }
 }
 
@@ -359,7 +562,12 @@ export async function pruneMissingWorkspaces(
     }
     try {
       if (record.mode === "worktree" && record.repoRoot) {
-        await run("git", ["-C", record.repoRoot, "worktree", "prune"]);
+        const commonDir = await resolveRecordCommonDir(record);
+        await runGitMetadataCommand(
+          commonDir,
+          ["-C", record.repoRoot, "worktree", "prune"],
+          { waitMs: 0 },
+        );
       }
       await removeRecord(record.id);
       removed += 1;

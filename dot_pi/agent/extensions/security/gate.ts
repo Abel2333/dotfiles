@@ -8,9 +8,9 @@
  *   worse than a noisy one
  * - engine error              -> allow, notify
  * - deny                      -> block; reason is fed back to the model
- * - ask                       -> user confirmation dialog; without UI the
- *   decision downgrades to deny (a matched rule that cannot be asked is a
- *   security event, not a guard malfunction)
+ * - ask                       -> interactive confirmation, or a bounded
+ *                                parent-session relay for implementer jobs;
+ *                                otherwise deny
  * - log                       -> allow; audit log + notice
  *
  * The rules file is re-read on every tool call: edits take effect without
@@ -20,12 +20,14 @@
 import { readFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
+import { getAgentDir, type ExtensionAPI, type ExtensionContext } from "@earendil-works/pi-coding-agent";
+import { createApprovalRequest, waitForApprovalResponse } from "./approval";
 import { evaluate, type MatchedRule } from "./engine/evaluate";
 import { parseRules, type RulesConfig } from "./engine/rules";
 import { writeLog } from "./logger";
 
-const RULES_PATH = join(homedir(), ".pi", "agent", "security-rules.toml");
+const RULES_PATH = join(getAgentDir(), "security-rules.toml");
+const POLICY_HOME = process.env.PI_SECURITY_POLICY_HOME || homedir();
 
 function isRecord(value: unknown): value is Record<string, unknown> {
 	return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -100,7 +102,7 @@ async function handleToolCall(
 
 	let matched: MatchedRule | null;
 	try {
-		matched = evaluate(config, toolName, input, { cwd: ctx.cwd, home: homedir() });
+		matched = evaluate(config, toolName, input, { cwd: ctx.cwd, home: POLICY_HOME });
 	} catch (err) {
 		const msg = err instanceof Error ? err.message : String(err);
 		if (ctx.hasUI) {
@@ -136,6 +138,44 @@ async function handleToolCall(
 
 	// ask
 	if (!ctx.hasUI) {
+		const approvalRoot = process.env.PI_SECURITY_APPROVAL_DIR;
+		const jobId = process.env.PI_MULTI_AGENT_JOB_ID;
+		const role = process.env.PI_MULTI_AGENT_ROLE;
+		if (approvalRoot && jobId && role === "implementer") {
+			const request = await createApprovalRequest(approvalRoot, {
+				jobId,
+				ruleName: matched.name,
+				reason,
+				detail: matched.detail,
+				toolName,
+				input,
+				command,
+				path: filePath,
+				explanation: getModelReasoning(ctx),
+			});
+			try {
+				const response = await waitForApprovalResponse(approvalRoot, request, ctx.signal);
+				const approved = response.decision === "allow";
+				writeLog({
+					...baseLog,
+					action: approved ? "allowed" : "blocked",
+					reason: `${matched.name}: ${reason}`,
+					userChoice: approved ? "parent-approved" : "parent-denied",
+				});
+				if (approved) return undefined;
+				return { block: true, reason: `Blocked by user. Rule: ${matched.name}. ${reason}` };
+			} catch (error) {
+				const approvalError = error instanceof Error ? error.message : String(error);
+				writeLog({
+					...baseLog,
+					action: "blocked",
+					reason: `${matched.name}: ${reason} (${approvalError})`,
+					userChoice: "auto-blocked",
+				});
+				return { block: true, reason: `${reason} (${approvalError})` };
+			}
+		}
+
 		writeLog({ ...baseLog, action: "blocked", reason: `${matched.name}: ${reason} (no UI)`, userChoice: "auto-blocked" });
 		return { block: true, reason: `${reason} (no UI available for confirmation)` };
 	}

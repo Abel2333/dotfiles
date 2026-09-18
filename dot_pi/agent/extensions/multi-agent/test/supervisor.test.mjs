@@ -77,12 +77,15 @@ async function createFixture(root, name, childCode, options = {}) {
   const sessionDir = path.join(jobDir, "sessions");
   await fs.promises.mkdir(sessionDir, { recursive: true });
   const now = new Date().toISOString();
-  let lease;
-  if (options.withLease) {
-    lease = await acquireLease(path.join(jobDir, "job.lock"), {
-      name: `job:${id}`,
-      jobId: id,
-    });
+  const leases = [];
+  const leaseCount = options.leaseCount ?? (options.withLease ? 1 : 0);
+  for (let index = 0; index < leaseCount; index += 1) {
+    leases.push(
+      await acquireLease(path.join(jobDir, `job-${index + 1}.lock`), {
+        name: `job:${id}:${index + 1}`,
+        jobId: id,
+      }),
+    );
   }
   await fs.promises.writeFile(
     path.join(jobDir, "job.json"),
@@ -100,7 +103,7 @@ async function createFixture(root, name, childCode, options = {}) {
       sessionDir,
       createdAt: now,
       updatedAt: now,
-      leases: lease ? [leaseReference(lease)] : [],
+      leases: leases.map((lease) => leaseReference(lease)),
     })}\n`,
   );
   await fs.promises.writeFile(
@@ -142,7 +145,7 @@ async function createFixture(root, name, childCode, options = {}) {
     supervisor.once("spawn", resolve);
     supervisor.once("error", reject);
   });
-  if (lease) {
+  for (const lease of leases) {
     await transferLease(lease, {
       ownerPid: supervisor.pid,
       ownerStartToken: procStartToken(supervisor.pid),
@@ -158,7 +161,7 @@ async function createFixture(root, name, childCode, options = {}) {
       updatedAt: now,
     })}\n`,
   );
-  return { id, jobDir, lease, logHandle, supervisor };
+  return { id, jobDir, leases, logHandle, supervisor };
 }
 
 async function terminateFixture(fixture) {
@@ -178,9 +181,9 @@ async function terminateFixture(fixture) {
     }
   }
   await fixture.logHandle.close();
-  if (fixture.lease) {
+  for (const lease of fixture.leases) {
     try {
-      await releaseLease(leaseReference(fixture.lease));
+      await releaseLease(leaseReference(lease));
     } catch {
       // The Supervisor may already have released it.
     }
@@ -204,7 +207,7 @@ test("Supervisor lifecycle and limits", { concurrency: 1 }, async (t) => {
         root,
         "normal",
         `console.log(JSON.stringify({type:"agent_end"}));`,
-        { withLease: true },
+        { leaseCount: 2 },
       );
       fixtures.push(fixture);
       await fs.promises.writeFile(
@@ -214,7 +217,9 @@ test("Supervisor lifecycle and limits", { concurrency: 1 }, async (t) => {
       assert.equal(await waitForSupervisor(fixture.supervisor), 0);
       const job = await readJson(path.join(fixture.jobDir, "job.json"));
       assert.equal(job.state, "completed");
-      assert.equal(fs.existsSync(fixture.lease.path), false);
+      for (const lease of fixture.leases) {
+        assert.equal(fs.existsSync(lease.path), false);
+      }
     },
   );
 
@@ -225,6 +230,7 @@ test("Supervisor lifecycle and limits", { concurrency: 1 }, async (t) => {
         root,
         "sigterm",
         `setInterval(()=>{},1000);`,
+        { leaseCount: 2 },
       );
       fixtures.push(fixture);
       await fs.promises.writeFile(
@@ -240,6 +246,9 @@ test("Supervisor lifecycle and limits", { concurrency: 1 }, async (t) => {
       await waitFor(() => !processRunning(record.childPid));
       const job = await readJson(path.join(fixture.jobDir, "job.json"));
       assert.equal(job.state, "aborted");
+      for (const lease of fixture.leases) {
+        assert.equal(fs.existsSync(lease.path), false);
+      }
     },
   );
 
@@ -249,6 +258,7 @@ test("Supervisor lifecycle and limits", { concurrency: 1 }, async (t) => {
       root,
       "preabort",
       `require("node:fs").writeFileSync(${JSON.stringify(marker)},String(process.pid));setInterval(()=>{},1000);`,
+      { leaseCount: 2 },
     );
     fixtures.push(fixture);
     await new Promise((resolve) => setTimeout(resolve, 100));
@@ -262,6 +272,9 @@ test("Supervisor lifecycle and limits", { concurrency: 1 }, async (t) => {
     assert.equal(fs.existsSync(marker), false);
     const job = await readJson(path.join(fixture.jobDir, "job.json"));
     assert.equal(job.state, "aborted");
+    for (const lease of fixture.leases) {
+      assert.equal(fs.existsSync(lease.path), false);
+    }
   });
 
   await t.test(
