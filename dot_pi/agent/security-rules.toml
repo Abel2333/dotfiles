@@ -218,6 +218,15 @@ cmd = "find"
 decision = "deny"
 reason = "Tool preference: use fd instead of find (fd PATTERN PATH; a plain pattern replaces -name; use fd -x instead of -exec). If a find-only feature is needed, explain why"
 
+# Python is arbitrary local execution; require approval of the exact source.
+# Static path matching cannot establish what persistent Python objects will do.
+[[tool]]
+name = "python-exec"
+tool = "python"
+where = { action = { equals = "exec" } }
+decision = "ask"
+reason = "Python executes with local user permissions; confirm this source and its file/network effects"
+
 # More preference-rule examples:
 #
 # [[bash]]

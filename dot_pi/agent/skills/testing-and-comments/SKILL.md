@@ -1,6 +1,6 @@
 ---
 name: testing-and-comments
-description: "Use when writing, modifying, or reviewing tests and code comments. Decides what to test and what not to test, how to structure and name tests, how to write regression tests, which functions need docstrings, and what comments should say. Triggers on: unit test, regression test, test coverage, flaky test, mock, docstring, comment, code review."
+description: "Use when writing or reviewing tests, comments, or docstrings. Decides what to test and what not to test, how to structure and name tests, how to write regression tests, which functions need docstrings, and what comments should say."
 ---
 
 # Testing and Comments
@@ -9,6 +9,10 @@ Playbook for deciding what to test, how to write tests, and what comments and
 docstrings to write. Hard constraints live in the global AGENTS.md
 (Testing & Comments section); this file provides the reasoning, the
 taxonomy, and the examples.
+
+This skill does not define general production-code review. Use
+`bounded-code-review` for requirements, maintainability, or verification review;
+use this skill only for the tests, comments, and docstrings within that work.
 
 ## 1. What to test
 

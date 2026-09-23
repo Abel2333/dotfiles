@@ -7,3 +7,4 @@ README.md
 
 # pi memory database is machine-local and grows continuously; never sync it.
 pi/agent/memory/memory.db*
+/plans/

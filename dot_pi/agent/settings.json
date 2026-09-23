@@ -1,0 +1,9 @@
+{
+  "lastChangelogVersion": "0.87.0",
+  "defaultProvider": "deepseek",
+  "defaultModel": "deepseek-v4-flash-vision-exp",
+  "defaultThinkingLevel": "max",
+  "packages": [],
+  "theme": "dark",
+  "hideThinkingBlock": false
+}

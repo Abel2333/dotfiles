@@ -72,7 +72,7 @@ export interface DelegatedTask {
   agent: AgentName;
   task: string;
   summary: string;
-  model?: string;
+  model: string;
   workspace: WorkspaceMode;
 }
 
@@ -174,13 +174,47 @@ export interface JobResultSnapshot extends JobSnapshot {
   messages?: Message[];
 }
 
+export type WaitObservationReason =
+  | "terminal"
+  | "pending-approval"
+  | "stall"
+  | "deadline";
+
+export interface JobObservation {
+  snapshots: JobSnapshot[];
+  reason: WaitObservationReason;
+  stalledJobIds: string[];
+  pendingApprovalJobIds: string[];
+  waitSeconds: number;
+  stallSeconds: number;
+}
+
+export interface WaitObservationDetails {
+  reason: WaitObservationReason;
+  stalledJobIds: string[];
+  pendingApprovalJobIds: string[];
+  waitSeconds: number;
+  stallSeconds: number;
+}
+
 export interface SubagentDetails {
   action:
-    "start" | "status" | "wait" | "result" | "abort" | "list" | "authorize";
+    | "start"
+    | "status"
+    | "wait"
+    | "wait_many"
+    | "result"
+    | "abort"
+    | "list"
+    | "authorize"
+    | "stats";
   jobs: JobSnapshot[];
   activities?: ActivityEvent[];
   nextCursor?: number;
   failures?: string[];
+  observation?: WaitObservationDetails;
+  resultOutput?: string;
+  stats?: unknown;
 }
 
 export const TERMINAL_JOB_STATES = new Set<JobState>([

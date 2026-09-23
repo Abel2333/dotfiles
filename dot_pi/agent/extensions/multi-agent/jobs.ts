@@ -27,6 +27,7 @@ import type {
   AgentConfig,
   DelegatedTask,
   JobLiveSnapshot,
+  JobObservation,
   JobResultSnapshot,
   JobSnapshot,
   JobState,
@@ -40,6 +41,7 @@ import type {
   UsageStats,
 } from "./types";
 import { TERMINAL_JOB_STATES } from "./types";
+import { observeSnapshots, resolveWaitSeconds } from "./wait-policy.mjs";
 
 const JOBS_ROOT = path.join(AGENT_DIR, "subagent-sessions");
 const FEASIBILITY_LEASE_PATH = path.join(
@@ -1321,7 +1323,25 @@ export async function getJobSnapshot(reference: string): Promise<JobSnapshot> {
   };
 }
 
-export async function listJobSnapshots(limit = 50): Promise<JobSnapshot[]> {
+export interface JobListQuery {
+  history?: boolean;
+  state?: JobState;
+  agent?: SubagentJobRecord["agent"];
+  session?: string;
+  limit?: number;
+  offset?: number;
+}
+
+/**
+ * List retained jobs with active jobs ahead of the five newest terminal jobs.
+ * @param query List filters and pagination, or a legacy newest-N limit.
+ * @returns Refreshed snapshots in creation order within each view group.
+ * @throws If a selected job cannot be inspected.
+ * @sideEffects May reconcile orphaned jobs on disk while refreshing snapshots.
+ */
+export async function listJobSnapshots(
+  query: JobListQuery | number = {},
+): Promise<JobSnapshot[]> {
   await fs.promises.mkdir(JOBS_ROOT, { recursive: true, mode: 0o700 });
   const entries = await fs.promises.readdir(JOBS_ROOT, { withFileTypes: true });
   const records: SubagentJobRecord[] = [];
@@ -1338,11 +1358,43 @@ export async function listJobSnapshots(limit = 50): Promise<JobSnapshot[]> {
     }
   }
   records.sort((left, right) => right.createdAt.localeCompare(left.createdAt));
-  const snapshots: JobSnapshot[] = [];
-  for (const record of records.slice(0, Math.max(1, limit))) {
-    snapshots.push(await getJobSnapshot(record.id));
+  if (typeof query === "number") {
+    return Promise.all(
+      records.slice(0, Math.max(1, query)).map((record) => getJobSnapshot(record.id)),
+    );
   }
-  return snapshots;
+  const filtered = records.filter(
+    (record) =>
+      (!query.agent || record.agent === query.agent) &&
+      (!query.session ||
+        [record.id, record.sessionDir, record.sessionPath].some(
+          (value) => value === query.session,
+        )),
+  );
+  const snapshots = await Promise.all(
+    filtered.map((record) => getJobSnapshot(record.id)),
+  );
+  const matching = snapshots.filter(
+    (snapshot) => !query.state || snapshot.job.state === query.state,
+  );
+  const explicit = query.history || query.state || query.agent || query.session;
+  const visible = explicit
+    ? matching
+    : [
+        ...matching.filter(
+          (snapshot) =>
+            !TERMINAL_JOB_STATES.has(snapshot.job.state) ||
+            snapshot.pendingApprovals?.length,
+        ),
+        ...matching
+          .filter((snapshot) => TERMINAL_JOB_STATES.has(snapshot.job.state))
+          .slice(0, 5),
+      ];
+  const offset = query.offset ?? 0;
+  return visible.slice(
+    offset,
+    offset + (query.limit ?? (explicit ? 20 : visible.length)),
+  );
 }
 
 async function sleepWithSignal(
@@ -1367,28 +1419,66 @@ async function sleepWithSignal(
   });
 }
 
+function uniqueSnapshots(snapshots: JobSnapshot[]): JobSnapshot[] {
+  const unique = new Map<string, JobSnapshot>();
+  for (const snapshot of snapshots) {
+    if (!unique.has(snapshot.job.id)) unique.set(snapshot.job.id, snapshot);
+  }
+  return [...unique.values()];
+}
+
+/**
+ * Observe one or two retained jobs through one shared polling loop.
+ *
+ * Observation ends on terminal state, pending approval, inactivity, deadline, or
+ * caller cancellation. It never alters child process state.
+ */
+export async function observeJobs(
+  references: string[],
+  options: {
+    waitSeconds?: number;
+    stallSeconds?: number;
+    signal?: AbortSignal;
+    onUpdate?: (snapshots: JobSnapshot[]) => void;
+  } = {},
+): Promise<JobObservation> {
+  const requested = [...new Set(references)];
+  if (requested.length < 1 || requested.length > 2) {
+    throw new Error("Observation supports one or two unique job IDs");
+  }
+  const initialSnapshots = uniqueSnapshots(
+    await Promise.all(requested.map((reference) => getJobSnapshot(reference))),
+  );
+  const waitSeconds = resolveWaitSeconds(
+    initialSnapshots.map((snapshot) => snapshot.job.agent),
+    options.waitSeconds,
+  );
+  const jobIds = initialSnapshots.map((snapshot) => snapshot.job.id);
+
+  return (await observeSnapshots({
+    initialSnapshots,
+    refresh: () => Promise.all(jobIds.map((jobId) => getJobSnapshot(jobId))),
+    wait: (ms: number) => sleepWithSignal(ms, options.signal),
+    waitSeconds,
+    stallSeconds: options.stallSeconds,
+    onUpdate: options.onUpdate,
+  })) as JobObservation;
+}
+
 export async function waitForJob(
   reference: string,
-  waitSeconds = 300,
+  waitSeconds?: number,
   signal?: AbortSignal,
   onUpdate?: (snapshot: JobSnapshot) => void,
+  options: { stallSeconds?: number } = {},
 ): Promise<JobSnapshot> {
-  const deadline = Date.now() + Math.max(0, waitSeconds) * 1000;
-  let snapshot = await getJobSnapshot(reference);
-  onUpdate?.(snapshot);
-  while (
-    !TERMINAL_JOB_STATES.has(snapshot.job.state) &&
-    !snapshot.pendingApprovals?.length &&
-    Date.now() < deadline
-  ) {
-    await sleepWithSignal(
-      Math.min(1000, Math.max(1, deadline - Date.now())),
-      signal,
-    );
-    snapshot = await getJobSnapshot(reference);
-    onUpdate?.(snapshot);
-  }
-  return snapshot;
+  const observation = await observeJobs([reference], {
+    waitSeconds,
+    stallSeconds: options.stallSeconds,
+    signal,
+    onUpdate: (snapshots) => onUpdate?.(snapshots[0]),
+  });
+  return observation.snapshots[0];
 }
 
 async function readActivities(

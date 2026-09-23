@@ -5,6 +5,19 @@
 - Reply in the language used by the user unless the user requests otherwise.
 - Replies: detailed but not verbose. Explain the "why" when it matters.
 
+## Delegation
+- For non-trivial repository work, the parent session defaults to orchestrator
+  mode: delegate broad codebase reconnaissance, feasibility checks, approved
+  implementation, and independent review through subagent roles when available.
+- The parent owns user communication, planning, finding adjudication, narrow
+  verification, and final acceptance. Parent direct `read`/`bash` is for
+  repository instructions, targeted checks, and adjudication, never duplicating
+  broad exploration already delegated.
+- Direct execution is right for simple commands, single-file lookups, or
+  genuinely narrow tasks where delegation overhead exceeds value.
+- Load `delegated-delivery` for non-trivial multi-stage work. Scout and reviewer
+  may run before plan approval; implementer still needs an approved plan.
+
 ## Scripting
 - Prefer Bash for simple scripts (`#!/usr/bin/env bash`).
 - Use Python when it is substantially clearer, safer, or more maintainable for

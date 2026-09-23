@@ -1,0 +1,8 @@
+{
+  "roles": {
+    "scout": "deepseek/deepseek-flash",
+    "feasibility": "deepseek/deepseek-flash",
+    "reviewer": "deepseek/deepseek-flash",
+    "implementer": "deepseek/deepseek-flash"
+  }
+}

@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { StringEnum } from "@earendil-works/pi-ai";
 import {
   type ExtensionAPI,
+  getAgentDir,
   getMarkdownTheme,
 } from "@earendil-works/pi-coding-agent";
 import { Container, Markdown, Spacer, Text } from "@earendil-works/pi-tui";
@@ -10,6 +11,7 @@ import { Type } from "typebox";
 import type { ApprovalRequest } from "../security/approval";
 import { writeLog } from "../security/logger";
 import { findAgent } from "./agents";
+import { evaluateParentToolCall } from "./parent-guard.mjs";
 import {
   abortJob,
   acquireFeasibilityLease,
@@ -26,10 +28,23 @@ import {
   releaseUnstartedLeases,
   resolveJobApproval,
   startJob,
-  waitForJob,
+  observeJobs,
 } from "./jobs";
 import { truncateUtf8 } from "./limits.mjs";
+import {
+  formatCompactSnapshots,
+  formatResultContent,
+  formatStatsSummary,
+} from "./presentation.mjs";
 import { requiresSingleDispatch, resolveAgentWorkspace } from "./policy.mjs";
+import {
+  aggregateParentUsage,
+  aggregateSubagentStats,
+  collectSubagentHistory,
+} from "./stats.mjs";
+import { assertImplementerTaskSafe } from "./task-policy.mjs";
+import { normalizeWaitJobIds } from "./wait-policy.mjs";
+import { resolveRoutedModel } from "./routing.mjs";
 import { truncateOutput } from "./runner";
 import {
   SUMMARY_MAX_CHARS,
@@ -40,7 +55,9 @@ import type {
   AgentConfig,
   AgentName,
   DelegatedTask,
+  JobObservation,
   JobSnapshot,
+  JobState,
   LeaseHandle,
   PreparedWorkspace,
   SubagentDetails,
@@ -48,7 +65,6 @@ import type {
   WorkspaceMode,
   WorkspaceRecord,
 } from "./types";
-import { TERMINAL_JOB_STATES } from "./types";
 import {
   cleanupWorkspace,
   inspectGitState,
@@ -69,19 +85,19 @@ const ACTIONS = [
   "start",
   "status",
   "wait",
+  "wait_many",
   "result",
   "abort",
   "list",
   "authorize",
+  "stats",
 ] as const;
 const MAX_PARALLEL = 2;
-const DEFAULT_WAIT_SECONDS = 300;
 const SUMMARY_SCHEMA = {
   maxLength: SUMMARY_MAX_CHARS,
   description:
     "One-line title (<= 160 chars) for the delegated task, shown to the user in the UI.",
 };
-const ACTIVITY_TEXT_CAP = 32 * 1024;
 const RESULT_DETAILS_CAP = 256 * 1024;
 const GUARD_PATH = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -89,25 +105,30 @@ const GUARD_PATH = path.join(
 );
 
 const AgentSchema = StringEnum(AGENT_NAMES);
+const JobStateSchema = StringEnum(
+  ["queued", "running", "aborting", "completed", "failed", "aborted", "orphaned"] as const,
+);
 const WorkspaceSchema = StringEnum(WORKSPACE_MODES, {
   description:
     "research is read-only; scratch writes in /tmp; worktree writes in a detached Git worktree; project writes directly in the current Git repository",
 });
 const ActionSchema = StringEnum(ACTIONS, {
   description:
-    "start, status, wait, result, abort, list, or authorize. Legacy start calls may omit action.",
+    "start, status, wait, wait_many, result, abort, list, authorize, or stats. Legacy start calls may omit action.",
+});
+const ResultViewSchema = StringEnum(["summary", "full"] as const, {
+  description:
+    "Result content view. summary is compact by default; full returns the existing bounded output.",
 });
 
 const ParallelTaskSchema = Type.Object({
   agent: AgentSchema,
   task: Type.String({ description: "Specific task delegated to the agent" }),
   summary: Type.String(SUMMARY_SCHEMA),
-  model: Type.Optional(
-    Type.String({
-      description:
-        "Model override. If the user named a model, pass that model exactly.",
-    }),
-  ),
+  model: Type.String({
+    description:
+      "Required for action=start. Pass the exact model for this task; the parent session model is valid too.",
+  }),
   workspace: Type.Optional(WorkspaceSchema),
 });
 
@@ -115,6 +136,12 @@ const SubagentParams = Type.Object({
   action: Type.Optional(ActionSchema),
   jobId: Type.Optional(
     Type.String({ description: "Full job ID or a unique job ID prefix" }),
+  ),
+  jobIds: Type.Optional(
+    Type.Array(Type.String({ description: "Full job ID or unique prefix" }), {
+      description:
+        "One or two unique job IDs for action=wait_many; duplicates are collapsed before observation.",
+    }),
   ),
   requestId: Type.Optional(
     Type.String({
@@ -126,7 +153,14 @@ const SubagentParams = Type.Object({
     Type.Number({
       minimum: 0,
       description:
-        "Maximum observation wait. Defaults to 300 seconds and never terminates the child.",
+        "Observation window. A wait always lasts at least the selected role floor: scout 600s, reviewer/feasibility 1200s, implementer 1800s (mixed jobs use the longest). Shorter explicit values, including 0, are raised to that floor; a wait never terminates the child. Use action=status for a non-blocking snapshot.",
+    }),
+  ),
+  stallSeconds: Type.Optional(
+    Type.Number({
+      minimum: 0,
+      description:
+        "Inactivity observation floor. A positive value is raised to the selected role floor: scout 600s, reviewer/feasibility 1200s, implementer 1800s (mixed jobs use the longest); 0 disables early stalled observation return.",
     }),
   ),
   cursor: Type.Optional(
@@ -139,9 +173,20 @@ const SubagentParams = Type.Object({
     Type.Integer({
       minimum: 1,
       maximum: 500,
-      description: "Result or list item limit",
+      description: "Result or list page size; list defaults to 20 for history/filter queries",
     }),
   ),
+  offset: Type.Optional(
+    Type.Integer({ minimum: 0, description: "Zero-based list page offset" }),
+  ),
+  history: Type.Optional(
+    Type.Boolean({ description: "List retained history in pages instead of the default active-plus-five view" }),
+  ),
+  state: Type.Optional(JobStateSchema),
+  session: Type.Optional(
+    Type.String({ description: "Filter list by child session directory, path, or job ID (exact match)" }),
+  ),
+  view: Type.Optional(ResultViewSchema),
   agent: Type.Optional(AgentSchema),
   task: Type.Optional(Type.String()),
   summary: Type.Optional(
@@ -154,7 +199,7 @@ const SubagentParams = Type.Object({
   model: Type.Optional(
     Type.String({
       description:
-        "Model override for a start action. If the user named a model, pass that model exactly.",
+        "Required for action=start. Pass the exact model for the task; the parent session model is valid too.",
     }),
   ),
   workspace: Type.Optional(WorkspaceSchema),
@@ -170,10 +215,17 @@ const SubagentParams = Type.Object({
 type SubagentParamsType = {
   action?: (typeof ACTIONS)[number];
   jobId?: string;
+  jobIds?: string[];
   requestId?: string;
   waitSeconds?: number;
+  stallSeconds?: number;
   cursor?: number;
   limit?: number;
+  offset?: number;
+  history?: boolean;
+  state?: JobState;
+  session?: string;
+  view?: "summary" | "full";
   agent?: AgentName;
   task?: string;
   summary?: string;
@@ -183,7 +235,7 @@ type SubagentParamsType = {
     agent: AgentName;
     task: string;
     summary: string;
-    model?: string;
+    model: string;
     workspace?: WorkspaceMode;
   }>;
 };
@@ -209,6 +261,12 @@ function normalizeTask(input: {
   model?: string;
   workspace?: WorkspaceMode;
 }): DelegatedTask {
+  if (typeof input.model !== "string" || input.model.trim() === "") {
+    throw new Error(
+      `action=start requires an explicit model for ${input.agent}; pass the desired model, including the parent session model when appropriate.`,
+    );
+  }
+  const model = input.model;
   const workspace = resolveAgentWorkspace(
     input.agent,
     input.workspace,
@@ -217,7 +275,7 @@ function normalizeTask(input: {
   // char budget (schema maxLength applies first at the agent loop; this
   // backstops direct callers). See summary.mjs.
   const summary = normalizeSummary(input.summary, input.agent);
-  return { ...input, summary, workspace };
+  return { ...input, model, summary, workspace };
 }
 
 function resolveModel(
@@ -228,7 +286,13 @@ function resolveModel(
   const inherited = parentModel
     ? `${parentModel.provider}/${parentModel.id}`
     : undefined;
-  const model = task.model || agentModel || inherited;
+  const model = resolveRoutedModel({
+    taskModel: task.model,
+    agent: task.agent,
+    agentDir: getAgentDir(),
+    legacyModel: agentModel,
+    parentModel: inherited,
+  });
   if (!model) {
     throw new Error(
       `No model is available for ${task.agent}. Specify the model parameter.`,
@@ -320,27 +384,33 @@ function snapshotText(
   return lines.join("\n");
 }
 
-function boundedActivityText(lines: string[]): string[] {
-  if (lines.length === 0) return [];
-  return [
-    truncateUtf8(lines.join("\n"), ACTIVITY_TEXT_CAP, {
-      tailBytes: 8 * 1024,
-      reportOmitted: true,
-    }),
-  ];
-}
-
 function details(
   action: SubagentDetails["action"],
   jobs: JobSnapshot[],
-  extras: Pick<SubagentDetails, "activities" | "nextCursor" | "failures"> = {},
+  extras: Omit<Partial<SubagentDetails>, "action" | "jobs"> = {},
 ): SubagentDetails {
   return { action, jobs, ...extras };
+}
+
+function observationDetails(
+  observation: JobObservation,
+): NonNullable<SubagentDetails["observation"]> {
+  return {
+    reason: observation.reason,
+    stalledJobIds: observation.stalledJobIds,
+    pendingApprovalJobIds: observation.pendingApprovalJobIds,
+    waitSeconds: observation.waitSeconds,
+    stallSeconds: observation.stallSeconds,
+  };
 }
 
 function requireJobId(params: SubagentParamsType): string {
   if (!params.jobId) throw new Error(`action=${params.action} requires jobId`);
   return params.jobId;
+}
+
+function requireJobIds(params: SubagentParamsType): string[] {
+  return normalizeWaitJobIds(params.jobIds);
 }
 
 function selectPendingApproval(
@@ -497,26 +567,88 @@ async function confirmProjectExecution(
 }
 
 export default function multiAgent(pi: ExtensionAPI) {
+  let parentMode: "strict" | "direct" = "strict";
+  const explorationBudget: { marker?: string; used: number } = { used: 0 };
+
+  // A cleaned or removed job must not lock the parent, while a failed lookup
+  // (which may be unrelated) must not clear a genuinely active job: the policy
+  // module refreshes retained jobs and keeps the last known state on errors.
+  const resolveParentGuardJob = async (
+    reference: string,
+  ): Promise<JobSnapshot | undefined> => {
+    try {
+      return await getJobSnapshot(reference);
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        error.message.startsWith("Unknown subagent job:")
+      ) {
+        return undefined;
+      }
+      throw error;
+    }
+  };
+
+  pi.on("tool_call", (event, ctx) =>
+    evaluateParentToolCall(event, {
+      branch: ctx.sessionManager.getBranch(),
+      cwd: ctx.cwd,
+      mode: parentMode,
+      resolveJob: resolveParentGuardJob,
+      explorationBudget,
+    }),
+  );
+
+  pi.registerCommand("agent-mode", {
+    description: "Show or set the session-local parent delegation guard mode",
+    async handler(args, ctx) {
+      const requested = args.trim();
+      if (!requested) {
+        ctx.ui.notify(
+          `Parent agent mode: ${parentMode}. Use /agent-mode strict or /agent-mode direct.`,
+          "info",
+        );
+        return;
+      }
+      if (requested !== "strict" && requested !== "direct") {
+        ctx.ui.notify(
+          "Usage: /agent-mode <strict|direct>",
+          "warning",
+        );
+        return;
+      }
+      parentMode = requested;
+      ctx.ui.notify(
+        `Parent agent mode set to ${parentMode}.`,
+        parentMode === "direct" ? "warning" : "info",
+      );
+    },
+  });
+
   pi.registerTool({
     name: "subagent",
     label: "Subagent",
     description: [
       "Manage persistent background scout, feasibility, reviewer, or implementer jobs.",
       "Use action=start to launch and receive a job ID immediately.",
-      "Use status, wait, result, abort, list, or authorize to control jobs later.",
-      "wait defaults to five minutes, returns early when the child finishes or needs authorization, and never terminates it.",
-      "Child sessions and activity logs are retained for later inspection.",
+      "Use status, wait, wait_many, result, abort, list, authorize, or stats to inspect and control retained jobs.",
+      "wait uses role-aware observation windows, returns early for completion, authorization, inactivity, or deadline, and never terminates a child.",
+      "Default list shows every active job and the five newest finished jobs; history and filters use pages of 20 (limit and offset supported).",
     ].join(" "),
     promptSnippet:
-      "Start and control persistent background subagents with status, wait, result, abort, list, and parent-mediated authorization",
+      "Start and control persistent background subagents with status, wait, wait_many, result, stats, abort, list, and parent-mediated authorization",
     promptGuidelines: [
-      "Use subagent action=start only when context isolation, independent verification, delegated implementation, or parallel investigation provides clear value.",
+      "Use subagent action=start for non-trivial repository work: prefer a subagent for broad exploration, independent verification, and approved implementation. Keep simple commands, single-file lookups, and genuinely narrow tasks direct.",
+      "Do not duplicate broad exploration already delegated to a subagent; use action=wait, action=wait_many, or action=result to consume its evidence, and keep parent read/bash for narrow checks, adjudication, and final verification.",
       "On action=start always provide summary: a one-line title (<= 160 chars) for the delegated work; the user sees it in the UI to understand what the subagent is for.",
       "Use the implementer agent only for an implementation plan the user approved; include the complete plan, constraints, acceptance criteria, and verification commands in its task.",
-      "After starting an implementer, do not modify project files concurrently; retain the job ID and wait until it completes or requests authorization.",
+      "After starting a reviewer or implementer, do not edit project files in the same user turn. Adjudicate reviewer findings and send only accepted Finding IDs to a remediation implementer; /agent-mode direct is an intentional user override.",
       "When wait or status reports a pending approval, use subagent action=authorize for that job; the tool itself asks the user and records a one-shot decision.",
-      "After subagent action=start, retain the returned job ID and use action=wait, status, or result to observe it; wait defaults to 300 seconds and returns early on completion or authorization requests.",
+      "After subagent action=start, retain the returned job ID. wait and stall thresholds use role floors (scout 600s, reviewer/feasibility 1200s, implementer 1800s; mixed jobs use the longest). waitSeconds is raised to the floor even when 0 is passed, so prefer one wait over repeated status calls; stallSeconds: 0 disables early stalled observation return.",
+      "Use action=wait_many with one or two retained job IDs when either job needing authorization or becoming inactive should wake the parent. Use action=result with view=full only when the compact output summary is insufficient.",
+      "Use action=stats to inspect unique child usage from this active parent branch. It is separate from footer accounting.",
       "Use subagent action=abort only after inspecting the job and deciding it should be stopped; cancelling a wait does not stop the child.",
+      "For action=start, always provide an explicit model in subagent.model or every subagent.tasks[].model; it may be the same as the parent session model.",
       "When the user specifies a model for delegated work, pass that exact model in subagent.model or subagent.tasks[].model.",
       "Do not ask a subagent to invoke another agent.",
     ],
@@ -567,6 +699,11 @@ export default function multiAgent(pi: ExtensionAPI) {
           throw new Error(
             "Feasibility and implementer roles require single agent + task dispatch",
           );
+        }
+        for (const task of tasks) {
+          if (task.agent === "implementer") {
+            assertImplementerTaskSafe(task.task);
+          }
         }
         if (
           tasks.some((task) => task.agent === "feasibility") &&
@@ -710,7 +847,7 @@ export default function multiAgent(pi: ExtensionAPI) {
               ]
             : []),
           "",
-          `Observe with action=wait (default ${DEFAULT_WAIT_SECONDS}s), status, or result.`,
+          `Observe with action=wait (role defaults: scout 600s, reviewer/feasibility 1200s, implementer 1800s), status, or result.`,
         ].join("\n");
         return {
           content: [{ type: "text", text }],
@@ -719,13 +856,80 @@ export default function multiAgent(pi: ExtensionAPI) {
       }
 
       if (action === "list") {
-        const jobs = await listJobSnapshots(params.limit ?? 20);
+        const jobs = await listJobSnapshots({
+          history: params.history,
+          state: params.state,
+          agent: params.agent,
+          session: params.session,
+          limit: params.limit,
+          offset: params.offset,
+        });
         const text = jobs.length
-          ? jobs.map(snapshotLine).join("\n")
+          ? [
+              jobs.map(snapshotLine).join("\n"),
+              ...(params.history || params.state || params.agent || params.session
+                ? [`Page offset ${params.offset ?? 0}; next page: offset=${(params.offset ?? 0) + jobs.length}`]
+                : []),
+            ].join("\n")
           : "No retained subagent jobs.";
         return {
           content: [{ type: "text", text }],
           details: details("list", jobs),
+        };
+      }
+
+      if (action === "stats") {
+        const branch = ctx.sessionManager.getBranch();
+        const history = collectSubagentHistory(branch);
+        const snapshots: JobSnapshot[] = [];
+        for (const reference of history.jobIds) {
+          try {
+            snapshots.push(await getJobSnapshot(reference));
+          } catch {
+            // Retained jobs may have been explicitly cleaned after this branch observed them.
+          }
+        }
+        const stats = {
+          parent: aggregateParentUsage(branch),
+          ...aggregateSubagentStats({
+            snapshots,
+            actionEvents: history.actionEvents,
+            referencedJobIds: history.jobIds,
+          }),
+        };
+        return {
+          content: [{ type: "text", text: formatStatsSummary(stats) }],
+          details: details("stats", snapshots, { stats }),
+        };
+      }
+
+      if (action === "wait_many") {
+        const observation = await observeJobs(requireJobIds(params), {
+          waitSeconds: params.waitSeconds,
+          stallSeconds: params.stallSeconds,
+          signal,
+          onUpdate: (snapshots) => {
+            onUpdate?.({
+              content: [
+                {
+                  type: "text",
+                  text: `Waiting; ${formatCompactSnapshots(snapshots)}`,
+                },
+              ],
+              details: details("wait_many", snapshots),
+            });
+          },
+        });
+        return {
+          content: [
+            {
+              type: "text",
+              text: formatCompactSnapshots(observation.snapshots, observation),
+            },
+          ],
+          details: details("wait_many", observation.snapshots, {
+            observation: observationDetails(observation),
+          }),
         };
       }
 
@@ -756,39 +960,38 @@ export default function multiAgent(pi: ExtensionAPI) {
       if (action === "status") {
         const snapshot = await getJobSnapshot(jobId);
         return {
-          content: [{ type: "text", text: snapshotText(snapshot) }],
+          content: [{ type: "text", text: formatCompactSnapshots([snapshot]) }],
           details: details("status", [snapshot]),
         };
       }
 
       if (action === "wait") {
-        const waitSeconds = params.waitSeconds ?? DEFAULT_WAIT_SECONDS;
-        const snapshot = await waitForJob(
-          jobId,
-          waitSeconds,
+        const observation = await observeJobs([jobId], {
+          waitSeconds: params.waitSeconds,
+          stallSeconds: params.stallSeconds,
           signal,
-          (current) => {
+          onUpdate: (snapshots) => {
             onUpdate?.({
               content: [
                 {
                   type: "text",
-                  text: `Waiting up to ${formatDuration(waitSeconds * 1000)}; ${snapshotLine(current)}`,
+                  text: `Waiting; ${formatCompactSnapshots(snapshots)}`,
                 },
               ],
-              details: details("wait", [current]),
+              details: details("wait", snapshots),
             });
           },
-        );
-        const reason = TERMINAL_JOB_STATES.has(snapshot.job.state)
-          ? `Subagent reached terminal state: ${snapshot.job.state}`
-          : snapshot.pendingApprovals?.length
-            ? "Subagent is waiting for parent authorization."
-            : `Observation wait ended after ${formatDuration(waitSeconds * 1000)}; subagent continues running.`;
+        });
         return {
           content: [
-            { type: "text", text: `${reason}\n\n${snapshotText(snapshot)}` },
+            {
+              type: "text",
+              text: formatCompactSnapshots(observation.snapshots, observation),
+            },
           ],
-          details: details("wait", [snapshot]),
+          details: details("wait", observation.snapshots, {
+            observation: observationDetails(observation),
+          }),
         };
       }
 
@@ -798,26 +1001,14 @@ export default function multiAgent(pi: ExtensionAPI) {
           params.cursor ?? 0,
           params.limit ?? 100,
         );
-        const eventLines = result.activities.map(
-          (event) =>
-            `${event.seq} ${event.timestamp} ${event.type}${event.toolName ? ` ${event.toolName}` : ""}${event.summary ? `: ${event.summary}` : ""}`,
-        );
         const output =
           result.finalOutput ||
           result.live.partialAssistantOutput ||
           result.live.latestCompletedOutput ||
           "(no assistant output yet)";
-        const text = [
-          snapshotText(result, { includeOutputs: false }),
-          "",
-          `activity cursor: ${result.nextCursor}`,
-          ...(eventLines.length
-            ? ["recent activity:", ...boundedActivityText(eventLines)]
-            : []),
-          "",
-          result.finalOutput ? "final output:" : "current output:",
-          truncateOutput(output),
-        ].join("\n");
+        const boundedOutput = truncateOutput(output);
+        const view = params.view ?? "summary";
+        const text = formatResultContent(result, boundedOutput, view);
         const {
           activities: _activities,
           nextCursor: _nextCursor,
@@ -878,6 +1069,7 @@ export default function multiAgent(pi: ExtensionAPI) {
         const resultDetails = details("result", [detailSnapshot], {
           activities: detailActivities,
           nextCursor: result.nextCursor,
+          resultOutput: boundedOutput,
         });
         while (
           resultDetails.activities?.length &&
@@ -896,6 +1088,19 @@ export default function multiAgent(pi: ExtensionAPI) {
           detailSnapshot.live.errorMessage = detailSnapshot.live.errorMessage
             ? truncateUtf8(detailSnapshot.live.errorMessage, 1024)
             : undefined;
+        }
+        for (const outputCap of [64 * 1024, 16 * 1024, 4 * 1024]) {
+          if (
+            Buffer.byteLength(JSON.stringify(resultDetails), "utf8") <=
+            RESULT_DETAILS_CAP
+          ) {
+            break;
+          }
+          resultDetails.resultOutput = truncateUtf8(
+            resultDetails.resultOutput ?? "",
+            outputCap,
+            { tailBytes: Math.min(1024, Math.floor(outputCap / 4)), reportOmitted: true },
+          );
         }
         return {
           content: [{ type: "text", text }],
@@ -924,6 +1129,9 @@ export default function multiAgent(pi: ExtensionAPI) {
         args.action ?? (args.agent || args.tasks?.length ? "start" : "unknown");
       let text = `${theme.fg("toolTitle", theme.bold("subagent"))} ${theme.fg("accent", action)}`;
       if (args.jobId) text += ` ${theme.fg("muted", args.jobId)}`;
+      if (args.jobIds?.length) {
+        text += ` ${theme.fg("muted", args.jobIds.join(","))}`;
+      }
       if (action === "start" && args.agent) {
         const workspace =
           args.workspace ??
@@ -973,11 +1181,20 @@ export default function multiAgent(pi: ExtensionAPI) {
         container.addChild(new Text(snapshotText(snapshot), 0, 0));
       }
       const content = result.content[0];
-      if (content?.type === "text" && info.action === "result") {
+      if (info.action === "result") {
+        const output = info.resultOutput ??
+          (content?.type === "text" ? content.text : "(no assistant output yet)");
+        const label =
+          info.jobs[0]?.job.state === "completed"
+            ? "Final output:"
+            : "Current output:";
         container.addChild(new Spacer(1));
         container.addChild(
-          new Markdown(content.text, 0, 0, getMarkdownTheme()),
+          new Markdown(`${label}\n${output}`, 0, 0, getMarkdownTheme()),
         );
+      } else if (content?.type === "text" && info.action === "stats") {
+        container.addChild(new Spacer(1));
+        container.addChild(new Markdown(content.text, 0, 0, getMarkdownTheme()));
       }
       return container;
     },
@@ -989,10 +1206,47 @@ export default function multiAgent(pi: ExtensionAPI) {
     async handler(args, ctx) {
       const [action, id, requestId] = args.trim().split(/\s+/, 3);
       if (!action || action === "list") {
-        const jobs = await listJobSnapshots(50);
+        const options: {
+          history?: boolean;
+          state?: JobState;
+          agent?: AgentName;
+          session?: string;
+          limit?: number;
+          offset?: number;
+        } = {};
+        const tokens = action ? args.trim().split(/\s+/).slice(1) : [];
+        for (const token of tokens) {
+          if (token === "history") {
+            options.history = true;
+            continue;
+          }
+          const [key, value, extra] = token.split("=");
+          if (!value || extra !== undefined) {
+            ctx.ui.notify(`Invalid list option: ${token}`, "warning");
+            return;
+          }
+          if (key === "state" && ["queued", "running", "aborting", "completed", "failed", "aborted", "orphaned"].includes(value)) {
+            options.state = value as JobState;
+          } else if (key === "agent" && AGENT_NAMES.some((name) => name === value)) {
+            options.agent = value as AgentName;
+          } else if (key === "session") {
+            options.session = value;
+          } else if ((key === "limit" || key === "offset") && /^\d+$/.test(value) && Number.isSafeInteger(Number(value)) && (key === "offset" || Number(value) > 0) && (key === "offset" || Number(value) <= 500)) {
+            options[key] = Number(value);
+          } else {
+            ctx.ui.notify(`Invalid list option: ${token}`, "warning");
+            return;
+          }
+        }
+        const jobs = await listJobSnapshots(options);
         ctx.ui.notify(
           jobs.length
-            ? jobs.map(snapshotLine).join("\n")
+            ? [
+                jobs.map(snapshotLine).join("\n"),
+                ...(options.history || options.state || options.agent || options.session
+                  ? [`Page offset ${options.offset ?? 0}; next page: offset=${(options.offset ?? 0) + jobs.length}`]
+                  : []),
+              ].join("\n")
             : "No retained subagent jobs.",
           "info",
         );
